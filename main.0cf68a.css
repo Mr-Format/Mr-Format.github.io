@@ -421,7 +421,7 @@ svg:not(:root) {
 pre {
     overflow: auto;
     white-space: pre;
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
     word-wrap: break-word
 }
 
@@ -1039,7 +1039,7 @@ html {
 }
 
 ::-webkit-scrollbar-track:hover {
-    background-color: rgba(0, 0, 0, .15)
+    background-color: rgba(255, 255, 255, 0.75)
 }
 
 ::-webkit-scrollbar-button:start {
