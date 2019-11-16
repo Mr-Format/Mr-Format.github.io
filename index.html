@@ -24,7 +24,7 @@
   <style type="text/css">
   
     #container.show {
-      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+      background: linear-gradient(200deg,#aaaaaa,#12b0fc);
     }
   </style>
   
@@ -38,59 +38,84 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
+    <div class="overlay" style="background: #4d4d4d"></div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
 			<img src="/assets/icon.png" class="js-avatar">
 		</a>
-		<hgroup>
-		  <h1 class="header-author"><a href="/">Dylan 17</a></h1>
-		</hgroup>
-		
-		<p class="header-subtitle">前端路茫茫~~</p>
-		
+            <hgroup>
+                <h1 class="header-author">
+                    <a href="/">
+                        Dylan 17
+                    </a>
+                </h1>
+            </hgroup>
+            
+                <p class="header-subtitle">
+                    前端路茫茫~~
+                </p>
+                
 
-		<nav class="header-menu">
-			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-	        
-			</ul>
-		</nav>
-		<nav class="header-smart-menu">
-    		
-    			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)" target="_blank" rel="noopener">所有文章</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)" target="_blank" rel="noopener">友链</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)" target="_blank" rel="noopener">关于我</a>
-    			
-            
-		</nav>
-		<nav class="header-nav">
-			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/Mr-Format" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="qq" target="_blank" href="/assets/qq.jpg" title="qq"><i class="icon-qq"></i></a>
-		        
-					<a class="weixin" target="_blank" href="/assets/weixin.jpg" title="weixin"><i class="icon-weixin"></i></a>
-		        
-					<a class="mail" target="_blank" href="/mailto:281473724@qq.com" title="mail"><i class="icon-mail"></i></a>
-		        
-			</div>
-		</nav>
-	</header>		
-</div>
-
+                    <nav class="header-menu">
+                        <ul>
+                            
+                                <li>
+                                    <a href="/">
+                                        主页
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="/categories">
+                                        分类
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="/archives">
+                                        归档
+                                    </a>
+                                </li>
+                                
+                        </ul>
+                    </nav>
+                    <nav class="header-smart-menu">
+                        
+                            
+                                <a q-on="click: openSlider(e, 'innerArchive')" href="#">
+                                    所有文章
+                                </a>
+                                
+                                    
+                            
+                                <a q-on="click: openSlider(e, 'friends')" href="#">
+                                    友链
+                                </a>
+                                
+                                    
+                            
+                                <a q-on="click: openSlider(e, 'aboutme')" href="#">
+                                    关于我
+                                </a>
+                                
+                                    
+                    </nav>
+                    <nav class="header-nav">
+                        <div class="social">
+                            
+                                <a class="github" target="_blank" href="https://github.com/Mr-Format" title="github"><i class="icon-github"></i></a>
+                                
+                                <a class="qq" target="_blank" href="/assets/qq.jpg" title="qq"><i class="icon-qq"></i></a>
+                                
+                                <a class="weixin" target="_blank" href="/assets/weixin.jpg" title="weixin"><i class="icon-weixin"></i></a>
+                                
+                                <a class="mail" target="_blank" href="/mailto:281473724@qq.com" title="mail"><i class="icon-mail"></i></a>
+                                
+                        </div>
+                    </nav>
+        </header>
+    </div>
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
@@ -116,6 +141,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -133,12 +160,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/archives">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -154,6 +183,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">AJAX-XMLHttpRequest对象</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
+  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
+<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记//" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -176,36 +299,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，语法简洁，易于学习，适合用来写博客。</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h3><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
-<p><img src="/static/markdown_preview_.png" alt="markdown预览"></p>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>使用 <code>#</code> 号来标记标题，<code>#</code> 号的个数对应标题的级数，最多六级。</p>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="# 一级标题"></a># 一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="## 二级标题"></a>## 二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="### 三级标题"></a>### 三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="#### 四级标题"></a>#### 四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="##### 五级标题"></a>##### 五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="###### 六级标题"></a>###### 六级标题</h6><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><code>-</code> 号标记无序列表，数字加点号标记有序列表。</p>
-<ul>
-<li>无序列表1</li>
-<li>无序列表2</li>
-<li>无序列表3</li>
-</ul>
-<ol>
-<li>有序列表1</li>
-<li>有序列表2</li>
-<li>有序列表3</li>
-</ol>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>使用 <code>&gt;</code> 来标记引用的内容。</p>
-<blockquote>
-<p>这是一段引用的文字</p>
-</blockquote>
-<h3 id="粗体字和斜体字"><a href="#粗体字和斜体字" class="headerlink" title="粗体字和斜体字"></a>粗体字和斜体字</h3><p>在文字前后加上 <code>**</code> 表示粗体字，在文字前后加上 <code>*</code> 表示斜体字。  </p>
-<p><strong>这是加粗的文字</strong>  </p>
-<p><em>这是倾斜的文字</em></p>
-<h3 id="代码和代码块"><a href="#代码和代码块" class="headerlink" title="代码和代码块"></a>代码和代码块</h3><p>一段代码： 代码的前后加 ``` 号</p>
-<p><code>var str = &quot;hello world&quot;</code></p>
-<p>多行代码：上下各加一行 <code>```</code> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var str = &quot;hello world&quot;</span><br><span class="line">console.log(str)</span><br></pre></td></tr></table></figure>
-
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>使用 <code>[</code> 和 <code>]</code> 来标记链接  </p>
-<p><a href="www.baidu.com">点我去百度</a></p>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p><code>![图片的alt属性值](图片的src属性)</code></p>
-
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h2><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
+<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/201911161.png" alt="markdown预览"></p>
+        
       
 
       
@@ -218,13 +314,32 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">markdown 笔记</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记//" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/markdown//" class="article-tag-list-link color4">markdown</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
@@ -241,16 +356,16 @@
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
             </div>
-        </div>
-        
-        
+            
+                
     </div>
 </aside>
 
@@ -302,6 +417,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
@@ -318,16 +444,16 @@
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
             </div>
-        </div>
-        
-        
+            
+                
     </div>
 </aside>
 
@@ -393,16 +519,16 @@
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
             </div>
-        </div>
-        
-        
+            
+                
     </div>
 </aside>
 
@@ -417,16 +543,25 @@
         </div>
       </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2019 Dylan 17
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy;
+                2019
+                    Dylan 17
+            </div>
+            <div class="footer-right">
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">
+                  本站总访问量：<span id="busuanzi_value_site_pv"></span>次
+                </span>
+                <span class="post-meta-divider">|</span>
+                <span id="busuanzi_container_site_uv">
+                  本站访客数：<span id="busuanzi_value_site_uv"></span>人
+                </span>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
     </div>
     <script>
@@ -503,11 +638,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">markdown 笔记</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">JavaScript</a>
               </li>
             
             <div class="clearfix"></div>
@@ -590,7 +733,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">2019年初接触前端&lt;br&gt;目前负责公司所有前端业务&lt;br&gt;主要进行移动端开发（vue框架）以及微信小程序开发&lt;br&gt;</div>
   	  	
     	</section>
     

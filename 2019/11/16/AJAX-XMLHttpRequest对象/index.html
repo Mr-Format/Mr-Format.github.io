@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>开始写博客啦~~ | 不会玩前端</title>
+  <title>AJAX-XMLHttpRequest对象 | 不会玩前端</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。 于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。 我的博客用git+hexo搭建，使用起来真的很方便。 最后，庆祝自己的博客诞生啦~~">
-<meta name="keywords" content="随笔">
+  <meta name="description" content="Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术. Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据,">
+<meta name="keywords" content="笔记,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开始写博客啦~~">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6&#x2F;index.html">
+<meta property="og:title" content="AJAX-XMLHttpRequest对象">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1&#x2F;index.html">
 <meta property="og:site_name" content="不会玩前端">
-<meta property="og:description" content="19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。 于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。 我的博客用git+hexo搭建，使用起来真的很方便。 最后，庆祝自己的博客诞生啦~~">
+<meta property="og:description" content="Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术. Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据,">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-16T11:32:22.295Z">
+<meta property="og:updated_time" content="2019-11-16T11:30:39.392Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="不会玩前端" type="application/atom+xml">
@@ -186,31 +186,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-开始写博客啦" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      开始写博客啦~~
+      AJAX-XMLHttpRequest对象
     </h1>
   
 
         
-        <a href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:13:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
+        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
+  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。</p>
-<p>于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。</p>
-<p>我的博客用git+hexo搭建，使用起来真的很方便。</p>
-<p>最后，庆祝自己的博客诞生啦~~</p>
+        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
+<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
+<a id="more"></a>
 
+<p>另外, 虽然名字中包含XML的成分, 但Ajax通信与数据格式无关, 这种技术就是无须刷新页面即可从服务器取得数据, 但不一定是XML数据.</p>
+<h1 id="一、创建XHR对象"><a href="#一、创建XHR对象" class="headerlink" title="一、创建XHR对象"></a>一、创建XHR对象</h1><p>IE7+、Firefox、Opera、Chrome和Safari都支持原生的XHR对象, 在这个浏览器中创建XHR对象要像下面这样使用XMLHttpRequest构造函数:</p>
+<p><code>var xhr = new XMLHttpRequest();</code></p>
+<p>如果需要支持IE的早期版本, 那么就需要专门为此编写一个函数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">    function createXHR()&#123;</span><br><span class="line">        if (typeof XMLHttpRequest != &quot;undefined&quot;)&#123;</span><br><span class="line">            return new XMLHttpRequest();</span><br><span class="line">        &#125; else if (typeof ActiveXObject != &quot;undefined&quot;)&#123;</span><br><span class="line">            if (typeof arguments.callee.activeXString != &quot;string&quot;)&#123;</span><br><span class="line">                var versions = [&quot;MSXML2.XMLHttpRequest.6.0&quot;,&quot;MSXML2.XMLHttp.3.0&quot;,&quot;MSXML2.XMLHttp&quot;],</span><br><span class="line">                    i, len;</span><br><span class="line">                for (i=0,len=versions.length; i &lt; len; i++)&#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        new ActiveXObject(versions[i]);</span><br><span class="line">                        arguments.callee.activeXString = versions[i];</span><br><span class="line">                        break;</span><br><span class="line">                    &#125; catch (ex)&#123;</span><br><span class="line">                    //跳过</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return new ActiveXObject(arguments.callee.activeXString);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            throw new Error(&quot;No XHR object available.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">这个函数会首先检测原生XHR对象是否存在, 如果存在则返回它的新实例. 如果原生对象不存在, 则检测ActiveX对象. 如果这两种对象都不存在, 就抛出一个错误.</span><br><span class="line"></span><br><span class="line">然后, 就可以使用以下代码在所有浏览器中创建XHR对象了:</span><br><span class="line"></span><br><span class="line">`var xhr = createXHR();`</span><br><span class="line"></span><br><span class="line"># 二、XHR的用法</span><br><span class="line"></span><br><span class="line">## 1.open()</span><br><span class="line"></span><br><span class="line">在使用XHR对象时, 要调用的第一个方法是`open()`, 它接受3个参数:</span><br><span class="line"></span><br><span class="line">* 要发送的请求的类型(&quot;get&quot;、&quot;post&quot;等)</span><br><span class="line">* 请求的URL</span><br><span class="line">* 表示是否异步发送请求的布尔值</span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line"></span><br><span class="line">`xhr.open(&quot;get&quot;, &quot;example.php&quot;, false);`</span><br><span class="line"></span><br><span class="line">这行代码会启动一个针对example.php的GET请求. 需要说明两点: 一是URL相对于执行代码的当前页面(或者使用绝对路径); 二是调用open()方法并不会真正发送请求, 而只是启动一个请求以备发送.</span><br><span class="line"></span><br><span class="line">注意, 只能向同一个域中使用相同端口和协议的URL发送请求. 如果URL与启动请求的页面有任何差别, 都会引发安全错误.</span><br><span class="line"></span><br><span class="line">## 2.send()</span><br><span class="line"></span><br><span class="line">要发送特定的请求, 必须像下面这样调用`send()`方法:</span><br></pre></td></tr></table></figure>
+<p>xhr.open(“get”, “example.txt”, false);<br>xhr.send(null);</p>
+<pre><code>
+send()方法接收一个参数, 即要作为请求主体发送的数据. 如果不需要通过请求主体发送数据, 则必须传入 null, 因为这个参数对有些浏览器来说是必需的.
+
+调用send()之后, 请求就会被分派到服务器.
+
+由于这次请求是同步的(第三个参数为false), JavaScript代码会等到服务器响应之后再继续执行.
+
+在收到响应后, 响应的数据会自动填充XHR对象的属性, 相关的属性简介如下:
+
+|---|
+</code></pre>
       
 
       
@@ -254,7 +270,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
@@ -266,7 +286,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/笔记//" class="article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/笔记/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
@@ -321,7 +345,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +359,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Markdown基本语法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Markdown基本语法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -373,7 +388,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、创建XHR对象"><span class="toc-number">1.</span> <span class="toc-text">一、创建XHR对象</span></a></li></ol>
                     </div>
                 </span>
                         </div>
