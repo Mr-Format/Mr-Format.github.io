@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>变量、作用域和内存问题（垃圾收集） | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变. 尽管从某种角度看, 这可能是一个既有趣又强大, 同时又容易出问题的特性, 但JavaScript变量实际的复杂程">
+  <meta name="description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="变量、作用域和内存问题（垃圾收集）">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变. 尽管从某种角度看, 这可能是一个既有趣又强大, 同时又容易出问题的特性, 但JavaScript变量实际的复杂程">
+<meta property="og:description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-18T11:50:12.510Z">
+<meta property="og:updated_time" content="2019-11-18T12:05:03.484Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -209,6 +209,8 @@
         <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
 <p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
 <p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
+<a id="more"></a>
+
 <p>尽管从某种角度看, 这可能是一个既有趣又强大, 同时又容易出问题的特性, 但JavaScript变量实际的复杂程度还远不止如此.</p>
 <h1 id="1-基本类型和引用类型的值"><a href="#1-基本类型和引用类型的值" class="headerlink" title="1. 基本类型和引用类型的值"></a>1. 基本类型和引用类型的值</h1><p>ECMAScript变量可能包含两种不同数据类型的值: <strong>基本类型值</strong>和<strong>引用类型值</strong>.</p>
 <p>基本类型值指的是简单的数据段, 而引用类型值指那些可能由多个值构成的对象.</p>
