@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>AJAX-XMLHttpRequest对象 | 灯芯的前端博客</title>
+  <title>变量、作用域和内存问题 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术. Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据,">
+  <meta name="description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AJAX-XMLHttpRequest对象">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;16&#x2F;AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1&#x2F;index.html">
+<meta property="og:title" content="变量、作用域和内存问题">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;18&#x2F;%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术. Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据,">
+<meta property="og:description" content="按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别. JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已. 由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-18T11:41:22.260Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BF%9D%E5%AD%98%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1.jpg">
+<meta property="og:updated_time" content="2019-11-18T14:46:50.513Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BF%9D%E5%AD%98%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
   
@@ -186,197 +188,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-变量、作用域和内存问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      AJAX-XMLHttpRequest对象
+      变量、作用域和内存问题
     </h1>
   
 
         
-        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
+        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
-<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
+        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
+<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
+<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
 <a id="more"></a>
 
-<p>另外, 虽然名字中包含XML的成分, 但Ajax通信与数据格式无关, 这种技术就是无须刷新页面即可从服务器取得数据, 但不一定是XML数据.</p>
-<h1 id="1、创建XHR对象"><a href="#1、创建XHR对象" class="headerlink" title="1、创建XHR对象"></a>1、创建XHR对象</h1><p>IE7+、Firefox、Opera、Chrome和Safari都支持原生的XHR对象, 在这个浏览器中创建XHR对象要像下面这样使用XMLHttpRequest构造函数:</p>
-<p><code>var xhr = new XMLHttpRequest();</code></p>
-<p>如果需要支持IE的早期版本, 那么就需要专门为此编写一个函数:  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function createXHR()&#123;</span><br><span class="line">    if (typeof XMLHttpRequest != &quot;undefined&quot;)&#123;</span><br><span class="line">        return new XMLHttpRequest();</span><br><span class="line">    &#125; else if (typeof ActiveXObject != &quot;undefined&quot;)&#123;</span><br><span class="line">        if (typeof arguments.callee.activeXString != &quot;string&quot;)&#123;</span><br><span class="line">            var versions = [&quot;MSXML2.XMLHttpRequest.6.0&quot;,&quot;MSXML2.XMLHttp.3.0&quot;,&quot;MSXML2.XMLHttp&quot;],i, len;</span><br><span class="line">            for (i=0,len=versions.length; i &lt; len; i++)&#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    new ActiveXObject(versions[i]);</span><br><span class="line">                    arguments.callee.activeXString = versions[i];</span><br><span class="line">                    break;</span><br><span class="line">                &#125; catch (ex)&#123;</span><br><span class="line">                //跳过</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ActiveXObject(arguments.callee.activeXString);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new Error(&quot;No XHR object available.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尽管从某种角度看, 这可能是一个既有趣又强大, 同时又容易出问题的特性, 但JavaScript变量实际的复杂程度还远不止如此.</p>
+<h1 id="1-基本类型和引用类型的值"><a href="#1-基本类型和引用类型的值" class="headerlink" title="1. 基本类型和引用类型的值"></a>1. 基本类型和引用类型的值</h1><p>ECMAScript变量可能包含两种不同数据类型的值: <strong>基本类型值</strong>和<strong>引用类型值</strong>.</p>
+<p>基本类型值指的是简单的数据段, 而引用类型值指那些可能由多个值构成的对象.</p>
+<p>在将一个值赋给变量时, 解析器必须确定这个值是基本类型值还是引用类型值. 基本数据类型是按值访问的, 因为可以操作保存在变量中的实际的值.</p>
+<p>引用类型的值是保存在内存中的对象. 与其他语言不同, JavaScript不允许直接访问内存中的位置, 也就是说不能直接操作对象的内存空间.</p>
+<p>在操作对象时, 实际上是在操作对象的引用而不实际的对象.</p>
+<p>为此, 引用类型的值是按引用访问的.</p>
+<p><em>注:该说法并不严密, 当复制保存着对象的某个变量时, 操作的是对象的引用. 但在为对象添加属性时, 操作的是实际的对象</em></p>
+<p>在很多语言中, 字符串以对象的形式来表示, 因此被认为是引用类型的. ECMAScript放弃了这一传统.</p>
+<h2 id="1-1-动态的属性"><a href="#1-1-动态的属性" class="headerlink" title="1.1 动态的属性"></a>1.1 动态的属性</h2><p>定义基本类型值和引用类型值的方式是类似的: 创建一个变量并为该变量赋值.</p>
+<p>但是, 当这个值保存到变量中以后, 对不同类型值可以执行的操作则大相径庭.</p>
+<p>对于引用类型的值, 我们可以为其添加属性和方法, 也可以改变和删除其属性和方法. 请看下面的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object();</span><br><span class="line">person.name = &quot;Nicholas&quot;;</span><br><span class="line">alert(person.name); //&quot;Nicholas&quot;</span><br></pre></td></tr></table></figure>
 
-<p>这个函数会首先检测原生XHR对象是否存在, 如果存在则返回它的新实例. 如果原生对象不存在, 则检测ActiveX对象. 如果这两种对象都不存在, 就抛出一个错误.</p>
-<p>然后, 就可以使用以下代码在所有浏览器中创建XHR对象了:</p>
-<p><code>var xhr = createXHR();</code></p>
-<h1 id="2、XHR的用法"><a href="#2、XHR的用法" class="headerlink" title="2、XHR的用法"></a>2、XHR的用法</h1><h2 id="2-1-open"><a href="#2-1-open" class="headerlink" title="2.1 open()"></a>2.1 open()</h2><p>在使用XHR对象时, 要调用的第一个方法是<code>open()</code>, 它接受3个参数:</p>
-<ul>
-<li>要发送的请求的类型(“get”、”post”等)</li>
-<li>请求的URL</li>
-<li>表示是否异步发送请求的布尔值</li>
-</ul>
-<p>例如:</p>
-<p><code>xhr.open(&quot;get&quot;, &quot;example.php&quot;, false);</code></p>
-<p>这行代码会启动一个针对example.php的GET请求. 需要说明两点: 一是URL相对于执行代码的当前页面(或者使用绝对路径); 二是调用open()方法并不会真正发送请求, 而只是启动一个请求以备发送.</p>
-<p>注意, 只能向同一个域中使用相同端口和协议的URL发送请求. 如果URL与启动请求的页面有任何差别, 都会引发安全错误.</p>
-<h2 id="2-2-send"><a href="#2-2-send" class="headerlink" title="2.2 send()"></a>2.2 send()</h2><p>要发送特定的请求, 必须像下面这样调用<code>send()</code>方法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;, &quot;example.txt&quot;, false);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
+<p>以上代码创建了一个对象并将其保存在了变量person中. 然后, 我们为该对象添加了一个名为 name的属性, 并将字符串值”Nicholas”赋给了这个属性.</p>
+<p>紧接着, 又通过alert()函数访问了这个新属性.</p>
+<p>如果对象不被销毁或者这个属性不被删除, 则这个属性将一直存在.</p>
+<p>但是, 我们不能给基本类型的值添加属性, 尽管这样做不会导致任何错误. 比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;Nicholas&quot;;</span><br><span class="line">name.age = 27;</span><br><span class="line">alert(name.age);  // undefined</span><br></pre></td></tr></table></figure>
 
-<p>send()方法接收一个参数, 即要作为请求主体发送的数据. 如果不需要通过请求主体发送数据, 则必须传入 null, 因为这个参数对有些浏览器来说是必需的.</p>
-<p>调用send()之后, 请求就会被分派到服务器.</p>
-<p>由于这次请求是同步的(第三个参数为false), JavaScript代码会等到服务器响应之后再继续执行.</p>
-<p>在收到响应后, 响应的数据会自动填充XHR对象的属性, 相关的属性简介如下:</p>
+<p>在这个例子中, 我们为字符串name定义了一个名为age的属性, 并为该属性赋值27, 但在下一行访问这个属性时, 发现该属性不见了.</p>
+<p>这说明只能给引用类型值动态地添加属性, 以便将来使用.</p>
+<h2 id="1-2-复制变量值"><a href="#1-2-复制变量值" class="headerlink" title="1.2 复制变量值"></a>1.2 复制变量值</h2><p>除了保存的方式不同之外, 在从一个变量向另一个变量复制基本类型值和引用类型值时, 也存在不同. 如果从一个变量向另一个变量复制基本类型的值, 会在变量对象上创建一个新值, 然后把该值复制到为新变量分配的位置上.来看一个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num1 = 5;</span><br><span class="line">var num2 = num1;</span><br></pre></td></tr></table></figure>
+
+<p>在此, num1 中保存的值是5. 当使用num1的值来初始化num2时, num2中也保存了值5. 但num2中的5与num1中的5是完全独立的, 该值只是 num1中5 的一个副本. 此后, 这两个变量可以参与任何操作而不会相互影响.</p>
+<p><strong>复制前的变量对象</strong></p>
 <table>
 <thead>
 <tr>
-<th align="center">名称</th>
-<th align="center">描述</th>
+<th align="center">名</th>
+<th align="center">值</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">responseText</td>
-<td align="center">作为响应主体被返回的文本</td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 <tr>
-<td align="center">responseXML</td>
-<td align="center">如果响应的内容类型是”text/xml”或”application/xml”,这个属性中将保存包含着响应数据的XML DOM文档</td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 <tr>
-<td align="center">status</td>
-<td align="center">响应的HTTP状态</td>
-</tr>
-<tr>
-<td align="center">statusText</td>
-<td align="center">HTTP状态的说明</td>
+<td align="center">num1</td>
+<td align="center">5(Number类型)</td>
 </tr>
 </tbody></table>
-<p>在接收到响应后, 第一步是检查<code>status</code>属性, 以确定响应已经成功返回.</p>
-<p>一般情况下, 可以将HTTP状态代码为200作为成功的标志. 此时, responseText属性的内容已经就绪, 而且在内容类型正确的情况下, responseXML也应该能够访问了. 此外, 状态代码为304表示请求的资源并没有被修改, 可以直接使用浏览器中缓存的版本; 当前, 也意味着响应是有效的.</p>
-<p>为确保接收到适当的响应, 应该同时检查上述两种状态代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;, &quot;example.txt&quot;, false);</span><br><span class="line">xhr.send(null);</span><br><span class="line"></span><br><span class="line">if ((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">    alert(xhr.responseText);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    alert(&quot;Request was unsuccessful: &quot; + xhr.status);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>建议最好是通过status来决定下一步的操作, 不要依赖statusText, 因为后者在跨浏览器使用时不太可靠.</p>
-<p>另外, 无论内容类型是什么, 响应主体的内容都会保存到responseText属性中; 而对于非XML数据而言, responseText属性的值为null.</p>
-<h2 id="2-3-readyState"><a href="#2-3-readyState" class="headerlink" title="2.3 readyState"></a>2.3 readyState</h2><p>像前面这样发送同步请求当然没问题, 但多数情况下, 我们还是要发送异步请求, 才能让JavaScript继续执行而不必等待响应. 此时可以检测 XHR对象的readyState属性, 该属性表示请求/响应过程的当前活动阶段.</p>
-<p>这个属性可取的值如下:</p>
-<ul>
-<li>0: 未初始化. 尚未调用open()方法</li>
-<li>1: 已启动. 已经调用open()方法, 但尚未调用send()方法</li>
-<li>2: 发送. 已经调用send()方法, 但尚未接收到响应</li>
-<li>3: 接收. 已经接收到部分响应数据</li>
-<li>4: 完成. 已经接收到全部响应数据, 而且已经可以在客户端使用了</li>
-</ul>
-<p>只要readyState属性的值由一个变为另一个值, 都会触发一次readystatechange事件. 可以利用这个事件来检测每次变化后 readyState的值.</p>
-<p>通常, 我们只对readyState值为4的阶段感兴趣, 因为这时所有数据都已就绪.</p>
-<p>不过, 必须在调用open()之前指定onreadystatechange事件处理程序才能确保跨浏览器的兼容性.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var xhr = createXHR();</span><br><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">    if (xhr.readyState == 4)&#123;</span><br><span class="line">        if ((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">            alert(xhr.responseText);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            alert(&quot;Request was unsuccessful: &quot; + xhr.status)</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(&quot;get&quot;, &quot;example.txt&quot;, true);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
-
-<p>以上代码利用DOM 0级方法为XHR对象添加了事件处理程序, 原因是并非所有浏览器都支持DOM 2级方法.</p>
-<p>与其他事件处理程序不同, 这里没有向onreadystatechange事件处理程序中传递event对象; 必须通过 XHR对象本身来确定下一步该怎么做.</p>
-<h2 id="2-4-abort"><a href="#2-4-abort" class="headerlink" title="2.4 abort()"></a>2.4 abort()</h2><p>在接收响应之前还可以调用abort()方法来取消异步请求.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.abort();</span><br></pre></td></tr></table></figure>
-
-<p>调用这个方法后, XHR对象会停止触发事件, 而且也不再允许访问任何与响应有关的对象属性.</p>
-<p>在终止请求之后, 还应该对XHR对象进行解引用操作. 由于内存原因, 不建议重用XHR对象.</p>
-<h1 id="3-HTTP头部信息"><a href="#3-HTTP头部信息" class="headerlink" title="3.HTTP头部信息"></a>3.HTTP头部信息</h1><p>每个HTTP请求和响应都会带有相应的头部信息, XHR对象提供了操作两种头部(请求头部和响应头部)信息的方法.</p>
-<p>默认情况下, 在发送XHR请求的同时, 还会发送下列头部信息:</p>
+<p><strong>复制后的变量对象</strong></p>
 <table>
 <thead>
 <tr>
-<th align="center">名称</th>
-<th align="center">描述</th>
+<th align="center">名</th>
+<th align="center">值</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">Accept</td>
-<td align="center">浏览器能够处理的内容类型</td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 <tr>
-<td align="center">Accept-Charset</td>
-<td align="center">浏览器能够显示的字符集</td>
+<td align="center">num2</td>
+<td align="center">5(Number类型)</td>
 </tr>
 <tr>
-<td align="center">Accept-Encoding</td>
-<td align="center">浏览器能够处理的压缩编码</td>
-</tr>
-<tr>
-<td align="center">Accept-Language</td>
-<td align="center">浏览器当前设置的语言</td>
-</tr>
-<tr>
-<td align="center">Connection</td>
-<td align="center">浏览器与服务器之间连接的类型</td>
-</tr>
-<tr>
-<td align="center">Cookie</td>
-<td align="center">当前页面设置的任何Cookie</td>
-</tr>
-<tr>
-<td align="center">Host</td>
-<td align="center">发出请求的页面所在的域</td>
-</tr>
-<tr>
-<td align="center">Referer</td>
-<td align="center">发出请求的页面的URI.</td>
-</tr>
-<tr>
-<td align="center">User-Agent</td>
-<td align="center">浏览器的用户代理字符串</td>
+<td align="center">num1</td>
+<td align="center">5(Number类型)</td>
 </tr>
 </tbody></table>
-<p>以上列出的基本上是所有浏览器都会发送的头部信息.</p>
-<p>使用setRequestHeader()方法可以设置自定义的请求头部信息. 该方法接受两个参数: 头部字段的名称和头部字段的值.</p>
-<p>要成功发送请求头部信息, 必须在调用open()方法之后且调用send()方法之前调用setRequestHeader(), 如下面的例子所示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xhr = createXHR();</span><br><span class="line">xhr.onreadystatechange = function()&#123;</span><br><span class="line">    if (xhr.readyState == 4)&#123;</span><br><span class="line">        if ((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">            alert(xhr.responseText);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            alert(&quot;Request was unsuccessful: &quot; + xhr.status)</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</span><br><span class="line">xhr.setRequestHeader(&quot;MyHeader&quot;, &quot;MyValue&quot;);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
+<p>当从一个变量向另一个变量复制引用类型的值时, 同样也会将存储在变量对象中的值复制一份放到为新变量分配的空间中.</p>
+<p>不同的是, 这个值的副本实际上是一个指针, 而这个指针指向存储在堆中的一个对象.</p>
+<p>复制操作结束后, 两个变量实际上将引用同一个对象.</p>
+<p>因此, 改变其中一个变量, 就会影响另一个变量, 如下面的例子所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = new Object();</span><br><span class="line">var obj2 = obj1;</span><br><span class="line">obj1.name = &quot;Nicholas&quot;;</span><br><span class="line">alert(obj2.name); //&quot;Nicholas&quot;</span><br></pre></td></tr></table></figure>
 
-<p>服务器在接收到自定义头部信息后, 可以执行相应的后续操作. 建议使用自定义的头部字段名称, 不要使用浏览器正常发送的字段名称, 否则可能会影响服务器的响应. 有的浏览器允许开发人员重写默认的头部信息, 但有的浏览器则不允许这样做.</p>
-<p>调用XHR对象的getResponseHeader()方法并传入头部字段名称, 可以取得相应的响应头部信息.</p>
-<p>而调用getAllResponseHeaders()方法则可以取得一个包含所有头部信息的长字符串.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var myHeader = xhr.getResponseHeader(&quot;MyHeader&quot;);</span><br><span class="line">var allHeaders = xhr.getAllResponseHeaders();</span><br></pre></td></tr></table></figure>
+<p>首先, 变量obj1保存了一个对象的新实例. 然后, 这个值被复制到了obj2中; 换句话说, obj1和obj2都指向同一个对象. 这样, 当为obj1添加name属性后, 可以通过obj2来访问这个属性, 因为这两个变量引用的都是同一个对象.</p>
+<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E4%BF%9D%E5%AD%98%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1.jpg" alt="保存变量对象"></p>
+<h2 id="1-3-传递参数"><a href="#1-3-传递参数" class="headerlink" title="1.3 传递参数"></a>1.3 传递参数</h2><p>ECMAScript中所有函数的参数都是按值传递的. 也就是说, 把函数外部的值复制给函数内部的参数, 就和把值从一个变量复制到另一个变量一样.</p>
+<p>基本类型值的传递如同基本类型变量的复制一样, 而引用类型值的传递, 则如同引用类型变量的复制一样.</p>
+<p>有不少开发人员在这一点上可能会感到困惑, 因为访问变量有按值和按引用两种方式, 而参数只能按值传递.</p>
+<p>在向参数传递基本类型的值时, 被传递的值会被复制给一个局部变量(即命名参数, 或者用ECMAScript的概念来说, 就是 arguments 对象中的一个元素).</p>
+<p>在向参数传递引用类型的值时, 会把这个值在内存中的地址复制给一个局部变量, 因此这个局部变量的变化会反映在函数的外部.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function addTen(num) &#123;</span><br><span class="line">    num += 10;</span><br><span class="line">    return num;</span><br><span class="line">&#125;</span><br><span class="line">var count = 20;</span><br><span class="line">var result = addTen(count);</span><br><span class="line">alert(count); //20，没有变化</span><br><span class="line">alert(result); //30</span><br></pre></td></tr></table></figure>
 
-<p>在服务器端, 也可以利用头部信息向浏览器发送额外的、结构化的数据.</p>
-<p>在没有自定义信息的情况下, getAllResponseHeaders()方法通常会返回如下所示多行文本内容:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Date: Sun, 14 Nov 2004 18:04:03 GMT</span><br><span class="line">Server: Apache/1.3.29 (Unix)</span><br><span class="line">Vary: Accept</span><br><span class="line">X-Powered-By: PHP/4.3.8</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br></pre></td></tr></table></figure>
+<p>这里的函数addTen()有一个参数num, 而参数实际上是函数的局部变量. 在调用这个函数时, 变量count作为参数被传递给函数, 这个变量的值是20. 于是, 数值20被复制给参数num以便在addTen()中使用.</p>
+<p>在函数内部, 参数num的值被加上了10, 但这一变化不会影响函数外部的count变量. 参数 num与变量count互不相识, 它们仅仅是具有相同的值.</p>
+<p>假如num是按引用传递的话. 那么变量count的值也将变成30, 从而反映函数内部的修改.</p>
+<p>当然, 使用数值等基本类型值来说明按值传递参数比较简单, 但如果使用对象, 那问题就不怎么好理解了. 再举一个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function setName(obj) &#123;</span><br><span class="line">    obj.name = &quot;Nicholas&quot;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Object();</span><br><span class="line">setName(person);</span><br><span class="line">alert(person.name); //&quot;Nicholas&quot;</span><br></pre></td></tr></table></figure>
 
-<p>这种格式化的输出可以方便我们检查响应中所有头部字段的名称, 而不必一个一个地检查某个字段是否存在.</p>
-<h1 id="4-GET请求"><a href="#4-GET请求" class="headerlink" title="4.GET请求"></a>4.GET请求</h1><p>GET是最常见的请求类型, 常用于向服务器查询某些信息. 必要时, 可以将查询字符串参数追加到URL的末尾, 以便将信息发送给服务器.</p>
-<p>对XHR而言, 位于传入open()方法的URL末尾的查询字符串必须经过正确的编码才行.</p>
-<p>使用GET请求经常会发生的一个错误, 就是查询字符串的格式问题. 查询字符串中每个参数的名称和值都必须使用encodeURIComponenet()进行编码, 然后才能放到URL的末尾; 而且所有的名值对都必须由和号(&amp;)分隔.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;, &quot;example.php?name1=value1&amp;name2=value2&quot;, true);</span><br></pre></td></tr></table></figure>
+<p>以上代码中创建一个对象, 并将其保存在了变量person中. 然后, 这个变量被传递到setName()函数中之后就被复制给了obj. 在这个函数内部, obj和person引用的是同一个对象.</p>
+<p>换句话说, 即使这个变量是按值传递的, 换句话说, 即使这个变量是按值传递的, obj也会按引用来访问同一个对象.</p>
+<p>于是, 当在函数内部为obj添加name属性后, 函数外部的 person也将有所反映. 因为person指向的对象在堆内存中只有一个, 而且是全局对象.</p>
+<p>有很多开发人员错误地认为: 在局部作用域中修改的对象会在全局作用域中反映出来, 就说明参数是按引用传递的. 为了证明对象是按值传递的, 我们再看一看下面这个经过修改的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function setName(obj) &#123;</span><br><span class="line">    obj.name = &quot;Nicholas&quot;;</span><br><span class="line">    obj = new Object();</span><br><span class="line">    obj.name = &quot;Greg&quot;;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Object();</span><br><span class="line">setName(person);</span><br><span class="line">alert(person.name); //&quot;Nicholas&quot;</span><br></pre></td></tr></table></figure>
 
-<p>下面这个函数可以辅助向现有URL的末尾添加查询字符串参数:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function addURLParam(url, name, value)&#123;</span><br><span class="line">    url += (url.indexOf(&quot;?&quot;) == -1 ? &quot;?&quot; : &quot;&amp;&quot;);</span><br><span class="line">    url += encodeURIComponent(name) + &quot;=&quot; + encodeURIComponent(value);</span><br><span class="line">    return url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子与前一个例子的唯一区别, 就是在setName()函数中添加了两行代码: 一行代码为 obj重新定义了一个对象, 另一行代码为该对象定义了一个带有不同值的name属性.</p>
+<p>在把person传递给setName()后, 其 name属性被设置为”Nicholas”. 然后, 又将一个新对象赋给变量obj. 同时将其name属性设置为”Greg”.</p>
+<p>如果person是按引用传递的, 那么 person就会自动被修改为指向其name属性值为”Greg”的新对象. 但是, 当接下来再访问person.name时, 显示的值仍然是”Nicholas”.</p>
+<p>这说明即使在函数内部修改了参数的值, 但原始的引用仍然保持未变.</p>
+<p>实际上, 当在函数内部重写obj时, 这个变量引用的就是一个局部对象了. 而局部对象会在函数执行完毕后立即被销毁.</p>
+<h2 id="1-4-检测类型"><a href="#1-4-检测类型" class="headerlink" title="1.4 检测类型"></a>1.4 检测类型</h2><p>typeof操作符是确定一个变量是字符串、数值、布尔值, 还是undefined的最佳工具.</p>
+<p>如果变量的值是一个对象或null, 则typeof操作符会像下面例子中所示的那样返回”object:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var s = &quot;Nicholas&quot;;</span><br><span class="line">var b = true;</span><br><span class="line">var i = 22;</span><br><span class="line">var u;</span><br><span class="line">var n = null;</span><br><span class="line">var o = new Object();</span><br><span class="line"></span><br><span class="line">alert(typeof s); //string</span><br><span class="line">alert(typeof i); //number</span><br><span class="line">alert(typeof b); //boolean</span><br><span class="line">alert(typeof u); //undefined</span><br><span class="line">alert(typeof n); //object</span><br><span class="line">alert(typeof o); //object</span><br></pre></td></tr></table></figure>
 
-<p>这个函数首先检查URL是否包含问号(以确定是否已经有参数存在). 如果没有, 就添加一个问号; 否则就添加一个和号.</p>
-<p>然后, 将参数名和值进行编码, 再添加到URL的末尾.</p>
-<p>最后返回添加参数之后的URL.</p>
-<p>下面是使用这个函数来构建请求URL的示例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = &quot;example.php&quot;;</span><br><span class="line"></span><br><span class="line">// 添加参数</span><br><span class="line">url = addURLParam(url, &quot;name&quot;, &quot;Nicholas&quot;);</span><br><span class="line">url = addURLParam(url, &quot;book&quot;, &quot;Professional JavaScript&quot;);</span><br><span class="line"></span><br><span class="line">// 初始化请求</span><br><span class="line">xhr.open(&quot;get&quot;, url, false);</span><br></pre></td></tr></table></figure>
+<p>虽然在检测基本数据类型时typeof是非常得力的助手, 但是检测引用类型的值时, 这个操作符用处不大.</p>
+<p>通常, 我们并不是想知道某个值是对象, 而是想知道它是什么类型的对象. 为此, ECMAScript提供了instanceof操作符, 其语法如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = variable instanceof constructor</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-POST请求"><a href="#5-POST请求" class="headerlink" title="5.POST请求"></a>5.POST请求</h1><p>POST请求通常用于向服务器发送应该被保存的数据.</p>
-<p>POST请求应该把数据作为请求的主体提交, 而GET请求传统上不是这样.</p>
-<p>POST请求的主体可以包含非常多的数据, 而且格式不限.</p>
-<p>在open()方法的第一个参数传入”post”就可以初始化一个POST请求.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;post&quot;, &quot;example.php&quot;, true);</span><br></pre></td></tr></table></figure>
+<p>如果变量是给定引用类型(根据它的原型链来识别)的实例, 那么instanceof操作符就会返回true.</p>
+<p>根据规定, 所有引用类型的值都是Object的实例. 因此, 在检测一个引用类型值和Object构造函数时, instanceof操作符始终会返回true.</p>
+<p>当然, 如果使用instanceof操作符检测基本类型的值, 则该操作符始终会返回false, 因为基本类型不是对象.</p>
+<p><em>使用typeof操作符检测函数时, 该操作符会返回”function”. ECMA-262规定任何在内部实现<code>[[call]]</code>方法的对象都应该在应用typeof操作符时返回”function”.</em></p>
+<h1 id="2-执行环境及作用域"><a href="#2-执行环境及作用域" class="headerlink" title="2.执行环境及作用域"></a>2.执行环境及作用域</h1><p>执行环境execution context是JavaScript中最为重要的一个概念.</p>
+<p>执行环境定义了变量或函数有权访问的其他数据, 决定了它们各自的行为.</p>
+<p>每个执行环境都有一个与之关联的变量对象variable object, 环境中定义的所有变量和函数都保存在这个对象中.</p>
+<h2 id="2-1-全局作用域"><a href="#2-1-全局作用域" class="headerlink" title="2.1 全局作用域"></a>2.1 全局作用域</h2><p>虽然我们编写的代码无法访问这个对象, 但解析器在处理数据时会在后台使用它.</p>
+<p>全局执行环境是最外围的一个执行环境. 根据ECMAScript实现所在的宿主环境不同, 表示执行环境的对象也不一样.</p>
+<ul>
+<li>直接编写在script标签中的JS代码,都在全局作用域</li>
+<li>全局作用域在页面打开时创建,在页面关闭时销毁</li>
+<li>在全局作用域中,有一个全局对象window,它代表一个浏览器的窗口,它由浏览器创建,我们可以直接使用</li>
+<li>在全局作用域中,创建的变量都会作为window对象的属性保存;创建的函数都会作为window对象的方法保存</li>
+<li>全局作用域中的变量都是全局变量,在页面的任意部分都可以被访问的到</li>
+</ul>
+<p>在Web浏览器中, 全局执行环境被认为是window对象, 因此所有全局变量和函数都是作为 window对象的属性和方法创建的.</p>
+<p>某个执行环境中的所有代码执行完毕后, 该环境被销毁, 保存在其中的所有变量和函数定义也随之销毁(全局执行环境直到应用程序退出时才会被销毁).</p>
+<h2 id="2-2-函数作用域-局部作用域"><a href="#2-2-函数作用域-局部作用域" class="headerlink" title="2.2 函数作用域(局部作用域)"></a>2.2 函数作用域(局部作用域)</h2><p>调用函数时, 创建函数作用域, 函数执行完毕后, 函数作用域销毁.每调用一次函数就会创建一个新的函数作用域, 他们之间是相互独立的.</p>
+<p>在函数作用域中, 可以访问到全局变量, 而在全局作用域中无法访问函数作用域的变量.</p>
+<p>当在函数作用域中操作变量时, 它会先在自身的作用域中寻找;如果有就直接使用, 如果没有就会在上一级作用域中寻找, 直到找到全局作用域.如果全局作用域中也没有, 就会报错: <code>ReferenceError</code>.</p>
+<p>在函数中访问全局变量, 可以使用<code>window.变量</code>.</p>
+<p><em>在函数中, 不使用var声明的变量都会成为全局变量.</em></p>
+<h2 id="2-3-作用域链"><a href="#2-3-作用域链" class="headerlink" title="2.3 作用域链"></a>2.3 作用域链</h2><p>每个函数都有自己的执行环境. 当执行流进入一个函数时, 函数的环境就会被推入一个环境栈中.而在函数执行之后, 栈将其环境弹出, 把控制权返回给之前的执行环境.ECMAScript程序中的执行流正是由这个方便的机制控制着.</p>
+<p>当代码在一个环境中执行时, 会创建变量对象的一个作用域链scope chain. 作用域链的用途, 是保证对执行环境有权访问的所有变量和函数的有序访问.</p>
+<p>作用域链的前端, 始终都是当前执行的代码所在环境的变量对象.</p>
+<p>如果这个环境是函数, 则将其活动对象activation object作为变量对象.</p>
+<p>活动对象在最开始时只包含一个变量, 即arguments对象(这个对象在全局环境中是不存在的).</p>
+<p>作用域链的下一个变量对象来自包含(外部)环境, 而再下一个变量对象则来自下一个包含环境.</p>
+<p>这样一直延续到全局执行环境; 全局执行环境的变量对象始终都是作用域链中的最后一个对象.</p>
+<p>标识符解析是沿着作用域链一级一级地搜索标识符的过程. 搜索过程始终从作用域链的最前端开始, 然后逐级地向后回溯, 直到找到标识符为止(如果找不到标识符, 通常会导致错误发生).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var color = &quot;blue&quot;;</span><br><span class="line">function changeColor()&#123;</span><br><span class="line">    if (color === &quot;blue&quot;)&#123;</span><br><span class="line">        color = &quot;red&quot;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        color = &quot;blue&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">changeColor();</span><br><span class="line">alert(&quot;Color is now &quot; + color);</span><br></pre></td></tr></table></figure>
 
-<p>发送POST请求的第二步就是向send()方法中传入某些数据. 可以出传入XML DOM文档, 也可以传入任何想发送到服务器的字符串.</p>
-<p>默认情况下, 服务器对POST请求和提交Web表单的请求并不会一视同仁. 因此, 服务器端必须有程序来读取发送过来的原始数据, 并从中解析出有用的部分.</p>
-<p>不过, 可以使用XHR来模仿表单提交: 首先将Content-Type头部信息设置为application/x-www-form-urlencoded, 也就是表单提交时的内容类型, 其次是以适当的格式创建一个字符串.</p>
-<p>POST数据的格式与查询字符串格式相同, 如果需要将页面中表单的数据进行序列化, 然后再通过XHR发送到服务器, 那么可以使用下面的函数来创建这个字符串:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">function serialize(form)&#123;</span><br><span class="line">    var parts = [],</span><br><span class="line">    field = null,</span><br><span class="line">    i,</span><br><span class="line">    len,</span><br><span class="line">    j,</span><br><span class="line">    optLen,</span><br><span class="line">    option,</span><br><span class="line">    optValue;</span><br><span class="line">    for (i=0, len=form.elements.length; i &lt; len; i++)&#123;</span><br><span class="line">        field = form.elements[i];</span><br><span class="line">        switch(field.type)&#123;</span><br><span class="line">            case &quot;select-one&quot;:</span><br><span class="line">            case &quot;select-multiple&quot;:</span><br><span class="line">                if (field.name.length)&#123;</span><br><span class="line">                    for (j=0, optLen = field.options.length; j &lt; optLen; j++)&#123;</span><br><span class="line">                        option = field.options[j];</span><br><span class="line">                        if (option.selected)&#123;</span><br><span class="line">                            optValue = &quot;&quot;;</span><br><span class="line">                            if (option.hasAttribute)&#123;</span><br><span class="line">                                optValue = (option.hasAttribute(&quot;value&quot;) ?</span><br><span class="line">                                option.value : option.text);</span><br><span class="line">                            &#125; else &#123;</span><br><span class="line">                                optValue = (option.attributes[&quot;value&quot;].specified ?</span><br><span class="line">                                option.value : option.text);</span><br><span class="line">                            &#125;</span><br><span class="line">                            parts.push(encodeURIComponent(field.name) + &quot;=&quot; +</span><br><span class="line">                                encodeURIComponent(optValue));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            break;</span><br><span class="line">            case undefined: //字段集</span><br><span class="line">            case &quot;file&quot;: //文件输入</span><br><span class="line">            case &quot;submit&quot;: //提交按钮</span><br><span class="line">            case &quot;reset&quot;: //重置按钮</span><br><span class="line">            case &quot;button&quot;: //自定义按钮</span><br><span class="line">            break;</span><br><span class="line">            case &quot;radio&quot;: //单选按钮</span><br><span class="line">            case &quot;checkbox&quot;: //复选框</span><br><span class="line">            if (!field.checked)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            /* 执行默认操作 */</span><br><span class="line">            default:</span><br><span class="line">            //不包含没有名字的表单字段</span><br><span class="line">            if (field.name.length)&#123;</span><br><span class="line">                parts.push(encodeURIComponent(field.name) + &quot;=&quot; +</span><br><span class="line">                encodeURIComponent(field.value));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return parts.join(&quot;&amp;&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function submitData()&#123;</span><br><span class="line">    var xhr = createXHR();</span><br><span class="line">    xhr.onreadystatechange = function()&#123;</span><br><span class="line">        if (xhr.readyState == 4)&#123;</span><br><span class="line">            if ((xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || xhr.status == 304)&#123;</span><br><span class="line">                alert(xhr.responseText);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                alert(&quot;Request was unsuccessful: &quot; + xhr.status);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    xhr.open(&quot;post&quot;, &quot;postexample.php&quot;, true);</span><br><span class="line">    xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">    var form = document.getElementById(&quot;user-info&quot;);</span><br><span class="line">    xhr.send(serialize(form));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子中, 函数changeColor()的作用域链包含两个对象: 它自己的变量对象(其中定义着 arguments对象)和全局环境的变量对象.</p>
+<p>可以在函数内部访问变量color, 就是因为可以在这个作用域链中找到它.</p>
+<p>此外, 在局部作用域中定义的变量可以在局部环境中与全局变量互换使用.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var color = &quot;blue&quot;;</span><br><span class="line"></span><br><span class="line">function changeColor()&#123;</span><br><span class="line">    var anotherColor = &quot;red&quot;;</span><br><span class="line"></span><br><span class="line">    function swapColors()&#123;</span><br><span class="line">        var tempColor = anotherColor;</span><br><span class="line">        anotherColor = color;</span><br><span class="line">        color = tempColor;</span><br><span class="line">// 这里可以访问 color、anotherColor 和 tempColor</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">// 这里可以访问 color 和 anotherColor，但不能访问 tempColor</span><br><span class="line">    swapColors();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">// 这里只能访问 color</span><br><span class="line">changeColor();</span><br></pre></td></tr></table></figure>
 
-<p>这个函数可以将ID为”user-info”的表单中的数据序列化之后发送给服务器.</p>
-<p>与GET请求相比, POST请求消耗的资源会更多一些. 从性能角度看, 发送相同的数据, GET请求的速度最多可达到POST请求的两倍.</p>
+<p>以上代码共涉及3个执行环境: 全局环境、changeColor()的局部环境和swapColors()的局部环境.</p>
+<p>全局环境中有一个变量color和一个函数changeColor(). changeColor()的局部环境中有一个名为anotherColor的变量和一个名为swapColors()的函数, 但它也可以访问全局环境中的变量 color. swapColors()的局部环境中有一个变量tempColor, 该变量只能在这个环境中访问到. 无论全局环境还是changeColor()的局部环境都无权访问tempColor. 然而, 在swapColors()内部则可以访问其他两个环境中的所有变量, 因为那两个环境是它的父执行环境.</p>
+<p>内部环境可以通过作用域链访问所有的外部环境, 但外部环境不能访问内部环境中的任何变量和函数.</p>
+<p>这些环境之间的联系是线性、有次序的. 每个环境都可以向上搜索作用域链, 以查询变量和函数名; 但任何环境都不能通过向下搜索作用域链而进入另一个执行环境.</p>
+<p>对于这个例子中的swapColors()而言, 其作用域链中包含 3 个对象: swapColors()的变量对象、changeColor()的变量对象和全局变量对象.</p>
+<p>swapColors()的局部环境开始时会现在自己的变量对象中搜索变量和函数名, 如果搜索不到则再搜索到上一级作用域链.</p>
+<p>changeColor()的作用域链中只包含两个对象: 它自己的变量对象和全局变量对象. 这也就是说, 它不能访问swapColors()的环境.</p>
+<p><em>函数参数也被当作变量来对待, 因此其访问规则与执行环境中的其他变量相同.</em></p>
+<h2 id="2-4-延长作用域链"><a href="#2-4-延长作用域链" class="headerlink" title="2.4 延长作用域链"></a>2.4 延长作用域链</h2><p>虽然执行环境的类型总共只有两种——全局和局部(函数), 但还是有其他办法来延长作用域链. 这么说是因为有些语句可以在作用域链的前端临时增加一个变量对象, 该变量对象会在代码执行后被移除.</p>
+<p>在两种情况下会发生这种现象. 具体来说, 就是当执行流进入下列任何一个语句时, 作用域链就会得到加长:</p>
+<p>*try-catch语句的catch块<br>*with语句</p>
+<p>这两个语句都会在作用域链的前端添加一个变量对象. 对with语句来说, 会将指定的对象添加到作用域链中. 对catch语句来说, 会创建一个新的变量对象, 其中包含的是被抛出的错误对象的声明.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function buildUrl() &#123;</span><br><span class="line">    var qs = &quot;?debug=true&quot;;</span><br><span class="line"></span><br><span class="line">    with(location)&#123;</span><br><span class="line">        var url = href + qs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此, with语句接收的是location对象, 因此其变量对象中就包含了 location对象的所有属性和方法, 而这个变量对象被添加到了作用域链的前端.</p>
+<p>buildUrl()函数中定义了一个变量qs. 当在with语句中引用变量herf时 (实际上引用的是 location.href), 可以在当前执行环境的变量对象中找到.</p>
+<p>当引用变量qs时, 引用的则是在buildUrl()中定义的那个变量, 而该变量位于函数环境的变量对象中.</p>
+<p>至于with语句内部, 则定义了一个名为url的变量, 因而url就成了函数执行环境的一部分, 所以可以作为函数的值被返回.</p>
+<p><em>在IE8及之前版本的JavaScript实现中, 存在一个与标准不一致的地方, 即在catch语句中捕获的错误对象会被添加到执行环境的变量对象, 而不是catch语句的变量对象中. 换句话说, 即使是在catch块的外部也可以访问到错误对象. IE9修复了这个问题.</em></p>
+<h2 id="2-5-没有块级作用域"><a href="#2-5-没有块级作用域" class="headerlink" title="2.5 没有块级作用域"></a>2.5 没有块级作用域</h2><p>JavaScript没有块级作用域经常会导致理解上的困惑.</p>
+<p>在其他类C的语言中, 由花括号封闭的代码块都有自己的作用域, 因而支持根据条件来定义变量.</p>
+<p>例如, 下面的代码在JavaScript中并不会得到想象中的结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (true) &#123;</span><br><span class="line">    var color = &quot;blue&quot;;</span><br><span class="line">&#125;</span><br><span class="line">alert(color); //&quot;blue&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里是在一个if语句中定义了变量color. 如果是在C、C++或Java中, color会在if语句执行完毕后被销毁.</p>
+<p>但在JavaScript中, if语句中的变量声明会将变量添加到当前的执行环境中. 在使用 for语句时尤其要牢记这一差异.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i=0; i &lt; 10; i++)&#123;</span><br><span class="line">    doSomething(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(i); //10</span><br></pre></td></tr></table></figure>
+
+<p>对于有块级作用域的语言来说, for语句初始化变量的表达式所定义的变量, 只会存在于循环的环境之中. 而对于JavaScript来说, 由for语句创建的变量i即使在for循环执行结束后, 也依旧会存在于循环外部的执行环境中.</p>
+<h3 id="2-5-1-声明变量"><a href="#2-5-1-声明变量" class="headerlink" title="2.5.1 声明变量"></a>2.5.1 声明变量</h3><p>使用var声明的变量会自动被添加到最接近的环境中. 在函数内部, 最接近的环境就是函数的局部环境; 在with语句中, 最接近的环境是函数环境. 如果初始化变量时没有使用 var声明, 该变量会自动被添加到全局环境. 如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function add(num1, num2) &#123;</span><br><span class="line">    var sum = num1 + num2;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = add(10, 20); //30</span><br><span class="line">alert(sum); //由于 sum 不是有效的变量，因此会导致错误</span><br></pre></td></tr></table></figure>
+
+<p>以上代码中的函数add()定义了一个名为sum的局部变量, 该变量包含加法操作的结果.虽然结果值从函数中返回了, 但变量sum在函数外部是访问不到的.</p>
+<p>如果省略这个例子中的var关键字, 那么当add()执行完毕后, sum也将可以访问到:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function add(num1, num2) &#123;</span><br><span class="line">    sum = num1 + num2;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = add(10, 20); //30</span><br><span class="line">alert(sum); //30</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的变量sum在被初始化赋值时没有使用var关键字. 于是, 当调用完add()之后, 添加到全局环境中的变量 sum将继续存在; 即使函数已经执行完毕, 后面的代码依旧可以访问它.</p>
+<p><em>在编写JavaScript代码的过程中, 不声明而直接初始化变量是一个常见的错误做法, 因为这样可能会导致意外. 我们建议在初始化变量之前, 一定要先声明, 这样就可以避免类似问题. 在严格模式下, 初始化未经声明的变量会导致错误.</em></p>
+<h3 id="2-5-2-函数的声明提前"><a href="#2-5-2-函数的声明提前" class="headerlink" title="2.5.2 函数的声明提前"></a>2.5.2 函数的声明提前</h3><p>使用函数声明形式创建的函数, 即: <code>function 函数(){}</code>, 它会在所有代码执行之前就被创建, 所以可以在函数声明之前调用函数.</p>
+<p>使用函数表达式创建的函数, 即: <code>var 函数 = function(){}</code>, 不会被提前创建, 不能提前调用.</p>
+<p>在函数作用域中也有声明提前的特性: 使用 var关键字声明的变量, 会在函数中所有代码执行之前被声明.</p>
+<p>函数声明也会在函数中所有代码执行之前被声明</p>
+<p>定义形参,相当于在函数作用域中声明了变量</p>
+<h3 id="2-5-3-查询标识符"><a href="#2-5-3-查询标识符" class="headerlink" title="2.5.3 查询标识符"></a>2.5.3 查询标识符</h3><p>当在某个环境中为了读取或写入而引入一个标识符时, 必须通过搜索来确定该标识符实际代表什么.</p>
+<p>搜索过程从作用域链的前端开始, 向上逐级查询与给定名字匹配的标识符.</p>
+<p>如果在局部环境中找到了该标识符, 搜索过程停止, 变量就绪. 如果在局部环境中没有找到该变量名, 则继续沿作用域链向上搜索.</p>
+<p>搜索过程将一直追溯到全局环境的变量对象. 如果在全局环境中也没有找到这个标识符, 则意味着该变量尚未声明.</p>
+<h1 id="3-垃圾收集"><a href="#3-垃圾收集" class="headerlink" title="3.垃圾收集"></a>3.垃圾收集</h1><p>JavaScript具有自动垃圾收集机制, 也就是说, 执行环境会负责管理代码执行过程中使用的内存.</p>
+<p>而在C和C++之类的语言中, 开发人员的一项基本任务就是手工跟踪内存的使用情况, 这是造成许多问题的一个根源.</p>
+<p>在编写JavaScript程序时, 开发人员不用再关心内存使用问题, 所需内存的分配以及无用内存的回收完全实现了自动管理.</p>
+<p>这种垃圾收集机制的原理其实很简单: 找出那些不再继续使用的变量, 然后释放其占用的内存.</p>
+<p>为此, 垃圾收集器会按照固定的时间间隔(或代码执行中预定的收集时间), 周期性地执行这一操作.</p>
+<p>下面我们来分析一下函数中局部变量的正常生命周期</p>
+<p>局部变量只在函数执行的过程中存在. 而在这个过程中, 会为局部变量在栈(或堆)内存上分配相应的空间, 以便存储它们的值. 然后在函数中使用这些变量, 直至函数执行结束.</p>
+<p>此时, 局部变量就没有存在的必要了, 因此可以释放它们的内存以供将来使用. 在这种情况下, 很容易判断变量是否还有存在的必要.</p>
+<p>但并非所有情况下都这么容易就能得出结论.</p>
+<p>垃圾收集器必须跟踪哪个变量有用哪个变量没用, 对于不再有用的变量打上标记, 以备将来收回其占用的内存. 用于标识无用变量的策略可能会因实现而异, 但具体到浏览器中的实现, 则通常有两个策略.</p>
+<h2 id="3-1-标记清除"><a href="#3-1-标记清除" class="headerlink" title="3.1 标记清除"></a>3.1 标记清除</h2><p>JavaScript中最常用的垃圾收集方式是标记清除mark-and-sweep. 当变量进入环境(例如, 在函数中声明一个变量)时, 就将这个变量标记为”进入环境”.</p>
+<p>从逻辑上讲, 永远不能释放进入环境的变量所占用的内存, 因为只要执行流进入相应的环境,就可能会用到它们. 而当变量离开环境时, 则将其标记为”离开环境”.</p>
+<p>可以使用任何方式来标记变量. 比如, 可以通过翻转某个特殊的位来记录一个变量何时进入环境, 或者使用一个”进入环境的”变量列表及一个”离开环境的”变量列表来跟踪哪个变量发生了变化. 说到底, 如何标记变量其实并不重要, 关键在于采取什么策略.</p>
+<p>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记(当然, 可以使用任何标记方式). 然后, 它会去掉环境中的变量以及被环境中的变量引用的变量的标记. 而在此之后再被加上标记的变量将被视为准备删除的变量, 原因是环境中的变量已经无法访问到这些变量了. 最后, 垃圾收集器完成内存清除工作, 销毁那些带标记的值并回收它们所占用的内存空间.</p>
+<h2 id="3-2-引用计数"><a href="#3-2-引用计数" class="headerlink" title="3.2 引用计数"></a>3.2 引用计数</h2><p>另一种不太常见的垃圾收集策略叫做引用计数reference counting.</p>
+<p>引用计数的含义是跟踪记录每个值被引用的次数. 当声明了一个变量并将一个引用类型值赋给该变量时, 则这个值的引用次数就是1. 如果同一个值又被赋给另一个变量, 则该值的引用次数加1.</p>
+<p>相反, 如果包含对这个值引用的变量又取得了另外一个值, 则这个值的引用次数减1. 当这个值的引用次数变成0时, 则说明没有办法再访问这个值了, 因而就可以将其占用的内存空间回收回来.</p>
+<p>这样, 当垃圾收集器下次再运行时, 它就会释放那些引用次数为零的值所占用的内存.</p>
 
       
 
@@ -488,7 +535,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -502,18 +549,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          变量、作用域和内存问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Markdown基本语法</div>
+    <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AJAX-XMLHttpRequest对象</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -540,7 +578,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、创建XHR对象"><span class="toc-number">1.</span> <span class="toc-text">1、创建XHR对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、XHR的用法"><span class="toc-number">2.</span> <span class="toc-text">2、XHR的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-open"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 open()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-send"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 send()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-readyState"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 readyState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-abort"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 abort()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-HTTP头部信息"><span class="toc-number">3.</span> <span class="toc-text">3.HTTP头部信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-GET请求"><span class="toc-number">4.</span> <span class="toc-text">4.GET请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-POST请求"><span class="toc-number">5.</span> <span class="toc-text">5.POST请求</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基本类型和引用类型的值"><span class="toc-number">1.</span> <span class="toc-text">1. 基本类型和引用类型的值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-动态的属性"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 动态的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-复制变量值"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 复制变量值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-传递参数"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 传递参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-检测类型"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 检测类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-执行环境及作用域"><span class="toc-number">2.</span> <span class="toc-text">2.执行环境及作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-全局作用域"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 全局作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-函数作用域-局部作用域"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 函数作用域(局部作用域)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-作用域链"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-延长作用域链"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 延长作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-没有块级作用域"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 没有块级作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-声明变量"><span class="toc-number">2.5.1.</span> <span class="toc-text">2.5.1 声明变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-函数的声明提前"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.5.2 函数的声明提前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-3-查询标识符"><span class="toc-number">2.5.3.</span> <span class="toc-text">2.5.3 查询标识符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-垃圾收集"><span class="toc-number">3.</span> <span class="toc-text">3.垃圾收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-标记清除"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 标记清除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-引用计数"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 引用计数</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
