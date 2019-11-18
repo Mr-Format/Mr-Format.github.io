@@ -47,7 +47,7 @@
             <hgroup>
                 <h1 class="header-author">
                     <a href="/">
-                        Dylan 17
+                        灯芯
                     </a>
                 </h1>
             </hgroup>
@@ -130,7 +130,7 @@
 				<img src="/assets/icon.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Dylan 17</h1>
+			  <h1 class="header-author js-header-author">灯芯</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端路茫茫~~<i class="icon icon-quo-right"></i></p>
@@ -183,6 +183,119 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-变量、作用域和内存问题（垃圾收集）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89/">变量、作用域和内存问题（垃圾收集）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
+<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
+<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
+<p>尽管从某种角度看, 这可能是一个既有趣又强大, 同时又容易出问题的特性, 但JavaScript变量实际的复杂程度还远不止如此.</p>
+<h1 id="1-基本类型和引用类型的值"><a href="#1-基本类型和引用类型的值" class="headerlink" title="1. 基本类型和引用类型的值"></a>1. 基本类型和引用类型的值</h1><p>ECMAScript变量可能包含两种不同数据类型的值: <strong>基本类型值</strong>和<strong>引用类型值</strong>.</p>
+<p>基本类型值指的是简单的数据段, 而引用类型值指那些可能由多个值构成的对象.</p>
+<p>在将一个值赋给变量时, 解析器必须确定这个值是基本类型值还是引用类型值. 基本数据类型是按值访问的, 因为可以操作保存在变量中的实际的值.</p>
+<p>引用类型的值是保存在内存中的对象. 与其他语言不同, JavaScript不允许直接访问内存中的位置, 也就是说不能直接操作对象的内存空间.</p>
+<p>在操作对象时, 实际上是在操作对象的引用而不实际的对象.</p>
+<p>为此, 引用类型的值是按引用访问的.</p>
+<p><em>注:该说法并不严密, 当复制保存着对象的某个变量时, 操作的是对象的引用. 但在为对象添加属性时, 操作的是实际的对象</em></p>
+<p>在很多语言中, 字符串以对象的形式来表示, 因此被认为是引用类型的. ECMAScript放弃了这一传统.</p>
+<h2 id="1-1-动态的属性"><a href="#1-1-动态的属性" class="headerlink" title="1.1 动态的属性"></a>1.1 动态的属性</h2><p>定义基本类型值和引用类型值的方式是类似的: 创建一个变量并为该变量赋值.</p>
+<p>但是, 当这个值保存到变量中以后, 对不同类型值可以执行的操作则大相径庭.</p>
+<p>对于引用类型的值, 我们可以为其添加属性和方法, 也可以改变和删除其属性和方法. 请看下面的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object();</span><br><span class="line">person.name = &quot;Nicholas&quot;;</span><br><span class="line">alert(person.name); //&quot;Nicholas&quot;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码创建了一个对象并将其保存在了变量person中. 然后, 我们为该对象添加了一个名为 name的属性, 并将字符串值”Nicholas”赋给了这个属性.</p>
+<p>紧接着, 又通过alert()函数访问了这个新属性.</p>
+<p>如果对象不被销毁或者这个属性不被删除, 则这个属性将一直存在.</p>
+<p>但是, 我们不能给基本类型的值添加属性, 尽管这样做不会导致任何错误. 比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;Nicholas&quot;;</span><br><span class="line">name.age = 27;</span><br><span class="line">alert(name.age);  // undefined</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中, 我们为字符串name定义了一个名为age的属性, 并为该属性赋值27, 但在下一行访问这个属性时, 发现该属性不见了.</p>
+<p>这说明只能给引用类型值动态地添加属性, 以便将来使用.</p>
+<h2 id="1-2-复制变量值"><a href="#1-2-复制变量值" class="headerlink" title="1.2 复制变量值"></a>1.2 复制变量值</h2><p>除了保存的方式不同之外, 在从一个变量向另一个变量复制基本类型值和引用类型值时, 也存在不同. 如果从一个变量向另一个变量复制基本类型的值, 会在变量对象上创建一个新值, 然后把该值复制到为新变量分配的位置上.来看一个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num1 = 5;</span><br><span class="line">var num2 = num1;</span><br></pre></td></tr></table></figure>
+
+<p>在此, num1 中保存的值是5. 当使用num1的值来初始化num2时, num2中也保存了值5. 但num2中的5与num1中的5是完全独立的, 该值只是 num1中5 的一个副本. 此后, 这两个变量可以参与任何操作而不会相互影响.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -521,7 +634,7 @@
             <div class="footer-left">
                 &copy;
                 2019
-                    Dylan 17
+                    灯芯
             </div>
             <div class="footer-right">
                 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

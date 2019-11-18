@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术. Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据,">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-18T11:32:43.253Z">
+<meta property="og:updated_time" content="2019-11-18T11:41:22.260Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -51,7 +51,7 @@
             <hgroup>
                 <h1 class="header-author">
                     <a href="/">
-                        Dylan 17
+                        灯芯
                     </a>
                 </h1>
             </hgroup>
@@ -134,7 +134,7 @@
 				<img src="/assets/icon.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">Dylan 17</h1>
+			  <h1 class="header-author js-header-author">灯芯</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端路茫茫~~<i class="icon icon-quo-right"></i></p>
@@ -211,7 +211,7 @@
 <a id="more"></a>
 
 <p>另外, 虽然名字中包含XML的成分, 但Ajax通信与数据格式无关, 这种技术就是无须刷新页面即可从服务器取得数据, 但不一定是XML数据.</p>
-<h1 id="一、创建XHR对象"><a href="#一、创建XHR对象" class="headerlink" title="一、创建XHR对象"></a>一、创建XHR对象</h1><p>IE7+、Firefox、Opera、Chrome和Safari都支持原生的XHR对象, 在这个浏览器中创建XHR对象要像下面这样使用XMLHttpRequest构造函数:</p>
+<h1 id="1、创建XHR对象"><a href="#1、创建XHR对象" class="headerlink" title="1、创建XHR对象"></a>1、创建XHR对象</h1><p>IE7+、Firefox、Opera、Chrome和Safari都支持原生的XHR对象, 在这个浏览器中创建XHR对象要像下面这样使用XMLHttpRequest构造函数:</p>
 <p><code>var xhr = new XMLHttpRequest();</code></p>
 <p>如果需要支持IE的早期版本, 那么就需要专门为此编写一个函数:  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function createXHR()&#123;</span><br><span class="line">    if (typeof XMLHttpRequest != &quot;undefined&quot;)&#123;</span><br><span class="line">        return new XMLHttpRequest();</span><br><span class="line">    &#125; else if (typeof ActiveXObject != &quot;undefined&quot;)&#123;</span><br><span class="line">        if (typeof arguments.callee.activeXString != &quot;string&quot;)&#123;</span><br><span class="line">            var versions = [&quot;MSXML2.XMLHttpRequest.6.0&quot;,&quot;MSXML2.XMLHttp.3.0&quot;,&quot;MSXML2.XMLHttp&quot;],i, len;</span><br><span class="line">            for (i=0,len=versions.length; i &lt; len; i++)&#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    new ActiveXObject(versions[i]);</span><br><span class="line">                    arguments.callee.activeXString = versions[i];</span><br><span class="line">                    break;</span><br><span class="line">                &#125; catch (ex)&#123;</span><br><span class="line">                //跳过</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ActiveXObject(arguments.callee.activeXString);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new Error(&quot;No XHR object available.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -219,7 +219,7 @@
 <p>这个函数会首先检测原生XHR对象是否存在, 如果存在则返回它的新实例. 如果原生对象不存在, 则检测ActiveX对象. 如果这两种对象都不存在, 就抛出一个错误.</p>
 <p>然后, 就可以使用以下代码在所有浏览器中创建XHR对象了:</p>
 <p><code>var xhr = createXHR();</code></p>
-<h1 id="二、XHR的用法"><a href="#二、XHR的用法" class="headerlink" title="二、XHR的用法"></a>二、XHR的用法</h1><h2 id="1-open"><a href="#1-open" class="headerlink" title="1.open()"></a>1.open()</h2><p>在使用XHR对象时, 要调用的第一个方法是<code>open()</code>, 它接受3个参数:</p>
+<h1 id="2、XHR的用法"><a href="#2、XHR的用法" class="headerlink" title="2、XHR的用法"></a>2、XHR的用法</h1><h2 id="2-1-open"><a href="#2-1-open" class="headerlink" title="2.1 open()"></a>2.1 open()</h2><p>在使用XHR对象时, 要调用的第一个方法是<code>open()</code>, 它接受3个参数:</p>
 <ul>
 <li>要发送的请求的类型(“get”、”post”等)</li>
 <li>请求的URL</li>
@@ -229,7 +229,7 @@
 <p><code>xhr.open(&quot;get&quot;, &quot;example.php&quot;, false);</code></p>
 <p>这行代码会启动一个针对example.php的GET请求. 需要说明两点: 一是URL相对于执行代码的当前页面(或者使用绝对路径); 二是调用open()方法并不会真正发送请求, 而只是启动一个请求以备发送.</p>
 <p>注意, 只能向同一个域中使用相同端口和协议的URL发送请求. 如果URL与启动请求的页面有任何差别, 都会引发安全错误.</p>
-<h2 id="2-send"><a href="#2-send" class="headerlink" title="2.send()"></a>2.send()</h2><p>要发送特定的请求, 必须像下面这样调用<code>send()</code>方法:</p>
+<h2 id="2-2-send"><a href="#2-2-send" class="headerlink" title="2.2 send()"></a>2.2 send()</h2><p>要发送特定的请求, 必须像下面这样调用<code>send()</code>方法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;, &quot;example.txt&quot;, false);</span><br><span class="line">xhr.send(null);</span><br></pre></td></tr></table></figure>
 
 <p>send()方法接收一个参数, 即要作为请求主体发送的数据. 如果不需要通过请求主体发送数据, 则必须传入 null, 因为这个参数对有些浏览器来说是必需的.</p>
@@ -267,7 +267,7 @@
 
 <p>建议最好是通过status来决定下一步的操作, 不要依赖statusText, 因为后者在跨浏览器使用时不太可靠.</p>
 <p>另外, 无论内容类型是什么, 响应主体的内容都会保存到responseText属性中; 而对于非XML数据而言, responseText属性的值为null.</p>
-<h2 id="3-readyState"><a href="#3-readyState" class="headerlink" title="3.readyState"></a>3.readyState</h2><p>像前面这样发送同步请求当然没问题, 但多数情况下, 我们还是要发送异步请求, 才能让JavaScript继续执行而不必等待响应. 此时可以检测 XHR对象的readyState属性, 该属性表示请求/响应过程的当前活动阶段.</p>
+<h2 id="2-3-readyState"><a href="#2-3-readyState" class="headerlink" title="2.3 readyState"></a>2.3 readyState</h2><p>像前面这样发送同步请求当然没问题, 但多数情况下, 我们还是要发送异步请求, 才能让JavaScript继续执行而不必等待响应. 此时可以检测 XHR对象的readyState属性, 该属性表示请求/响应过程的当前活动阶段.</p>
 <p>这个属性可取的值如下:</p>
 <ul>
 <li>0: 未初始化. 尚未调用open()方法</li>
@@ -283,12 +283,12 @@
 
 <p>以上代码利用DOM 0级方法为XHR对象添加了事件处理程序, 原因是并非所有浏览器都支持DOM 2级方法.</p>
 <p>与其他事件处理程序不同, 这里没有向onreadystatechange事件处理程序中传递event对象; 必须通过 XHR对象本身来确定下一步该怎么做.</p>
-<h2 id="4-abort"><a href="#4-abort" class="headerlink" title="4.abort()"></a>4.abort()</h2><p>在接收响应之前还可以调用abort()方法来取消异步请求.</p>
+<h2 id="2-4-abort"><a href="#2-4-abort" class="headerlink" title="2.4 abort()"></a>2.4 abort()</h2><p>在接收响应之前还可以调用abort()方法来取消异步请求.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.abort();</span><br></pre></td></tr></table></figure>
 
 <p>调用这个方法后, XHR对象会停止触发事件, 而且也不再允许访问任何与响应有关的对象属性.</p>
 <p>在终止请求之后, 还应该对XHR对象进行解引用操作. 由于内存原因, 不建议重用XHR对象.</p>
-<h1 id="三-HTTP头部信息"><a href="#三-HTTP头部信息" class="headerlink" title="三.HTTP头部信息"></a>三.HTTP头部信息</h1><p>每个HTTP请求和响应都会带有相应的头部信息, XHR对象提供了操作两种头部(请求头部和响应头部)信息的方法.</p>
+<h1 id="3-HTTP头部信息"><a href="#3-HTTP头部信息" class="headerlink" title="3.HTTP头部信息"></a>3.HTTP头部信息</h1><p>每个HTTP请求和响应都会带有相应的头部信息, XHR对象提供了操作两种头部(请求头部和响应头部)信息的方法.</p>
 <p>默认情况下, 在发送XHR请求的同时, 还会发送下列头部信息:</p>
 <table>
 <thead>
@@ -349,7 +349,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Date: Sun, 14 Nov 2004 18:04:03 GMT</span><br><span class="line">Server: Apache/1.3.29 (Unix)</span><br><span class="line">Vary: Accept</span><br><span class="line">X-Powered-By: PHP/4.3.8</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br></pre></td></tr></table></figure>
 
 <p>这种格式化的输出可以方便我们检查响应中所有头部字段的名称, 而不必一个一个地检查某个字段是否存在.</p>
-<h1 id="四-GET请求"><a href="#四-GET请求" class="headerlink" title="四.GET请求"></a>四.GET请求</h1><p>GET是最常见的请求类型, 常用于向服务器查询某些信息. 必要时, 可以将查询字符串参数追加到URL的末尾, 以便将信息发送给服务器.</p>
+<h1 id="4-GET请求"><a href="#4-GET请求" class="headerlink" title="4.GET请求"></a>4.GET请求</h1><p>GET是最常见的请求类型, 常用于向服务器查询某些信息. 必要时, 可以将查询字符串参数追加到URL的末尾, 以便将信息发送给服务器.</p>
 <p>对XHR而言, 位于传入open()方法的URL末尾的查询字符串必须经过正确的编码才行.</p>
 <p>使用GET请求经常会发生的一个错误, 就是查询字符串的格式问题. 查询字符串中每个参数的名称和值都必须使用encodeURIComponenet()进行编码, 然后才能放到URL的末尾; 而且所有的名值对都必须由和号(&amp;)分隔.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&quot;get&quot;, &quot;example.php?name1=value1&amp;name2=value2&quot;, true);</span><br></pre></td></tr></table></figure>
@@ -363,7 +363,7 @@
 <p>下面是使用这个函数来构建请求URL的示例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = &quot;example.php&quot;;</span><br><span class="line"></span><br><span class="line">// 添加参数</span><br><span class="line">url = addURLParam(url, &quot;name&quot;, &quot;Nicholas&quot;);</span><br><span class="line">url = addURLParam(url, &quot;book&quot;, &quot;Professional JavaScript&quot;);</span><br><span class="line"></span><br><span class="line">// 初始化请求</span><br><span class="line">xhr.open(&quot;get&quot;, url, false);</span><br></pre></td></tr></table></figure>
 
-<h1 id="五-POST请求"><a href="#五-POST请求" class="headerlink" title="五.POST请求"></a>五.POST请求</h1><p>POST请求通常用于向服务器发送应该被保存的数据.</p>
+<h1 id="5-POST请求"><a href="#5-POST请求" class="headerlink" title="5.POST请求"></a>5.POST请求</h1><p>POST请求通常用于向服务器发送应该被保存的数据.</p>
 <p>POST请求应该把数据作为请求的主体提交, 而GET请求传统上不是这样.</p>
 <p>POST请求的主体可以包含非常多的数据, 而且格式不限.</p>
 <p>在open()方法的第一个参数传入”post”就可以初始化一个POST请求.</p>
@@ -502,6 +502,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          变量、作用域和内存问题（垃圾收集）
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Markdown基本语法</div>
@@ -531,7 +540,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、创建XHR对象"><span class="toc-number">1.</span> <span class="toc-text">一、创建XHR对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、XHR的用法"><span class="toc-number">2.</span> <span class="toc-text">二、XHR的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-open"><span class="toc-number">2.1.</span> <span class="toc-text">1.open()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-send"><span class="toc-number">2.2.</span> <span class="toc-text">2.send()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-readyState"><span class="toc-number">2.3.</span> <span class="toc-text">3.readyState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-abort"><span class="toc-number">2.4.</span> <span class="toc-text">4.abort()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-HTTP头部信息"><span class="toc-number">3.</span> <span class="toc-text">三.HTTP头部信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-GET请求"><span class="toc-number">4.</span> <span class="toc-text">四.GET请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-POST请求"><span class="toc-number">5.</span> <span class="toc-text">五.POST请求</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、创建XHR对象"><span class="toc-number">1.</span> <span class="toc-text">1、创建XHR对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、XHR的用法"><span class="toc-number">2.</span> <span class="toc-text">2、XHR的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-open"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 open()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-send"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 send()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-readyState"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 readyState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-abort"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 abort()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-HTTP头部信息"><span class="toc-number">3.</span> <span class="toc-text">3.HTTP头部信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-GET请求"><span class="toc-number">4.</span> <span class="toc-text">4.GET请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-POST请求"><span class="toc-number">5.</span> <span class="toc-text">5.POST请求</span></a></li></ol>
                     </div>
                 </span>
                         </div>
@@ -562,7 +571,7 @@
             <div class="footer-left">
                 &copy;
                 2019
-                    Dylan 17
+                    灯芯
             </div>
             <div class="footer-right">
                 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
