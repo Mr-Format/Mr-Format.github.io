@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>灯芯的前端博客</title>
+  <title>过渡、动画和变换 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;index.html">
+  <meta name="description" content="1.过渡1.1 使用过渡过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性. CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="过渡、动画和变换">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;20&#x2F;%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="1.过渡1.1 使用过渡过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性. CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-20T15:28:32.544Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,16 +186,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-过渡、动画和变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-过渡、动画和变换" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">过渡、动画和变换</a>
+    <h1 class="article-title" itemprop="name">
+      过渡、动画和变换
     </h1>
   
 
@@ -206,9 +208,335 @@
       
         <h1 id="1-过渡"><a href="#1-过渡" class="headerlink" title="1.过渡"></a>1.过渡</h1><h2 id="1-1-使用过渡"><a href="#1-1-使用过渡" class="headerlink" title="1.1 使用过渡"></a>1.1 使用过渡</h2><p>过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性.</p>
 <p>CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.</p>
-        
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">说明</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">transition-delay</td>
+<td align="center">指定过渡开始之前的延迟时间</td>
+<td align="center">时间</td>
+</tr>
+<tr>
+<td align="center">transition-duration</td>
+<td align="center">指定过渡的持续时间</td>
+<td align="center">时间</td>
+</tr>
+<tr>
+<td align="center">transition-property</td>
+<td align="center">指定应用过渡的属性</td>
+<td align="center">字符串</td>
+</tr>
+<tr>
+<td align="center">transition-timing-function</td>
+<td align="center">指定过渡期间计算中间值的方式</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">transition</td>
+<td align="center">在一条声明中指定所有过渡细节的简写属性</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>transition简写属性的格式如下:</p>
+<p><code>transition: &lt;transition-property&gt; &lt;transition-duration&gt; &lt;transition-timing-function&gt; &lt;transition-delay&gt;</code></p>
+<h2 id="1-2-创建反向过渡"><a href="#1-2-创建反向过渡" class="headerlink" title="1.2 创建反向过渡"></a>1.2 创建反向过渡</h2><p>过渡只有在应用与其关联的样式时才会生效.默认情况下,元素的外观会立刻回到初始状态</p>
+<p>因为这个原因,大多数过渡成对出现:暂时状态的过渡和方向相反的反向过渡.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#menu</span>&#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>: solid <span class="number">4px</span> transparent;</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#menu</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">rgb</span>(216, 214, 214);</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>刚开始布局页面时浏览器不会应用过渡,这意味着HTML文档一开始显示时就会直接应用初始样式,之后才会通过过渡应用新样式.</p>
+<h2 id="1-3-选择中间值的计算方式"><a href="#1-3-选择中间值的计算方式" class="headerlink" title="1.3 选择中间值的计算方式"></a>1.3 选择中间值的计算方式</h2><p>使用过渡时,浏览器需要为每个属性计算初始值和最终值之间的中间值.使用 <code>transition-timing-function</code> 属性指定计算中间值的方式,表示为四个点控制的三次贝塞尔曲线.有五种预设曲线可以选择:</p>
+<table>
+<thead>
+<tr>
+<th align="center">值</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ease(默认值)</td>
+<td align="center">规定慢速开始，然后变快，然后慢速结束的过渡效果</td>
+</tr>
+<tr>
+<td align="center">linear</td>
+<td align="center">规定以相同速度开始至结束的过渡效果</td>
+</tr>
+<tr>
+<td align="center">ease-in</td>
+<td align="center">规定以慢速开始的过渡效果</td>
+</tr>
+<tr>
+<td align="center">ease-out</td>
+<td align="center">规定以慢速结束的过渡效果</td>
+</tr>
+<tr>
+<td align="center">ease-in-out</td>
+<td align="center">规定以慢速开始和结束的过渡效果</td>
+</tr>
+</tbody></table>
+<p>这五种曲线展示了中间值随着时间的推移变为最终值的速率.</p>
+<p>还有另外一个值<code>cubic-bezier(n,n,n,n)</code>,可以用来指定自定义曲线,可能的值是0-1之间的数值.</p>
+<h1 id="2-使用动画"><a href="#2-使用动画" class="headerlink" title="2.使用动画"></a>2.使用动画</h1><p>CSS动画本质上是增强的过渡.</p>
+<p><strong>动画属性</strong>  </p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">说明</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">animation-delay</td>
+<td align="left">设置动画开始前的延迟</td>
+<td align="left">时间</td>
+</tr>
+<tr>
+<td align="left">animation-direction</td>
+<td align="left">设置动画循环播放的时候是否反向播放</td>
+<td align="left">normal, alternate</td>
+</tr>
+<tr>
+<td align="left">animation-duration</td>
+<td align="left">设置动画播放的持续时间</td>
+<td align="left">时间</td>
+</tr>
+<tr>
+<td align="left">animation-iteration-count</td>
+<td align="left">设置动画的播放次数</td>
+<td align="left">infinite, 数值</td>
+</tr>
+<tr>
+<td align="left">animation-name</td>
+<td align="left">指定动画名称</td>
+<td align="left">none , 字符串</td>
+</tr>
+<tr>
+<td align="left">animation-play-state</td>
+<td align="left">允许动画暂停和重新播放</td>
+<td align="left">runing, paused</td>
+</tr>
+<tr>
+<td align="left">animation-timing-function</td>
+<td align="left">指定如何计算中间动画值</td>
+<td align="left">ease, linear, ease-in, ease-out, ease-in-out, cublic-bezier</td>
+</tr>
+</tbody></table>
+<p>animation简写属性的格式如下:</p>
+<p><code>animation: animation-name animation-duration animation-timing-function animation-delay animation-count;</code></p>
+<p>注意,这些属性都不是用来指定要作为动画的CSS属性的.这是因为动画是在两部分定义的.</p>
+<p>第一部分包含在样式声明中,使用上表列出的属性.它们定义了动画的样式,但是没有定义哪些属性是动画.</p>
+<p>第二部分使用@key-frames规则创建,用来定义应用动画的属性.</p>
+<p><em>chrome支持替代的-webkit-方法</em></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">-webkit-animation-delay</span>: <span class="number">0ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-duration</span>: <span class="number">1000ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-iteration-count</span>: infinite;</span><br><span class="line">    <span class="attribute">-webkit-animation-direction</span>: normal;</span><br><span class="line">    <span class="attribute">-webkit-animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">-webkit-animation-name</span>: <span class="string">"hei"</span>;</span><br><span class="line">&#125;</span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> hei&#123;</span><br><span class="line">    <span class="selector-tag">from</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>动画的设置分为两部分.</p>
+<p>第一部分是在样式中定义动画属性,其中应用了延迟时间,持续时间,重复播放以及中间函数.此外,还需要给动画属性起个名字.这样就相当于告诉浏览器找一组指定名字的关键帧, 然后将这些基本属性的值应用到 @keyframes指定的动画属性上.</p>
+<p>第二部分是关键帧的声明.声明的开始是@keyframes,接着指定了这组关键帧的名字.在声明内部指定了一组要应用动画效果的属性.</p>
+<p>from声明了动画样式的初始值.可以省略from,这样就会使用样式本来的属性作为初始值;to声明中定义一组设置动画样式的属性以及动画结束时这些属性的最终值.</p>
+<h2 id="2-1-使用关键帧"><a href="#2-1-使用关键帧" class="headerlink" title="2.1 使用关键帧"></a>2.1 使用关键帧</h2><h3 id="2-1-1-设置初始状态"><a href="#2-1-1-设置初始状态" class="headerlink" title="2.1.1 设置初始状态"></a>2.1.1 设置初始状态</h3><p>使用from子句可以指定与元素自身属性不同的另一组初始值作为动画开始时的属性.</p>
+<h3 id="2-1-2-指定中间关键帧"><a href="#2-1-2-指定中间关键帧" class="headerlink" title="2.1.2 指定中间关键帧"></a>2.1.2 指定中间关键帧</h3><p>也可以添加其他关键帧定义动画的中间阶段.这是通过添加百分数子句实现的.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> hei&#123;</span><br><span class="line">    <span class="selector-tag">from</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: white;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    40%&#123;</span><br><span class="line">        <span class="attribute">background</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    60%&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: blue;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于每一个百分数子句,在动画中定义了一个点,这时子句中指定的属性和值会完全应用到样式上.</p>
+<p>中间关键帧有两个用途.一是为属性定义新的变化速率.浏览器会使用 animation-timing-function 指定的函数计算由一个关键帧移动到下一个关键帧需要的中间值,以确保关键帧与关键帧之间流畅地播放.</p>
+<p>另外,还可以分别使用0%和100%代替from和to子句定义开始关键帧和结束关键帧.</p>
+<p>中间关键帧的另一个用途是定义属性值,以便创建更为复杂的动画.</p>
+<h2 id="2-2-设置重复方向"><a href="#2-2-设置重复方向" class="headerlink" title="2.2 设置重复方向"></a>2.2 设置重复方向</h2><p>动画结束后浏览器可以选择接下来的动画以何种方式重复.使用animation-derection 属性指定的首选方式.</p>
+<p><strong>animation-derection属性的值</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">每次重复都向前播放,如果可重复播放多次,每次动画都恢复初始状态,从头播放.</td>
+</tr>
+<tr>
+<td align="left">alternate</td>
+<td align="left">动画先向前播放,然后反方向播放,相当于animatin-iteration-count属性的值为2.</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-理解结束状态"><a href="#2-3-理解结束状态" class="headerlink" title="2.3 理解结束状态"></a>2.3 理解结束状态</h2><p>CSS动画的一个局限是关键帧为属性定义的值只能在动画中应用.动画结束后,动画元素的外观回到初始状态.</p>
+<p>如果想让元素的外观保留动画结束时的状态,必须使用过渡.</p>
+<h2 id="2-4-初始布局时应用动画"><a href="#2-4-初始布局时应用动画" class="headerlink" title="2.4 初始布局时应用动画"></a>2.4 初始布局时应用动画</h2><p>跟过渡相比,动画的一个优势是可以将其应用到页面的初始布局.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: white;</span><br><span class="line">    <span class="attribute">-webkit-animation-delay</span>: <span class="number">0ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-duration</span>: <span class="number">1000ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-iteration-count</span>: infinite;</span><br><span class="line">    <span class="attribute">-webkit-animation-direction</span>: alternate;</span><br><span class="line">    <span class="attribute">-webkit-animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">-webkit-animation-name</span>: <span class="string">"hei"</span>;</span><br><span class="line">&#125;</span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> hei&#123;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下,页面一旦加载就会自动应用样式.这意味着浏览器一旦显示HTML就有了动画.</p>
+<p><strong>重用关键帧</strong></p>
+<p>可以对同一组关键帧应用多个动画,从而为动画属性配置不同的值.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: white;</span><br><span class="line">    <span class="attribute">-webkit-animation-delay</span>: <span class="number">0ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-duration</span>: <span class="number">1000ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-iteration-count</span>: infinite;</span><br><span class="line">    <span class="attribute">-webkit-animation-direction</span>: alternate;</span><br><span class="line">    <span class="attribute">-webkit-animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">-webkit-animation-name</span>: <span class="string">"hei"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#box2</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">    <span class="attribute">-webkit-animation-delay</span>: <span class="number">100ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-duration</span>: <span class="number">500ms</span>;</span><br><span class="line">    <span class="attribute">-webkit-animation-iteration-count</span>: infinite;</span><br><span class="line">    <span class="attribute">-webkit-animation-direction</span>: alternate;</span><br><span class="line">    <span class="attribute">-webkit-animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">-webkit-animation-name</span>: <span class="string">"hei"</span>;</span><br><span class="line">&#125;</span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> hei&#123;</span><br><span class="line">    <span class="selector-tag">to</span>&#123;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>box1和box2都使用了hei关键帧.他们分别有不同的动画效果.</p>
+<h2 id="2-5-为多个元素应用动画"><a href="#2-5-为多个元素应用动画" class="headerlink" title="2.5 为多个元素应用动画"></a>2.5 为多个元素应用动画</h2><p>可以为多个元素应用同一个动画,通过扩展选择器的范围实现.</p>
+<p>还可以为一个元素应用多个动画,只需要用逗号将动画属性的不同名称隔开.</p>
+<p><strong>停止和启动动画</strong></p>
+<p><code>animaton-play-state</code>属性可以用来停止和启动动画.</p>
+<p>如果这个属性的值为paused,动画就会停止.如果换成playing,动画就会开始播放.</p>
+<p><em>在实际使用中,可以使用JavaScript来改变这个属性的值.</em></p>
+<h1 id="3-使用变换"><a href="#3-使用变换" class="headerlink" title="3.使用变换"></a>3.使用变换</h1><p>可以使用CSS变换为元素应用线性变换,也就是说可以旋转、缩放、倾斜和平移某个元素.</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>transform</td>
+<td>指定应用的变换功能</td>
+</tr>
+<tr>
+<td>transform-origin</td>
+<td>指定变换的起点</td>
+</tr>
+</tbody></table>
+<h2 id="3-1-应用变换"><a href="#3-1-应用变换" class="headerlink" title="3.1 应用变换"></a>3.1 应用变换</h2><p>通过transform属性为元素应用变换.这个属性允许的值是一组预定义的函数.</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>translate(长度值或百分数值)</td>
+<td>在水平或垂直方向上平移元素</td>
+</tr>
+<tr>
+<td>translateX(长度值或百分数值)</td>
+<td>在水平或垂直方向上平移元素</td>
+</tr>
+<tr>
+<td>translateY(长度值或百分数值)</td>
+<td>在水平或垂直方向上平移元素</td>
+</tr>
+<tr>
+<td>scale(数值)</td>
+<td>在水平或垂直方向上缩放元素</td>
+</tr>
+<tr>
+<td>scaleX(数值)</td>
+<td>在水平或垂直方向上缩放元素</td>
+</tr>
+<tr>
+<td>scaleY(数值)</td>
+<td>在水平或垂直方向上缩放元素</td>
+</tr>
+<tr>
+<td>rotate(角度)</td>
+<td>旋转元素</td>
+</tr>
+<tr>
+<td>skew(角度)</td>
+<td>在水平或垂直方向上使元素倾斜一定的角度</td>
+</tr>
+<tr>
+<td>skewX(角度)</td>
+<td>在水平或垂直方向上使元素倾斜一定的角度</td>
+</tr>
+<tr>
+<td>skewY(角度)</td>
+<td>在水平或垂直方向上使元素倾斜一定的角度</td>
+</tr>
+<tr>
+<td>matrix(4-6个数值,逗号隔开)</td>
+<td>指定自定义变换.大多数浏览器还没有实现z轴缩放,因此最后两个数字可以忽略.(有些情况必须要省略)</td>
+</tr>
+</tbody></table>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">      <span class="attribute">background</span>: gainsboro;</span><br><span class="line">      <span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-45deg) <span class="built_in">scaleX</span>(1.2);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里指定了两个变换,一个是旋转-45度,二是沿x轴进行因子为1.2的缩放.此时,元素按照指定方式进行了旋转和放大,而页面的布局并没有因此改变.元素变换后覆盖了周围的一些内容.</p>
+<h2 id="3-2-指定元素变换的起点"><a href="#3-2-指定元素变换的起点" class="headerlink" title="3.2 指定元素变换的起点"></a>3.2 指定元素变换的起点</h2><p><code>transform-origin</code> 属性可以指定应用变换的起点.默认情况下,使用元素的中心作为起点.</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>指定元素x轴或y轴的起点</td>
+</tr>
+<tr>
+<td>长度值</td>
+<td>指定距离</td>
+</tr>
+<tr>
+<td>left</td>
+<td>指定x轴上的位置</td>
+</tr>
+<tr>
+<td>center</td>
+<td>指定x轴上的位置</td>
+</tr>
+<tr>
+<td>right</td>
+<td>指定x轴上的位置</td>
+</tr>
+<tr>
+<td>top</td>
+<td>指定y轴上的位置</td>
+</tr>
+<tr>
+<td>center</td>
+<td>指定y轴上的位置</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>指定y轴上的位置</td>
+</tr>
+</tbody></table>
+<p>要定义起点,需要为x轴和y轴各定义一个值.如果只提供一个值,另一个值会被认为是中心位置.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: gainsboro;</span><br><span class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-45deg) <span class="built_in">scaleX</span>(1.2);</span><br><span class="line">    <span class="attribute">-webkit-transform-origin</span>: right top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-作为动画和过渡处理"><a href="#3-3-作为动画和过渡处理" class="headerlink" title="3.3 作为动画和过渡处理"></a>3.3 作为动画和过渡处理</h2><p>可以为变换应用动画和过渡,就跟其他CSS属性一样.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: gainsboro;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#box1</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-45deg) <span class="built_in">scaleX</span>(1.2);</span><br><span class="line">    <span class="attribute">-webkit-transform-origin</span>: right top;</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -239,16 +567,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">变量、作用域和内存问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -263,425 +650,32 @@
             </div>
             
                 
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-过渡"><span class="toc-number">1.</span> <span class="toc-text">1.过渡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-使用过渡"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 使用过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-创建反向过渡"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 创建反向过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-选择中间值的计算方式"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 选择中间值的计算方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-使用动画"><span class="toc-number">2.</span> <span class="toc-text">2.使用动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-使用关键帧"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 使用关键帧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-设置初始状态"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 设置初始状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-指定中间关键帧"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 指定中间关键帧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-设置重复方向"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 设置重复方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-理解结束状态"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 理解结束状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-初始布局时应用动画"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 初始布局时应用动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-为多个元素应用动画"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 为多个元素应用动画</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-使用变换"><span class="toc-number">3.</span> <span class="toc-text">3.使用变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-应用变换"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 应用变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-指定元素变换的起点"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 指定元素变换的起点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-作为动画和过渡处理"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 作为动画和过渡处理</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-变量、作用域和内存问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">变量、作用域和内存问题</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
-<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
-<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">AJAX-XMLHttpRequest对象</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
-<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">Markdown基本语法</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，语法简洁，易于学习，适合用来写博客。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h2><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
-<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/201911161.png" alt="markdown预览"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开始写博客啦" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">开始写博客啦~~</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:13:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。</p>
-<p>于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。</p>
-<p>我的博客用git+hexo搭建，使用起来真的很方便。</p>
-<p>最后，庆祝自己的博客诞生啦~~</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-16T04:35:57.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -713,8 +707,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
