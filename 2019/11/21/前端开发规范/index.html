@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>灯芯的前端博客</title>
+  <title>前端开发规范 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;index.html">
+  <meta name="description" content="原文出处：前端开发手册（github） 1.基本原则基本原则结构、样式和行为分离">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端开发规范">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;21&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="原文出处：前端开发手册（github） 1.基本原则基本原则结构、样式和行为分离">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-21T15:33:10.794Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,16 +186,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-前端开发规范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-前端开发规范" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">前端开发规范</a>
+    <h1 class="article-title" itemprop="name">
+      前端开发规范
     </h1>
   
 
@@ -206,9 +208,134 @@
       
         <p>原文出处：前端开发手册（<a href="https://github.com/Aaaaaashu/Front-End-Style-Guide" target="_blank" rel="noopener">github</a>）</p>
 <h1 id="1-基本原则"><a href="#1-基本原则" class="headerlink" title="1.基本原则"></a>1.基本原则</h1><h3 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h3><p><strong>结构、样式和行为分离</strong></p>
-        
+<a id="more"></a>
+
+<p>尽量确保文档和模板只包含 <code>HTML</code> 结构，样式都放到样式表里，行为都放到脚本里。</p>
+<p><strong>缩进</strong></p>
+<p>统一两个空格缩进（统一即可），不要使用 <code>Tab</code> 或者 <code>Tab</code>、空格混搭。</p>
+<h3 id="文件编码"><a href="#文件编码" class="headerlink" title="文件编码"></a>文件编码</h3><p><strong>使用不带 <code>BOM</code> 的UTF-8 编码。</strong></p>
+<ul>
+<li>在HTML中指定编码 <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>；</li>
+<li>无需使用 <code>@charset</code> 指定样式表的编码，它默认为 <code>UTF-8</code>。</li>
+</ul>
+<h3 id="一律使用小写字母"><a href="#一律使用小写字母" class="headerlink" title="一律使用小写字母"></a>一律使用小写字母</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"google.png"</span> <span class="attr">alt</span>=<span class="string">"Google"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Not recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">A</span> <span class="attr">HREF</span>=<span class="string">"/"</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">A</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-tag">color</span>: <span class="selector-id">#e5e5e5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Not Recommended */</span></span><br><span class="line"><span class="selector-tag">color</span>: <span class="selector-id">#E5E5E5</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="省略外链资源-URL-协议部分"><a href="#省略外链资源-URL-协议部分" class="headerlink" title="省略外链资源 URL 协议部分"></a>省略外链资源 URL 协议部分</h3><p>省略外链资源（图片及其他媒体资源）URL 中的 <code>http</code> / <code>https</code> 协议，使 URL 成为相对地址，避免 <code>Mixed Content</code> 问题，减小文件字节数。</p>
+<p>**其他协议（<code>ftp</code> 等）的 URL 不省略。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//www.w3cschool.cn/statics/js/autotrack.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Not Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.w3cschool.cn/statics/js/autotrack.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(//www.google.com/images/example);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Not recommended  */</span></span><br><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(http://www.google.com/images/example);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="统一注释"><a href="#统一注释" class="headerlink" title="统一注释"></a>统一注释</h3><p>通过配置编辑器，可以提供快捷键来输出一致认可的注释模式。</p>
+<p><strong>HTML 注释</strong></p>
+<ul>
+<li>模块注释</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 文章列表列表模块 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"article-list"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>区块注释</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">@name: Drop Down Menu</span></span><br><span class="line"><span class="comment">@description: Style of top bar drop down menu.</span></span><br><span class="line"><span class="comment">@author: Ashu</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CSS 注释</strong></p>
+<p>组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔；</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ============================</span></span><br><span class="line"><span class="comment">  组件块</span></span><br><span class="line"><span class="comment">=============================== */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 子组件块</span></span><br><span class="line"><span class="comment">================================ */</span></span><br><span class="line"><span class="selector-class">.selector</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 子组件块</span></span><br><span class="line"><span class="comment">================================ */</span></span><br><span class="line"><span class="selector-class">.selector-secondary</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block; <span class="comment">/* 注释 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.selector-three</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: span;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JavaScript 注释</strong></p>
+<ul>
+<li>单行注释</li>
+</ul>
+<p>必须独占一行。 <code>//</code> 后跟一个空格，缩进与下一行被注释说明的代码一致。</p>
+<ul>
+<li>多行注释</li>
+</ul>
+<p>避免使用 <code>/* ... */</code> 这样的多行注释。有多行注释内容时，使用多个单行注释。</p>
+<ul>
+<li><p>函数/方法注释</p>
+</li>
+<li><p>函数/方法注释必须包含函数说明，有参数和返回值时必须使用注释标识；</p>
+</li>
+<li><p>参数和返回值注释必须包含类型信息和说明；</p>
+</li>
+<li><p>当函数是内部函数，外部不可访问时，可以使用 <code>@inner</code> 标识。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 函数描述</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; p1 参数1的说明</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; p2 参数2的说明，比较长</span></span><br><span class="line"><span class="comment"> *     那就换行！</span></span><br><span class="line"><span class="comment"> * @param &#123;number=&#125; p3 参数3的说明（可选）</span></span><br><span class="line"><span class="comment"> * @return &#123;Object&#125; 返回值描述</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">p1, p2, p3</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> p3 = p3 || <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        p1: p1,</span><br><span class="line">        p2: p2,</span><br><span class="line">        p3: p3</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文件注释</li>
+</ul>
+<p>文件注释用于告诉不熟悉这段代码的读者这个文件中包含哪些东西。应该提供文件的答题内容，它的作者，依赖关系和兼容性信息。 如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @fileoverview Description of file, its uses and information</span></span><br><span class="line"><span class="comment"> * about its dependencies</span></span><br><span class="line"><span class="comment"> * @author user@example.com (Firstname Lastname)</span></span><br><span class="line"><span class="comment"> * Copyright 2019 *** Inc. All Rights Reserved</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h3><ul>
+<li><p>使用 <a href="//validator.w3.org/">W3C HTML Validator</a> 来验证 HTML 代码有效性；</p>
+</li>
+<li><p>使用 <a href="//jigsaw.w3.org/css-validator/validator.html.zh-cn">W3C CSS Validator</a> 来验证 CSS 代码有效性；</p>
+</li>
+</ul>
+<p>代码验证不是最终目的，真的目的在于让开发者在经过多次这种验证过程后，能够深刻理解到怎样的语法或写法是非标准和不推荐的，即使在某些场景下被迫使用非标准写法，也可以做到心中有数。</p>
+<h1 id="2-HTML"><a href="#2-HTML" class="headerlink" title="2.HTML"></a>2.HTML</h1><p>尽量遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度。</p>
+<h2 id="2-1-通用约定"><a href="#2-1-通用约定" class="headerlink" title="2.1 通用约定"></a>2.1 通用约定</h2><h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><ul>
+<li><p>自闭和 (self-closing) 标签， 无需闭合 (例如：<code>img</code> <code>input</code> <code>br</code> <code>hr</code> 等)；</p>
+</li>
+<li><p>可选的闭合标签 (closing tag)，需闭合 (例如：<code>&lt;/li&gt;</code> 或 <code>&lt;/body&gt;</code>)；</p>
+</li>
+<li><p>尽量减少标签数量</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"//atts.w3cschool.cn/attachments/image/cimg/google.png"</span> <span class="attr">alt</span>=<span class="string">"Google"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Style<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Guide<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Not recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"avatar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"..."</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"avatar"</span> <span class="attr">src</span>=<span class="string">"..."</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Class-与-ID"><a href="#Class-与-ID" class="headerlink" title="Class 与 ID"></a>Class 与 ID</h3><ul>
+<li><p>class 应以功能或内容命名，不以表现形式命名；</p>
+</li>
+<li><p>class 与 id 单词字母小写，多个单词组成时，采用中划线 <code>-</code> 分隔；</p>
+</li>
+<li><p>使用唯一的 id 作为 Javascript hook，同时避免创建无样式信息的 class；</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Not Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"j-hook left contentWrapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Recommended --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"j-hook"</span> <span class="attr">class</span>=<span class="string">"sidebar content-wrapper"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="属性顺序"><a href="#属性顺序" class="headerlink" title="属性顺序"></a>属性顺序</h3><blockquote>
+<p>(未完待续…)</p>
+</blockquote>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -239,16 +366,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">过渡、动画和变换</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -263,511 +449,32 @@
             </div>
             
                 
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-基本原则"><span class="toc-number">1.</span> <span class="toc-text">1.基本原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本原则"><span class="toc-number">1.0.1.</span> <span class="toc-text">基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件编码"><span class="toc-number">1.0.2.</span> <span class="toc-text">文件编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一律使用小写字母"><span class="toc-number">1.0.3.</span> <span class="toc-text">一律使用小写字母</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#省略外链资源-URL-协议部分"><span class="toc-number">1.0.4.</span> <span class="toc-text">省略外链资源 URL 协议部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统一注释"><span class="toc-number">1.0.5.</span> <span class="toc-text">统一注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码验证"><span class="toc-number">1.0.6.</span> <span class="toc-text">代码验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTML"><span class="toc-number">2.</span> <span class="toc-text">2.HTML</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-通用约定"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 通用约定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标签"><span class="toc-number">2.1.1.</span> <span class="toc-text">标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-与-ID"><span class="toc-number">2.1.2.</span> <span class="toc-text">Class 与 ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性顺序"><span class="toc-number">2.1.3.</span> <span class="toc-text">属性顺序</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-过渡、动画和变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">过渡、动画和变换</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2019-11-20T15:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-过渡"><a href="#1-过渡" class="headerlink" title="1.过渡"></a>1.过渡</h1><h2 id="1-1-使用过渡"><a href="#1-1-使用过渡" class="headerlink" title="1.1 使用过渡"></a>1.1 使用过渡</h2><p>过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性.</p>
-<p>CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS//" class="article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-变量、作用域和内存问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">变量、作用域和内存问题</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
-<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
-<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">AJAX-XMLHttpRequest对象</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
-<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">Markdown基本语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，语法简洁，易于学习，适合用来写博客。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h2><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
-<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/201911161.png" alt="markdown预览"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开始写博客啦" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">开始写博客啦~~</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:13:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。</p>
-<p>于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。</p>
-<p>我的博客用git+hexo搭建，使用起来真的很方便。</p>
-<p>最后，庆祝自己的博客诞生啦~~</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-16T04:35:57.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -799,8 +506,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
