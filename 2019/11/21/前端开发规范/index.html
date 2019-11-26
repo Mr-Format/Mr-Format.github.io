@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="原文出处：前端开发手册（github） 1.基本原则基本原则结构、样式和行为分离">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-25T15:36:17.026Z">
+<meta property="og:updated_time" content="2019-11-26T14:39:07.732Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -569,6 +569,44 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line"><span class="selector-class">.red</span> &#123;&#125;</span><br><span class="line"><span class="selector-class">.box-green</span> &#123;&#125;</span><br><span class="line"><span class="selector-class">.page</span> <span class="selector-class">.header</span> <span class="selector-class">.login</span> <span class="selector-id">#username</span> <span class="selector-tag">input</span> &#123;&#125;</span><br><span class="line"><span class="selector-tag">ul</span><span class="selector-id">#example</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-id">#nav</span> &#123;&#125;</span><br><span class="line"><span class="selector-class">.box-video</span> &#123;&#125;</span><br><span class="line"><span class="selector-id">#username</span> <span class="selector-tag">input</span> &#123;&#125;</span><br><span class="line"><span class="selector-id">#example</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>——2019/11/25——</p>
+<p><strong>声明块格式</strong></p>
+<ul>
+<li><p>选择器分组时，保持独立的选择器占用一行；</p>
+</li>
+<li><p>声明块的左括号 <code>{</code> 前添加一个空格；</p>
+</li>
+<li><p>声明块的右括号 <code>}</code> 应单独成行；</p>
+</li>
+<li><p>声明语句中的 <code>:</code> 后应添加一个空格；</p>
+</li>
+<li><p>声明语句应以分号 <code>;</code> 结尾；</p>
+</li>
+<li><p>一般以逗号分隔的属性值，每个都好后应添加一个空格；</p>
+</li>
+<li><p><code>rgb()</code>、<code>rgba()</code>、<code>hsl()</code>或 <code>rect()</code> 括号内的值，逗号分隔，但逗号后不添加空格；</p>
+</li>
+<li><p>对于属性值或颜色参数，省略小于 1 的小数前面的 0；</p>
+</li>
+<li><p>十六进制值应该全部小写和尽量简写，例如， <code>#fff;</code> 代替 <code>#ffffff;</code>；</p>
+</li>
+<li><p>避免为 0 值指定单位，例如，用 <code>margin: 0;</code> 代替 <code>margin: 0px;</code>；</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Not Recommended */</span></span><br><span class="line"><span class="selector-class">.selector</span>, <span class="selector-class">.selector-secondary</span>, <span class="selector-class">.selector</span><span class="selector-attr">[type=text]</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>:<span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">margin</span>:<span class="number">0px</span> <span class="number">0px</span> <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>:<span class="built_in">rgba</span>(0, 0, 0, 0.5);</span><br><span class="line">  <span class="attribute">box-shadow</span>:<span class="number">0px</span> <span class="number">1px</span> <span class="number">2px</span> <span class="number">#CCC</span>,inset <span class="number">0</span> <span class="number">1px</span> <span class="number">0</span> <span class="number">#FFFFFF</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-class">.selector</span>,</span><br><span class="line"><span class="selector-class">.selector-secondary</span>,</span><br><span class="line"><span class="selector-class">.selector</span><span class="selector-attr">[type="text"]</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(0,0,0,.5);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="number">#ccc</span>, inset <span class="number">0</span> <span class="number">1px</span> <span class="number">0</span> <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>声明顺序</strong></p>
+<p>相关属性应为一组，推荐的样式编写顺序：</p>
+<ol>
+<li><p>Positioning</p>
+</li>
+<li><p>Box model</p>
+</li>
+<li><p>Typographic</p>
+</li>
+<li><p>Visual</p>
+</li>
+</ol>
+<p>——2019/11/26——</p>
 <blockquote>
 <p>未完待续…</p>
 </blockquote>
