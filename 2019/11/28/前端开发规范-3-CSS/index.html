@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>前端开发规范(3)-CSS | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.通用约定代码组织 以组件为单位组织代码段； 制定一致的注释规范； 组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔； 如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；  良好的注释是非常重要的。请留出时间来描述组件（component）的工作方式、局限性和构建它们的方法。不要让团队成员来猜测一段不通用或不明显的代码的目的。">
+  <meta name="description" content="1.通用约定代码组织 以组件为单位组织代码段； 制定一致的注释规范； 组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔； 如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端开发规范(3)-CSS">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="1.通用约定代码组织 以组件为单位组织代码段； 制定一致的注释规范； 组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔； 如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；  良好的注释是非常重要的。请留出时间来描述组件（component）的工作方式、局限性和构建它们的方法。不要让团队成员来猜测一段不通用或不明显的代码的目的。">
+<meta property="og:description" content="1.通用约定代码组织 以组件为单位组织代码段； 制定一致的注释规范； 组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔； 如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-2.png">
-<meta property="og:updated_time" content="2019-11-28T15:59:42.824Z">
+<meta property="og:updated_time" content="2019-11-28T16:08:31.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-1.png">
   
@@ -215,6 +215,8 @@
 <li>组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔；</li>
 <li>如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；</li>
 </ul>
+<a id="more"></a>
+
 <p>良好的注释是非常重要的。请留出时间来描述组件（component）的工作方式、局限性和构建它们的方法。不要让团队成员来猜测一段不通用或不明显的代码的目的。</p>
 <p><em>通过配置编辑器，可以提供快捷键来输出一致认可的注释模式</em></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* =======================================</span></span><br><span class="line"><span class="comment">    组件块</span></span><br><span class="line"><span class="comment">  ======================================== */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 子组件块</span></span><br><span class="line"><span class="comment">  ======================================== */</span></span><br><span class="line"><span class="selector-class">.selector</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 子组件块</span></span><br><span class="line"><span class="comment">  ========================================= */</span></span><br><span class="line"><span class="selector-class">.selector-secondary</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: span;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
