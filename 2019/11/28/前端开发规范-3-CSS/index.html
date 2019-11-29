@@ -18,7 +18,9 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-2.png">
-<meta property="og:updated_time" content="2019-11-28T16:08:31.493Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-4.png">
+<meta property="og:updated_time" content="2019-11-29T15:20:31.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-1.png">
   
@@ -291,7 +293,144 @@
 <li>文章卡片（<code>.article-card</code>）</li>
 </ul>
 <h2 id="Elements（元素）"><a href="#Elements（元素）" class="headerlink" title="Elements（元素）"></a>Elements（元素）</h2><p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-2.png" alt="元素的class"></p>
+<p><code>Elements</code> 是 <code>Components</code> 中的元素。</p>
+<p><strong>Naming elements（元素命名）</strong></p>
+<p><code>Elements</code> 的类名尽可能仅有一个单词。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.search-from</span> &#123;</span><br><span class="line">  &gt; .field &#123; /* ... */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.action</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><strong>On multiple words（多个单词）</strong></p>
+<p>对于需要两个或以上单词表达的 <code>Elements</code> 类名，不应使用中划线和下划线链接，应直接连接。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.profike-box</span> &#123;</span><br><span class="line">  &gt; .firstname &#123; /* ... */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.lastname</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &gt; <span class="selector-class">.avatar</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Avoid tag selectors（避免标签选择器）</strong></p>
+<p>任何时候尽可能使用 <code>classnames</code>。标签选择器在使用上没有问题，但是其性能上稍弱，并且表意不明确。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article-card</span> &#123;</span><br><span class="line">  &gt; h3 &#123; /* avoid */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.name</span> &#123; <span class="comment">/* better */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Variants（变体）"><a href="#Variants（变体）" class="headerlink" title="Variants（变体）"></a>Variants（变体）</h2><p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-3.png" alt="变体的class"></p>
+<p><code>Components</code> 和 <code>Elements</code> 都可能会拥有 <code>Variants</code>。</p>
+<p><strong>Naming variants（变体命名）</strong></p>
+<p><code>Variants</code> 的 <code>classname</code> 应带有前缀中划线 <code>-</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.like-button</span> &#123;</span><br><span class="line">  &amp;.-wide &#123; /* ... */ &#125;</span><br><span class="line">  &amp;<span class="selector-class">.-short</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &amp;<span class="selector-class">.-disable</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Element variants（元素变体）</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.shopping-card</span> &#123;</span><br><span class="line">  &gt; .title &#123; /* ... */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.title</span><span class="selector-class">.-small</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Dash prefixes（中划线前缀）</strong></p>
+<p>为什么使用中划线作为变体的前缀？</p>
+<ul>
+<li>它可以避免歧义</li>
+<li>CSS class 仅能以单词和 <code>_</code> 或 <code>-</code> 开头</li>
+<li>中划线比下划线更容易输出</li>
+</ul>
+<h2 id="Layout（布局）"><a href="#Layout（布局）" class="headerlink" title="Layout（布局）"></a>Layout（布局）</h2><p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%833-4.png" alt="变体的class"></p>
+<p><strong>Avoid positioning properties（避免定位属性）</strong></p>
+<p>Components 应该在不同的上下文中都可以复用，所以应避免设置以下属性：</p>
+<ul>
+<li>Positioning (position, top, left, right, bottom)</li>
+<li>Floats (float, clear)</li>
+<li>Margins (margin)</li>
+<li>Dimensions (width, height)</li>
+</ul>
+<p><strong>Fixed dimensions（固定尺寸）</strong></p>
+<p>头像和 logos 这些元素应该设置固定尺寸（宽度，高度）。</p>
+<p><strong>Define positioning in parents（在父元素中设置定位）</strong></p>
+<p>倘若你需要为组件设置定位，应将在组件的上下文（父元素）中进行处理，比如以下例子中，将 <code>width</code> 和 <code>float</code> 应用在 <code>list component(.article-list)</code> 当中，而不是 <code>component(.article-card)</code> 自身。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article-list</span> &#123;</span><br><span class="line">  &amp; &#123;</span><br><span class="line">    @<span class="keyword">include</span> clearfix;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &gt; <span class="selector-class">.article-card</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">33.3%</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.article-card</span> &#123;</span><br><span class="line">  &amp; &#123; /* ... */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.image</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &gt; <span class="selector-class">.title</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">  &gt; <span class="selector-class">.category</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Avoid over-nesting（避免过分嵌套）</strong></p>
+<p>当出现多个嵌套的时候容易失去控制，应保持不超过一个嵌套。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Avoid: 3 levels of nesting */</span></span><br><span class="line"><span class="selector-class">.image-frame</span> &#123;</span><br><span class="line">  &gt; .description &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line"></span><br><span class="line">    &gt; <span class="selector-class">.icon</span> &#123;</span><br><span class="line">      <span class="comment">/* ... */</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Better: 2 levels */</span></span><br><span class="line"><span class="selector-class">.image-frame</span> &#123;</span><br><span class="line">  &gt; .description &#123; /* ... */ &#125;</span><br><span class="line">  &gt; <span class="selector-class">.description</span> &gt; <span class="selector-class">.icon</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary（总结）"><a href="#Summary（总结）" class="headerlink" title="Summary（总结）"></a>Summary（总结）</h2><ul>
+<li>以 <code>components</code> 的角度思考，以两个单词命名(<code>.screenshot-image</code>)</li>
+<li><code>Components</code> 中的 <code>Elements</code>，以一个单词命名(<code>.blog-post .title</code>)</li>
+<li><code>Variants</code>，以中划线 <code>-</code> 作为前缀(<code>.shop-banner.-with-icon</code>)</li>
+<li><code>Components</code> 可以互相嵌套</li>
+</ul>
+<h1 id="4-Less规范"><a href="#4-Less规范" class="headerlink" title="4.Less规范"></a>4.Less规范</h1><h2 id="代码组织-1"><a href="#代码组织-1" class="headerlink" title="代码组织"></a>代码组织</h2><p>代码按以下顺序组织：</p>
+<ol>
+<li>@import</li>
+<li>变量声明</li>
+<li>样式声明</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> <span class="string">"mixins/size.less"</span>;</span><br><span class="line"></span><br><span class="line">@default-text-color: #333;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.page</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">960px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="import-语句"><a href="#import-语句" class="headerlink" title="@import 语句"></a>@import 语句</h2><p>@import 语句引用的内容需要写在一对引号内，.less 后缀不可以省略；引号类型在统一项目内需统一（<code>&#39;</code> 或 <code>&quot;</code>）。</p>
+<h2 id="混入（Mixin）"><a href="#混入（Mixin）" class="headerlink" title="混入（Mixin）"></a>混入（Mixin）</h2><ol>
+<li>在定义 <code>mixin</code> 时，如果 <code>mixin</code> 名称不是一个需要使用的 className，必须加上括号，否则即使被调用也会输出到 CSS 中。</li>
+<li>如果混入的是本身不输出内容的 mixin，需要在 mixin 后添加括号（即使不传参数），以区分这是否是一个 className。</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line"><span class="selector-class">.big-text</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h3</span> &#123;</span><br><span class="line">  .big-text;</span><br><span class="line">  <span class="selector-class">.clear-fix</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-class">.big-text</span>() &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h3</span> &#123;</span><br><span class="line">  .big-text(); /* 1 */  </span><br><span class="line">  <span class="selector-class">.clear-fix</span>(); <span class="comment">/* 2 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="避免嵌套层级过多"><a href="#避免嵌套层级过多" class="headerlink" title="避免嵌套层级过多"></a>避免嵌套层级过多</h2><ul>
+<li>将嵌套深度限制在2级。对于超过3级的嵌套，给予重新评估。这可以避免出现过于详实的 CSS 选择器。</li>
+<li>避免大量的嵌套规则。当可读性受到影响时，将之打断。推荐避免出现多于20行的嵌套规则出现。</li>
+</ul>
+<h2 id="字符串插值"><a href="#字符串插值" class="headerlink" title="字符串插值"></a>字符串插值</h2><p>变量可以使用类似 ruby 和 php 的方式嵌入到字符串中，像 @{name} 这样的结构：<code>@base-url: &quot;http://assets/fnord.com&quot;;</code> <code>background-image: url(&quot;@{base-url}/images/bg.png&quot;);</code></p>
+<h1 id="5-性能优化"><a href="#5-性能优化" class="headerlink" title="5.性能优化"></a>5.性能优化</h1><h2 id="慎重选择高消耗的样式"><a href="#慎重选择高消耗的样式" class="headerlink" title="慎重选择高消耗的样式"></a>慎重选择高消耗的样式</h2><p>高消耗属性在绘制前需要浏览器进行大量计算：</p>
+<ul>
+<li>box-shadows</li>
+<li>border-radius</li>
+<li>transparency</li>
+<li>transforms</li>
+<li>CSS filters（性能杀手）</li>
+</ul>
+<h2 id="避免过分重排"><a href="#避免过分重排" class="headerlink" title="避免过分重排"></a>避免过分重排</h2><p>当发生重排的时候，浏览器需要重新计算布局位置与大小，<a href="https://www.jianshu.com/p/e305ace24ddf" target="_blank" rel="noopener">更多详情</a>。</p>
+<p>常见的重排元素：</p>
+<ul>
+<li>width</li>
+<li>height</li>
+<li>padding</li>
+<li>margin</li>
+<li>display</li>
+<li>border-width</li>
+<li>position</li>
+<li>top</li>
+<li>left</li>
+<li>right</li>
+<li>bottom</li>
+<li>font-size</li>
+<li>float</li>
+<li>text-align</li>
+<li>overflow-y</li>
+<li>font-weight</li>
+<li>overflow</li>
+<li>font-family</li>
+<li>line-height</li>
+<li>vertical-align</li>
+<li>clear</li>
+<li>white-space</li>
+<li>min-height</li>
+</ul>
+<h2 id="正确使用-Display-的属性"><a href="#正确使用-Display-的属性" class="headerlink" title="正确使用 Display 的属性"></a>正确使用 Display 的属性</h2><p>Display 属性会影响页面的渲染，请合理使用。</p>
+<ul>
+<li>display: inline 后不应该再使用 width height margin padding 以及 float;</li>
+<li>display: inline-block 后不应该再使用 float;</li>
+<li>display: block 后不应该再使用 vertical-align;</li>
+<li>display: table-* 后不应该在使用 margin 或者 float;</li>
+</ul>
+<h2 id="不滥用-Float"><a href="#不滥用-Float" class="headerlink" title="不滥用 Float"></a>不滥用 Float</h2><p>Float 在渲染时计算量比较大，尽量减少使用</p>
+<h2 id="动画性能优化"><a href="#动画性能优化" class="headerlink" title="动画性能优化"></a>动画性能优化</h2><p>动画的实现原理，是利用了人眼的“视觉暂留”现象，在短时间内连续播放数幅静止的画面，使肉眼因视觉产生错觉，而误以为画面在“动”。</p>
+<p>动画的基本概念：</p>
+<ul>
+<li>帧：在动画过程中，每一幅静止画面即为一“帧”；</li>
+<li>帧率：即每秒钟播放的静止画面的数量，单位是fps(Frame per second)；</li>
+<li>帧时长：即每一幅静止画面的停留时间，单位一般是ms（毫秒）；</li>
+<li>跳帧（掉帧/丢帧）：在帧率固定的画面中，某一帧的时长远高于平均帧时长，导致其后续数帧被挤压而丢失的现象。</li>
+</ul>
+<p>一般浏览器的渲染刷新频率是 60 fps，所以在网页当中，帧率如果达到 50-60fps 的动画将会相当流畅。</p>
+<ul>
+<li>如果使用基于 javascript 的动画，尽量使用 requestAnimationFrame，避免使用 setTimeout、setInterval；</li>
+<li>避免通过类似 jQuery animate()-style 改变每帧的样式，使用 CSS 声明动画会得到更好的浏览器优化；</li>
+<li>使用 translate 取代 absolute 定位会得到更好的 fps，动画会更顺滑；</li>
+</ul>
+<h2 id="多利用硬件能力"><a href="#多利用硬件能力" class="headerlink" title="多利用硬件能力"></a>多利用硬件能力</h2><p>例如通过 3D 变形开启 GPU 加速。</p>
+<p>一般在 Chrome 中，3D或透视变换（perspective transform）CSS 睡醒或对 opacity 进行 CSS 动画会创建新的图层，在硬件加速渲染通道的优化下，GPU 完成 3D 变形等操作后，将图层进行复合操作（Compesite Layers），从而避免触发浏览器大面积重绘和重排。</p>
+<p><em>3D 变形会消耗更多的内存和功耗</em></p>
+<p>使用 tranlate3d 右移 500px 的动画流畅度要明显优于直接使用 left：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ball-1</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: transform .<span class="number">5s</span> ease;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ball-1</span><span class="selector-class">.slidein</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(500px, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ball-2</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: left .<span class="number">5s</span> ease;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ball-2</span><span class="selector-class">.slidein</span> &#123;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提升-CSS-选择器性能"><a href="#提升-CSS-选择器性能" class="headerlink" title="提升 CSS 选择器性能"></a>提升 CSS 选择器性能</h2>
       
 
       
@@ -445,7 +584,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-通用约定"><span class="toc-number">1.</span> <span class="toc-text">1.通用约定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码组织"><span class="toc-number">1.1.</span> <span class="toc-text">代码组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-和-ID"><span class="toc-number">1.2.</span> <span class="toc-text">Class 和 ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明块格式"><span class="toc-number">1.3.</span> <span class="toc-text">声明块格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明顺序"><span class="toc-number">1.4.</span> <span class="toc-text">声明顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引号使用"><span class="toc-number">1.5.</span> <span class="toc-text">引号使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#媒体查询（Media-query）的位置"><span class="toc-number">1.6.</span> <span class="toc-text">媒体查询（Media query）的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要使用-import"><span class="toc-number">1.7.</span> <span class="toc-text">不要使用 @import</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接的样式顺序"><span class="toc-number">1.8.</span> <span class="toc-text">链接的样式顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无需添加浏览器厂商前缀"><span class="toc-number">1.9.</span> <span class="toc-text">无需添加浏览器厂商前缀</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-字体排印"><span class="toc-number">2.</span> <span class="toc-text">2.字体排印</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-模块组织"><span class="toc-number">3.</span> <span class="toc-text">3.模块组织</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Components（组件）"><span class="toc-number">3.1.</span> <span class="toc-text">Components（组件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Elements（元素）"><span class="toc-number">3.2.</span> <span class="toc-text">Elements（元素）</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-通用约定"><span class="toc-number">1.</span> <span class="toc-text">1.通用约定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码组织"><span class="toc-number">1.1.</span> <span class="toc-text">代码组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-和-ID"><span class="toc-number">1.2.</span> <span class="toc-text">Class 和 ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明块格式"><span class="toc-number">1.3.</span> <span class="toc-text">声明块格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明顺序"><span class="toc-number">1.4.</span> <span class="toc-text">声明顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引号使用"><span class="toc-number">1.5.</span> <span class="toc-text">引号使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#媒体查询（Media-query）的位置"><span class="toc-number">1.6.</span> <span class="toc-text">媒体查询（Media query）的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要使用-import"><span class="toc-number">1.7.</span> <span class="toc-text">不要使用 @import</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链接的样式顺序"><span class="toc-number">1.8.</span> <span class="toc-text">链接的样式顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无需添加浏览器厂商前缀"><span class="toc-number">1.9.</span> <span class="toc-text">无需添加浏览器厂商前缀</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-字体排印"><span class="toc-number">2.</span> <span class="toc-text">2.字体排印</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-模块组织"><span class="toc-number">3.</span> <span class="toc-text">3.模块组织</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Components（组件）"><span class="toc-number">3.1.</span> <span class="toc-text">Components（组件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Elements（元素）"><span class="toc-number">3.2.</span> <span class="toc-text">Elements（元素）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Variants（变体）"><span class="toc-number">3.3.</span> <span class="toc-text">Variants（变体）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout（布局）"><span class="toc-number">3.4.</span> <span class="toc-text">Layout（布局）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary（总结）"><span class="toc-number">3.5.</span> <span class="toc-text">Summary（总结）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Less规范"><span class="toc-number">4.</span> <span class="toc-text">4.Less规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码组织-1"><span class="toc-number">4.1.</span> <span class="toc-text">代码组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#import-语句"><span class="toc-number">4.2.</span> <span class="toc-text">@import 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#混入（Mixin）"><span class="toc-number">4.3.</span> <span class="toc-text">混入（Mixin）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免嵌套层级过多"><span class="toc-number">4.4.</span> <span class="toc-text">避免嵌套层级过多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串插值"><span class="toc-number">4.5.</span> <span class="toc-text">字符串插值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-性能优化"><span class="toc-number">5.</span> <span class="toc-text">5.性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#慎重选择高消耗的样式"><span class="toc-number">5.1.</span> <span class="toc-text">慎重选择高消耗的样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过分重排"><span class="toc-number">5.2.</span> <span class="toc-text">避免过分重排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正确使用-Display-的属性"><span class="toc-number">5.3.</span> <span class="toc-text">正确使用 Display 的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不滥用-Float"><span class="toc-number">5.4.</span> <span class="toc-text">不滥用 Float</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动画性能优化"><span class="toc-number">5.5.</span> <span class="toc-text">动画性能优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多利用硬件能力"><span class="toc-number">5.6.</span> <span class="toc-text">多利用硬件能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提升-CSS-选择器性能"><span class="toc-number">5.7.</span> <span class="toc-text">提升 CSS 选择器性能</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
