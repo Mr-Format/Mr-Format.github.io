@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.通用约定注释原则  As short as possible（如无必要，勿增注释）：尽量提高代码本身的清晰性、可读性 As long as necessary（如有必要，尽量详尽）：合理的注释、空行排版等，可以让代码更易阅读、更具美感">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-30T16:01:18.400Z">
+<meta property="og:updated_time" content="2019-11-30T16:02:05.852Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -427,7 +427,7 @@
 <p>对于例如按钮、下拉框或表格这样的基础组件应该始终以一个特定的前缀开头，区别于其他业务组件。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反例</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">    ├── page-header</span><br><span class="line">    ├── page-article</span><br><span class="line">    ├── page-header</span><br><span class="line">    ├── mazey-button</span><br><span class="line">    ├── mazey-select</span><br><span class="line">    └── mazey-table</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正例</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">|   ├── page-header</span><br><span class="line">|   ├── page-article</span><br><span class="line">|   └── page-header</span><br><span class="line">└── base</span><br><span class="line">    ├── mazey-button</span><br><span class="line">    ├── mazey-select</span><br><span class="line">    └── mazey-table</span><br></pre></td></tr></table></figure>
 
-
+<p><strong>Prop</strong></p>
 
       
 
