@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>Archives: 2019 | 灯芯的前端博客</title>
+  <title>前端开发规范(4)-JavaScript | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;archives&#x2F;2019&#x2F;index.html">
+  <meta name="description" content="1.通用约定注释原则  As short as possible（如无必要，勿增注释）：尽量提高代码本身的清晰性、可读性 As long as necessary（如有必要，尽量详尽）：合理的注释、空行排版等，可以让代码更易阅读、更具美感">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端开发规范(4)-JavaScript">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;11&#x2F;30&#x2F;%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="1.通用约定注释原则  As short as possible（如无必要，勿增注释）：尽量提高代码本身的清晰性、可读性 As long as necessary（如有必要，尽量详尽）：合理的注释、空行排版等，可以让代码更易阅读、更具美感">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-30T16:01:18.400Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,36 +186,287 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-前端开发规范-4-JavaScript" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      前端开发规范(4)-JavaScript
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/" class="archive-article-date">
+
+        
+        <a href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/" class="archive-article-date">
   	<time datetime="2019-11-30T14:33:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/">前端开发规范(4)-JavaScript</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-通用约定"><a href="#1-通用约定" class="headerlink" title="1.通用约定"></a>1.通用约定</h1><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><strong>原则</strong></p>
+<ul>
+<li>As short as possible（如无必要，勿增注释）：尽量提高代码本身的清晰性、可读性</li>
+<li>As long as necessary（如有必要，尽量详尽）：合理的注释、空行排版等，可以让代码更易阅读、更具美感</li>
+</ul>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<p><strong>单行注释</strong></p>
+<p>必须独占一行。<code>//</code> 后跟一个空格，缩进与下一行被注释说明的代码一致。</p>
+<p><strong>多行注释</strong></p>
+<p>避免使用 <code>/* ... */</code> 这样的多行注释。有多行注释内容时，使用多个单行注释。</p>
+<p><strong>函数/方法注释</strong></p>
+<ol>
+<li>函数/方法注释必须包含函数说明，有参数和返回值时必须使用注释标识；</li>
+<li>参数和返回值注释必须包含类型信息和说明；</li>
+<li>当函数是内部函数，外部不可访问时，可以使用 @inner 标识；</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 函数描述</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * @param &#123; string &#125; p1 参数1的说明</span></span><br><span class="line"><span class="comment"> * @param &#123; string &#125; p2 参数2的说明，比较长</span></span><br><span class="line"><span class="comment"> *      那就换行了。</span></span><br><span class="line"><span class="comment"> * @param &#123; number= &#125; p3 参数3的说明（可选）</span></span><br><span class="line"><span class="comment"> * @return &#123; Object &#125; 返回值描述</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">p1, p2, p3</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> p3 = p3 || <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        p1: p1,</span><br><span class="line">        p2: p2,</span><br><span class="line">        p3: p3</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件注释</strong></p>
+<p>文件注释用于告诉不熟悉这段代码的读者这个文件中包含哪些东西。应该提供文件的大体内容，它的作者，依赖关系和兼容性信息。如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @fileoverview Description of file, its uses and information</span></span><br><span class="line"><span class="comment"> * about its dependencies.</span></span><br><span class="line"><span class="comment"> * @author user@example.com (Firstname Lastname)</span></span><br><span class="line"><span class="comment"> * Copyright 2009 XX Inc. All Rights Reserved.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>变量，使用 Camel 命名法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> loadingModules = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>私有属性、变量和方法以下划线 <code>_</code> 开头。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _privateMethod = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>常量，使用全部字母大写，单词间下划线分隔的命名方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HTML_ENTITY = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>函数，使用 Camel 命名法。</li>
+<li>函数的参数，使用 Camel 命名法。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stringFormat</span>(<span class="params">source</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hear</span>(<span class="params">theBells</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>类，使用 Pascal 命名法</li>
+<li>类的 方法/属性，使用 Camel 命名法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TextNode</span>(<span class="params">value, engine</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">    <span class="keyword">this</span>.engine = engine;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TextNode.prototype.clone = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>枚举变量</strong> 使用 Pascal 命名法</li>
+<li><strong>枚举的属性</strong> 使用全部字母大写，单词间下划线分隔的命名方式</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> TargetState = &#123;</span><br><span class="line">    READING: <span class="number">1</span>,</span><br><span class="line">    READED: <span class="number">2</span>,</span><br><span class="line">    APPLIED: <span class="number">3</span>,</span><br><span class="line">    READY: <span class="number">4</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>由多个单词组成的 <strong>缩写词</strong>，在命名中，根据当前命名法和出现的位置，所以字母的大小写与首字母的大小写保持一致。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">XMLParser</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertHTML</span> (<span class="params">element, html</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> httpRequest = <span class="keyword">new</span> HTTPRequest();</span><br></pre></td></tr></table></figure>
+
+<h2 id="命名语法"><a href="#命名语法" class="headerlink" title="命名语法"></a>命名语法</h2><p><strong>类名</strong>，使用名词。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Engine</span>(<span class="params">options</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数名</strong>，使用动宾短语。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>boolean</strong>类型的变量使用 is 或 has 开头。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isReady = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> hasMoreCommands = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>Promise 对象</strong>用动宾短语的进行时表达</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> loadingData = ajax.get(<span class="string">'url'</span>);</span><br><span class="line">loadingData.then(callback);</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口命名规范"><a href="#接口命名规范" class="headerlink" title="接口命名规范"></a>接口命名规范</h2><ol>
+<li>可读性强，见名晓义；</li>
+<li>尽量不与 jQuery 社区已有的习惯冲突；</li>
+<li>尽量写全。不用缩写，除非是下面列表中约定的（变量以表达清除为目的）；</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>常用词</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>options</td>
+<td>表示选项，不要使用 config、opts 等</td>
+</tr>
+<tr>
+<td>active</td>
+<td>表示当前，不要用 current 等</td>
+</tr>
+<tr>
+<td>index</td>
+<td>表示索引，不要用 idx 等</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>触点元素</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td>触发类型、方式</td>
+</tr>
+<tr>
+<td>context</td>
+<td>表示传入的 this 对象</td>
+</tr>
+<tr>
+<td>object</td>
+<td>推荐写全，不推荐简写为 o、obj 等</td>
+</tr>
+<tr>
+<td>element</td>
+<td>推荐写全，不推荐简写为 el、elem 等</td>
+</tr>
+<tr>
+<td>length</td>
+<td>不要写成 len、l</td>
+</tr>
+<tr>
+<td>prev</td>
+<td>previous的缩写</td>
+</tr>
+<tr>
+<td>next</td>
+<td>next 下一个</td>
+</tr>
+<tr>
+<td>contructor</td>
+<td>不能写成 ctor</td>
+</tr>
+<tr>
+<td>easing</td>
+<td>动画平滑函数</td>
+</tr>
+<tr>
+<td>min</td>
+<td>minimize 的缩写</td>
+</tr>
+<tr>
+<td>max</td>
+<td>maximize 的缩写</td>
+</tr>
+<tr>
+<td>DOM</td>
+<td>不要写成 dom、Dom</td>
+</tr>
+<tr>
+<td>.hbs</td>
+<td>使用 hbs 后缀表示模板</td>
+</tr>
+<tr>
+<td>btn</td>
+<td>button 的缩写</td>
+</tr>
+<tr>
+<td>link</td>
+<td>超链接</td>
+</tr>
+<tr>
+<td>title</td>
+<td>主要文本</td>
+</tr>
+<tr>
+<td>img</td>
+<td>图片路径（img标签src属性）</td>
+</tr>
+<tr>
+<td>dataset</td>
+<td>html5 data-xxx 数据接口</td>
+</tr>
+<tr>
+<td>theme</td>
+<td>主题</td>
+</tr>
+<tr>
+<td>className</td>
+<td>类名</td>
+</tr>
+<tr>
+<td>classNameSpace</td>
+<td>class 命名空间</td>
+</tr>
+</tbody></table>
+<h2 id="True-和-Flase-布尔表达式"><a href="#True-和-Flase-布尔表达式" class="headerlink" title="True 和 Flase 布尔表达式"></a>True 和 Flase 布尔表达式</h2><p>类型检测优先使用 typeof。对象类型检测使用 instanceof。null 或 undefined 的检测使用 ==null。</p>
+<p>下面的布尔表达都返回false：</p>
+<ul>
+<li>null</li>
+<li>undefined</li>
+<li>“” （空字符串）</li>
+<li>0 （数字0）</li>
+</ul>
+<p>但小心下面的，可能返回 true：</p>
+<ul>
+<li>“0” （字符串0）</li>
+<li>[] （空数组）</li>
+<li>{} （空对象）</li>
+</ul>
+<h2 id="不要在-Array-上使用-for-in-循环"><a href="#不要在-Array-上使用-for-in-循环" class="headerlink" title="不要在 Array 上使用 for-in 循环"></a>不要在 Array 上使用 for-in 循环</h2><p>for-in 循环只用于 <code>object/map/hash</code> 的遍历，对 <code>Array</code> 用 for-in 循环有时会出错。因为他并不是从 0 到 length - 1 进行遍历，而是所有出现在对象及其原型链的键值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printArray</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> arr) &#123;</span><br><span class="line">        print(arr[key]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printArray([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]); <span class="comment">// this works</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);</span><br><span class="line">printArray(a); <span class="comment">// this is wrong</span></span><br><span class="line"></span><br><span class="line">a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'*'</span>);</span><br><span class="line">printArray(a); <span class="comment">// this is wrong</span></span><br><span class="line"></span><br><span class="line">a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a.buhu = <span class="string">'wine'</span>;</span><br><span class="line">printArray(a); <span class="comment">// this is wrong again</span></span><br><span class="line"></span><br><span class="line">a = <span class="keyword">new</span> array;</span><br><span class="line">a[<span class="number">3</span>] = <span class="number">3</span>;</span><br><span class="line">pringArray(a); <span class="comment">// this is wrong agagin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printArray</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; l; i++) &#123;</span><br><span class="line">        print(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二元和三元操作符"><a href="#二元和三元操作符" class="headerlink" title="二元和三元操作符"></a>二元和三元操作符</h2><p>操作符始终写在前一行，以免分号的隐式插入产生预想不到的问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = a ? b : c;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> y = a ?</span><br><span class="line">    longButSimpleOperandB : longButSimpleOperandC;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> z = a ?</span><br><span class="line">        moreComplicatedB :</span><br><span class="line">        moreComplicatedC;</span><br></pre></td></tr></table></figure>
+
+<p><code>.</code> 操作符也是如此：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = foo.bar().</span><br><span class="line">    doSomething().</span><br><span class="line">    doSomethingElse();</span><br></pre></td></tr></table></figure>
+
+<p><strong>条件（三元）操作符（? :）</strong></p>
+<p>三元操作符用于替代 if 条件判断语句。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line"><span class="keyword">if</span> (val != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> foo();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> bar();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line"><span class="keyword">return</span> val ? foo() : bar();</span><br></pre></td></tr></table></figure>
+
+<p><strong>&amp;&amp; 和 ||</strong></p>
+<p>二元布尔操作符是可短路的，只有在必要时才会计算到最后一项。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">opt_win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> win;</span><br><span class="line">    <span class="keyword">if</span> (opt_win) &#123;</span><br><span class="line">        win = opt_win;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        win = <span class="built_in">window</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (node) &#123;</span><br><span class="line">    <span class="keyword">if</span> (node.kids) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node.kids[index]) &#123;</span><br><span class="line">            foo(node.kids[index]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">opt_win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> win = opt_win || <span class="built_in">window</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> kid = node &amp;&amp; node.kids &amp;&amp; node.kids[index];</span><br><span class="line"><span class="keyword">if</span> (kid) &#123;</span><br><span class="line">    foo(kid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Vue开发规范"><a href="#2-Vue开发规范" class="headerlink" title="2.Vue开发规范"></a>2.Vue开发规范</h1><h2 id="框架-Vue"><a href="#框架-Vue" class="headerlink" title="框架/Vue"></a>框架/Vue</h2><p><strong>组件名</strong></p>
+<p>组件名为多个单词，并且用连接线 <code>-</code> 连接，避免与 HTML 标签冲突，并且结构更加清晰。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'item'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'page-article-item'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>组件文件</strong></p>
+<p>组件的名字应该始终是以连接线 <code>-</code> 连接的单词，一方面可与组件名一致，使项目更加清晰，另一方面这样的写法对编辑器引入也很友好。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">    ├── pageheader</span><br><span class="line">    ├── pagearticle</span><br><span class="line">    └── pageheader</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">    ├── page-header</span><br><span class="line">    ├── page-article</span><br><span class="line">    └── page-header</span><br></pre></td></tr></table></figure>
+
+<p>对于例如按钮、下拉框或表格这样的基础组件应该始终以一个特定的前缀开头，区别于其他业务组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反例</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">    ├── page-header</span><br><span class="line">    ├── page-article</span><br><span class="line">    ├── page-header</span><br><span class="line">    ├── mazey-button</span><br><span class="line">    ├── mazey-select</span><br><span class="line">    └── mazey-table</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正例</span></span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">└── components</span><br><span class="line">|   ├── page-header</span><br><span class="line">|   ├── page-article</span><br><span class="line">|   └── page-header</span><br><span class="line">└── base</span><br><span class="line">    ├── mazey-button</span><br><span class="line">    ├── mazey-select</span><br><span class="line">    └── mazey-table</span><br></pre></td></tr></table></figure>
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,7 +478,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,425 +491,117 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/" class="archive-article-date">
-  	<time datetime="2019-11-28T15:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/">前端开发规范(3)-CSS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/" class="archive-article-date">
-  	<time datetime="2019-11-23T14:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">前端开发规范(2)-HTML</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2019-11-21T06:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">前端开发规范(1)-基本原则</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2019-11-20T15:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">过渡、动画和变换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS//" class="article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">变量、作用域和内存问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">AJAX-XMLHttpRequest对象</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">Markdown基本语法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:13:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">开始写博客啦~~</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-16T04:35:57.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端开发规范(3)-CSS</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-通用约定"><span class="toc-number">1.</span> <span class="toc-text">1.通用约定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">1.1.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命名"><span class="toc-number">1.2.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命名语法"><span class="toc-number">1.3.</span> <span class="toc-text">命名语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口命名规范"><span class="toc-number">1.4.</span> <span class="toc-text">接口命名规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#True-和-Flase-布尔表达式"><span class="toc-number">1.5.</span> <span class="toc-text">True 和 Flase 布尔表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要在-Array-上使用-for-in-循环"><span class="toc-number">1.6.</span> <span class="toc-text">不要在 Array 上使用 for-in 循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二元和三元操作符"><span class="toc-number">1.7.</span> <span class="toc-text">二元和三元操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Vue开发规范"><span class="toc-number">2.</span> <span class="toc-text">2.Vue开发规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#框架-Vue"><span class="toc-number">2.1.</span> <span class="toc-text">框架/Vue</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -686,8 +633,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
