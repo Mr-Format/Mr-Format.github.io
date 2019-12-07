@@ -184,6 +184,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Promise-2-高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">Promise与异步编程(2)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/" class="archive-article-date">
+  	<time datetime="2019-12-07T15:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="4-串联-Promise"><a href="#4-串联-Promise" class="headerlink" title="4.串联 Promise"></a>4.串联 Promise</h1><p>存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。</p>
+<p>每次对 <code>then()</code> 或 <code>catch()</code> 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">42</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Finished'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此代码输出：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span></span><br><span class="line">Finished</span><br></pre></td></tr></table></figure>
+
+<p>对 <code>p1.then()</code> 的调用返回了第二个 Promise，又在这之上调用了 <code>then()</code>。仅当第一个 Promise 已被决议后，第二个 <code>then()</code> 的完成处理函数才会被调用。假若在此例中不使用串联，则会是这个样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">42</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p2 = p1.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p2.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Finished'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在这个无串联版本的代码中，<code>p1.then()</code> 的结果被存储在 <code>p2</code> 中，并且随后 <code>p2.then()</code> 被调用，以添加最终的完成处理函数。同样的，对于 <code>p2.then()</code> 的调用也会返回一个 Promise。</p>
+<h2 id="4-1-捕获错误"><a href="#4-1-捕获错误" class="headerlink" title="4.1 捕获错误"></a>4.1 捕获错误</h2><p>Promise 链允许捕获前一个 Promise 的完成或拒绝处理函数中发生的错误。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">42</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Boom!'</span>)</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)  <span class="comment">// "Boom!"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此代码中，<code>p1</code> 的完成处理函数抛出了一个错误，链式调用指向了第二个 Promise 上的 <code>catch()</code> 方法，能通过此拒绝处理函数接收前面的错误。</p>
+<p>若是一个拒绝处理函数抛出了错误，情况也是一样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Explosion!'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)  <span class="comment">// "Explosion!"</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Boom!'</span>)</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)  <span class="comment">// "Boom!"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>为了确保能正确处理任意可能发生的错误，应当始终在 Promise 链尾部添加拒绝处理函数。</p>
+<h2 id="4-2-在-Promise-链中返回值"><a href="#4-2-在-Promise-链中返回值" class="headerlink" title="4.2 在 Promise 链中返回值"></a>4.2 在 Promise 链中返回值</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Promise-1-基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -943,93 +1046,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">Markdown基本语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，语法简洁，易于学习，适合用来写博客。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h2><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
-<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/201911161.png" alt="markdown预览"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">展开全文 >></a>
         </p>
       
 
