@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>Promise与异步编程(2) | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="4.串联 Promise存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。 每次对 then() 或 catch() 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。 123456789let p1 = new Promise(function(resolve, reject) &amp;#123;">
+  <meta name="description" content="4.串联 Promise存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。 每次对 then() 或 catch() 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Promise与异步编程(2)">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;07&#x2F;Promise-2-%E9%AB%98%E7%BA%A7&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="4.串联 Promise存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。 每次对 then() 或 catch() 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。 123456789let p1 = new Promise(function(resolve, reject) &amp;#123;">
+<meta property="og:description" content="4.串联 Promise存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。 每次对 then() 或 catch() 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-07T16:19:20.696Z">
+<meta property="og:updated_time" content="2019-12-07T16:20:35.138Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -208,6 +208,8 @@
       
         <h1 id="4-串联-Promise"><a href="#4-串联-Promise" class="headerlink" title="4.串联 Promise"></a>4.串联 Promise</h1><p>存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。</p>
 <p>每次对 <code>then()</code> 或 <code>catch()</code> 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。</p>
+<a id="more"></a>
+
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">42</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Finished'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>此代码输出：</p>
@@ -225,7 +227,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Explosion!'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)  <span class="comment">// "Explosion!"</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Boom!'</span>)</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message)  <span class="comment">// "Boom!"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>为了确保能正确处理任意可能发生的错误，应当始终在 Promise 链尾部添加拒绝处理函数。</p>
-<h2 id="4-2-在-Promise-链中返回值"><a href="#4-2-在-Promise-链中返回值" class="headerlink" title="4.2 在 Promise 链中返回值"></a>4.2 在 Promise 链中返回值</h2><p>Promise 链的另一</p>
+<h2 id="4-2-在-Promise-链中返回值"><a href="#4-2-在-Promise-链中返回值" class="headerlink" title="4.2 在 Promise 链中返回值"></a>4.2 在 Promise 链中返回值</h2><p>Promise 链的另一重要方面是能从一个 Promise 传递数据给下一个Promise的能力。</p>
 
       
 
