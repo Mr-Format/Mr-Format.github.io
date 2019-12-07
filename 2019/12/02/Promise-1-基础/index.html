@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>Promise(1)-基础 | 灯芯的前端博客</title>
+  <title>Promise与异步编程(1) | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="JS 最强大的一面就是它能及其轻易地处理异步编程。作为因互联网而生的语言，JS 从一开始就必须能够响应点击或按键之类的用户交互行为。 Node.js 通过使用回调函数来代替事件，进一步推动了 JS 中的异步编程。 随着越来越多的程序开始使用异步编程，事件与回调函数已不足以支持开发者的所有需求。Promise正是为了解决这方面的问题。">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Promise(1)-基础">
+<meta property="og:title" content="Promise与异步编程(1)">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;02&#x2F;Promise-1-%E5%9F%BA%E7%A1%80&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="JS 最强大的一面就是它能及其轻易地处理异步编程。作为因互联网而生的语言，JS 从一开始就必须能够响应点击或按键之类的用户交互行为。 Node.js 通过使用回调函数来代替事件，进一步推动了 JS 中的异步编程。 随着越来越多的程序开始使用异步编程，事件与回调函数已不足以支持开发者的所有需求。Promise正是为了解决这方面的问题。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-06T04:00:07.119Z">
+<meta property="og:updated_time" content="2019-12-07T14:52:09.642Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -193,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Promise(1)-基础
+      Promise与异步编程(1)
     </h1>
   
 
@@ -321,7 +321,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Explosion'</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">        reject(ex)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error.message) <span class="comment">// 'Explosion'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>执行器处理程序捕捉了抛出的任何错误，以简化这种常见处理。但在执行器内抛出的错误仅当在拒绝处理函数时才会被报告，否则该错误就会被隐瞒。不过 JS 环境通过提供钩子(hook)来捕捉被拒绝的 Promise，从而解决了此问题。</p>
-
+<h1 id="3-全局的-Promise-拒绝处理"><a href="#3-全局的-Promise-拒绝处理" class="headerlink" title="3.全局的 Promise 拒绝处理"></a>3.全局的 Promise 拒绝处理</h1>
       
 
       
@@ -475,7 +475,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-异步编程的背景"><span class="toc-number">1.</span> <span class="toc-text">1.异步编程的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件模型"><span class="toc-number">1.1.</span> <span class="toc-text">事件模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调模式"><span class="toc-number">1.2.</span> <span class="toc-text">回调模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Promise-基础"><span class="toc-number">2.</span> <span class="toc-text">2.Promise 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-的生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">Promise 的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建未决的-Promise"><span class="toc-number">2.2.</span> <span class="toc-text">创建未决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建已决的-Promise"><span class="toc-number">2.3.</span> <span class="toc-text">创建已决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行器错误"><span class="toc-number">2.4.</span> <span class="toc-text">执行器错误</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-异步编程的背景"><span class="toc-number">1.</span> <span class="toc-text">1.异步编程的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件模型"><span class="toc-number">1.1.</span> <span class="toc-text">事件模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调模式"><span class="toc-number">1.2.</span> <span class="toc-text">回调模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Promise-基础"><span class="toc-number">2.</span> <span class="toc-text">2.Promise 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-的生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">Promise 的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建未决的-Promise"><span class="toc-number">2.2.</span> <span class="toc-text">创建未决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建已决的-Promise"><span class="toc-number">2.3.</span> <span class="toc-text">创建已决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行器错误"><span class="toc-number">2.4.</span> <span class="toc-text">执行器错误</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-全局的-Promise-拒绝处理"><span class="toc-number">3.</span> <span class="toc-text">3.全局的 Promise 拒绝处理</span></a></li></ol>
                     </div>
                 </span>
                         </div>
