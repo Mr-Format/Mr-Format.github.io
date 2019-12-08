@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="4.串联 Promise存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。 每次对 then() 或 catch() 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-08T13:43:24.853Z">
+<meta property="og:updated_time" content="2019-12-08T13:45:58.170Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -304,7 +304,7 @@
 
 <p>在 <code>function</code> 之前的 <code>async</code> 关键字标明了此函数使用异步任务运行。<code>await</code> 关键字则表示对于 <code>readFile(&#39;config.json&#39;)</code> 的函数调用应返回一个 Promise，若返回类型不对，则会将其包装为 Promise。</p>
 <p>与上述 <code>run()</code> 的实现一致，<code>await</code> 会在 Promise 被拒绝的情况下抛出错误，否则它将返回该 Promise 被决议的值。最终结果是你可以将异步代码当作同步代码来书写，而无须为管理基于迭代器的状态机而付出额外开销。</p>
-<p><code>await</code> 语法目前已经被纳入 ES2017（即 ES8）。</p>
+<p><em><code>await</code> 语法目前已经被纳入 ES2017（即 ES8）。</em></p>
 
       
 
