@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>灯芯的前端博客</title>
+  <title>Set与Map(1) | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;index.html">
+  <meta name="description" content="JS 的大部分时期都只存在一种集合类型，即数组类型。数组在 JS 中的使用正如其他语言的数组一样，但缺少更多类型的集合导致数组也经常被当做队列与栈来使用。 数组只使用了数值型的索引，而如果非数值型的索引是必要的，开发者便会使用非数组的对象。这种技巧引出了非数组对象的定制实现，即 Set 与 Map。 Set 是不包含重复值的列表。你一般不会像对待数组那样来访问 Set 中的某个项；相反更常见的是，">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Set与Map(1)">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;Set%E4%B8%8EMap&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="JS 的大部分时期都只存在一种集合类型，即数组类型。数组在 JS 中的使用正如其他语言的数组一样，但缺少更多类型的集合导致数组也经常被当做队列与栈来使用。 数组只使用了数值型的索引，而如果非数值型的索引是必要的，开发者便会使用非数组的对象。这种技巧引出了非数组对象的定制实现，即 Set 与 Map。 Set 是不包含重复值的列表。你一般不会像对待数组那样来访问 Set 中的某个项；相反更常见的是，">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-11T14:03:33.595Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,16 +186,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Set与Map" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Set与Map" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/Set%E4%B8%8EMap/">Set与Map(1)</a>
+    <h1 class="article-title" itemprop="name">
+      Set与Map(1)
     </h1>
   
 
@@ -208,182 +210,130 @@
 <p>数组只使用了数值型的索引，而如果非数值型的索引是必要的，开发者便会使用非数组的对象。这种技巧引出了非数组对象的定制实现，即 Set 与 Map。</p>
 <p><strong>Set 是不包含重复值的列表</strong>。你一般不会像对待数组那样来访问 Set 中的某个项；相反更常见的是，只在 Set 中检查某个值是否存在。</p>
 <p><strong>Map 是键与相应的值的集合</strong>。因此，Map 中的每个项都存储了两块数据，通过指定所需读取的键即可检索对应的值。Map 常被用作缓存，存储数据以便此后快速检索。</p>
-        
+<a id="more"></a>
+
+<p>由于 Set 与 Map 并不正式存在于 ES5 中，开发者就只能使用非数组的对象。</p>
+<h1 id="1-ES5-中的-Set-与-Map"><a href="#1-ES5-中的-Set-与-Map" class="headerlink" title="1.ES5 中的 Set 与 Map"></a>1.ES5 中的 Set 与 Map</h1><p>在 ES5 中，开发者使用对象属性模拟 Set 与 Map，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = Object.create(null)</span><br><span class="line"><span class="keyword">set</span>.foo = true</span><br><span class="line">// 检查属性的存在性</span><br><span class="line">if (<span class="keyword">set</span>.foo) &#123;</span><br><span class="line">    <span class="comment">// doSomething</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本例中的 <code>set</code> 变量是一个原型为 <code>null</code> 的对象，确保在此对象上没有继承属性。使用对象的属性作为需要检查的唯一值在 ES5 中是很常用的方法。</p>
+<p>当一个属性被添加到 <code>set</code> 对象时，它的值也被设为 <code>true</code>，因此条件判断语句(例如本例中的if语句)就可以简单判断出该值是否存在。</p>
+<p>使用对象模拟 Set 与模拟 Map 之间唯一真正的区别是所存储的值。例如，以下例子将对象作为Map使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">map.foo = <span class="string">'bar'</span></span><br><span class="line"><span class="comment">// 提取一个值</span></span><br><span class="line"><span class="keyword">let</span> value = map.foo</span><br><span class="line"><span class="built_in">console</span>.log(value)  <span class="comment">// "bar"</span></span><br></pre></td></tr></table></figure>
+
+<p>与 Set 不同，Map 多被用来提取数据，而不是仅检查键的存在性。</p>
+<h1 id="2-变通方法的问题"><a href="#2-变通方法的问题" class="headerlink" title="2.变通方法的问题"></a>2.变通方法的问题</h1><p>尽管在简单情况下将对象作为 Set 与 Map 来使用都是可行的，但一旦接触到对象属性的局限性，此方式就会遇到更多麻烦。</p>
+<p>例如，由于对象属性的类型必须为字符串，就必须保证任意两个键不能被转换为相同的字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">mpa[<span class="number">5</span>] = <span class="string">'foo'</span></span><br><span class="line"><span class="built_in">console</span>.log(map[<span class="string">'5'</span>])  <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>本例将字符串值 <code>&quot;foo&quot;</code> 赋值到数值类型的键 <code>5</code> 上，而数值类型的键会在内部被转换为字符串，因此 <code>map[5]</code> 与 <code>map[&quot;5&quot;]</code> 实际上引用了同一个属性。</p>
+<p>当你想将数值与字符串都作为键来使用时，这种内部转换会引起问题。而若使用对象作为键，就会出现另一个问题，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>),</span><br><span class="line">    key1 = &#123;&#125;,</span><br><span class="line">    key2 = &#123;&#125;;</span><br><span class="line">map[key1] = <span class="string">'foo'</span></span><br><span class="line"><span class="built_in">console</span>.log(map[key2]) <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>此处的 <code>map[key2]</code> 与 <code>map[key1]</code> 引用了同一个值。</p>
+<p>由于对象的属性只能是字符串，而对象默认的字符串类型表达形式又是 <code>&quot;[object Object]&quot;</code>，因此，<code>key1</code> 与 <code>key2</code> 对象都被转换为同一个字符串 <code>&quot;[object Object]&quot;</code>。</p>
+<p>这种行为导致的错误可能不太显眼，因为貌似合乎逻辑的假设是：键如果使用了不同对象，它们就应当是不同的键。</p>
+<p>将对象转换为默认的字符串表现形式，使得对象很难被当做 Map 的键来使用(此问题同样存在于将对象作为Set来使用的尝试上)。</p>
+<p>当键的值为假值时，Map也遇到了自身的特殊问题。在需要布尔值的位置(例如 if 语句内)，任何假值都会被自动转换为 <code>false</code>。这种转换单独说来不是问题，只要对如何使用值的问题足够小心。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">map.count = <span class="number">1</span></span><br><span class="line"><span class="comment">// 是想检查 "count" 属性的存在性，还是想检查非零值？</span></span><br><span class="line"><span class="keyword">if</span> (map.count) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此例中 <code>map.count</code> 的用法存在歧义，此处的 <code>if</code> 语句是想检查 <code>map.count</code> 属性的存在性，还是想检查非零值？该 <code>if</code> 语句内的代码会被执行是因为 <code>1</code> 是真值。然而若 <code>map.count</code> 的值为 <code>0</code>，或者该属性不存在，则 <code>if</code> 语句内的代码都将不会被执行。</p>
+<p>在大型应用中，这类问题都是难以确认、难以调试的，这也是 ES6 新增 Set 与 Map 类型的首要原因。</p>
+<p><em>JS 存在 <code>in</code> 运算符，若属性存在于对象中，就会返回 <code>true</code> 而无需读取对象的属性值。不过，<code>in</code> 运算符会搜索对象的原型，这使得它只有在处理原型为 <code>null</code> 的对象是才是安全的。但即使原型没问题，许多开发者仍然错误地使用与上例类似的代码，而不是使用 <code>in</code> 运算符。</em></p>
+<h1 id="3-ES6-的-Set"><a href="#3-ES6-的-Set" class="headerlink" title="3.ES6 的 Set"></a>3.ES6 的 Set</h1><p>ES6 新增了 Set 类型，这是一种无重复值的有序列表。Set 允许对它包含的数据进行快速访问，从而增加了一个追踪离散值的更有效方式。</p>
+<h2 id="3-1-创建-Set-并添加项目"><a href="#3-1-创建-Set-并添加项目" class="headerlink" title="3.1 创建 Set 并添加项目"></a>3.1 创建 Set 并添加项目</h2><p>Set 使用 <code>new Set()</code> 来创建，而调用 <code>add()</code> 方法就能向 Set 中添加项目，检查 <code>size</code> 属性还能查看其中包含多少项。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set()</span><br><span class="line"><span class="keyword">set</span>.add(5)</span><br><span class="line"><span class="keyword">set</span>.add('5')</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 2</span><br></pre></td></tr></table></figure>
+
+<p>Set 不会使用强制类型转换来判断值是否重复。这意味着 Set 可以同时包含数值 <code>5</code> 与字符串 <code>&quot;5&quot;</code>，将它们都作为相对独立的项（在 Set 内部的比较使用了 <code>Object.is()</code> 方法，来判断两个值是否相等，唯一的例外是 <code>+0</code> 与 <code>-0</code> 在 Set 中被判断是相等的。）</p>
+<p>还可以向 Set 添加多个对象，它们不会被合并为同一项：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set(), </span><br><span class="line">    key1 = &#123;&#125;, </span><br><span class="line">    key2 = &#123;&#125;;</span><br><span class="line"><span class="keyword">set</span>.add(key1)</span><br><span class="line"><span class="keyword">set</span>.add(key2)</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 2</span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>key1</code> 与 <code>key2</code> 并不会被转换为字符串，所以它们在这个 Set 内部被认为是两个不同的项。</p>
+<p>如果 <code>add()</code> 方法用相同值进行了多次调用，那么在第一次之后的调用实际上会被忽略：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set()</span><br><span class="line"><span class="keyword">set</span>.add(5)</span><br><span class="line"><span class="keyword">set</span>.add('5')</span><br><span class="line"><span class="keyword">set</span>.add(5)  // 重复了，该调用被忽略</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 2</span><br></pre></td></tr></table></figure>
+
+<p>可以使用数组来初始化一个 Set，并且 Set 构造器会确保不重复地使用这些值。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set([1, 2, 3, 4, 5, 5, 5, 5])</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 5</span><br></pre></td></tr></table></figure>
+
+<p>在此例中，带有重复值的数组被用来初始化这个 <code>Set</code>。虽然数值 <code>5</code> 在数组中出现了四次，但 <code>Set</code> 中却只有一个 <code>5</code>。</p>
+<p>若要把已存在的代码或 JSON 结构转换为 Set 来使用，这个特性会让转换更轻松。</p>
+<p>Set 构造器实际上可以接收任意可迭代对象作为参数。能使用数组是因为它们默认就是可迭代的，Set 与 Map 也是一样。Set 构造器会使用迭代器来提取参数中的值。</p>
+<p><em>Set 构造器只接收可迭代对象作为参数，不接受基本类型的值</em></p>
+<p>使用 <code>has()</code> 方法来测试某个值是否存在于 <code>Set</code> 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set()</span><br><span class="line"><span class="keyword">set</span>.add(5)</span><br><span class="line"><span class="keyword">set</span>.add('5')</span><br><span class="line">console.log(<span class="keyword">set</span>.has(5))  // true</span><br><span class="line">console.log(<span class="keyword">set</span>.has(6))  // false</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-移除值"><a href="#3-2-移除值" class="headerlink" title="3.2 移除值"></a>3.2 移除值</h2><p>使用 <code>delete()</code> 方法来移除单个值，或调用 <code>clear()</code> 方法来将所有值从 <code>Set</code> 中移除。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set()</span><br><span class="line"><span class="keyword">set</span>.add(5)</span><br><span class="line"><span class="keyword">set</span>.add('5')</span><br><span class="line">console.log(<span class="keyword">set</span>.has(5))  // true</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>.delete(5)</span><br><span class="line">console.log(<span class="keyword">set</span>.has(5))  // false</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 1</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>.clear()</span><br><span class="line">console.log(<span class="keyword">set</span>.has('5'))  // false</span><br><span class="line">console.log(<span class="keyword">set</span>.size)  // 0</span><br></pre></td></tr></table></figure>
+
+<p>在调用 <code>delete()</code> 之后，只有 <code>5</code> 被移走；而执行 <code>clear()</code> 方法后，<code>Set</code> 就被清空了。</p>
+<p>这些方法都提供了一个简单的机制来追踪有序的唯一值。不过，在给 Set 添加项之后，需要使用 <code>forEach()</code> 方法来对每项执行操作。</p>
+<h2 id="3-3-Set-上的-forEach-方法"><a href="#3-3-Set-上的-forEach-方法" class="headerlink" title="3.3 Set 上的 forEach() 方法"></a>3.3 Set 上的 <code>forEach()</code> 方法</h2><p>ES5 给数组添加了 <code>forEach()</code> 方法，使得更易处理数组中的每一项，而无需建立 <code>for</code> 循环。Set 类型也添加了相同方法，其工作方式也一样。</p>
+<p><code>forEach()</code> 方法会被传递一个回调函数，该回调函数接收三个参数：</p>
+<ol>
+<li>Set 中下个位置的值；</li>
+<li>与第一个参数相同的值；</li>
+<li>目标 Set 自身。</li>
+</ol>
+<p>Set 版本的 <code>forEach()</code> 方法与数组版本有个奇怪差异：前者传给回调函数的第一个与第二个参数是相同。虽然开起来是错误，但这种行为却有个正当理由：</p>
+<p>具有 <code>forEach()</code> 方法的其他对象（即数组与 Map）都会给回调函数传递三个参数，前两个参数都分别是下个位置的值与键（给数组使用的键是数值索引）。</p>
+<p>然而 Set 却没有键。为了让 <code>forEach()</code> 方法的回调函数在不同版本中保持一致，因此将 Set 中的每一项同时认定为键与值，于是 Set 的 <code>forEach()</code> 方法中回调函数前两个参数就始终相同了。</p>
+<p>除了参数特点的差异外，在 Set 上使用 <code>forEach()</code> 方法与在数组上基本相同。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set([1, 2])</span><br><span class="line"><span class="keyword">set</span>.forEach(function(value, key, ownerSet) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(key + <span class="string">' '</span> + value)</span><br><span class="line">    <span class="built_in">console</span>.log(ownerSet === <span class="keyword">set</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>此代码在 Set 的每一项上进行迭代，并对传递给 <code>forEach()</code> 的回调函数的值进行了输出。回调函数每次执行时，<code>key</code> 与 <code>value</code> 总是相同的，同时 <code>ownerSet</code> 也始终等于 <code>set</code>。</p>
+<p>此代码输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">true</span><br><span class="line">2 2</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<p>与使用数组相同，如果想在回调函数中使用 <code>this</code>，可以给 <code>forEach()</code> 传入一个 <code>this</code> 值作为第二个参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set([1, 2])</span><br><span class="line">let processor = &#123;</span><br><span class="line">    output(value) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">    &#125;,</span><br><span class="line">    process(dataSet) &#123;</span><br><span class="line">        dataSet.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.output(value)</span><br><span class="line">        &#125;, <span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">processor.process(<span class="keyword">set</span>)</span><br></pre></td></tr></table></figure>
+
+<p>本例中 <code>processor.process()</code> 方法在 Set 上调用了 <code>forEach()</code>，并传递了当前 <code>this</code> 作为回调函数的 <code>this</code> 值。这个传递十分必要，这样 <code>this.output()</code> 就能正确地解析到 <code>processor.output()</code> 方法。</p>
+<p>使用箭头函数也能达成同样的效果，而无须传入第二个参数，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set([1, 2])</span><br><span class="line">let processor = &#123;</span><br><span class="line">    output(value) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">    &#125;,</span><br><span class="line">    process(dataSet) &#123;</span><br><span class="line">        dataSet.forEach(<span class="function">(<span class="params">value</span>) =&gt;</span> <span class="keyword">this</span>.output(value))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">processor.process(<span class="keyword">set</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-将-Set-转换为数组"><a href="#3-4-将-Set-转换为数组" class="headerlink" title="3.4 将 Set 转换为数组"></a>3.4 将 Set 转换为数组</h2><p>将数组转换为 Set 相当容易，因为可以将数组传递给 Set 构造器；而使用扩展运算符也能简单地将 Set 转换回数组。</p>
+<p>扩展运算符 <code>...</code> 能将数组中的项分割并作为函数的分离参数，同样也能将扩展运算符作用于可迭代对象，将它们转换为数组。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set([1, 2, 3, 3, 3, 4, 5]),</span><br><span class="line">    array = [...<span class="keyword">set</span>]</span><br><span class="line">console.log(array)  // [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+
+<p>此处 Set 清除了数组中的重复值后，又使用扩展运算符将自身的项放到一个新数组中。这些项只是被赋值到新数组中，而并未从 Set 中消失。</p>
+<p>当已经存在一个数组，而你想用它创建一个无重复值的新数组时，该方法十分有用，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">elieminateDuplicates</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...new <span class="built_in">Set</span>(items)]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">    noDuplicates= elieminateDuplicates(numbers)</span><br><span class="line"><span class="built_in">console</span>.log(noDuplicates)  <span class="comment">// [1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>elieminateDuplicates()</code> 函数中，Set 只是一个临时的中介，以便在创建一个无重复的数组之前将重复值过滤。</p>
+<h2 id="3-5-Weak-Set"><a href="#3-5-Weak-Set" class="headerlink" title="3.5 Weak Set"></a>3.5 Weak Set</h2>
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/Set%E4%B8%8EMap/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Promise-2-高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">Promise与异步编程(2)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2019-12-07T15:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="4-串联-Promise"><a href="#4-串联-Promise" class="headerlink" title="4.串联 Promise"></a>4.串联 Promise</h1><p>存在多种方式来将 Promise 串联在一起，以完成更复杂的异步行为。</p>
-<p>每次对 <code>then()</code> 或 <code>catch()</code> 的调用实际上创建并返回了另一个 Promise，仅当前一个 Promise 被完成或拒绝时，后一个 Promise 才会被决议。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Promise-1-基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/">Promise与异步编程(1)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2019-12-02T14:23:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JS 最强大的一面就是它能及其轻易地处理异步编程。作为因互联网而生的语言，JS 从一开始就必须能够响应点击或按键之类的用户交互行为。</p>
-<p>Node.js 通过使用回调函数来代替事件，进一步推动了 JS 中的异步编程。</p>
-<p>随着越来越多的程序开始使用异步编程，事件与回调函数已不足以支持开发者的所有需求。Promise正是为了解决这方面的问题。</p>
-        
-      
-
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -414,16 +364,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/12/11/Set%E4%B8%8EMap/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Promise与异步编程(2)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -438,632 +447,32 @@
             </div>
             
                 
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-ES5-中的-Set-与-Map"><span class="toc-number">1.</span> <span class="toc-text">1.ES5 中的 Set 与 Map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-变通方法的问题"><span class="toc-number">2.</span> <span class="toc-text">2.变通方法的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-ES6-的-Set"><span class="toc-number">3.</span> <span class="toc-text">3.ES6 的 Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-创建-Set-并添加项目"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 创建 Set 并添加项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-移除值"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 移除值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Set-上的-forEach-方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 Set 上的 forEach() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-将-Set-转换为数组"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 将 Set 转换为数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-Weak-Set"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 Weak Set</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-前端开发规范-5-vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-5-vue/">前端开发规范(5)-vue</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-5-vue/" class="archive-article-date">
-  	<time datetime="2019-12-01T03:39:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://www.jianshu.com/p/d8636c0104be" target="_blank" rel="noopener">本章内容参考</a></p>
-<h1 id="1-框架-Vue"><a href="#1-框架-Vue" class="headerlink" title="1.框架/Vue"></a>1.框架/Vue</h1><h2 id="组件名"><a href="#组件名" class="headerlink" title="组件名"></a>组件名</h2><p>组件名为多个单词，并且用连接线 <code>-</code> 连接，避免与 HTML 标签冲突，并且结构更加清晰。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not recommended</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'item'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'page-article-item'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-5-vue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端开发规范-4-JavaScript" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/">前端开发规范(4)-JavaScript</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/" class="archive-article-date">
-  	<time datetime="2019-11-30T14:33:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-通用约定"><a href="#1-通用约定" class="headerlink" title="1.通用约定"></a>1.通用约定</h1><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p><strong>原则</strong></p>
-<ul>
-<li>As short as possible（如无必要，勿增注释）：尽量提高代码本身的清晰性、可读性</li>
-<li>As long as necessary（如有必要，尽量详尽）：合理的注释、空行排版等，可以让代码更易阅读、更具美感</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端开发规范-3-CSS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/">前端开发规范(3)-CSS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/" class="archive-article-date">
-  	<time datetime="2019-11-28T15:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-通用约定"><a href="#1-通用约定" class="headerlink" title="1.通用约定"></a>1.通用约定</h1><h2 id="代码组织"><a href="#代码组织" class="headerlink" title="代码组织"></a>代码组织</h2><ul>
-<li>以组件为单位组织代码段；</li>
-<li>制定一致的注释规范；</li>
-<li>组件块和子组件块以及声明块之间使用一空行分隔，子组件块之间三空行分隔；</li>
-<li>如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动；</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端开发规范-2-HTML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">前端开发规范(2)-HTML</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/" class="archive-article-date">
-  	<time datetime="2019-11-23T14:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>尽量遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度。</p>
-<h1 id="1-通用约定"><a href="#1-通用约定" class="headerlink" title="1.通用约定"></a>1.通用约定</h1><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
-<li>自闭和 (self-closing) 标签， 无需闭合 (例如：<code>img</code> <code>input</code> <code>br</code> <code>hr</code> 等)；</li>
-<li>可选的闭合标签 (closing tag)，需闭合 (例如：<code>&lt;/li&gt;</code> 或 <code>&lt;/body&gt;</code>)；</li>
-<li>尽量减少标签数量</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端开发规范-1-基本原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">前端开发规范(1)-基本原则</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2019-11-21T06:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文出处：前端开发手册（<a href="https://github.com/Aaaaaashu/Front-End-Style-Guide" target="_blank" rel="noopener">github</a>）</p>
-<h1 id="1-基本原则"><a href="#1-基本原则" class="headerlink" title="1.基本原则"></a>1.基本原则</h1><h2 id="结构、样式和行为分离"><a href="#结构、样式和行为分离" class="headerlink" title="结构、样式和行为分离"></a>结构、样式和行为分离</h2><p>尽量确保文档和模板只包含 <code>HTML</code> 结构，样式都放到样式表里，行为都放到脚本里。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-过渡、动画和变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">过渡、动画和变换</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2019-11-20T15:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-过渡"><a href="#1-过渡" class="headerlink" title="1.过渡"></a>1.过渡</h1><h2 id="1-1-使用过渡"><a href="#1-1-使用过渡" class="headerlink" title="1.1 使用过渡"></a>1.1 使用过渡</h2><p>过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性.</p>
-<p>CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS//" class="article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-变量、作用域和内存问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">变量、作用域和内存问题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
-<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
-<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1095,8 +504,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
