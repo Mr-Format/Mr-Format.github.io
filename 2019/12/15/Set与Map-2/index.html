@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="Set 是处理值列表的方法，但是若需要给这些值添加额外的信息，就需要使用 Map 类型了。 4.ES6 的 MapES6 的 Map 类型是键值对的有序列表，而键和值都可以是任意类型。键的比较使用的是 Object.is()，因此能将 5 与 &amp;quot;5&amp;quot; 同时作为键，因为它们类型不同。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-15T12:03:12.367Z">
+<meta property="og:updated_time" content="2019-12-15T12:04:44.011Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -270,6 +270,7 @@
 <p>该方法的困难之处在于：如何判断一个 DOM 元素已不复存在于网页中，以便该库能够移除此元素的关联对象。若做不到，该库就会继续保持对 DOM 元素的一个无效引用，并造成内存泄漏。</p>
 <p>使用 Weak Map 来追踪 DOM 元素，依然允许将自定义对象关联到每个 DOM 元素，而在此对象所关联的 DOM 元素不复存在时，它就会在 Weak Map 中被自动销毁。</p>
 <p><em>Weak Map 的键是弱引用，而值不是。在 Weak Map 的值中存储对象会阻止垃圾回收，即使该对象的其他引用已全都被移除</em></p>
+<p><strong>使用 Weak Map</strong></p>
 
       
 
