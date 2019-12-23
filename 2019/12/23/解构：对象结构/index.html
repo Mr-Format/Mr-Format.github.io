@@ -8,12 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>解构：对象结构 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="在 ES6 之前的版本中，从对象或数组中获取信息，并将特定数据存入本地变量，需要书写许多并且相似的代码，例如： 12345678let options = &amp;#123;    repeat: true,    save: false&amp;#125;;&#x2F;&#x2F; 从对象中提取数据let repeat = options.repeat,     save = options.save;">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
 <meta property="og:title" content="解构：对象结构">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;23&#x2F;%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="在 ES6 之前的版本中，从对象或数组中获取信息，并将特定数据存入本地变量，需要书写许多并且相似的代码，例如： 12345678let options = &amp;#123;    repeat: true,    save: false&amp;#125;;&#x2F;&#x2F; 从对象中提取数据let repeat = options.repeat,     save = options.save;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-23T14:28:03.530Z">
+<meta property="og:updated_time" content="2019-12-23T14:55:06.106Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -203,7 +206,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>在 ES6 之前的版本中，从对象或数组中获取信息，并将特定数据存入本地变量，需要书写许多并且相似的代码，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> options = &#123;</span><br><span class="line">    repeat: <span class="literal">true</span>,</span><br><span class="line">    save: <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从对象中提取数据</span></span><br><span class="line"><span class="keyword">let</span> repeat = options.repeat, </span><br><span class="line">    save = options.save;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>此代码提取了 <code>options</code> 对象的 <code>repeat</code> 与 <code>save</code> 值，并将其存在同名的本地变量上。</p>
+<p>ES6 的解构实际使用的语法就是对象与数组的字面量语法，即在赋值语句的左侧使用对象字面量，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identifier'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; type, name &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Identifier"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>在此代码中，<code>node.type</code> 的值被存储到 <code>type</code> 本地变量中，<code>node.name</code> 的值则存储到 <code>name</code> 变量中。此语法相同于简写的属性初始化器。</p>
+<h1 id="1-初始化器"><a href="#1-初始化器" class="headerlink" title="1.初始化器"></a>1.初始化器</h1><p>当使用解构配合 <code>var</code>、<code>let</code> 或 <code>const</code> 来声明变量时，必须提供初始化器（即等号右边的值）。</p>
+<p>下面的代码都会因为缺失初始化器而抛出错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语法错误</span></span><br><span class="line"><span class="keyword">var</span> &#123; type, name &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 语法错误</span></span><br><span class="line"><span class="keyword">let</span> &#123; type, name &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 语法错误</span></span><br><span class="line"><span class="keyword">const</span> &#123; type, name &#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>const</code> 总是要求有初始化器，即使没有使用解构的变量；而 <code>var</code> 与 <code>let</code> 仅在使用解构时才作此要求。</p>
+<h1 id="2-解构赋值"><a href="#2-解构赋值" class="headerlink" title="2.解构赋值"></a>2.解构赋值</h1><p>以上对象解构都用于变量声明。不过，也可以在赋值的时候使用解构。例如，你可能想在变量声明之后改变它们的值，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;,</span><br><span class="line">type = <span class="string">'Literal'</span>,</span><br><span class="line">name = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用解构来分配不同的值</span></span><br><span class="line">(&#123; type, name &#125; = node);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Identify"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>在本例中，<code>type</code> 与 <code>name</code> 属性在声明时被初始化，而两个同名变量也被声明并初始化为不同的值。接下来一行使用了解构表达式，通过读取 <code>node</code> 对象来更改这两个变量的值。</p>
+<p><em>必须使用圆括号包裹解构赋值语句，这是因为暴露的花括号会被解析为代码块语句，而块语句不允许在赋值操作符（<code>=</code>）左侧出现。圆括号标示了里面的花括号并不是块语句，而应该被解析为表达式，从而允许完成赋值操作。</em></p>
+<p>解构赋值表达式的值为表达式右侧的值，也就是说在任何期望有个值的位置都可以使用解构赋值表达式。例如，传递值给函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;,</span><br><span class="line">type = <span class="string">'Literal'</span>,</span><br><span class="line">name = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputInfo</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value === node); <span class="comment">// true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">outputInfo(&#123; type, name &#125; = node);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Identify"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>outputInfo()</code> 函数被使用一个解构赋值表达式进行了调用。该表达式计算结果为 <code>node</code>，因为这就是表达式右侧的值。对 <code>type</code> 与 <code>name</code> 的赋值正常进行，同时 <code>node</code> 也被传入了 <code>outputInfo()</code> 函数。</p>
+<p><em>当解构赋值表达式右侧的计算结果为 <code>null</code> 或 <code>undefined</code> 时，会抛出错误。因为任何读取 <code>null</code> 或 <code>undefined</code> 的企图都会导致‘运行时’错误（<code>runtime error</code>）。</em></p>
+<h1 id="3-默认值"><a href="#3-默认值" class="headerlink" title="3.默认值"></a>3.默认值</h1><p>当使用解构赋值语句时，如果所指定的本地变量在对象中没有找到同名属性，那么该变量会被赋值为 <code>undefined</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Idenfity"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>此代码定义了一个额外的本地变量 <code>value</code>，并试图对其赋值。然而，<code>node</code> 对象中不存在同名属性，因此 <code>value</code> 不出预料地被赋值为 <code>undefined</code>。</p>
+<p>你可以选择性地定义一个默认值，以便在指定属性不存在时使用该值。若要这么做，需要在属性名后面添加一个等号并指定默认值，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value = <span class="literal">true</span> &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Idenfity"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-赋值给不同的本地变量名"><a href="#4-赋值给不同的本地变量名" class="headerlink" title="4.赋值给不同的本地变量名"></a>4.赋值给不同的本地变量名</h1><p>ES6 有一个扩展语法，允许在给本地变量赋值时使用一个不同的名称，而且该语法看上去就像是使用对象字面量的非简写的属性初始化。例如：</p>
+
       
 
       
@@ -242,7 +278,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -328,6 +386,19 @@
             </div>
             
                 
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-初始化器"><span class="toc-number">1.</span> <span class="toc-text">1.初始化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-解构赋值"><span class="toc-number">2.</span> <span class="toc-text">2.解构赋值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-默认值"><span class="toc-number">3.</span> <span class="toc-text">3.默认值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-赋值给不同的本地变量名"><span class="toc-number">4.</span> <span class="toc-text">4.赋值给不同的本地变量名</span></a></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
     </div>
 </aside>
 
