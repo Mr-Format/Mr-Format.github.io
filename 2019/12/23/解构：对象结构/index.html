@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="在 ES6 之前的版本中，从对象或数组中获取信息，并将特定数据存入本地变量，需要书写许多并且相似的代码，例如： 12345678let options = &amp;#123;    repeat: true,    save: false&amp;#125;;&#x2F;&#x2F; 从对象中提取数据let repeat = options.repeat,     save = options.save;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-23T14:55:06.106Z">
+<meta property="og:updated_time" content="2019-12-23T14:57:44.405Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -239,6 +239,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value = <span class="literal">true</span> &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Idenfity"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="4-赋值给不同的本地变量名"><a href="#4-赋值给不同的本地变量名" class="headerlink" title="4.赋值给不同的本地变量名"></a>4.赋值给不同的本地变量名</h1><p>ES6 有一个扩展语法，允许在给本地变量赋值时使用一个不同的名称，而且该语法看上去就像是使用对象字面量的非简写的属性初始化。例如：</p>
+<pre><code class="js"></code></pre>
 
       
 
