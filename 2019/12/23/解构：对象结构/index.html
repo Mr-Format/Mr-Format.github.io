@@ -6,17 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>Set与Map(2) | 灯芯的前端博客</title>
+  <title>解构：对象结构 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Set 是处理值列表的方法，但是若需要给这些值添加额外的信息，就需要使用 Map 类型了。 4.ES6 的 MapES6 的 Map 类型是键值对的有序列表，而键和值都可以是任意类型。键的比较使用的是 Object.is()，因此能将 5 与 &amp;quot;5&amp;quot; 同时作为键，因为它们类型不同。">
-<meta name="keywords" content="笔记">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Set与Map(2)">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;15&#x2F;Set%E4%B8%8EMap-2&#x2F;index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="解构：对象结构">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2019&#x2F;12&#x2F;23&#x2F;%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="Set 是处理值列表的方法，但是若需要给这些值添加额外的信息，就需要使用 Map 类型了。 4.ES6 的 MapES6 的 Map 类型是键值对的有序列表，而键和值都可以是任意类型。键的比较使用的是 Object.is()，因此能将 5 与 &amp;quot;5&amp;quot; 同时作为键，因为它们类型不同。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-15T13:14:18.582Z">
+<meta property="og:updated_time" content="2019-12-23T14:28:03.530Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -186,133 +183,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Set与Map-2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-解构：对象结构" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Set与Map(2)
+      解构：对象结构
     </h1>
   
 
         
-        <a href="/2019/12/15/Set%E4%B8%8EMap-2/" class="archive-article-date">
-  	<time datetime="2019-12-15T10:16:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
+        <a href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" class="archive-article-date">
+  	<time datetime="2019-12-23T14:28:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Set 是处理值列表的方法，但是若需要给这些值添加额外的信息，就需要使用 Map 类型了。</p>
-<h1 id="4-ES6-的-Map"><a href="#4-ES6-的-Map" class="headerlink" title="4.ES6 的 Map"></a>4.ES6 的 Map</h1><p>ES6 的 Map 类型是<em>键值对的有序列表</em>，而键和值都可以是任意类型。键的比较使用的是 <code>Object.is()</code>，因此能将 <code>5</code> 与 <code>&quot;5&quot;</code> 同时作为键，因为它们类型不同。</p>
-<a id="more"></a>
-
-<p>这与使用对象属性作为的键的方式（指的是用对象来模拟 Map）截然不同，因为对象的属性会被强制转换为字符串。</p>
-<p>可以调用 <code>set()</code> 方法并给它传递一个键与一个关联的值，来给 Map 添加项；此后使用键名来调用 <code>get()</code> 方法便能提取对应的值。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">'title'</span>, <span class="string">'Understanding ES6'</span>)</span><br><span class="line">map.set(<span class="string">'year'</span>, <span class="number">2016</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'title'</span>))  <span class="comment">// "Understanding ES6"</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'year'</span>))  <span class="comment">// 2016</span></span><br></pre></td></tr></table></figure>
-
-<p>此例存储了两个键值对。<code>&#39;title&#39;</code> 键存储了一个字符串，而 <code>&#39;year&#39;</code> 键则存储了一个数值，此后调用 <code>get()</code> 方法提取出了二者的值。</p>
-<p>如果一个键不存在于 Map 中，则 <code>get()</code> 方法就会返回特殊值 <code>undefined</code>。</p>
-<p>可以将对象作为键，这是之前使用对象属性来创建 Map 的变通方法所无法做到的。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(), key1 = &#123;&#125;, key2 = &#123;&#125;;</span><br><span class="line">map.set(key1, <span class="number">5</span>)</span><br><span class="line">map.set(key2, <span class="number">42</span>)</span><br><span class="line"><span class="built_in">console</span>.log(map.get(key1))  <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(key2))  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
-
-<p>此代码使用了对象 <code>key1</code> 与 <code>key2</code> 作为 Map 的键，并存储了两个不同的值。由于这些键不会被强制转换成其他形式，每个对象就都被认为是唯一的。这允许你给对象关联额外数据，而无须修改对象自身。</p>
-<h2 id="4-1-Map-的方法"><a href="#4-1-Map-的方法" class="headerlink" title="4.1 Map 的方法"></a>4.1 Map 的方法</h2><p>Map 与 Set 共享了几个方法，允许你使用相似的方式来与 Map 及 Set 进行交互。以下三个方法在 Map 与 Set 上都存在：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>has(key)</td>
-<td>判断指定的键是否存在于 Map 中</td>
-</tr>
-<tr>
-<td>delete(key)</td>
-<td>移除 Map 中的键以及对应的值</td>
-</tr>
-<tr>
-<td>clear()</td>
-<td>移除 Map 中所有的键与值</td>
-</tr>
-</tbody></table>
-<p><em>Weak Set 拥有 <code>add()</code>、<code>has()</code> 和 <code>delete()</code> 方法</em></p>
-<p>Map 同样拥有 <code>size</code> 属性，用于指明包含了多少个键值对。以下代码用不同方式使用了这三种方法以及 <code>size</code> 属性：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">'name'</span>, <span class="string">'Nicholas'</span>)</span><br><span class="line">map.set(<span class="string">'age'</span>, <span class="number">25</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.size)  <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'name'</span>))  <span class="comment">// "Nicholas"</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'age'</span>))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'age'</span>))  <span class="comment">// 25</span></span><br><span class="line"></span><br><span class="line">map.delete(<span class="string">'name'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>))  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'name'</span>))  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(map.size)  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">map.clear()</span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>))  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'name'</span>))  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'age'</span>))  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'age'</span>))  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(map.size)  <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-
-<p>和在 Set 中一样，<code>size</code> 属性总是包含了 Map 中键值对的数量。<code>clear()</code> 方法是从 Map 中移除大量数据的快捷方法，同时也有一次性将大量数据添加到 Map 的方法。</p>
-<h2 id="4-2-Map-的初始化"><a href="#4-2-Map-的初始化" class="headerlink" title="4.2 Map 的初始化"></a>4.2 Map 的初始化</h2><p>与 Set 类似，可以将数组直接传递给 Map 构造器，以便使用数据来初始化一个 Map。注意，该数组中的每一项也必须是数组。内部数组的首个项作为键，第二项则为对应值。因此整个 Map 就被这些双项数组所填充。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'name'</span>, <span class="string">'Nicholas'</span>], [<span class="string">'age'</span>, <span class="number">25</span>]])</span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'name'</span>))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'name'</span>))  <span class="comment">// "Nicholas"</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(<span class="string">'age'</span>))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'age'</span>))  <span class="comment">// 25</span></span><br><span class="line"><span class="built_in">console</span>.log(map.size)  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>这种初始化方式对于准确表示键是非常必要的：因为键允许是任意数据类型，将键存储在数组中，是确保它们在被添加到 Map 之前不会被强制转换为其他类型的唯一方法。</p>
-<h2 id="4-3-Map-上的-forEach-方法"><a href="#4-3-Map-上的-forEach-方法" class="headerlink" title="4.3 Map 上的 forEach 方法"></a>4.3 Map 上的 forEach 方法</h2><p>Map 的 <code>forEach()</code> 方法类似于 Set 与数组的同名方法，它接受一个能接收三个参数的回调函数：</p>
-<ol>
-<li>Map 中下个位置的值；</li>
-<li>该值所对应的键；</li>
-<li>目标 Map 自身。</li>
-</ol>
-<p>回调函数的这些参数更紧密契合了数组 <code>forEach()</code> 方法的行为，即：第一个参数是值，第二个参数则是键（在数组中是索引）。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'name'</span>, <span class="string">'Nicholas'</span>], [<span class="string">'age'</span>, <span class="number">25</span>]])</span><br><span class="line">map.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">value, key, ownerMap</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(key + <span class="string">''</span> + value)</span><br><span class="line">    <span class="built_in">console</span>.log(ownerMap === map)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><code>forEach()</code> 的回调函数输出了传给它的信息。其中 <code>value</code> 与 <code>key</code> 被直接输出，<code>ownerMap</code> 与 <code>map</code> 进行了比较，说明它们是相等的。输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name Nicholas</span><br><span class="line">true</span><br><span class="line">age 25</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-
-<p>传递给 <code>forEach()</code> 的回调函数接收了每个键值对，按照键值对被添加到 Map 中的顺序。这种行为与在数组上调用 <code>forEach()</code> 方法有所不同，后者的回调函数会按数值索引的顺序接收到每一项。</p>
-<p><em>也可以给 <code>forEach()</code> 提供第二个参数来指定回调函数中的 <code>this</code> 值，其行为与 Set 版本的 <code>forEach()</code> 一致</em></p>
-<h2 id="4-4-Weak-Map"><a href="#4-4-Weak-Map" class="headerlink" title="4.4 Weak Map"></a>4.4 Weak Map</h2><p>Weak Map 对 Map 而言，就像 Weak Set 对 Set 一样：Weak 版本都是存储对象弱引用的方式。</p>
-<p>在 Weak Map 中，所有的键都必须是对象（尝试使用非对象的键会抛出错误），而且这些对象都是弱引用，不会干扰垃圾回收。当 Weak Map 中的键在 Weak Map 之外不存在引用时，该键值对会被移除。</p>
-<p>Weak Map 的最佳使用方式，是在浏览器中创建一个关联到特定 DOM 元素的对象。例如，某些用在网页上的 JS 库会维护一个自定义对象，用于引用该库所使用的每一个 DOM 元素，并且其映射关系会存储在内部的对象缓存中。</p>
-<p>该方法的困难之处在于：如何判断一个 DOM 元素已不复存在于网页中，以便该库能够移除此元素的关联对象。若做不到，该库就会继续保持对 DOM 元素的一个无效引用，并造成内存泄漏。</p>
-<p>使用 Weak Map 来追踪 DOM 元素，依然允许将自定义对象关联到每个 DOM 元素，而在此对象所关联的 DOM 元素不复存在时，它就会在 Weak Map 中被自动销毁。</p>
-<p><em>Weak Map 的键是弱引用，而值不是。在 Weak Map 的值中存储对象会阻止垃圾回收，即使该对象的其他引用已全都被移除</em></p>
-<p><strong>使用 Weak Map</strong></p>
-<p>ES6 的 WeakMap 类型是键值对的无序列表，其中键必须是非空的对象，值则允许是任意类型。</p>
-<p>WeakMap 的接口与 Map 的非常相似，都使用 <code>set()</code> 与 <code>get()</code> 方法来分别添加与提取数据：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>(), element = <span class="built_in">document</span>.querySelector(<span class="string">'.element'</span>);</span><br><span class="line">map.set(element, <span class="string">'Original'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> value = map.get(element)</span><br><span class="line"><span class="built_in">console</span>.log(value)  <span class="comment">// "Original"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除元素</span></span><br><span class="line">element.parentNode.removeChild(element)</span><br><span class="line">element = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 该 Weak Map 在此处为空</span></span><br></pre></td></tr></table></figure>
-
-<p>类似于 Weak Set，没有任何办法可以确认 Weak Map 是否为空，因为它没有 <code>size</code> 属性。在其他引用被移除后，由于对键的引用不再又残留，也就无法调用 <code>get()</code> 方法来提取对应的值。Weak Map 已经切断了对于该值的访问，其所占的内存在垃圾回收器运行时便会被释放。</p>
-<p><strong>Weak Map 的初始化</strong></p>
-<p>为了初始化 Weak Map，需要把一个由数组构成的数组传递给 WeakMap 构造器。就像正规 Map 构造器那样，每个内部数组都应当由两个项，第一项是作为键的非空的对象，第二项则是对应的值（任意类型）。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> key1 = &#123;&#125;, key2 = &#123;&#125;, map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>([[key1, <span class="string">'Hello'</span>], [key2, <span class="number">42</span>]])</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.has(key1))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(key1))  <span class="comment">// "Hello"</span></span><br><span class="line"><span class="built_in">console</span>.log(map.has(key2))  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(key2))  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
-
-<p>对象 <code>key1</code> 与 <code>key2</code> 被用作 Weak Map 的键，<code>get()</code> 与 <code>has()</code> 方法则能访问它们。在传递给 WeakMap 构造器的参数中，若任意键值对使用了非对象的键，构造器就会抛出错误。</p>
-<p><strong>Weak Map 的方法</strong></p>
-<p>Weak Map 只有两个附加方法能用来与键值对交互。<code>has()</code> 方法用于判断指定的键是否存在于 Map 中，而 <code>delete()</code> 方法则用于移除一个特定的键值对。<code>clear()</code> 方法不存在，这是因为没必要对键进行枚举，并且枚举 Weak Map 也是不可能的，这与 Weak Set 相同。以下例子同时用到了 <code>has()</code> 与 <code>delete()</code> 方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>(),</span><br><span class="line">    element = <span class="built_in">document</span>.querySelector(<span class="string">".element"</span>);</span><br><span class="line"></span><br><span class="line">map.set(element, <span class="string">"Original"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.has(element));      <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(element));      <span class="comment">// "Original"</span></span><br><span class="line"></span><br><span class="line">map.delete(element);</span><br><span class="line"><span class="built_in">console</span>.log(map.has(element));      <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(element));      <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-
-<p>对于查看一个引用是否正被用作 Weak Map 的键，<code>has()</code> 是非常有用的。但需要注意，必须要有对于该键的另一个非空引用，才能使用此方法。而使用 <code>delete()</code> 方法则会把键从 Weak Map 中强制移除，此后 <code>has()</code> 方法就会对该键返回 <code>false</code>，<code>get()</code> 方法则会返回 <code>undefined</code>。</p>
-<h2 id="4-5-对象的私有数据"><a href="#4-5-对象的私有数据" class="headerlink" title="4.5 对象的私有数据"></a>4.5 对象的私有数据</h2><p>Weak Map 的一个实际应用就是在对象实例中存储私有数据。在 ES6 中对象的所有属性都是公开的，因此若想让数据对于对象自身可访问、而在其他条件下不可访问，那么你就需要使用一些创造力。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>此代码使用了下划线这种表示私有属性的公共约定，来表明一个成员应当被认为是私有的，不应从对象实例外进行修改，此处意图是：只允许用 <code>getName()</code> 来访问 <code>this._name</code>，而不允许 <code>_name</code> 的值被修改。</p>
-<p>然而，毫无办法阻止任何人写入 <code>_name</code> 属性，所以它依然能够被有意或无意地改写。</p>
-<p>在 ES5 中能够创建几乎真正私有的数据，只要在创建对象时使用类似下面的模式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> privateData = &#123;&#125;, privateId = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, <span class="string">'_id'</span>, &#123; <span class="attr">value</span>: privateId++ &#125;);</span><br><span class="line">        privateData[<span class="keyword">this</span>._id] = &#123;</span><br><span class="line">            name: name</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    Person.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> privateData[<span class="keyword">this</span>._id].name;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> Person;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
-
-<p>此例用立即调用函数（IIFE）包裹了 <code>Person</code> 的定义，其中含有两个私有属性：<code>privateData</code> 与 <code>privateId</code>。</p>
-<p><code>privateData</code> 对象存储了每个实例的私有信息，而 <code>privateId</code> 则被用于为每个实例产生一个唯一 ID。</p>
-<p>当 Person 构造器被调用时，一个不可枚举、不可配置、不可写入的 <code>_id</code> 属性就被添加了。</p>
-<p>接下来在 <code>privateData</code> 对象中建立了与实例 ID 对应的一个入口，其中存储着 <code>name</code> 的值。</p>
-<p>随后在 <code>getName()</code> 函数中，就能使用 <code>this._id</code> 作为 <code>privateData</code> 的键来提取该值。</p>
-<p>由于 <code>privateData</code> 无法从 IIFE 外部进行访问，实际的数据就是安全的，尽管 <code>this._id</code> 在 <code>privateData</code> 对象上依然是公开暴露的。</p>
-<p>此方式最大的问题在于 <code>privateData</code> 中的数据永不会消失，因为在对象实例被销毁时没有任何方法可以获知该属性，<code>privateData</code> 对象就将永远包含多余的数据。</p>
-<p>这个问题现在可以用 Weak Map 来解决了，如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Person = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> Data = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">        Data.set(<span class="keyword">this</span>, &#123; <span class="attr">name</span>: name &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    Person.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Data.get(<span class="keyword">this</span>).name</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> Person</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
-
-<p>此版本的 <code>Person</code> 范例使用了 WeakMap 而不是对象来保存私有数据。由于 <code>Person</code> 对象的实例本身能被作为键来使用，于是也就无需再记录单独的 ID。</p>
-<p>当 Person 构造器被调用时,将 <code>this</code> 作为键在 Weak Map 上建立了一个入口，而包含私有信息的对象成为了对应的值，其中只存放了 <code>name</code> 属性。</p>
-<p>通过将 <code>this</code> 传递给 <code>Data.get()</code> 方法，以获取对象并访问其 <code>name</code> 属性，<code>getName()</code> 函数便能提取私有信息。</p>
-<p>这种技术让私有信息能够保持私有状态，并且当与之关联的对象的实例被销毁时，私有信息也会被同时销毁。</p>
-<p><strong>Weak Map 的用法与局限性</strong></p>
-<p>当决定是要使用 Weak Map 还是使用正规 Map 时，首要考虑因素在于你是否只想使用对象类型的键。如果你打算这么做，那么最好的选择就是 Weak Map。因为它能确保额外数据在不再可用后被销毁，从而能优化内存使用并规避内存泄漏。</p>
-<p>Weak Map 只为它们的内容提供了很小的可见度，因此不能使用 <code>forEach()</code> 方法、<code>size</code> 属性或 <code>clear()</code> 方法来管理其中的项。如果确实需要一些检测功能，那么正规 Map 会是更好的选择，只是一定要确保留意内存的使用。</p>
-<p>当然，若想使用非对象的键，那么正规 Map 就是唯一选择。</p>
-
+        
       
 
       
@@ -351,29 +242,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -423,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/12/15/Set%E4%B8%8EMap-2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -437,18 +306,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          解构：对象结构
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/11/Set%E4%B8%8EMap/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Set与Map(1)</div>
+    <a href="/2019/12/15/Set%E4%B8%8EMap-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Set与Map(2)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -468,19 +328,6 @@
             </div>
             
                 
-                    <div class="toc-container tooltip-left">
-                        <i class="icon-font icon-category"></i>
-                        <div class="tooltip tooltip-east">
-                            <span class="tooltip-item">
-                </span>
-                            <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#4-ES6-的-Map"><span class="toc-number">1.</span> <span class="toc-text">4.ES6 的 Map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Map-的方法"><span class="toc-number">1.1.</span> <span class="toc-text">4.1 Map 的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Map-的初始化"><span class="toc-number">1.2.</span> <span class="toc-text">4.2 Map 的初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-Map-上的-forEach-方法"><span class="toc-number">1.3.</span> <span class="toc-text">4.3 Map 上的 forEach 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Weak-Map"><span class="toc-number">1.4.</span> <span class="toc-text">4.4 Weak Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-对象的私有数据"><span class="toc-number">1.5.</span> <span class="toc-text">4.5 对象的私有数据</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-                        </div>
-                    </div>
-                    
     </div>
 </aside>
 
