@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="在 ES6 之前的版本中，从对象或数组中获取信息，并将特定数据存入本地变量，需要书写许多并且相似的代码，例如： 12345678let options = &amp;#123;    repeat: true,    save: false&amp;#125;;&#x2F;&#x2F; 从对象中提取数据let repeat = options.repeat,     save = options.save;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-27T06:31:38.207Z">
+<meta property="og:updated_time" content="2019-12-28T04:47:15.607Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -239,7 +239,30 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; type, name, value = <span class="literal">true</span> &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(type); <span class="comment">// "Idenfity"</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// "foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="4-赋值给不同的本地变量名"><a href="#4-赋值给不同的本地变量名" class="headerlink" title="4.赋值给不同的本地变量名"></a>4.赋值给不同的本地变量名</h1><p>ES6 有一个扩展语法，允许在给本地变量赋值时使用一个不同的名称，而且该语法看上去就像是使用对象字面量的非简写的属性初始化。例如：</p>
-<pre><code class="js"></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">'Identify'</span>,</span><br><span class="line">    name: <span class="string">'foo'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">type</span>: localType, <span class="attr">name</span>: localName &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(localType); <span class="comment">// "Identify"</span></span><br><span class="line"><span class="built_in">console</span>.log(localName); <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<p>此代码使用解构赋值来声明 <code>localType</code> 与 <code>localName</code> 变量，分别获得了 <code>node.type</code> 与 <code>node.name</code> 属性的值。</p>
+<p><code>type: localType</code> 这种语法表示要读取名为 <code>type</code> 的属性，并把它的值存储在变量 <code>localType</code> 上。</p>
+<p>该语法实际上与传统对象字面量语法相反，传统语法将名称放在了冒号左边、值放在冒号右边；而在本例中，则是名称在右边，需要进行值读取的位置则被放在了左边。</p>
+<p>也可以给变量别名添加默认值，依然是在本地变量名称后面添加等号与默认值，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">"Identify"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">type</span>: localType, <span class="attr">name</span>: localName = <span class="string">"bar"</span> &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(localType); <span class="comment">// "Identify"</span></span><br><span class="line"><span class="built_in">console</span>.log(localName); <span class="comment">// "bar"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-嵌套的对象解构"><a href="#5-嵌套的对象解构" class="headerlink" title="5.嵌套的对象解构"></a>5.嵌套的对象解构</h1><p>使用类似于对象字面量的语法，可以深入到嵌套的对象结构中去提取想要的数据。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">"Identify"</span>,</span><br><span class="line">    name: <span class="string">"foo"</span>,</span><br><span class="line">    loc: &#123;</span><br><span class="line">        start: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        end: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">loc</span>: &#123; <span class="attr">start</span>: &#123; line, column &#125; &#125; &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(line); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(column); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>本例中的解构模式使用了花括号，表示应当下行到 <code>node</code> 对象的 <code>loc</code> 属性内部去寻找 <code>start</code> 属性。</p>
+<p>每当有一个冒号在解构模式中出现，就意味着冒号之前的标识符代表需要检查的位置，而冒号右侧则是赋值的目标。当冒号右侧存在花括号时，表示目标被嵌套在对象的更深一层中。</p>
+<p>还能更进一步，在对象的嵌套解构中同样能为本地变量使用不同的名称：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">"Identify"</span>,</span><br><span class="line">    name: <span class="string">"foo"</span>,</span><br><span class="line">    loc: &#123;</span><br><span class="line">        start: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        end: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提取 node.loc.start</span></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">loc</span>: &#123; <span class="attr">start</span>: localStart &#125; &#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(localStart.line); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(localStart.column); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>在此例中，<code>node.loc.start</code> 的值被存储在一个新的本地变量 <code>localStart</code> 上，解构模式可以被嵌套在任意深度的层级，并且在每个层级的功能都一样。</p>
+<p>对象解构十分强大并有很多可用形式，而数组解构则提供了一些独特的能力，用于提取数组中的信息。</p>
+<p><strong>语法难点</strong></p>
+<p>使用嵌套的解构时需要小心，因为你可能无意中就创建了一个没有任何效果的语句。空白花括号在对象解构中是合法的，然而它不会做任何事。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有变量被声明！</span></span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">loc</span>: &#123;&#125; &#125; = node;</span><br></pre></td></tr></table></figure>
+
+<p>在此语句中并未声明任何变量绑定。由于花括号在右侧，<code>loc</code> 被作为需检查的位置来使用，而不会创建变量绑定。这种情况仿佛是想用等号来定义一个默认值，但却被语法判断为想用冒号来定义一个位置。</p>
+<p>这种语法将来可能是非法的，然而现在它只是需要留意的一个疑难点。</p>
 
       
 
@@ -365,15 +388,6 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          解构：对象结构
-        
-      </div>
-    </a>
-  
   
     <a href="/2019/12/15/Set%E4%B8%8EMap-2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Set与Map(2)</div>
@@ -403,7 +417,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-初始化器"><span class="toc-number">1.</span> <span class="toc-text">1.初始化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-解构赋值"><span class="toc-number">2.</span> <span class="toc-text">2.解构赋值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-默认值"><span class="toc-number">3.</span> <span class="toc-text">3.默认值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-赋值给不同的本地变量名"><span class="toc-number">4.</span> <span class="toc-text">4.赋值给不同的本地变量名</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-初始化器"><span class="toc-number">1.</span> <span class="toc-text">1.初始化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-解构赋值"><span class="toc-number">2.</span> <span class="toc-text">2.解构赋值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-默认值"><span class="toc-number">3.</span> <span class="toc-text">3.默认值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-赋值给不同的本地变量名"><span class="toc-number">4.</span> <span class="toc-text">4.赋值给不同的本地变量名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-嵌套的对象解构"><span class="toc-number">5.</span> <span class="toc-text">5.嵌套的对象解构</span></a></li></ol>
                     </div>
                 </span>
                         </div>
