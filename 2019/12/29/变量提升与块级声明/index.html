@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.var 声明与变量提升使用 var 关键字声明的变量，无论其实际声明位置在何处，都会被视为声明于所在函数的顶部（如果声明不在任意函数内，则视为在全局作用域顶部）。这就是所谓的变量提升(hoisting)。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T09:50:16.544Z">
+<meta property="og:updated_time" content="2019-12-29T11:38:12.237Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -269,6 +269,15 @@
 
 <p>此处的 <code>value</code> 变量使用了 <code>let</code> 进行定义与初始化，但该语句永远不会被执行。因为声明之前的那行代码抛出了一个错误。</p>
 <p>出现该问题是因为：<code>value</code> 位于被 JS 社区称为<strong>暂时性死区（temporal dead zone, TDZ)</strong>的区域内。</p>
+<p>该名称并未在 ES 规范中被明确命名，但经常被用于描述 <code>let</code> 或 <code>const</code> 声明的变量为何在声明处之前无法被访问。</p>
+<p>当 JS 引擎检视接下来的代码块并发现变量声明时，它会在面对 <code>var</code> 的情况下将声明提升到函数或全局作用域的顶部，而面对 <code>let</code> 或 <code>const</code> 时会将声明放在暂时性死区内。</p>
+<p>任何在暂时性死区内访问变量的企图都会导致“运行时”错误（runtime error）。只有执行到变量的声明语句时，该变量才会从暂时性死区内被移除并可以安全访问。</p>
+<p>使用 <code>let</code> 或 <code>const</code> 声明的变量，若试图在定义位置之前使用它，无论如何都不能避免暂时性死区。而且正如上例所演示的，这甚至影响了通常安全的 <code>typeof</code> 运算符。</p>
+<p>然而，可以在变量被定义的代码块之外对该变量使用 <code>typeof</code>，尽管其结果可能并非预期。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> value); <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="string">"blue"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>typeof</code> 运算符被使用时，<code>value</code> 并没有在暂时性死区内，因为这发生在定义 <code>value</code> 变量的代码块外部。这意味着此时并没有绑定 <code>value</code> 变量，而 <code>typeof</code> 仅单纯返回了 <code>undefined</code>。</p>
+<p><strong>ES6规定，如果块级作用域中存在 <code>let</code> 或 <code>const</code> 命令，而无论这个命令出现在块级作用域中的什么位置，这个块级作用域对这些命令声明的变量从一开始就形成封闭的作用域。只要在声明前使用这些变量，就会报错，即便外部作用域中存在同名的变量。</strong></p>
 
       
 
@@ -325,7 +334,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
         		</li>
       		
 		</ul>
@@ -393,6 +402,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/12/29/%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          块级绑定
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/29/%E8%A7%A3%E6%9E%84%EF%BC%9A%E6%B7%B7%E5%90%88%E8%A7%A3%E6%9E%84%E5%92%8C%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
