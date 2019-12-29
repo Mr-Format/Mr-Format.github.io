@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.混合解构对象与数组解构能被用在一起，以创建更复杂的解构表达式。在对象与数组混合而成的结构中，这么做能准确提取其中想要的信息片段。例如：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T03:36:12.610Z">
+<meta property="og:updated_time" content="2019-12-29T04:01:22.682Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -226,7 +226,23 @@
 
 <p>此函数的行为类似上例，但此时第三个参数使用了解构来抽取必要的数据。现在对于 <code>setCookie()</code> 函数的使用者来说，解构参数之外的参数明显是必须的；而可选项目存在于额外的参数组中，这同样是非常明确的；同时，若使用了第三个参数，其中应当包含什么值当然也是及其明确的。</p>
 <p>解构参数在没有传递值的情况下类似于常规参数，它们会被设为 <code>undefined</code>。</p>
-<h1 id="2-1-解构的参数是必需的"><a href="#2-1-解构的参数是必需的" class="headerlink" title="2.1 解构的参数是必需的"></a>2.1 解构的参数是必需的</h1>
+<h2 id="2-1-解构的参数是必需的"><a href="#2-1-解构的参数是必需的" class="headerlink" title="2.1 解构的参数是必需的"></a>2.1 解构的参数是必需的</h2><p>参数解构有一个怪异点：默认情况下调用函数时未给参数解构传值会抛出错误。例如，用以下方式调用上例中的 <code>setCookie()</code> 函数就会报错：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 出错！</span></span><br><span class="line">setCooke(<span class="string">"type"</span>, <span class="string">"js"</span>)；</span><br></pre></td></tr></table></figure>
+
+<p>调用时第三个参数缺失了，因此它不出预料地等于 <code>undefined</code>。这导致了一个错误，因为参数解构实际上只是解构声明的简写。当 <code>setCookie()</code> 函数被调用时，JS 引擎实际上是这么做的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; secure, path, domain, expires &#125; = options;</span><br><span class="line">    <span class="comment">// 设置 cookie 的代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>既然在赋值右侧的值为 <code>null</code> 或 <code>undefined</code> 时，解构会抛出错误，那么未向 <code>setCookie()</code> 函数传递第三个参数就同样会出错。</p>
+<p>若让解构的参数作为必选参数，那么上述行为并不会令人困扰。然而若要求它们是可选的，可以给解构的参数提供默认值来处理这种行为，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, &#123;secure, path, domain, expires&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此例为第三个参数提供了一个空对象作为其默认值。给解构的参数提供默认值，也就意味着若未向 <code>setCookie()</code> 函数传递第三个参数，则 <code>secure</code> <code>path</code> <code>domain</code> 与 <code>expires</code> 的值全都会是 <code>undefined</code>，此时不会有错误被抛出。</p>
+<h2 id="2-2-参数解构的默认值"><a href="#2-2-参数解构的默认值" class="headerlink" title="2.2 参数解构的默认值"></a>2.2 参数解构的默认值</h2><p>可以为参数解构提供可解构的默认值，就像在解构赋值时所做的那样，只需在其中每个参数后面添加等号并指定默认值即可。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, </span></span></span><br><span class="line"><span class="function"><span class="params">    &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        secure = false,</span></span></span><br><span class="line"><span class="function"><span class="params">        path = <span class="string">"/"</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        domain = <span class="string">"example.com"</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        expires = new Date(Date.now(</span>) + 360000000)</span></span><br><span class="line"><span class="function">    &#125; = </span>&#123;&#125;</span><br><span class="line">) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此代码中参数解构给每个属性都提供了默认值，所以你可以避免检查指定属性是否已被传入（以便在未传入时使用正确的值）。而整个解构的参数同样有一个默认值，即一个空对象，令该参数成为可选参数。</p>
+<p>这么做使得函数声明看起来比平时要复杂一些，但却是为了确保每个参数都有可用的值而付出的微小代价。</p>
+
       
 
       
@@ -380,7 +396,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-混合解构"><span class="toc-number">1.</span> <span class="toc-text">1.混合解构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-参数解构"><span class="toc-number">2.</span> <span class="toc-text">2.参数解构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-解构的参数是必需的"><span class="toc-number">3.</span> <span class="toc-text">2.1 解构的参数是必需的</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-混合解构"><span class="toc-number">1.</span> <span class="toc-text">1.混合解构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-参数解构"><span class="toc-number">2.</span> <span class="toc-text">2.参数解构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-解构的参数是必需的"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 解构的参数是必需的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-参数解构的默认值"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 参数解构的默认值</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
