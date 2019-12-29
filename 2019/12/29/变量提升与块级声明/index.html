@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.var 声明与变量提升使用 var 关键字声明的变量，无论其实际声明位置在何处，都会被视为声明于所在函数的顶部（如果声明不在任意函数内，则视为在全局作用域顶部）。这就是所谓的变量提升(hoisting)。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T05:04:28.170Z">
+<meta property="og:updated_time" content="2019-12-29T09:50:16.544Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -208,6 +208,68 @@
       
         <h1 id="1-var-声明与变量提升"><a href="#1-var-声明与变量提升" class="headerlink" title="1.var 声明与变量提升"></a>1.var 声明与变量提升</h1><p>使用 <code>var</code> 关键字声明的变量，无论其实际声明位置在何处，都会被视为声明于所在函数的顶部（如果声明不在任意函数内，则视为在全局作用域顶部）。这就是所谓的<strong>变量提升(hoisting)</strong>。</p>
 <a id="more"></a>
+
+<p>以下面定义的函数为例:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(condition) &#123;</span><br><span class="line">        <span class="keyword">var</span> value = <span class="string">"blue"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// value 在此处可访问,值为 undefined</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// value 在此处可访问,值为 undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果对 JS 不熟悉，或许会认为仅当 <code>condition</code> 的值为 <code>true</code> 时，变量 <code>value</code> 才会被创建。但实际上，<code>value</code> 无论如何都会被创建。JS 引擎在后台对 <code>getValue</code> 函数进行了调整，就像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value;</span><br><span class="line">    <span class="keyword">if</span>(condition) &#123;</span><br><span class="line">        value = <span class="string">"blue"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>value</code> 变量的声明被提升到了顶部，而<strong>初始化工作则保留在原处</strong>。</p>
+<p>这意味着在 <code>else</code> 分支内 <code>value</code> 变量也是可访问的，此处它的值会是 <code>undefined</code>，因为它并没有被初始化。</p>
+<h1 id="2-块级声明"><a href="#2-块级声明" class="headerlink" title="2.块级声明"></a>2.块级声明</h1><p>块级声明也就是让声明的变量在指定块的作用域外无法被访问。</p>
+<p>块级作用域（又称词法作用域）在如下情况被创建：</p>
+<ul>
+<li>在一个函数内部</li>
+<li>在一个代码块（由一对花括号包裹）内部</li>
+</ul>
+<p>块级作用域是很多类 C 语言的工作机制，ES6 引入块级声明，是为了给 JS 添加灵活性以及与其他语言的一致性。</p>
+<h2 id="2-1-let-声明"><a href="#2-1-let-声明" class="headerlink" title="2.1 let 声明"></a>2.1 let 声明</h2><p><code>let</code> 声明的语法与 <code>var</code> 的语法一致。基本上可以使用 <code>let</code> 来代替 <code>var</code> 进行变量声明，但会将变量的作用域限制在当前代码中。</p>
+<p>由于 <code>let</code> 声明并不会被提升到当前代码块的顶部，因此需要手动将 <code>let</code> 声明放置到顶部，以便让变量在整个代码块内部可用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">condition</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (condition) &#123;</span><br><span class="line">        <span class="keyword">let</span> value = <span class="string">"blue"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// value 在此处不可用</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// value 在此处不可用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上例这种写法的 <code>getValue</code> 函数的行为更接近其他类 C 语言。</p>
+<p>由于变量 <code>value</code> 声明使用的是 <code>let</code> 而非 <code>var</code>，该声明就没有被提升到函数定义的顶部，因此变量 <code>value</code> 在 <code>if</code> 代码块外部是无法访问的；并且在 <code>condition</code> 的值为 <code>false</code> 时，该变量是永远不会被声明并初始化的。</p>
+<h2 id="2-2-禁止重复声明"><a href="#2-2-禁止重复声明" class="headerlink" title="2.2 禁止重复声明"></a>2.2 禁止重复声明</h2><p>如果一个标识符已经在代码块内部被定义，那么在此代码块内使用同一个标识符进行 <code>let</code> 声明就会导致抛出错误。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 语法错误</span></span><br><span class="line"><span class="keyword">let</span> count = <span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在本例中，<code>count</code> 变量被声明了两次。因为 <code>let</code> 不能在同一作用域内重复声明一个已有标识符，此处的 <code>let</code> 声明就会抛出错误。</p>
+<p>另一方面，在嵌套的作用域内使用 <code>let</code> 声明一个同名的新变量，则不会抛出错误。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不会抛出错误</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">    <span class="keyword">let</span> count = <span class="number">40</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处的 <code>let</code> 声明不会抛出错误，因为它是在 <code>if</code> 语句内创建了一个新的 <code>count</code> 变量，而不是在同一级别再次创建此变量。</p>
+<h2 id="2-3-常量声明"><a href="#2-3-常量声明" class="headerlink" title="2.3 常量声明"></a>2.3 常量声明</h2><p>在 ES6 中也可以使用 <code>const</code> 语法进行声明。</p>
+<p>使用 <code>const</code> 声明的变量会被认为是常量（constant），意味着它们的值在被设置完成后就不能再被改变。</p>
+<p>因此，<strong>所有的 <code>const</code> 变量都需要在声明时进行初始化</strong>，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有效的常量</span></span><br><span class="line"><span class="keyword">const</span> maxItems = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 语法错误，未进行初始化</span></span><br><span class="line"><span class="keyword">const</span> name;</span><br></pre></td></tr></table></figure>
+
+<p><code>maxItems</code> 变量被初始化了，因此它的 <code>const</code> 声明能正常起效。而 <code>name</code> 变量没有初始化，导致在试图运行这段代码时抛出了错误。</p>
+<p><strong>对比常量声明与 let 声明</strong></p>
+<p>常量声明与 <code>let</code> 声明一样，都是<strong>块级声明</strong>。这意味着常量在声明它们的语句块外部是无法访问的，并且声明也不会被提升。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">    <span class="keyword">const</span> maxItems = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// maxItems 在此处无法访问</span></span><br></pre></td></tr></table></figure>
+
+<p>此代码中，常量 <code>maxItems</code> 在 <code>if</code> 语句内被声明。<code>maxItems</code> 在代码块外部无法被访问，因为该语句已结束执行。</p>
+<p>与 <code>let</code> 的另一个相似之处，是 <code>const</code> 声明会在同一作用域（全局或是函数作用域）内定义一个已有变量时抛出错误，无论该变量此前是用 <code>var</code> 声明的还是 <code>let</code> 声明的。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Hello"</span>;</span><br><span class="line"><span class="keyword">let</span> age = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二者均会抛出错误</span></span><br><span class="line"><span class="keyword">const</span> message = <span class="string">"Goodbye!"</span>;</span><br><span class="line"><span class="keyword">const</span> age = <span class="number">30</span>;</span><br></pre></td></tr></table></figure>
+
+<p>除了以上相似之处，<code>let</code> 与 <code>const</code> 之间还有个重大区别：<strong>试图对之前使用 <code>const</code> 声明的常量进行赋值操作会抛出错误，无论是在严格模式还是非严格模式下。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> maxItems = <span class="number">5</span>;</span><br><span class="line">maxItems = <span class="number">6</span>; <span class="comment">// 抛出错误</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，JS 的常量如果是一个对象，那么它所包含的值是可以被修改的。</p>
+<p><strong>使用 <code>const</code> 声明对象</strong></p>
+<p><code>const</code> 声明会阻止对于变量绑定与变量自身值的修改，这意味着 <code>const</code> 声明并不会阻止对变量成员的修改。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">    name: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工作正常</span></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出错误</span></span><br><span class="line">person = &#123;</span><br><span class="line">    name: <span class="string">"Greg"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处 <code>person</code> 在初始化时被绑定了带有一个属性的对象。</p>
+<p>修改 <code>person.name</code> 是可以的，并不会抛出错误，因为该操作只修改了 <code>person</code> 对象的成员，而没有修改 <code>person</code> 的绑定值。</p>
+<p>当代码试图为 <code>person</code> 对象自身赋值时（这会改变变量绑定），就会导致错误。</p>
+<p><em><code>const</code> 阻止的是对于变量绑定的修改，而不阻止对成员值的修改。</em></p>
+<h2 id="2-4-暂时性死区"><a href="#2-4-暂时性死区" class="headerlink" title="2.4 暂时性死区"></a>2.4 暂时性死区</h2><p>使用 <code>let</code> 或 <code>const</code> 声明的变量，在达到声明处之前都是无法访问的，试图访问会导致一个引用错误，即使在通常是安全的操作时（例如使用 <code>typeof</code> 运算符），也是如此。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> value); <span class="comment">// 引用错误</span></span><br><span class="line">    <span class="keyword">let</span> value = <span class="string">"blue"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处的 <code>value</code> 变量使用了 <code>let</code> 进行定义与初始化，但该语句永远不会被执行。因为声明之前的那行代码抛出了一个错误。</p>
+<p>出现该问题是因为：<code>value</code> 位于被 JS 社区称为<strong>暂时性死区（temporal dead zone, TDZ)</strong>的区域内。</p>
+
       
 
       
@@ -361,7 +423,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-var-声明与变量提升"><span class="toc-number">1.</span> <span class="toc-text">1.var 声明与变量提升</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-var-声明与变量提升"><span class="toc-number">1.</span> <span class="toc-text">1.var 声明与变量提升</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-块级声明"><span class="toc-number">2.</span> <span class="toc-text">2.块级声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-let-声明"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 let 声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-禁止重复声明"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 禁止重复声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-常量声明"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 常量声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-暂时性死区"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 暂时性死区</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
