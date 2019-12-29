@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.混合解构对象与数组解构能被用在一起，以创建更复杂的解构表达式。在对象与数组混合而成的结构中，这么做能准确提取其中想要的信息片段。例如：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T03:19:15.344Z">
+<meta property="og:updated_time" content="2019-12-29T03:36:12.610Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -208,6 +208,25 @@
       
         <h1 id="1-混合解构"><a href="#1-混合解构" class="headerlink" title="1.混合解构"></a>1.混合解构</h1><p>对象与数组解构能被用在一起，以创建更复杂的解构表达式。在对象与数组混合而成的结构中，这么做能准确提取其中想要的信息片段。例如：</p>
 <a id="more"></a>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> node = &#123;</span><br><span class="line">    type: <span class="string">"Identifier"</span>,</span><br><span class="line">    name: <span class="string">"foo"</span>,</span><br><span class="line">    loc: &#123;</span><br><span class="line">        start: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        end: &#123;</span><br><span class="line">            line: <span class="number">1</span>,</span><br><span class="line">            column: <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    range: [<span class="number">0</span>, <span class="number">3</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123;</span><br><span class="line">    loc: &#123; start &#125;，</span><br><span class="line">    range: [ startIndex ]</span><br><span class="line">&#125; = node;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(start.line); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(start.column); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(startIndex); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>此代码将 <code>node.loc.start</code> 与 <code>node.range[0]</code> 提取出来，并将它们的值分别存储到 <code>start</code> 与 <code>startIndex</code> 中。</p>
+<p>注意，解构模式中的 <code>loc:</code> 与 <code>range:</code> 只是对应于 <code>node</code> 对象中属性的位置。混合使用对象与数组解构，<code>node</code> 的任何部分都能提取出来。</p>
+<p>对于从 JSON 配置结构中抽取数据来说，这种方法尤其有用，因为它不需要探索整个解构。</p>
+<h1 id="2-参数解构"><a href="#2-参数解构" class="headerlink" title="2.参数解构"></a>2.参数解构</h1><p>解构还有一个特别有用的场景，即在传递函数参数时。</p>
+<p>当 JS 的函数接收大量可选参数时，一个常用模式是创建一个 <code>options</code> 对象，其中包含了附加的参数，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// options 上的属性表示附加参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, options</span>) </span>&#123;</span><br><span class="line">    options = options || &#123;&#125;;</span><br><span class="line">    <span class="keyword">let</span> secure = options.secure,</span><br><span class="line">        path = options.path,</span><br><span class="line">        domain = options.domain,</span><br><span class="line">        expires = options.expires;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 设置 cookie 的代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三个参数映射到 options</span></span><br><span class="line">setCookie(<span class="string">"type"</span>, <span class="string">"js"</span>, &#123;</span><br><span class="line">    secure: <span class="literal">true</span>,</span><br><span class="line">    expires: <span class="number">60000</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>很多 JS 的库都包含了类似于此例的 <code>setCookie()</code> 函数。在此函数内，<code>name</code> 与 <code>value</code> 参数是必须的，而 <code>secure</code> <code>path</code> <code>domain</code> 与 <code>expires</code> 则不是。并且因为此处对于其余数据并没有顺序要求，将它们作为 <code>options</code> 对象的具名属性会更有效率，而无须列出一堆额外的具名参数。</p>
+<p>这种方法很有用，但无法仅通过查看函数定义就判断出函数所期望的输入，你必须阅读函数体的代码。</p>
+<p>参数解构提供了更清楚地表明函数期望输入的替代方案。它使用对象或数组解构的模式替代了具名参数。</p>
+<p>下例是重写版本的 <code>setCookie()</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, &#123; secure, path, domain, expires &#125;</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 设置 cookie 的代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setCookie(<span class="string">"type"</span>, <span class="string">"js"</span>, &#123;</span><br><span class="line">    secure: <span class="literal">true</span>,</span><br><span class="line">    expires: <span class="number">60000</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此函数的行为类似上例，但此时第三个参数使用了解构来抽取必要的数据。现在对于 <code>setCookie()</code> 函数的使用者来说，解构参数之外的参数明显是必须的；而可选项目存在于额外的参数组中，这同样是非常明确的；同时，若使用了第三个参数，其中应当包含什么值当然也是及其明确的。</p>
+<p>解构参数在没有传递值的情况下类似于常规参数，它们会被设为 <code>undefined</code>。</p>
+<h1 id="2-1-解构的参数是必需的"><a href="#2-1-解构的参数是必需的" class="headerlink" title="2.1 解构的参数是必需的"></a>2.1 解构的参数是必需的</h1>
       
 
       
@@ -361,7 +380,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-混合解构"><span class="toc-number">1.</span> <span class="toc-text">1.混合解构</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-混合解构"><span class="toc-number">1.</span> <span class="toc-text">1.混合解构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-参数解构"><span class="toc-number">2.</span> <span class="toc-text">2.参数解构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-解构的参数是必需的"><span class="toc-number">3.</span> <span class="toc-text">2.1 解构的参数是必需的</span></a></li></ol>
                     </div>
                 </span>
                         </div>
