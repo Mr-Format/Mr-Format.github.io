@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.循环中的块级绑定开发者最需要使用变量的块级作用域的场景，或许就是在 for 循环内，也就是让一次性循环计数器仅能在循环内部使用。例如，以下代码在 JS 中并不罕见：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T12:34:39.031Z">
+<meta property="og:updated_time" content="2019-12-29T12:41:53.674Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -259,7 +259,7 @@
 <p><em>若想让代码能从全局对象中被访问，仍然需要使用 <code>var</code>。在浏览器中跨越帧或窗口去访问代码时，这种做法非常普遍。</em></p>
 <h1 id="3-最佳时间"><a href="#3-最佳时间" class="headerlink" title="3.最佳时间"></a>3.最佳时间</h1><p>在 ES6 的发展阶段，被广泛认可的变量声明方式时：默认情况下应该使用 <code>let</code> 而不是 <code>var</code>。对于多数 JS 开发者来说，<code>let</code> 的行为方式正式 <code>var</code> 本应有的方式，因此直接使用 <code>let</code> 替代 <code>var</code> 更符合逻辑。此时，应当对需要受到保护的变量使用 <code>const</code>。</p>
 <p>然而随着更多开发者迁移到 ES6 上，一种替代方案变得更为流行，那就是默认情况下使用 <code>const</code>，并且只在知道变量值需要被更改的情况下才使用 <code>let</code>。</p>
-<p>其理论依据是大部分变量在初始化后都不应该被修改，因为预期外的改动是 BUG 的源头之一。</p>
+<p>其理论依据是大部分变量在初始化后都不应该被修改，因为预期外的改动是 BUG 的源头之一。 </p>
 
       
 
