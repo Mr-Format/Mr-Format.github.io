@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>Tag: 笔记 | 灯芯的前端博客</title>
+  <title>JavaScript基本数据类型 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;tags&#x2F;%E7%AC%94%E8%AE%B0&#x2F;index.html">
+  <meta name="description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基本数据类型">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;01&#x2F;05&#x2F;JavaScript%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-05T13:26:24.738Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,36 +186,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JavaScript基本数据类型" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/05/JavaScript%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-01-05T12:42:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/05/JavaScript%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">JavaScript基本数据类型</a>
+    <h1 class="article-title" itemprop="name">
+      JavaScript基本数据类型
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/01/05/JavaScript%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2020-01-05T12:42:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES 中有5种简单数据类型（也成为基本数据类型）：<code>Undefined</code> <code>Null</code> <code>Boolean</code> <code>Number</code> 和 <code>String</code>，还有一种复杂数据类型：<code>Object</code>。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。</p>
+<p><em>ES 6 引入了一种新的基本类型：符号（<code>Symbol</code>）。</em></p>
+<a id="more"></a>
+
+<h1 id="1-typeof-操作符"><a href="#1-typeof-操作符" class="headerlink" title="1.typeof 操作符"></a>1.typeof 操作符</h1><p>鉴于 ES 是松散类型的，因此需要有一种手段来检测给定变量的数据类型—— <code>typeof</code> 就是负责提供这方面信息的操作符。对一个值使用 <code>typeof</code> 操作符可能返回下列某个字符串：</p>
+<ul>
+<li><code>&quot;undefined&quot;</code>：未定义</li>
+<li><code>&quot;boolean&quot;</code>：布尔值</li>
+<li><code>&quot;string&quot;</code>：字符串</li>
+<li><code>&quot;number&quot;</code>：数值</li>
+<li><code>&quot;object&quot;</code>：对象或 <code>null</code></li>
+<li><code>&quot;function&quot;</code>：函数</li>
+</ul>
+<p><code>typeof</code> 操作符的操作数可以是变量，也可以是数值字面量。注意，<code>typeof</code> 是一个操作符而不是函数，因此后面可以不使用圆括号。</p>
+<p>有些时候，<code>typeof</code> 操作符会返回一些令人迷惑但技术上却正确的值。比如，调用 <code>typeof null</code> 会返回 <code>&quot;object&quot;</code>，因为特殊值 <code>null</code> 被认为是一个空的对象引用。在 Safari5 及之前版本、Chrome7 及之前版本在对正则表达式调用 <code>typeof</code> 操作符时会返回 <code>&quot;function&quot;</code>，而其他浏览器在这种情况下会返回 <code>&quot;object&quot;</code>。</p>
+<h1 id="2-Undefined-类型"><a href="#2-Undefined-类型" class="headerlink" title="2.Undefined 类型"></a>2.Undefined 类型</h1><p><code>Undefined</code> 类型只有一个值，即特殊的 <code>undefined</code>。在使用 <code>var</code> 声明变量但未对其加以初始化时，这个变量的值就是 <code>undefined</code>，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;</span><br><span class="line">alert(message == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子只声明了变量 <code>message</code>，但未对其进行初始化。比较这个变量与 <code>undefined</code> 字面量，结果表明它们是相等的，因为未经初始化的值默认就会取得 <code>undefined</code> 值。</p>
+<p><em>一般而言，不存在需要显式地把一个变量设置为  <code>undefined</code> 值的情况。字面量 <code>undefined</code> 的主要目的是用于比较。在 ES3 之前的版本中没有规定这个值，第 3 版引入这个值是为了正式区分空对象指针与未经初始化的变量。</em></p>
+<p>不过，包含 <code>undefined</code> 值的变量与尚未定义的变量还是不一样的。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message; <span class="comment">// 这个变量声明之后默认取得了 undefined 值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这个变量并没有声明</span></span><br><span class="line"><span class="comment">// var age</span></span><br><span class="line">alert(message); <span class="comment">// "undefined"</span></span><br><span class="line">alert(age); <span class="comment">// 抛出引用错误</span></span><br></pre></td></tr></table></figure>
+
+<p>对于尚未声明过的变量，只能执行一项操作，即使用 <code>typeof</code> 操作符检测其数据类型（对未经声明的变量调用 <code>delete</code> 不会导致错误，但这样做没有什么实际意义，而且在严格模式下确实会导致错误）。</p>
+<p>然而，令人困惑的是：对未经初始化的变量执行 <code>typeof</code> 操作会返回 <code>undefined</code> 值，而对未声明的变量执行 <code>typeof</code> 操作符同样也会返回 <code>undefined</code> 值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message; <span class="comment">// 这个变量声明之后默认取得了 undefined 值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这个变量没有声明</span></span><br><span class="line"><span class="comment">// var age</span></span><br><span class="line"></span><br><span class="line">alert(<span class="keyword">typeof</span> message); <span class="comment">// "undefined"</span></span><br><span class="line">alert(<span class="keyword">typeof</span> age); <span class="comment">// "undefined"</span></span><br></pre></td></tr></table></figure>
+
+<p>结果表明，对未初始化和未声明的变量执行 <code>typeof</code> 操作符都返回了 <code>undefined</code> 值；这个结果有其逻辑上的合理性。因为虽然这两种变量从技术角度看有本质区别，但实际上无论对哪种变量也不可能执行真正的操作。</p>
+<p><em>即便未初始化的变量会自动被赋予 <code>undefined</code> 值，但显式地初始化变量依然是明智的选择。如果能够做到这一点，那么当 <code>typeof</code> 操作符返回 <code>&quot;undefined&quot;</code> 时，我们就知道被检测的变量还没有被声明，而不是尚未初始化。</em></p>
+<h1 id="3-Null-类型"><a href="#3-Null-类型" class="headerlink" title="3.Null 类型"></a>3.Null 类型</h1>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,7 +285,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,471 +298,116 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/01/05/JavaScript%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/29/%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/" class="archive-article-date">
-  	<time datetime="2019-12-29T11:37:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/29/%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/">块级绑定</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/29/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E4%B8%8E%E5%9D%97%E7%BA%A7%E5%A3%B0%E6%98%8E/" class="archive-article-date">
-  	<time datetime="2019-12-29T05:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/29/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E4%B8%8E%E5%9D%97%E7%BA%A7%E5%A3%B0%E6%98%8E/">变量提升与块级声明</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/29/%E8%A7%A3%E6%9E%84%EF%BC%9A%E6%B7%B7%E5%90%88%E8%A7%A3%E6%9E%84%E5%92%8C%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2019-12-29T03:17:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/29/%E8%A7%A3%E6%9E%84%EF%BC%9A%E6%B7%B7%E5%90%88%E8%A7%A3%E6%9E%84%E5%92%8C%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%84/">解构：混合解构和参数解构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/28/%E8%A7%A3%E6%9E%84%EF%BC%9A%E6%95%B0%E7%BB%84%E8%A7%A3%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2019-12-28T04:49:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/28/%E8%A7%A3%E6%9E%84%EF%BC%9A%E6%95%B0%E7%BB%84%E8%A7%A3%E6%9E%84/">解构：数组解构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2019-12-23T14:28:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84/">解构：对象解构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/15/Set%E4%B8%8EMap-2/" class="archive-article-date">
-  	<time datetime="2019-12-15T10:16:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/15/Set%E4%B8%8EMap-2/">Set与Map(2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/11/Set%E4%B8%8EMap/" class="archive-article-date">
-  	<time datetime="2019-12-11T12:39:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/11/Set%E4%B8%8EMap/">Set与Map(1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2019-12-07T15:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">Promise与异步编程(2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2019-12-02T14:23:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/">Promise与异步编程(1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/12/29/%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">块级绑定</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/%E7%AC%94%E8%AE%B0/page/2/">2</a><a class="extend next" rel="next" href="/tags/%E7%AC%94%E8%AE%B0/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -733,9 +440,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
