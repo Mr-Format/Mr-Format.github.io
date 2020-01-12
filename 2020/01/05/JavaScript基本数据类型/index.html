@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-12T12:19:11.861Z">
+<meta property="og:updated_time" content="2020-01-12T13:05:17.972Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -246,7 +246,53 @@
 
 <p>这里，位于 <code>null</code> 和 <code>undefined</code> 之间的相等操作符（<code>==</code>）总是返回 <code>true</code>，不过要注意的是，这个操作符出于比较的目的会转换其操作数。</p>
 <p>尽管 <code>null</code> 和 <code>undefined</code> 有这样的关系，但它们的用途完全不同。如前所述，无论在什么情况下都没有必要把一个变量的值显式地设置为 <code>undefined</code>，可是同样的规则对 <code>null</code> 却不适用。换句话说，只要意在保存对象的变量还没有真正保存对象，就应该明确地让该变量保存 <code>null</code> 值。这样做不仅可以体现 <code>null</code> 作为空对象指针的惯例，而且也有助于进一步区分 <code>null</code> 和 <code>undefined</code>。</p>
-<h1 id="4-Boolean-类型"><a href="#4-Boolean-类型" class="headerlink" title="4.Boolean 类型"></a>4.Boolean 类型</h1>
+<h1 id="4-Boolean-类型"><a href="#4-Boolean-类型" class="headerlink" title="4.Boolean 类型"></a>4.Boolean 类型</h1><p>Boolean 类型是 ES 中使用得最多的一种类型，该类型只有两个字面值：<code>true</code> 和 <code>false</code>。这两个值与数字值不是一回事，因此 <code>true</code> 不一定等于 1，而 <code>false</code> 也不一定等于 0。以下是为变量赋 Boolean 类型值的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> lost = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，Boolean 类型的字面值 <code>true</code> 和 <code>false</code> 是区分大小写的。也就是说，<code>True</code> 和 <code>False</code> 都不是 Boolean 值，只是标识符。</p>
+<p>虽然 Boolean 类型的字面值只有两个，但 ES 中所有类型的值都有与这两个 Boolean 值等价的值。要将一个值转换为其对应的 Boolean 值，可以调用转型函数 Boolean()，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Hello World!"</span>;</span><br><span class="line"><span class="keyword">var</span> messageAsBoolean = <span class="built_in">Boolean</span>(message);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，字符串 <code>message</code> 被转换成了一个 Boolean 值，该值被保存在 <code>messageAsBoolean</code> 变量中。可以对任何数据类型的值调用 <code>Boolean()</code> 函数，而且总会返回一个 Boolean 值。至于返回的这个值是 <code>true</code> 还是 <code>false</code>，取决于要转换值的数据类型及其实际值。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转换为  true 的值</th>
+<th>转换为 false 的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>String</td>
+<td>任何非空字符串</td>
+<td>“”(空字符串)</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>任何非零数字值（包括无穷大）</td>
+<td>0 和 NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何对象</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>-</td>
+<td>undefined</td>
+</tr>
+</tbody></table>
+<p>这些转换规则对理解流控制语句（如 if 语句）自动执行相应的 Boolean 转换非常重要，请看下面的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Hello world!"</span>;</span><br><span class="line"><span class="keyword">if</span> (message) &#123;</span><br><span class="line">    alert(<span class="string">"Value is true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行这个示例，就会显示一个警告框，因为字符串 <code>message</code> 被自动转换成了对应的 Boolean 值（<code>true</code>）。由于存在这种自动执行的 Boolean 转换，因此确切地知道在流控制语句中使用的是什么变量至关重要。错误地使用一个对象而不是一个 Boolean 值，就有可能彻底改变应用程序的流程。</p>
+
       
 
       
