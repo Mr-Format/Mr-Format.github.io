@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-12T13:05:17.972Z">
+<meta property="og:updated_time" content="2020-01-12T13:19:19.792Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -292,7 +292,20 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Hello world!"</span>;</span><br><span class="line"><span class="keyword">if</span> (message) &#123;</span><br><span class="line">    alert(<span class="string">"Value is true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行这个示例，就会显示一个警告框，因为字符串 <code>message</code> 被自动转换成了对应的 Boolean 值（<code>true</code>）。由于存在这种自动执行的 Boolean 转换，因此确切地知道在流控制语句中使用的是什么变量至关重要。错误地使用一个对象而不是一个 Boolean 值，就有可能彻底改变应用程序的流程。</p>
+<h1 id="5-Number-类型"><a href="#5-Number-类型" class="headerlink" title="5.Number 类型"></a>5.Number 类型</h1><p>Number 类型应该是 ES 中最令人关注的数据类型了，这种类型使用 IEEE754 格式来表示整数和浮点数值（浮点数值在某些语言中也被称为双精度数值）。为支持各种数值类型，ES 定义了不同的数值字面量格式。</p>
+<p>最基本的数值字面量格式是十进制整数，十进制整数可以像下面这样直接在代码中输入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum = <span class="number">55</span>; <span class="comment">// 整数</span></span><br></pre></td></tr></table></figure>
 
+<p>除了以十进制表示外，整数还可以通过八进制（以 8 为基数）或十六进制（以 16 为基数）的字面值来表示。其中，八进制字面值的第一位必须是零（0），然后是八进制数字序列（0 - 7）。如果字面值中的数值超出了范围，那么前导零将被忽略，后面的数值将被当作十进制数值解析。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> octalNum1 = <span class="number">070</span>; <span class="comment">// 八进制的 56</span></span><br><span class="line"><span class="keyword">var</span> octalNum2 = <span class="number">079</span>; <span class="comment">// 无效的八进制数值——解析为 79</span></span><br><span class="line"><span class="keyword">var</span> octalNum3 = <span class="number">08</span>; <span class="comment">// 无效的八进制数值——解析为 8</span></span><br></pre></td></tr></table></figure>
+
+<p>八进制字面量在严格模式下是无效的，会导致支持的 JavaScript 引擎抛出错误。</p>
+<p>十六进制字面值的前两位必须是 <code>0x</code>，后跟任何十六进制数字（0 - 9 及 A - F）。其中，字母 A - F 可以大写，也可以小写。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>; <span class="comment">// 十六进制的 10</span></span><br><span class="line"><span class="keyword">var</span> hexNum2 = <span class="number">0x1f</span>; <span class="comment">// 十六进制的 31</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在进行算术计算时，所有以八进制和十六进制表示的数值最终都将被转换为十进制数值。</strong></p>
+<p><em>JavaScript 中可以保存正零（+0）和负零（-0）。正零和负零被认为相等。</em></p>
+<h2 id="5-1-浮点数值"><a href="#5-1-浮点数值" class="headerlink" title="5.1 浮点数值"></a>5.1 浮点数值</h2>
       
 
       
@@ -446,7 +459,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
