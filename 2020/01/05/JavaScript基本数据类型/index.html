@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-12T13:19:19.792Z">
+<meta property="og:updated_time" content="2020-01-13T07:53:17.832Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -305,7 +305,26 @@
 
 <p><strong>在进行算术计算时，所有以八进制和十六进制表示的数值最终都将被转换为十进制数值。</strong></p>
 <p><em>JavaScript 中可以保存正零（+0）和负零（-0）。正零和负零被认为相等。</em></p>
-<h2 id="5-1-浮点数值"><a href="#5-1-浮点数值" class="headerlink" title="5.1 浮点数值"></a>5.1 浮点数值</h2>
+<h2 id="5-1-浮点数值"><a href="#5-1-浮点数值" class="headerlink" title="5.1 浮点数值"></a>5.1 浮点数值</h2><p>所谓浮点数值，就是该数值中必须包含一个小数点，并且小数点后面必须至少有一位数字。</p>
+<p>由于保存浮点数值需要的内存空间是保存整数值的两倍，因此 ES 会不失时机地将浮点数值转换为整数值。如果小数点后面没有跟任何数字，那么这个数值就可以作为整数值来保存。同样地，如果浮点数值本身表示的就是一个整数（如 1.0），那么该值也会被转换为整数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatNum1 = <span class="number">1.</span>; <span class="comment">// 解析为1</span></span><br><span class="line"><span class="keyword">var</span> floatNum2 = <span class="number">10.0</span>; <span class="comment">// 解析为10</span></span><br></pre></td></tr></table></figure>
+
+<p>对于极大或极小的数值，可以使用 e表示法（科学计数法）表示的浮点数值表示。用 e表示法表示的数值等于 <code>e</code> 前面的数值乘以 10 的指数次幂。ES 中 e表示法的格式也是如此，即前面是一个数值（可以是整数也可以是浮点数），中间是一个大写或小写的字母 E，后面是 10 的幂中的指数，该幂值将用来与前面的数相乘。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatNum = <span class="number">3.125e7</span>; <span class="comment">// 等于 31250000</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，使用 e表示法表示的变量 <code>floatNum</code> 的形式虽然简洁，但它的实际值则是 <code>31250000</code>。在此，e表示法的实际含义就是 <em>“3.125 乘以 10 的 7 次方”</em>。</p>
+<p>也可以使用 e表示法表示极小的数值，如 <code>0.00000000000000003</code>，这个数值可以使用 <code>3e-17</code> 表示。默认情况下，<strong>ES 会将小数点后面带有 6 个以上零的浮点数值转换为 e表示法来表示。</strong></p>
+<p>浮点数值的最高精度是 <strong>17</strong> 位小数，但在进行算术计算时其精确度远远不如整数。例如，<code>0.1</code> 加 <code>0.2</code> 的结果不是 <code>0.3</code>，而是 <code>0.30000000000000004</code>。这一误差导致无法测试特定的浮点数值。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a + b == <span class="number">0.3</span>) &#123; <span class="comment">// 不要做这样的测试</span></span><br><span class="line">    alert(<span class="string">"You got 0.3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>浮点数值计算会产生舍入误差的问题，是来自于 IEEE754 数值的浮点计算的通病，并非 ES 本身的问题。</p>
+<h2 id="5-2-数值范围"><a href="#5-2-数值范围" class="headerlink" title="5.2 数值范围"></a>5.2 数值范围</h2><p>由于内存的限制，ES 并不能保存世界上所有的数值。ES 能够表示的最小数值保存在 <code>Number.MIN_VALUE</code> 中——在大多数浏览器中，这个值是 <code>5e-324</code>；能够表示的最大数值保存在 <code>Number.MAX_VALUE</code> 中——在大多数浏览器中，这个值是 <code>1.7976931348623157e+308</code>。如果某次计算的结果得到了一个超出 JS 数值范围的值，那么这个数值将被自动转换成特殊的 <code>Infinity</code> 值。具体来说，如果这个数值是负数，则会被转换成 <code>-Infinity</code>（负无穷），如果这个数值是正数，则会被转换成 <code>Infinity</code>（正无穷）。</p>
+<p>如上所述，如果某次计算返回了正或负的 <code>Infinity</code> 值，那么该值将无法继续参与下一次的计算，因为 <code>Infinity</code> 不是能够参与计算的数值。要想确定一个数值是不是有穷的，可以使用 <code>isFinite()</code> 函数。这个函数在参数位于最小与最大数值之间时会返回 <code>true</code>，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="built_in">Number</span>.MAX_VALUE + <span class="built_in">Number</span>.MAX_VALUE;</span><br><span class="line">alert(<span class="built_in">isFinite</span>(result)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管在计算中很少出现某些值超出表示范围的情况，但在执行极小或极大数值的计算时，检测监控这些值是可能的，也是必须的。</p>
+<p><em>访问 <code>Number.NEGATIVE_INFINITY</code> 和 <code>Number.POSITIVE_INFINITY</code> 也可以得到负和正的 <code>Infinity</code> 的值。可以想见，这两个属性中分别保存着 <code>-Infinity</code> 和 <code>Infinity</code>。</em></p>
+
       
 
       
@@ -459,7 +478,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-数值范围"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 数值范围</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
