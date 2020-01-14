@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-14T08:52:11.674Z">
+<meta property="og:updated_time" content="2020-01-14T12:41:12.268Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -460,6 +460,36 @@
 <p><em><code>null</code> 和 <code>undefined</code> 没有 <code>toString()</code> 方法，因此不能对 <code>null</code> 和 <code>undefined</code> 调用 <code>toString()</code>；而 <code>String()</code> 函数属于全局对象 <code>Global</code>，可以将 <code>null</code> 或 <code>undefined</code> 作为参数传递给 <code>String()</code> 函数。</em></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> value2 = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> value3 = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> value4;</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">String</span>(value1)); <span class="comment">// "10"</span></span><br><span class="line">alert(<span class="built_in">String</span>(value2)); <span class="comment">// "true"</span></span><br><span class="line">alert(<span class="built_in">String</span>(value3)); <span class="comment">// "null"</span></span><br><span class="line">alert(<span class="built_in">String</span>(value4)); <span class="comment">// "undefined"</span></span><br></pre></td></tr></table></figure>
 
+<p>这里先后转换了 4 个值：数值、布尔值、null 和 undefined。数值和布尔值的转换结果与调用 <code>toString()</code> 方法得到的结果相同。因为 <code>null</code> 和 <code>undefined</code> 没有 <code>toString()</code> 方法，所以 <code>String()</code> 函数就返回了这两个值的字面量。</p>
+<p><em>要把某个值转换为字符串，可以使用加号操作符把它与一个字符串（<code>&quot;&quot;</code>）加在一起。</em></p>
+<h1 id="7-Object-类型"><a href="#7-Object-类型" class="headerlink" title="7.Object 类型"></a>7.Object 类型</h1><p>ES 中的对象其实就是一组数据和功能的集合。对象可以通过执行 <code>new</code> 操作符后跟要创建的对象类型的名称来创建。而创建 Object 类型的实例并为其添加属性和（或）方法，就可以创建自定义对象，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这个语法与 Java 中创建对象的语法相似；但在 ES 中，如果不给构造函数传递参数，则可以省略后面的那一对圆括号（不推荐）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>; <span class="comment">// 有效，但不推荐省略圆括号</span></span><br></pre></td></tr></table></figure>
+
+<p>仅仅创建 Object 的实例并没有什么用处，关键是要理解一个重要是思想：在 ES 中，Object 类型是所有它的实例的基础。也就是说，Object 类型所具有的任何属性和方法也同样存在于更具体的对象中。</p>
+<p>Object 的每个实例都具有下列属性和方法：</p>
+<ul>
+<li><strong>constructor</strong>: 保存着用于创建当前对象的函数。对于前面的例子而言，构造函数（constructor）就是 <code>Object()</code>。</li>
+<li><strong>hasOwnProperty(<em>propertyName</em>)</strong>：用于检查给定的属性在当前的对象实例中（而不是在实例的原型中）是否存在。其中，作为参数的属性名（<em>propertyName</em>）必须以字符串形式指定（例如：<code>o.hasOwnProperty(&quot;name&quot;)</code>）。</li>
+<li><strong>isPrototypeOf(object)</strong>：用于检查传入的对象是否是传入对象的原型。</li>
+<li><strong>propertyIsEnumerable(<em>propertyName</em>)</strong>：用于检查给定的属性是否能够使用 <code>for-in</code> 语句来枚举。与 <code>hasOwnProperty()</code> 方法一样，作为参数的属性名必须以字符串形式指定。</li>
+<li><strong>toLocaleString()</strong>：返回对象的字符串表示，该字符串与执行环境的地区对应。</li>
+<li><strong>toString()</strong>：返回对象的字符串表示。</li>
+<li><strong>valueOf()</strong>：返回对象的字符串、数值或布尔值表示，通常与 <code>toString()</code> 方法的返回值相同。</li>
+</ul>
+<p>由于在 ES 中 Object 是所有对象的基础，因此所有对象都具有这些基本的属性和方法。</p>
+<p><em>1.从技术角度将，ES 中对象的行为不一定适用于 JavaScript 中的其他对象。浏览器环境中的对象，比如 BOM 和 DOM 中的对象，都属于宿主对象，因为它们是由宿主实现提供和定义的。ES 不负责定义宿主对象，因此宿主对象可能会也可能不会继承 Object。</em></p>
+<p><em>2.通过 <code>Object.create(null)</code> 方式创建的对象，没有以上这些属性和方法。</em></p>
+<p><strong>toString() 与 toLocaleString() 的区别：</strong></p>
+<p>第一个区别发生在对数值的转换上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line">a.toString(); <span class="comment">// "123"</span></span><br><span class="line">a.toLocaleString(); <span class="comment">// "123"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1234</span>;</span><br><span class="line"></span><br><span class="line">b.toString(); <span class="comment">// "1234"</span></span><br><span class="line">b.toLocaleString(); <span class="comment">// "1,234"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1234.56789</span>;</span><br><span class="line"></span><br><span class="line">c.toString(); <span class="comment">// "1234.56789"</span></span><br><span class="line">c.toLocaleString(); <span class="comment">// "1,234.568"</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，<code>toString()</code> 会将数值按原样转换为字符串；而 <code>toLocaleString()</code> 会将数值的整数部分按照千分位进行分隔，将数值的小数部分按四舍五入保留 3 位小数，然后再转换位字符串；</p>
+<p>第二个区别体现在对 Date 对象的操作上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>(); <span class="comment">// Tue Jan 14 2020 20:35:32 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line">d.toString(); <span class="comment">// "Tue Jan 14 2020 20:35:32 GMT+0800 (中国标准时间)"</span></span><br><span class="line">d.toLocaleString(); <span class="comment">// "2020/1/14 下午8:35:32"</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -585,6 +615,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/01/14/JavaScript-%E6%93%8D%E4%BD%9C%E7%AC%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaScript 操作符
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/12/29/%E5%9D%97%E7%BA%A7%E7%BB%91%E5%AE%9A/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">块级绑定</div>
@@ -614,7 +653,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-数值范围"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 数值范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-NaN"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 NaN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-数值转换"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 数值转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-String-类型"><span class="toc-number">6.</span> <span class="toc-text">6.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-字符字面量"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 字符字面量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-字符串的特点"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 字符串的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-转换为字符串"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 转换为字符串</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-数值范围"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 数值范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-NaN"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 NaN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-数值转换"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 数值转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-String-类型"><span class="toc-number">6.</span> <span class="toc-text">6.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-字符字面量"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 字符字面量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-字符串的特点"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 字符串的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-转换为字符串"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 转换为字符串</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Object-类型"><span class="toc-number">7.</span> <span class="toc-text">7.Object 类型</span></a></li></ol>
                     </div>
                 </span>
                         </div>
