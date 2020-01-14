@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-14T06:23:46.087Z">
+<meta property="og:updated_time" content="2020-01-14T06:48:45.098Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -342,10 +342,14 @@
 <p>如果字符串中只包含数字（包括前面带正号或负号的情况），则将其转换为十进制数值，即 <code>&quot;1&quot;</code> 会变成 <code>1</code>，<code>&quot;011&quot;</code> 会变成 <code>11</code>（前面的 <code>0</code> 被忽略了）；<br>如果字符串中包含有效的浮点格式，如 <code>&quot;1.1&quot;</code>，则将其转换为对应的浮点数值（同样会忽略前导 <code>0</code>）；<br>如果字符串中包含有效的十六进制格式，例如 <code>&quot;0xf&quot;</code>，则将其转换为相同大小的十进制整数值；<br>如果字符串是空的（不包含任何字符，或只有空格），则将其转换为 <code>0</code>；<br>如果字符串中包含除上述格式之外的字符，则将其转换为 <code>NaN</code>。<br>如果是对象，则调用对象的 <code>valueOf()</code> 方法，然后依照前面的规则转换返回的值。如果转换的结果是 <code>NaN</code>，则调用对象的 <code>toString()</code> 方法，然后再次依照前面的规则转换返回的字符串值。</p>
 </blockquote>
 </blockquote>
-<p>根据这么多的规则使用 <code>Number()</code> 把各种数据类型转换为数值确实有点复杂。下面还是给出几个具体的例子吧。</p>
+<p>根据这么多的规则使用 <code>Number()</code> 把各种数据类型转换为数值确实有点复杂，下面是几个具体的例子。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">Number</span>(<span class="string">"Hello world!"</span>); <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">Number</span>(<span class="string">""</span>); <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">Number</span>(<span class="string">"000011"</span>); <span class="comment">// 11</span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">Number</span>(<span class="literal">true</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 
 <p><em>一元加操作符的操作与 <code>Number()</code> 函数相同。</em></p>
+<p>由于 <code>Number()</code> 函数在转换字符串时比较复杂而且不够合理，因此在处理整数的时候更常用的是 <code>parseInt()</code> 函数。<code>parseInt()</code> 函数在转换字符串时，更多的是看其是否符合数值模式。它会忽略字符串前面的空格，直到找到第一个非空格字符。如果第一个字符不是数字字符或者正负号，<code>parseInt()</code> 就会返回 <code>NaN</code>；也就是说，用 <code>parseInt()</code> 转换空字符串会返回 <code>NaN</code>（<code>Number()</code> 对空字符串返回 <code>0</code>）。如果第一个字符是数字字符，<code>parseInt()</code> 会继续解析第二个字符，直到解析完所有后续字符或者遇到了一个非数字字符。例如，<code>&quot;1234blue&quot;</code> 会被转换为 <code>1234</code>，<code>&quot;22.5&quot;</code> 会被转换为 <code>22</code>（小数点不是有效的数字字符）。</p>
+<p>如果字符串中的第一个字符是数字字符，<code>parseInt()</code> 也能够识别出各种整数格式（十进制、八进制和十六进制）。也就是说，如果字符串以 <code>&quot;0x&quot;</code> 开头且后面跟数字字符，就会将其当作一个十六进制整数；如果字符串以 <code>&quot;0&quot;</code> 开头且后面跟数字字符，则会将其当作一个八进制数来解析（ES 3 和 ES 5 在这一点上存在分歧）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(<span class="string">"1234blue"</span>); <span class="comment">// 1234</span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(<span class="string">""</span>); <span class="comment">// NaN</span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">parseInt</span>(<span class="string">"0xA"</span>); <span class="comment">// 10 (十六进制数)</span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">parseInt</span>(<span class="number">22.5</span>); <span class="comment">// 22</span></span><br><span class="line"><span class="keyword">var</span> num5 = <span class="built_in">parseInt</span>(<span class="string">"  70"</span>); <span class="comment">// 70 (十进制数)</span></span><br><span class="line"><span class="keyword">var</span> num6 = <span class="built_in">parseInt</span>(<span class="string">"0xf"</span>); <span class="comment">// 15 (十六进制数)</span></span><br></pre></td></tr></table></figure>
+
 
       
 
