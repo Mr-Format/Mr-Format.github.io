@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ES 中有5种简单数据类型（也成为基本数据类型）：Undefined Null Boolean Number 和 String，还有一种复杂数据类型：Object。ES 不支持任何创建自定义类型的机制，而所有值最终都将是上述六种数据类型之一。 ES 6 引入了一种新的基本类型：符号（Symbol）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-13T07:53:17.832Z">
+<meta property="og:updated_time" content="2020-01-14T05:21:56.497Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -324,6 +324,14 @@
 
 <p>尽管在计算中很少出现某些值超出表示范围的情况，但在执行极小或极大数值的计算时，检测监控这些值是可能的，也是必须的。</p>
 <p><em>访问 <code>Number.NEGATIVE_INFINITY</code> 和 <code>Number.POSITIVE_INFINITY</code> 也可以得到负和正的 <code>Infinity</code> 的值。可以想见，这两个属性中分别保存着 <code>-Infinity</code> 和 <code>Infinity</code>。</em></p>
+<h2 id="5-3-NaN"><a href="#5-3-NaN" class="headerlink" title="5.3 NaN"></a>5.3 NaN</h2><p><code>NaN</code>，即非数值（Not a Number）是一个特殊的数值，这个数值用于表示一个本来要返回数值的操作数未返回数值的情况（这样就不会抛出错误了）。</p>
+<p><em><code>0</code> 初一 <code>0</code> 会返回 <code>NaN</code>，整数除以 <code>0</code> 返回 <code>Infinity</code>，负数除以 <code>0</code> 返回 <code>-Infinity</code>。</em></p>
+<p><code>NaN</code> 本身有两个非同寻常的特点。首先，任何涉及 <code>NaN</code> 的操作（例如 <code>NaN / 10</code>）都会返回 <code>NaN</code>，这个特点在多步计算机中可能导致问题。其次，<code>NaN</code> 与任何值都不相等，包括 <code>NaN</code> 本身。例如，下面的代码会返回 <code>false</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="literal">NaN</span> == <span class="literal">NaN</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>针对 <code>NaN</code> 的这两个特点，ES 定义了 <code>isNaN()</code> 函数。这个函数接受一个参数，该参数可以是任何类型，而函数会帮我们确定这个参数是否“不是数值”。<code>isNaN()</code> 在接收到一个值之后，会尝试将这个值转换为数值。某些不是数值的值会直接转换为数值，例如字符串 <code>&quot;10&quot;</code> 或 <code>Boolean</code> 值。而任何不能被转换为数值的值都会导致整个函数返回 <code>true</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>)); <span class="comment">// true</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="number">10</span>)); <span class="comment">// false (10 是一个数值)</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">"10"</span>)); <span class="comment">// false (可以转换为数值 10)</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">"blue"</span>)); <span class="comment">// true (不能转换为数值)</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">true</span>)); <span class="comment">// false (可以被转换成数值1)</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -478,7 +486,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-数值范围"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 数值范围</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-typeof-操作符"><span class="toc-number">1.</span> <span class="toc-text">1.typeof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Undefined-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Undefined 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Null-类型"><span class="toc-number">3.</span> <span class="toc-text">3.Null 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Boolean-类型"><span class="toc-number">4.</span> <span class="toc-text">4.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Number-类型"><span class="toc-number">5.</span> <span class="toc-text">5.Number 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-浮点数值"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 浮点数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-数值范围"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 数值范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-NaN"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 NaN</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
