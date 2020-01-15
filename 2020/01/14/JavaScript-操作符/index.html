@@ -18,7 +18,8 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-5.png">
-<meta property="og:updated_time" content="2020-01-15T13:14:51.287Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-6.png">
+<meta property="og:updated_time" content="2020-01-15T14:05:40.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
   
@@ -416,7 +417,17 @@
 <p>注意，向左移位后，原数值的右侧多出 5 个空位。左移操作会以 0 来填充这些空位，以便得到的结果是一个完整的 32 位二进制数。</p>
 <p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-5.png" alt="位操作符"></p>
 <p>左移操作不会影响操作数的符号位。换句话说，如果将 -2 向左移动 5 位，结果将是 -64，而非 64。</p>
-<h2 id="2-6-有符号的右移"><a href="#2-6-有符号的右移" class="headerlink" title="2.6 有符号的右移"></a>2.6 有符号的右移</h2>
+<h2 id="2-6-有符号的右移"><a href="#2-6-有符号的右移" class="headerlink" title="2.6 有符号的右移"></a>2.6 有符号的右移</h2><p>有符号的右移操作符由两个大于号（<code>&gt;&gt;</code>）表示，这个操作符会将数值向右移动，但保留符号位（即正负号标记）。有符号的右移操作与左移操作恰好相反，即如果将 64 向右移动 5 位，结果将变回 2：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oldValue = <span class="number">64</span>; <span class="comment">// 二进制的 1000000</span></span><br><span class="line"><span class="keyword">var</span> newValue = oldValue &gt;&gt; <span class="number">5</span>; <span class="comment">// 二进制的 10，十进制的 2</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，在移位过程中，原数值也会出现空位，只不过这次的空位出现在原数值的左侧、符号位的右侧。而此时 ES 会用符号位的值来填充所有空位，以便得到一个完整的值。</p>
+<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-6.png" alt="位操作符"></p>
+<h2 id="2-7-无符号右移"><a href="#2-7-无符号右移" class="headerlink" title="2.7 无符号右移"></a>2.7 无符号右移</h2><p>无符号右移操作符由 3 个大于号（<code>&gt;&gt;&gt;</code>）表示，这个操作符会将数值的所有 32 位都向右移动。对正数来说，无符号右移的结果与有符号右移相同。但对负数来说，情况就不一样了。</p>
+<p>首先，无符号右移是以 0 来填充空位，而不是像有符号右移那样以符号位的值来填充空位。所以，对正数的无符号右移与有符号右移结果相同，但对负数的结果就不一样了。其次，无符号右移操作符会把负数的二进制码当成正数的二进制码。而且，由于负数以其绝对值的二进制补码形式表示，因此就会导致无符号右移后的结果非常大。如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oldValue = <span class="number">-64</span>; <span class="comment">// 二进制的 11111111111111111111111111000000</span></span><br><span class="line"><span class="keyword">var</span> newValue = oldValue &gt;&gt;&gt; <span class="number">5</span>; <span class="comment">// 十进制的 134217726</span></span><br></pre></td></tr></table></figure>
+
+<p>这里，当对 -64 执行无符号右移 5 位的操作后，得到的结果是 134217726。之所以结果如此之大，是因为 -64 的二进制码为 11111111111111111111111111000000，而且无符号右移操作会把这个二进制码当成正数的二进制码，换算成十进制就是 4294967232。如果把这个值右移 5 为，结果就变成了 00000111111111111111111111111110，即十进制的 134217726。</p>
+<h1 id="3-布尔操作符"><a href="#3-布尔操作符" class="headerlink" title="3.布尔操作符"></a>3.布尔操作符</h1>
       
 
       
@@ -570,7 +581,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-有符号的右移"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 有符号的右移</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-有符号的右移"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 有符号的右移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-无符号右移"><span class="toc-number">2.7.</span> <span class="toc-text">2.7 无符号右移</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-布尔操作符"><span class="toc-number">3.</span> <span class="toc-text">3.布尔操作符</span></a></li></ol>
                     </div>
                 </span>
                         </div>
