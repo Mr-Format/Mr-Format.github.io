@@ -17,7 +17,7 @@
 <meta property="og:description" content="ECMA-262 描述了一组用于操作数据值的操作符，包括算术运算符、位操作符、关系操作符和相等操作符。ES 操作符的与众不同之处在于，它们能够适用于很多值，例如字符串、数值、布尔值，甚至对象。不过，在应用于对象时，相应的操作符通常都会调用对象的 valueOf() 和（或） toString() 方法，以便取得可以操作的值。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
-<meta property="og:updated_time" content="2020-01-15T12:11:02.880Z">
+<meta property="og:updated_time" content="2020-01-15T12:33:15.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
   
@@ -332,6 +332,87 @@
 <p>上例可见，对 25 和 3 执行按位与操作的结果是 1。底层操作如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 25 = 0000 0000 0000 0000 0000 0000 0001 1001</span><br><span class="line">  3 = 0000 0000 0000 0000 0000 0000 0000 0011</span><br><span class="line">--------------------------------------------</span><br><span class="line">AND = 0000 0000 0000 0000 0000 0000 0000 0001</span><br></pre></td></tr></table></figure>
 
+<p>可见，25 和 3 的二进制码对应位上只有一位同时是 1，而其他位的结果自然都是 0，因此最终结果等于 1。</p>
+<h2 id="2-3-按位或（OR）"><a href="#2-3-按位或（OR）" class="headerlink" title="2.3 按位或（OR）"></a>2.3 按位或（OR）</h2><p>按位或操作符由一个竖线符号（<code>|</code>）表示，同样也有两个操作数。按位或操作遵循下面这个真值表：</p>
+<table>
+<thead>
+<tr>
+<th>第一个数值的位</th>
+<th>第二个数值的位</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>由此可见，按位或操作在有一个位是 1 的情况下就返回 1，而只有在两个位都是 0 的情况下才返回 0。</p>
+<p>如果在前面按位与的例子中对 25 和 3 执行按位或操作，则代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">25</span> | <span class="number">3</span>;</span><br><span class="line">alert(result); <span class="comment">// 27</span></span><br></pre></td></tr></table></figure>
+
+<p>25 与 3 按位或的结果是 27：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">25 = 0000 0000 0000 0000 0000 0000 0001 1001</span><br><span class="line"> 3 = 0000 0000 0000 0000 0000 0000 0000 0011</span><br><span class="line">--------------------------------------------</span><br><span class="line">OR = 0000 0000 0000 0000 0000 0000 0001 1011</span><br></pre></td></tr></table></figure>
+
+<p>这两个数值都包含 4 个 1，因此可以把每个 1 直接放到结果中。二进制码 11011 等于十进制 27。</p>
+<h2 id="2-4-按位异或（XOR）"><a href="#2-4-按位异或（XOR）" class="headerlink" title="2.4 按位异或（XOR）"></a>2.4 按位异或（XOR）</h2><p>按位异或操作符由一个插入符号（<code>^</code>）表示，也有两个操作数。以下是按位异或的真值表：</p>
+<table>
+<thead>
+<tr>
+<th>第一个数值的位</th>
+<th>第二个数值的位</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>按位异或与按位或的不同之处在于，这个操作在两个数值对应位上只有一个 1 时才返回 1，如果对应的两位都是 1 或都是 0，则返回 0。</p>
+<p>对 25 和 3 执行按位异或操作的代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">25</span> ^ <span class="number">3</span>;</span><br><span class="line">alert(result); <span class="comment">// 26</span></span><br></pre></td></tr></table></figure>
+
+<p>25 与 3 按位异或的结果是 26，底层操作如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 25 = 0000 0000 0000 0000 0000 0000 0001 1001</span><br><span class="line">  3 = 0000 0000 0000 0000 0000 0000 0000 0011</span><br><span class="line">--------------------------------------------</span><br><span class="line">XOR = 0000 0000 0000 0000 0000 0000 0001 1010</span><br></pre></td></tr></table></figure>
+
+<p>这两个数值都包含 4 个 1，但第一位上则都是 1，因此结果的第一位变成了 0；而其他位上的 1 在另一个数值中都没有对应的 1，可以直接放到结果中。二进制码 11010 等于十进制的 26。</p>
+<h2 id="2-5-左移"><a href="#2-5-左移" class="headerlink" title="2.5 左移"></a>2.5 左移</h2><p>左移操作符由两个小于号（<code>&lt;&lt;</code>）表示，这个操作符会将数值的所有位向左移动指定的位数。例如，如果将数值 2（二进制码位 10）向左移动 5 位，结果就是 64（二进制码位 1000000），代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oldValue = <span class="number">2</span>; <span class="comment">// 二进制 10</span></span><br><span class="line"><span class="keyword">var</span> newValue = oldValue &lt;&lt; <span class="number">5</span>; <span class="comment">// 二进制 1000000，十进制 64</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，向左移位后，原数值的右侧多出 5 个空位。左移操作会以 0 来填充这些空位，以便得到的结果是一个完整的 32 位二进制数。</p>
 
       
 
@@ -486,7 +567,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
