@@ -17,7 +17,8 @@
 <meta property="og:description" content="ECMA-262 描述了一组用于操作数据值的操作符，包括算术运算符、位操作符、关系操作符和相等操作符。ES 操作符的与众不同之处在于，它们能够适用于很多值，例如字符串、数值、布尔值，甚至对象。不过，在应用于对象时，相应的操作符通常都会调用对象的 valueOf() 和（或） toString() 方法，以便取得可以操作的值。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
-<meta property="og:updated_time" content="2020-01-15T12:33:15.190Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-5.png">
+<meta property="og:updated_time" content="2020-01-15T13:06:38.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
   
@@ -413,7 +414,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oldValue = <span class="number">2</span>; <span class="comment">// 二进制 10</span></span><br><span class="line"><span class="keyword">var</span> newValue = oldValue &lt;&lt; <span class="number">5</span>; <span class="comment">// 二进制 1000000，十进制 64</span></span><br></pre></td></tr></table></figure>
 
 <p>注意，向左移位后，原数值的右侧多出 5 个空位。左移操作会以 0 来填充这些空位，以便得到的结果是一个完整的 32 位二进制数。</p>
-
+<p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-5.png" alt="位操作符"></p>
+<p>左移操作不会影响操作数的符号位。换句话说，如果将 -2 向左移动 5 位，结果将是 -64，而非 64。</p>
+<h2 id="2-6-有符号的右移"><a href="#2-6-有符号的右移" class="headerlink" title="2.6 有符号的右移"></a>2.6 有符号的右移</h2>
       
 
       
@@ -567,7 +570,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-有符号的右移"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 有符号的右移</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
