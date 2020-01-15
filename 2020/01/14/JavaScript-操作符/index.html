@@ -17,7 +17,7 @@
 <meta property="og:description" content="ECMA-262 描述了一组用于操作数据值的操作符，包括算术运算符、位操作符、关系操作符和相等操作符。ES 操作符的与众不同之处在于，它们能够适用于很多值，例如字符串、数值、布尔值，甚至对象。不过，在应用于对象时，相应的操作符通常都会调用对象的 valueOf() 和（或） toString() 方法，以便取得可以操作的值。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
-<meta property="og:updated_time" content="2020-01-14T14:09:54.406Z">
+<meta property="og:updated_time" content="2020-01-15T11:39:35.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
   
@@ -264,9 +264,32 @@
 
 <p>一元加和减操作符主要用于基本的算术运算，也可以像前面示例所展示的一样用于转换数据类型。</p>
 <h1 id="2-位操作符"><a href="#2-位操作符" class="headerlink" title="2.位操作符"></a>2.位操作符</h1><p>位操作符用于在最基本的层次上，即按内存中表示数值的位来操作数值。ES 中的所有数值都以 IEEE-764 64 位格式存储，但位操作符并不直接操作 64 位的值，而是先将 64 位的值转换为 32 位的整数，然后执行操作，最后再将结果转换回 64 位。对于开发人员而言，由于 64 位存储格式是透明的，因此整个过程就像是只存在 32 位的整数一样。</p>
-<p>对于有符号的整数，32 位中的前 31 位用于表示整数的值。第 32 位用于表示数值的负号：0 表示正数，1 表示负数。这个表示符号的位叫做符号位，符号位的值决定了其他位数值的格式。其中，正数以纯二进制格式存储，31 位中的每一位都表示 2 的幂。第一位（叫做位 0）表示 2 的 0 次方，第二位表示 2 的 1 次方，以此类推。没有用到的位以 0 填充，即忽略不计。例如，数值 18 的二进制表示是 <code>00000000000000000000000000010010</code>，或者更简洁的 <code>10010</code>。这是 5 个有效位，这 5 位本身就决定了实际的值。如下图所示：</p>
+<p>对于有符号的整数，32 位中的前 31 位用于表示整数的值。第 32 位用于表示数值的符号：0 表示正数，1 表示负数。这个表示符号的位叫做符号位，符号位的值决定了其他位数值的格式。其中，正数以纯二进制格式存储，31 位中的每一位都表示 2 的幂。第一位（叫做位 0）表示 2 的 0 次方，第二位表示 2 的 1 次方，以此类推。没有用到的位以 0 填充，即忽略不计。例如，数值 18 的二进制表示是 <code>00000000000000000000000000010010</code>，或者更简洁的 <code>10010</code>。这是 5 个有效位，这 5 位本身就决定了实际的值。如下图所示：</p>
 <p><img src="https://raw.githubusercontent.com/Mr-Format/repo/master/blog/%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png" alt="位操作符"></p>
+<p>负数同样以二进制码存储，但使用的格式是二进制补码。计算一个数值的二进制补码，需要经过以下 3 个步骤：</p>
+<ol>
+<li>求这个数值绝对值的二进制码（例如，要求 -18 的二进制补码，先求 18 的二进制码）；</li>
+<li>求二进制反码，即将 0 替换为 1，将 1 替换为 0；</li>
+<li>得到的二进制反码加 1。</li>
+</ol>
+<p>要根据这 3 个步骤求得 -18 的二进制码，首先就要求得 18 的二进制码，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000 0000 0000 0000 0000 0000 0001 0010</span><br></pre></td></tr></table></figure>
 
+<p>然后，求其二进制反码，即 0 和 1 互换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1111 1111 1111 1111 1111 1111 1110 1101</span><br></pre></td></tr></table></figure>
+
+<p>最后，二进制反码加 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1111 1111 1111 1111 1111 1111 1110 1101</span><br><span class="line">                                      1</span><br><span class="line">---------------------------------------</span><br><span class="line">1111 1111 1111 1111 1111 1111 1110 1110</span><br></pre></td></tr></table></figure>
+
+<p>这样，就求得了 -18 的二进制表示。要注意的是，在处理有符号整数时，是不能访问位 31 的。</p>
+<p>ES 会尽力隐藏这些信息，在以二进制字符串形式输出一个负数时，看到的只是这个负数绝对值的二进制码前面加上了一个负号。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">-18</span>;</span><br><span class="line">alert(num.toString(<span class="number">2</span>)); <span class="comment">// "-10010"</span></span><br></pre></td></tr></table></figure>
+
+<p>要把数值 -18 转换成二进制字符串时，得到的结果是 <code>&quot;-10010&quot;</code>。这说明转换过程理解了二进制补码并将其以更合乎逻辑的形式展示了出来。</p>
+<p><em>默认情况下，ES 中的所有整数都是有符号整数。不过，当然也存在无符号整数。对于无符号整数来说，第 32 位不再表示符号，因为无符号整数只能是正数。而且，无符号整数的值可以更大，因为多出的一位不再表示符号，可以用来表示数值。</em></p>
+<p>在 ES 中，当对数值应用位操作符时，后台会发生如下转换过程：64 位的数值转换成 32 位数值，然后执行位操作，最后再将 32 位的结果转换回 64 位数值。这样，表面上看起来好像是在操作 32 位数值。但这个转换过程也导致了一个严重的副效应，即在对特殊的 <code>NaN</code> 和 <code>Infinity</code> 值应用位操作时，这两个值都会被当成 0 来处理。</p>
+<p>如果对非数值应用位操作符，会先使用 <code>Number()</code> 函数将该值转换为一个数值（自动完成），然后再应用位操作。得到的结果是一个数值。</p>
+<h2 id="2-1-按位非（NOT）"><a href="#2-1-按位非（NOT）" class="headerlink" title="2.1 按位非（NOT）"></a>2.1 按位非（NOT）</h2>
       
 
       
@@ -420,7 +443,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
