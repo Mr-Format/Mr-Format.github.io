@@ -8,13 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>JavaScript操作符（下） | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="笔记">
+  <meta name="description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：  如果两个操作数都是数值，则执行数值比较">
+<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript操作符（下）">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;08&#x2F;JavaScript%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%88%E4%B8%8B%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：  如果两个操作数都是数值，则执行数值比较">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-08T12:25:57.830Z">
+<meta property="og:updated_time" content="2020-03-08T12:38:57.342Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -204,7 +206,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-关系操作符"><a href="#1-关系操作符" class="headerlink" title="1.关系操作符"></a>1.关系操作符</h1><p>小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="number">5</span> &gt; <span class="number">3</span>; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="number">5</span> &lt; <span class="number">3</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：</p>
+<ul>
+<li>如果两个操作数都是数值，则执行数值比较；</li>
+<li>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</li>
+<li>如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较；</li>
+<li>如果一个操作数是对象，则调用这个对象的 <code>valueOf()</code> 方法，用得到的结果按照前面的规则执行比较。如果对象没有 <code>valueOf()</code> 方法，则调用 <code>toString()</code> 方法，并用得到的结果根据前面的规则执行比较；</li>
+<li>如果一个操作数是布尔值，则先将其转换为数值，然后再执行比较。</li>
+</ul>
+<p>在使用关系操作符比较两个字符串时，会执行一种奇怪的操作。很多人都会认为，在比较字符串值时，小于的意思是“在字母表中的位置靠前”，而大于则意味着“在字母表中的位置靠后”，但实际上完全不是那么回事。在比较字符串时，实际比较的是两个字符串中对应位置的每个字符的字符编码值。经过一番比较之后，再返回一个布尔值。由于大写字母的字符编码全部小于小写字母的字符编码，因此我们就会看到如下所示的奇怪现象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"Brick"</span> &lt; <span class="string">"alphabet"</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中</p>
+
       
 
       
@@ -358,7 +375,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-关系操作符"><span class="toc-number">1.</span> <span class="toc-text">1.关系操作符</span></a></li></ol>
                     </div>
                 </span>
                         </div>
