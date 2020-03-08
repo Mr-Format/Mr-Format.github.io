@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>JavaScript操作符（下） | 灯芯的前端博客</title>
+  <title>JavaScript 操作符（下） | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript操作符（下）">
+<meta property="og:title" content="JavaScript 操作符（下）">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;08&#x2F;JavaScript%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%88%E4%B8%8B%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-08T13:26:16.902Z">
+<meta property="og:updated_time" content="2020-03-08T13:30:02.038Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -193,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JavaScript操作符（下）
+      JavaScript 操作符（下）
     </h1>
   
 
@@ -344,7 +344,13 @@
 <li>无符号右移/赋值 （<code>&gt;&gt;&gt;=</code>）</li>
 </ul>
 <p>设计这些操作符的主要目的就是简化赋值操作。<strong>使用它们不会带来任何性能的提升。</strong></p>
-<h1 id="5-逗号操作符"><a href="#5-逗号操作符" class="headerlink" title="5.逗号操作符"></a>5.逗号操作符</h1><p>使用逗号操作符</p>
+<h1 id="5-逗号操作符"><a href="#5-逗号操作符" class="headerlink" title="5.逗号操作符"></a>5.逗号操作符</h1><p>使用逗号操作符可以在一条语句中执行多个操作，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="number">1</span>, num2 = <span class="number">2</span>, num3 = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>逗号操作符多用于声明多个变量；但除此之外，逗号操作符还可以用于赋值。在用于赋值时，逗号操作符总会返回表达式中的最后一项，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = (<span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">0</span>); <span class="comment">// num 的值为 0</span></span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>0</code> 是表达式的最后一项，因此 <code>num</code> 的值就是 <code>0</code>。虽然逗号的这种使用方式并不常见，但这个例子可以帮我们理解逗号的这种行为。</p>
 
       
 
