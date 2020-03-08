@@ -19,7 +19,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-5.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62-6.png">
-<meta property="og:updated_time" content="2020-03-08T10:26:47.522Z">
+<meta property="og:updated_time" content="2020-03-08T11:10:16.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Mr-Format&#x2F;repo&#x2F;master&#x2F;blog&#x2F;%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A62.png">
   
@@ -446,7 +446,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alert(!!<span class="string">"blue"</span>); <span class="comment">// true</span></span><br><span class="line">alert(!!<span class="number">0</span>); <span class="comment">//false</span></span><br><span class="line">alert(!!<span class="literal">NaN</span>); <span class="comment">//false</span></span><br><span class="line">alert(!!<span class="string">""</span>); <span class="comment">//false</span></span><br><span class="line">alert(!!<span class="number">12345</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="3-2-逻辑与"><a href="#3-2-逻辑与" class="headerlink" title="3.2 逻辑与"></a>3.2 逻辑与</h2><p>逻辑与操作符由两个和号（<code>&amp;&amp;</code>）表示，有两个操作数，如下面的例子所示：</p>
-<pre><code class="js"><span class="keyword">var</span> result = <span class="literal">true</span> &amp;&amp; <span class="literal">false</span>;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="literal">true</span> &amp;&amp; <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
 <p>逻辑与的真值表如下：</p>
 <table>
 <thead>
@@ -487,16 +488,15 @@
 <li>如果有一个操作数是 <code>undefined</code>，则返回 <code>undefined</code>。</li>
 </ul>
 <p>逻辑与操作属于短路操作，即如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。对于逻辑与操作而言，如果第一个操作数是 <code>false</code>，则无论第二个操作数是什么值，结果都不再可能是 <code>true</code> 了。</p>
-<pre><code class="js"><span class="keyword">var</span> found = <span class="literal">true</span>;
-<span class="keyword">var</span> result = (found &amp;&amp; someUndefinedVariable); <span class="comment">// 这里发生错误</span>
-alert(result); <span class="comment">// 这一行不会执行</span></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> result = (found &amp;&amp; someUndefinedVariable); <span class="comment">// 这里发生错误</span></span><br><span class="line">alert(result); <span class="comment">// 这一行不会执行</span></span><br></pre></td></tr></table></figure>
+
 <p>在上面的代码中，当执行逻辑与操作室会发生错误，因为变量 <code>someUndefinedVariable</code> 没有声明。由于变量 <code>found</code> 的值是 <code>true</code>，所以逻辑与操作符会继续对变量 <code>someUndefinedVariable</code> 求值，因此就会导致错误。这说明不能再逻辑与操作中使用未定义的值。如果像下面这个例子中一样，将 <code>found</code> 的值设置为 <code>false</code>，就不会发生错误了：</p>
-<pre><code class="js"><span class="keyword">var</span> found = <span class="literal">false</span>;
-<span class="keyword">var</span> result = (found &amp;&amp; someUndefinedVariable); <span class="comment">// 不会发生错误</span>
-alert(result); <span class="comment">// 输出 'false'</span></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> result = (found &amp;&amp; someUndefinedVariable); <span class="comment">// 不会发生错误</span></span><br><span class="line">alert(result); <span class="comment">// 输出 'false'</span></span><br></pre></td></tr></table></figure>
+
 <p>在这个例子中，警告框会显示出来。无论变量 <code>someUndefinedVariable</code> 有没有定义，也永远不会对它求值。</p>
 <h2 id="3-3-逻辑或"><a href="#3-3-逻辑或" class="headerlink" title="3.3 逻辑或"></a>3.3 逻辑或</h2><p>逻辑或操作符由两个竖线符号（<code>||</code>）表示，有两个操作数，如下面的例子所示：</p>
-<pre><code class="js"><span class="keyword">var</span> result = <span class="literal">true</span> || <span class="literal">false</span>;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="literal">true</span> || <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
 <p>逻辑或的真值表如下：</p>
 <table>
 <thead>
@@ -537,19 +537,60 @@ alert(result); <span class="comment">// 输出 'false'</span></code></pre>
 <li>如果两个操作数都是 <code>undefined</code>，则返回 <code>undefined</code>；  </li>
 </ul>
 <p>与逻辑与操作符相似，逻辑或操作符也是短路操作符。也就是说，如果第一个操作数的求值结果为 <code>true</code>，就不会对第二个操作数求值了。下面看一个例子：</p>
-<pre><code class="js"><span class="keyword">var</span> found = <span class="literal">true</span>;
-<span class="keyword">var</span> result = (found || someUndefinedVariable); <span class="comment">// 不会发生错误</span>
-alert(result); <span class="comment">// 执行 'true'</span></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> result = (found || someUndefinedVariable); <span class="comment">// 不会发生错误</span></span><br><span class="line">alert(result); <span class="comment">// 执行 'true'</span></span><br></pre></td></tr></table></figure>
+
 <p>这个例子跟前面的例子一样，变量 <code>someUndefinedVariable</code> 也没有定义。但是，由于变量 <code>found</code> 的值是 <code>true</code>，而变量 <code>someUndefinedVariable</code> 永远不会被求值，因此结果就会输出 <code>&quot;true&quot;</code>。如果像下面这个例子一样，把 <code>found</code> 的值改为 <code>false</code>，就会导致错误：</p>
-<pre><code class="js"><span class="keyword">var</span> found = <span class="literal">false</span>;
-<span class="keyword">var</span> result = (found || someUndefinedVariable); <span class="comment">// 这里会发生错误</span>
-alert(result); <span class="comment">// 这一行不会执行</span></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> result = (found || someUndefinedVariable); <span class="comment">// 这里会发生错误</span></span><br><span class="line">alert(result); <span class="comment">// 这一行不会执行</span></span><br></pre></td></tr></table></figure>
+
 <p>我们可以利用逻辑或的这一行为来避免为变量赋 <code>null</code> 或 <code>undefined</code> 值。例如：</p>
-<pre><code class="js"><span class="keyword">var</span> myObject = preferredObject || backupObject;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = preferredObject || backupObject;</span><br></pre></td></tr></table></figure>
+
 <p>在这个例子中，变量 <code>myObject</code> 将被赋予等号后面两个值中的一个。变量 <code>preferredObject</code> 中包含优先赋给变量 <code>myObject</code> 的值，变量 <code>backupObject</code> 负责在 <code>preferredObject</code> 中不包含有效值的情况下提供后备值。如果 <code>preferredObject</code> 的值不是 <code>null</code>，那么它的值将被赋给 <code>myObject</code>；反之，则将 <code>backupObject</code> 的值赋给 <code>myObject</code>。ES 程序的赋值语句经常会使用这种模式。</p>
 <h1 id="4-乘性操作符"><a href="#4-乘性操作符" class="headerlink" title="4.乘性操作符"></a>4.乘性操作符</h1><p>ES 定义了 3 个乘性操作符：<strong>乘法</strong>、<strong>除法</strong>和<strong>求模</strong>  。这些操作符与 Java、C 或者 Per1 中的相应操作符用途类似，只不过在操作数为非数值的情况下会执行自动的类型转换。如果参与乘性计算的某个操作数不是数值，后台会先使用 <code>Number()</code> 转型函数将其转换为数值。也就是说，空字符串将被当作 0 ，布尔值 true 将被当作 1 。</p>
 <h2 id="4-1-乘法"><a href="#4-1-乘法" class="headerlink" title="4.1 乘法"></a>4.1 乘法</h2><p>乘法操作符由一个星号（<code>*</code>）表示，用于计算两个数值的乘积。其语法类似于 C，如下面的例子所示：</p>
-<pre><code class="js"><span class="keyword">var</span> result = <span class="number">34</span> * <span class="number">56</span>;</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">34</span> * <span class="number">56</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在处理特殊值的情况下，乘法操作符遵循下列特殊的规则：</p>
+<ul>
+<li>如果操作数都是数值，执行常规的乘法计算，即两个正数或两个负数相乘的结果还是正数，而如果只有一个操作数有符号，那么结果就是负数。如果乘积超过了 ES 数值的表示范围，则返回 <code>Infinity</code> 或 <code>-Infinity</code>。</li>
+<li>如果有一个操作数是 <code>NaN</code>，则结果是 <code>NaN</code>；</li>
+<li>如果是 <code>Infinity</code> 与 <code>0</code> 相乘，则结果是 <code>NaN</code>；</li>
+<li>如果是 <code>Infinity</code> 与非 <code>0</code> 数值相乘，则结果是 <code>Infinity</code> 或 <code>-Infinity</code>；</li>
+<li>如果是 <code>Infinity</code> 与 <code>Infinity</code> 相乘，则结果是 <code>Infinity</code>；</li>
+<li>如果有一个操作数不是数值，则在后台调用 <code>Number()</code> 将其转换为数值，然后再应用上面的规则。  </li>
+</ul>
+<h2 id="4-2-除法"><a href="#4-2-除法" class="headerlink" title="4.2 除法"></a>4.2 除法</h2><p>除法操作符由一个斜线符号（<code>/</code>）表示，执行第二个操作数除第一个操作数的计算，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">66</span> / <span class="number">11</span>;</span><br></pre></td></tr></table></figure>
+
+<p>与乘法操作符类似，除法操作苏对特殊的值也有特殊的处理规则。</p>
+<ul>
+<li>如果操作数都是数值，执行常规的除法计算，即两个正数或两个负数相除的结果还是正数，而如果只有一个操作数有符号，那么结果就是负数。如果商超过了 ES 数值的表示范围，则返回 <code>Infinity</code> 或 <code>-Infinity</code>；</li>
+<li>如果有一个操作数是 <code>NaN</code>，则结果是 <code>NaN</code>;</li>
+<li>如果是 <code>Infinity</code> 被 <code>Infinity</code> 除，则结果是 <code>NaN</code>；</li>
+<li>如果是零被零除，则结果是 <code>NaN</code>；</li>
+<li>如果是非零的有限数被零除，则结果是 <code>Infinity</code> 或 <code>-Infinity</code>，取决于有符号操作数的符号；</li>
+<li>如果是 <code>Infinity</code> 被任何非零值除，则结果是 <code>Infinity</code> 或 <code>-Infinity</code>，取决于有符号操作数的符号；</li>
+<li>如果有一个操作数不是数值，则在后台调用 <code>Number()</code> 将其转换为数值，然后再应用上面的规则。</li>
+</ul>
+<h2 id="4-3-求模"><a href="#4-3-求模" class="headerlink" title="4.3 求模"></a>4.3 求模</h2><p>求模（余数）操作数由一个百分号（<code>&amp;</code>）表示，用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">26</span> % <span class="number">5</span>; <span class="comment">// 等于 1</span></span><br></pre></td></tr></table></figure>
+
+<p>与另外两个乘性操作符类似，求模操作符会遵循下列特殊规则的来处理特殊的值：</p>
+<ul>
+<li>如果操作数都是数值，执行常规的除法计算，返回除得的余数；</li>
+<li>如果被除数是无穷大值而除数是有限大的数值，则结果是 <code>NaN</code>;</li>
+<li>如果被除数是有限大的数值而除数是零，则结果是 <code>NaN</code>;</li>
+<li>如果是 <code>Infinity</code> 被 <code>Infinity</code> 除，则结果是 <code>NaN</code>;</li>
+<li>如果被除数是有限大的数值而除数是无穷大的数值，则结果是被除数；</li>
+<li>如果被除数是零，则结果是零；</li>
+<li>如果有一个操作数不是数值，则再后台调用 <code>Number()</code> 将其转换为数值，然后再应用上面的规则。</li>
+</ul>
+<h1 id="5-加性操作符"><a href="#5-加性操作符" class="headerlink" title="5.加性操作符"></a>5.加性操作符</h1><p>加法和减法这两个加性操作符应该说是编程语言中最简单的算术操作符了。但是 ES 中，这两个操作符却都有一系列的特殊行为。与乘性操作符类似，加性操作符也会在后台转换不同的数据类型。然而，对于加性操作符而言，相应的转换规则还稍微有点复杂。</p>
+<h2 id="5-1-加法"><a href="#5-1-加法" class="headerlink" title="5.1 加法"></a>5.1 加法</h2><p>加法操作符的用法如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="number">1</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+
+
 
       
 
@@ -704,7 +745,7 @@ alert(result); <span class="comment">// 这一行不会执行</span></code></pre
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-有符号的右移"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 有符号的右移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-无符号右移"><span class="toc-number">2.7.</span> <span class="toc-text">2.7 无符号右移</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-布尔操作符"><span class="toc-number">3.</span> <span class="toc-text">3.布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-逻辑非"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 逻辑非</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-逻辑与"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 逻辑与</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-逻辑或"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 逻辑或</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-乘性操作符"><span class="toc-number">4.</span> <span class="toc-text">4.乘性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-乘法"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 乘法</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-一元操作符"><span class="toc-number">1.</span> <span class="toc-text">1.一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-递增和递减操作符"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 递增和递减操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-一元加和减操作符"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 一元加和减操作符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-位操作符"><span class="toc-number">2.</span> <span class="toc-text">2.位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-按位非（NOT）"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 按位非（NOT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-按位与（AND）"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 按位与（AND）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按位或（OR）"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 按位或（OR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-按位异或（XOR）"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 按位异或（XOR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-左移"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 左移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-有符号的右移"><span class="toc-number">2.6.</span> <span class="toc-text">2.6 有符号的右移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-无符号右移"><span class="toc-number">2.7.</span> <span class="toc-text">2.7 无符号右移</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-布尔操作符"><span class="toc-number">3.</span> <span class="toc-text">3.布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-逻辑非"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 逻辑非</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-逻辑与"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 逻辑与</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-逻辑或"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 逻辑或</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-乘性操作符"><span class="toc-number">4.</span> <span class="toc-text">4.乘性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-乘法"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 乘法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-除法"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 除法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-求模"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 求模</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-加性操作符"><span class="toc-number">5.</span> <span class="toc-text">5.加性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-加法"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 加法</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
