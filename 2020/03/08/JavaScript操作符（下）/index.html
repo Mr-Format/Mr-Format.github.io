@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：  如果两个操作数都是数值，则执行数值比较">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-08T12:38:57.342Z">
+<meta property="og:updated_time" content="2020-03-08T12:44:37.362Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -220,7 +220,14 @@
 <p>在使用关系操作符比较两个字符串时，会执行一种奇怪的操作。很多人都会认为，在比较字符串值时，小于的意思是“在字母表中的位置靠前”，而大于则意味着“在字母表中的位置靠后”，但实际上完全不是那么回事。在比较字符串时，实际比较的是两个字符串中对应位置的每个字符的字符编码值。经过一番比较之后，再返回一个布尔值。由于大写字母的字符编码全部小于小写字母的字符编码，因此我们就会看到如下所示的奇怪现象：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"Brick"</span> &lt; <span class="string">"alphabet"</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<p>在这个例子中</p>
+<p>在这个例子中，字符串 <code>&quot;Brick&quot;</code> 被认为小于字符串 <code>&quot;alphabet&quot;</code>。原因是字母 B 的字符编码是 66，而字母 a 的字符编码是 97。如果要真正按字母表顺序比较字符串，就必须把两个操作数转换为相同的大小写形式，然后再执行比较，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"Brick"</span>.toLowerCase() &lt; <span class="string">"alphabet"</span>.toLowerCase(); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>通过将两个操作数都转换为小写形式，就可以得出 <code>&quot;alphabet&quot;</code> 按字母表顺序排在 <code>&quot;Brick&quot;</code> 之前的正确判断了。</p>
+<p>另一种奇怪的现象发生在比较两个数字字符串的情况下，比如下面这个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"23"</span> &lt; <span class="string">"3"</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>确实，当比较字符串 <code>&quot;23&quot;</code> 是否小于 <code>&quot;3&quot;</code> 时，结果居然是 <code>true</code>。这是因为两个操作数都是字符串，而字符串比较的是字符编码</p>
 
       
 
