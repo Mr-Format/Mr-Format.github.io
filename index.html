@@ -208,35 +208,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="number">5</span> &gt; <span class="number">3</span>; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="number">5</span> &lt; <span class="number">3</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：</p>
-<ul>
-<li>如果两个操作数都是数值，则执行数值比较；</li>
-<li>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</li>
-<li>如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较；</li>
-<li>如果一个操作数是对象，则调用这个对象的 <code>valueOf()</code> 方法，用得到的结果按照前面的规则执行比较。如果对象没有 <code>valueOf()</code> 方法，则调用 <code>toString()</code> 方法，并用得到的结果根据前面的规则执行比较；</li>
-<li>如果一个操作数是布尔值，则先将其转换为数值，然后再执行比较。</li>
-</ul>
-<p>在使用关系操作符比较两个字符串时，会执行一种奇怪的操作。很多人都会认为，在比较字符串值时，小于的意思是“在字母表中的位置靠前”，而大于则意味着“在字母表中的位置靠后”，但实际上完全不是那么回事。在比较字符串时，实际比较的是两个字符串中对应位置的每个字符的字符编码值。经过一番比较之后，再返回一个布尔值。由于大写字母的字符编码全部小于小写字母的字符编码，因此我们就会看到如下所示的奇怪现象：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"Brick"</span> &lt; <span class="string">"alphabet"</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，字符串 <code>&quot;Brick&quot;</code> 被认为小于字符串 <code>&quot;alphabet&quot;</code>。原因是字母 B 的字符编码是 66，而字母 a 的字符编码是 97。如果要真正按字母表顺序比较字符串，就必须把两个操作数转换为相同的大小写形式，然后再执行比较，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"Brick"</span>.toLowerCase() &lt; <span class="string">"alphabet"</span>.toLowerCase(); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>通过将两个操作数都转换为小写形式，就可以得出 <code>&quot;alphabet&quot;</code> 按字母表顺序排在 <code>&quot;Brick&quot;</code> 之前的正确判断了。</p>
-<p>另一种奇怪的现象发生在比较两个数字字符串的情况下，比如下面这个例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"23"</span> &lt; <span class="string">"3"</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>确实，当比较字符串 <code>&quot;23&quot;</code> 是否小于 <code>&quot;3&quot;</code> 时，结果居然是 <code>true</code>。这是因为两个操作数都是字符串，而字符串比较的是字符编码（<code>&quot;2&quot;</code> 的字符编码是 50，而 <code>&quot;3&quot;</code> 的字符编码是 51）。不过，如果像下面例子中一样，将一个操作数改为数值，比较的结果就正常了：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"23"</span> &lt; <span class="number">3</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，字符串 <code>&quot;23&quot;</code> 会被转换为数值 <code>23</code>，然后再与 <code>3</code> 进行比较，因此就会得到合理的结果。在比较数值和字符串时，字符串都会被转换为数值，然后再以数值方式与另一个数值比较。当然，这个规则对前面的例子是适用的。可是，如果那个字符串不能被转换成一个合理的数值呢？比如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = <span class="string">"a"</span> &lt; <span class="number">3</span>; <span class="comment">// false, 因为 "a" 被转换成了 NaN</span></span><br></pre></td></tr></table></figure>
-
-<p>由于字母 <code>&quot;a&quot;</code> 不能转换成合理的数值，因此就被转换成了 <code>NaN</code>。根据规则，任何操作数与 <code>NaN</code> 进行关系比较，结果都是 <code>false</code>。于是，就出现了下面这个现象：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="literal">NaN</span> &lt; <span class="number">3</span>; <span class="comment">// false</span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="literal">NaN</span> &gt;= <span class="number">3</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>按照常理，如果一个值不小于另一个值，则一定是大于或等于那个值。然而，在于 <code>NaN</code> 进行比较时，这两个比较操作的结果都返回了 <code>false</code>。</p>
-<h1 id="2-相等操作符"><a href="#2-相等操作符" class="headerlink" title="2.相等操作符"></a>2.相等操作符</h1><p>确定两个变量是否相等是编程中的一个非常重要的操作。在比较字符串、数值和布尔值的相等性时，问题还比较简单。但是在涉及到对象的比较时，问题就变得复杂了。最早的 ES 中的相等和不等操作符会在执行比较值钱，先将对象转换成相似的类型。后来，有人提出了这种转换到底是否合理的质疑。最后，ES 的解决方案就是提供两组操作符：<strong>相等</strong>和<strong>不相等</strong>——先转换再比较，<strong>全等</strong>和<strong>不全等</strong>——仅比较而不转换。</p>
-
+        
       
 
       

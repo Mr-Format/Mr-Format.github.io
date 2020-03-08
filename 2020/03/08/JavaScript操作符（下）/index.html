@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>JavaScript操作符（下） | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：  如果两个操作数都是数值，则执行数值比较">
+  <meta name="description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript操作符（下）">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;08&#x2F;JavaScript%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%88%E4%B8%8B%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：  如果两个操作数都是数值，则执行数值比较">
+<meta property="og:description" content="1.关系操作符小于、大于、小于等于和大于等于这几个关系操作符用于对两个值进行比较，返回一个布尔值。 12var result1 = 5 &amp;gt; 3; &#x2F;&#x2F; truevar result2 = 5 &amp;lt; 3; &#x2F;&#x2F; false  与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-08T12:55:05.843Z">
+<meta property="og:updated_time" content="2020-03-08T13:26:16.902Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -210,6 +210,8 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="number">5</span> &gt; <span class="number">3</span>; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="number">5</span> &lt; <span class="number">3</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>与 ES 中的其他操作符一样，当关系操作符的操作数使用了非数值时，也要进行数据转换或完成某些奇怪的操作。以下就是相应的规则：</p>
+<a id="more"></a>
+
 <ul>
 <li>如果两个操作数都是数值，则执行数值比较；</li>
 <li>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</li>
@@ -238,6 +240,111 @@
 
 <p>按照常理，如果一个值不小于另一个值，则一定是大于或等于那个值。然而，在于 <code>NaN</code> 进行比较时，这两个比较操作的结果都返回了 <code>false</code>。</p>
 <h1 id="2-相等操作符"><a href="#2-相等操作符" class="headerlink" title="2.相等操作符"></a>2.相等操作符</h1><p>确定两个变量是否相等是编程中的一个非常重要的操作。在比较字符串、数值和布尔值的相等性时，问题还比较简单。但是在涉及到对象的比较时，问题就变得复杂了。最早的 ES 中的相等和不等操作符会在执行比较值钱，先将对象转换成相似的类型。后来，有人提出了这种转换到底是否合理的质疑。最后，ES 的解决方案就是提供两组操作符：<strong>相等</strong>和<strong>不相等</strong>——先转换再比较，<strong>全等</strong>和<strong>不全等</strong>——仅比较而不转换。</p>
+<h2 id="2-1-相等和不相等"><a href="#2-1-相等和不相等" class="headerlink" title="2.1 相等和不相等"></a>2.1 相等和不相等</h2><p>ES 中的相等操作符由两个等于号（<code>==</code>）表示，如果两个操作数相等，则返回 <code>true</code>。而不相等操作符由叹号后跟等于号（<code>!=</code>）表示，如果两个操作数不相等，则返回 <code>true</code>。这两个操作符都会先转换操作数（通常称为<strong>强制转换</strong>），然后再比较它们的相等性。</p>
+<p>在转换不同的数据类型时，相等和不相等操作符遵循下列基本规则：</p>
+<ul>
+<li>如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值 —— <code>false</code> 转换为 <code>0</code>，而 <code>true</code> 转换为 <code>1</code>；</li>
+<li>如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值；</li>
+<li>如果一个操作数是对象，另一个操作数不是，则调用对象的的 <code>valueOf()</code> 方法，用得到的基本类型值按前面的规则进行比较；</li>
+</ul>
+<p>这两个操作符在进行比较时要遵循下列规则：</p>
+<ul>
+<li><code>null</code> 和 <code>undefined</code> 是相等的；</li>
+<li>要比较相等性之前，不能将 <code>null</code> 和 <code>undefined</code> 转换成其他任何值；</li>
+<li>如果有一个操作数是 <code>NaN</code>，则相等操作符返回 <code>false</code>，不相等操作符返回 <code>true</code>（即使两个操作数都是 <code>NaN</code>）。</li>
+<li>如果两个操作数都是对象，则比较它们是不是同一个对象。如果两个操作数都指向同一个对象，则相等操作符返回 <code>true</code>；否则，返回 <code>false</code>。</li>
+</ul>
+<p>下表列出了一些特殊情况及比较结果：</p>
+<table>
+<thead>
+<tr>
+<th align="center">表达式</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">null == undefined</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">“NaN” == NaN</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">5 == NaN</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">NaN == NaN</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">NaN != NaN</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">false == 0</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">true == 1</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">true == 2</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">undefined == 0</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">null == 0</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">“5” == 5</td>
+<td align="center">true</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-全等和不全等"><a href="#2-2-全等和不全等" class="headerlink" title="2.2 全等和不全等"></a>2.2 全等和不全等</h2><p>除了在比较之前不转换操作数之外，全等和不全等操作符与相等和不相等操作符没有什么区别。全等操作符由 3 个等于号（<code>===</code>）表示，它只在两个操作数未经转换就相等的情况下返回 <code>true</code>，如下面例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = (<span class="string">"55"</span> == <span class="number">55</span>); <span class="comment">// true，因为转换后相等</span></span><br><span class="line"><span class="keyword">var</span> result2 = (<span class="string">"55"</span> === <span class="number">55</span>); <span class="comment">// false，因为不同的数据类型不相等</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，第一个比较使用的是相等操作符比较字符串 <code>&quot;55&quot;</code> 和数值 <code>55</code>，结果返回了 <code>true</code>。如前所述，这是因为字符串 <code>&quot;55&quot;</code> 先被转换成了数值 <code>55</code>，然后再与另一个数值 <code>55</code> 进行比较。第二个比较使用了全等操作符以不转换数值的方式比较同样的字符串和值。在不转换的情况下，字符串当然不等于数值，因此结果就是 <code>false</code>。</p>
+<p>不全等操作符由一个叹号后跟两个等于号（<code>!==</code>）表示，它在两个操作数未经转换就不相等的情况下返回 <code>true</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = (<span class="string">"55"</span> != <span class="number">55</span>); <span class="comment">// false</span></span><br><span class="line"><span class="keyword">var</span> result2 = (<span class="string">"55"</span> !== <span class="number">55</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：<code>null == undefined</code> 会返回 <code>true</code>，因为它们是类似的值；但 <code>null === undefined</code> 会返回 <code>false</code>，因为它们是不同类型的值。</strong></p>
+<p><em>由于相等和不相等操作符存在类型转换问题，而为了保持代码中数据类型的完整性，推荐使用全等和不全等操作符。</em></p>
+<h1 id="3-条件操作符"><a href="#3-条件操作符" class="headerlink" title="3.条件操作符"></a>3.条件操作符</h1><p>条件操作符是 ES 中最为灵活的一种操作符，而且它遵循了与 Java 中的条件操作符相同的语法形式，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = boolean_expression ? true_value : false_value;</span><br></pre></td></tr></table></figure>
+
+<p>本质上，这行代码的含义就是基于对 <code>boolean_expression</code> 求值的结果，决定给变量 <code>variable</code> 赋什么值。如果求值结果为 <code>true</code>，则给变量 <code>variable</code> 赋 <code>true_value</code> 值；如果求值结果为 <code>false</code>，则给变量 <code>variable</code> 赋 <code>false_value</code> 值。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> max = (num1 &gt; num2) ? num1 : num2;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，<code>max</code> 将会保存一个最大的值。这个表达式的意思是：如果 <code>num1</code> 大于 <code>num2</code>（关系表达式返回 <code>true</code>），则将 <code>num1</code> 的值赋给 <code>max</code>；如果 <code>num1</code> 小于或等于 <code>num2</code>（关系表达式返回 <code>false</code>），则将 <code>num2</code> 的值赋给 <code>max</code>。</p>
+<h1 id="4-赋值操作符"><a href="#4-赋值操作符" class="headerlink" title="4.赋值操作符"></a>4.赋值操作符</h1><p>简单的赋值操作符由等于号表示，其作用就是把右侧的值赋给左侧的变量，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果在等于号前面再添加乘性操作符、加性操作符或位操作符，就可以完成复合赋值操作。这种复合赋值操作相当于是对下面常规表达式的简写形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">num = num + <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中第二行代码可以用一个复合赋值来代替：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">num += <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>每个主要算数操作符（及个别其他操作符）都有对应的复合赋值操作符。这些操作符如下所示：</p>
+<ul>
+<li>乘/赋值 （<code>*=</code>）</li>
+<li>除/赋值 （<code>/=</code>）</li>
+<li>模/赋值 （<code>%=</code>）</li>
+<li>加/赋值 （<code>+=</code>）</li>
+<li>减/赋值 （<code>-=</code>）</li>
+<li>左移/赋值 （<code>&lt;&lt;=</code>）</li>
+<li>有符号右移/赋值 （<code>&gt;&gt;=</code>）</li>
+<li>无符号右移/赋值 （<code>&gt;&gt;&gt;=</code>）</li>
+</ul>
+<p>设计这些操作符的主要目的就是简化赋值操作。<strong>使用它们不会带来任何性能的提升。</strong></p>
+<h1 id="5-逗号操作符"><a href="#5-逗号操作符" class="headerlink" title="5.逗号操作符"></a>5.逗号操作符</h1><p>使用逗号操作符</p>
 
       
 
@@ -392,7 +499,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-关系操作符"><span class="toc-number">1.</span> <span class="toc-text">1.关系操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-相等操作符"><span class="toc-number">2.</span> <span class="toc-text">2.相等操作符</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-关系操作符"><span class="toc-number">1.</span> <span class="toc-text">1.关系操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-相等操作符"><span class="toc-number">2.</span> <span class="toc-text">2.相等操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-相等和不相等"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 相等和不相等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-全等和不全等"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 全等和不全等</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-条件操作符"><span class="toc-number">3.</span> <span class="toc-text">3.条件操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-赋值操作符"><span class="toc-number">4.</span> <span class="toc-text">4.赋值操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-逗号操作符"><span class="toc-number">5.</span> <span class="toc-text">5.逗号操作符</span></a></li></ol>
                     </div>
                 </span>
                         </div>
