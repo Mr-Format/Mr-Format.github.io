@@ -243,7 +243,31 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; count) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关的代码集中在了一个位置。</p>
+<p>有必要指出的是，在 for 循环的变量初始化表达式中，也可以不使用 <code>var</code> 关键字。该变量的初始化可以在外部执行，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>以上代码与在循环初始化表达式中声明变量的效果是一样的。由于 ES5 中不存在块级作用域，因此在循环内部定义的变量也可以在外部访问到（ES6 中增加了块级作用域）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">&#125;</span><br><span class="line">alert(i); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，会有一个警告框显示循环完成后变量 <code>i</code> 的值，这个值是 <code>10</code>。这是因为，即使 <code>i</code> 是在循环内部定义的一个变量，但在循环外部仍然可以访问到它。</p>
+<p>此外，for 语句中的初始化表达式、控制表达式和循环后表达式都是可选的。将这三个表达式全部省略，就会创建一个无限循环，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(;;) &#123; <span class="comment">// 无限循环</span></span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而只给出控制表达式实际上就把 for 循环转换成了 while 循环，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (; i &lt; count; ) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于 for 语句存在极大的灵活性，因此它也是 ES 中最常用的一个语句。</p>
+<h1 id="5-for-in-语句"><a href="#5-for-in-语句" class="headerlink" title="5.for-in 语句"></a>5.for-in 语句</h1><p>for-in 语句是一种精准迭代语句，可以用来枚举对象的属性。以下是 for-in 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (property <span class="keyword">in</span> expression) statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> propName <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">    <span class="built_in">document</span>.write(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用 for-in 循环来显示了 BOM 中 <code>window</code> 对象的所有属性。每次执行循环时，都会将 <code>window</code> 对象中存在的一个属性名赋值给变量 <code>propName</code>。这个过程会一直持续到对象中的所有属性都被枚举一遍为止。</p>
+<p>ES 对象的属性没有顺序。因此，通过 for-in 循环输出的属性名的顺序是不可预测的。具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。</p>
+<p>但是，如果表示要迭代的对象的变量值为 <code>null</code> 或 <code>undefined</code>，for-in 语句会抛出错误。ES5 更正了这一行为：对这种情况不再抛出错误，而只是不执行循环体。为了保证最大限度的兼容性，<strong>建议在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined</strong>。</p>
+<p><em>Safari3 以前版本的 for-in 语句中存在一个 bug，该 bug 会导致某些属性被返回两次。</em></p>
+<h1 id="6-label-语句"><a href="#6-label-语句" class="headerlink" title="6.label 语句"></a>6.label 语句</h1>
       
 
       
