@@ -204,7 +204,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>ECMAScript 中的函数使用 <code>function</code> 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionName</span> (<span class="params">arg0, arg1, ... , argN</span>) </span>&#123;</span><br><span class="line">    statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是一个函数示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params">name, message</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello "</span> + name + <span class="string">","</span> + message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数可以通过其函数名来调用，后面还要加上一对圆括号和参数（圆括号中的参数如果有多个，可以用逗号隔开）。调用 <code>sayHi()</code> 函数的代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sayHi(<span class="string">"Nicholas"</span>, <span class="string">"how are you today?"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>ES 中的函数在定义时不必指定是否返回值。</p>
+
       
 
       

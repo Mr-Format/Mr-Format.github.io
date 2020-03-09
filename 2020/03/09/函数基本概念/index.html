@@ -8,13 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>函数基本概念 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="笔记">
+  <meta name="description" content="ECMAScript 中的函数使用 function 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示： 123function functionName (arg0, arg1, ... , argN) &amp;#123;    statements&amp;#125;  以下是一个函数示例： 123function sayHi (name, message) &amp;#123;    alert(&quot;H">
+<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数基本概念">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;09&#x2F;%E5%87%BD%E6%95%B0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="ECMAScript 中的函数使用 function 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示： 123function functionName (arg0, arg1, ... , argN) &amp;#123;    statements&amp;#125;  以下是一个函数示例： 123function sayHi (name, message) &amp;#123;    alert(&quot;H">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-09T09:07:54.656Z">
+<meta property="og:updated_time" content="2020-03-09T09:11:42.008Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -204,7 +206,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>ECMAScript 中的函数使用 <code>function</code> 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">functionName</span> (<span class="params">arg0, arg1, ... , argN</span>) </span>&#123;</span><br><span class="line">    statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是一个函数示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params">name, message</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello "</span> + name + <span class="string">","</span> + message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数可以通过其函数名来调用，后面还要加上一对圆括号和参数（圆括号中的参数如果有多个，可以用逗号隔开）。调用 <code>sayHi()</code> 函数的代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sayHi(<span class="string">"Nicholas"</span>, <span class="string">"how are you today?"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>ES 中的函数在定义时不必指定是否返回值。</p>
+
       
 
       
