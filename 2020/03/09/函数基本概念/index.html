@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的函数使用 function 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示： 123function functionName (arg0, arg1, ... , argN) &amp;#123;    statements&amp;#125;  以下是一个函数示例： 123function sayHi (name, message) &amp;#123;    alert(&quot;H">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-09T09:11:42.008Z">
+<meta property="og:updated_time" content="2020-03-09T09:15:55.521Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -212,10 +212,21 @@
 <p>以下是一个函数示例：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params">name, message</span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello "</span> + name + <span class="string">","</span> + message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <p>这个函数可以通过其函数名来调用，后面还要加上一对圆括号和参数（圆括号中的参数如果有多个，可以用逗号隔开）。调用 <code>sayHi()</code> 函数的代码如下所示：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sayHi(<span class="string">"Nicholas"</span>, <span class="string">"how are you today?"</span>);</span><br></pre></td></tr></table></figure>
 
-<p>ES 中的函数在定义时不必指定是否返回值。</p>
+<p>ES 中的函数在定义时不必指定是否返回值。实际上，任何函数在任何时候都可以通过 <code>return</code> 语句后跟要返回的值来实现返回值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个 <code>sum()</code> 函数的作用是把两个值加起来返回一个结果。除了 <code>return</code> 语句之外，没有任何声明表示该函数会返回一个值。调用这个函数的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = sum(<span class="number">5</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个函数会在执行完 <code>return</code> 语句之后停止并立即退出。因此，位于 <code>return</code> 语句之后的任何代码都永远不会执行。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">    alert(<span class="string">"Hello world"</span>); <span class="comment">// 永远不会执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，由于调用 <code>alert()</code> 函数的语句位于 <code>return</code> 语句之后，因此永远不会显示警告框。</p>
 
       
 
