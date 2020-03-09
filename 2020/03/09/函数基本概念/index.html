@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的函数使用 function 关键字来声明，后跟一组参数以及函数体。函数的基本语法如下所示： 123function functionName (arg0, arg1, ... , argN) &amp;#123;    statements&amp;#125;  以下是一个函数示例： 123function sayHi (name, message) &amp;#123;    alert(&quot;H">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-09T09:15:55.521Z">
+<meta property="og:updated_time" content="2020-03-09T12:11:34.655Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -227,6 +227,49 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">    alert(<span class="string">"Hello world"</span>); <span class="comment">// 永远不会执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个例子中，由于调用 <code>alert()</code> 函数的语句位于 <code>return</code> 语句之后，因此永远不会显示警告框。</p>
+<p>当然，一个函数中也可以包含多个 <code>return</code> 语句，如下面这个例子中所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">diff</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num1 &lt; num2) &#123;</span><br><span class="line">        <span class="keyword">return</span> num2 - num1;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> num1 - num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中定义的 <code>diff()</code> 函数用于计算两个数值的差。如果第一个数比第二个小，则用第二个数减第一个数；否则，用第一个数减第二个数。代码中的两个分支都具有自己的 <code>return</code> 语句，分别用于执行正确的计算。</p>
+<p>另外，<code>return</code> 语句也可以不带有任何返回值。在这种情况下，函数在停止执行后将返回 <code>undefined</code> 值。这种用法一般用在需要提前停止函数执行而又不需要返回值的情况下。比如在下面这个例子中，就不会显示警告框：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params">name, message</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">    alert(<span class="string">"Hello "</span> + name + <span class="string">","</span> + message); <span class="comment">// 永远不会调用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>推荐的做法是要么让函数始终都返回一个值，要么永远都不要返回值。否则，如果函数有时候返回值，有时候不返回值，会给调试代码带来不便。</em></p>
+<p>严格模式下对函数有一些限制：</p>
+<ul>
+<li>不能把函数命名为 <code>eval</code> 或 <code>arguments</code>；</li>
+<li>不能把参数命名为 <code>eval</code> 或 <code>arguments</code>；</li>
+<li>不能出现两个命名参数同名的情况。</li>
+</ul>
+<p>如果发生以上情况，就会导致语法错误，代码无法执行。</p>
+<h1 id="1-理解参数"><a href="#1-理解参数" class="headerlink" title="1.理解参数"></a>1.理解参数</h1><p>ES 函数的参数与大多数其他语言中函数的参数有所不同。ES 函数不介意传递进来多少个参数，也不在乎传进来的参数是什么数据类型。也就是说，即使定义的函数只接收两个参数，在调用这个函数时也未必一定要传递两个参数。可以传递一个、三个甚至不传递参数，而解析器永远不会有什么怨言。之所以会这样，原因是 ES 中的参数在内部是用一个数组来表示的。函数接收到的始终都是这个数组，而不关心数组中包含哪些参数（如果有参数的话）。如果这个数组中不包含任何元素，无所谓；如果包含多个元素，也没有问题。实际上，在函数体内可以通过 <code>arguments</code> 对象来访问这个参数数组，从而获取传递给函数的每一个参数。</p>
+<p>起始，<code>arguments</code> 对象只是与数组类似（它并不是 Array 的实例），因为可以使用方括号语法访问它的每一个元素，使用 <code>length</code> 属性来确定传递进来多少个参数。在前面的例子中，<code>sayHi()</code> 函数的第一个参数名字叫 <code>name</code>，而该参数的值也可以通过访问 <code>arguments[0]</code> 来获取。因此，那个函数也可以像下面这样重写，即不显示地使用命名参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"Hello "</span> + <span class="built_in">arguments</span>[<span class="number">0</span>] + <span class="string">","</span> + <span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个重写后的函数中不包含命名的参数。虽然没有使用 <code>name</code> 和 <code>message</code> 标识符，但函数的功能依旧。这个事实说明了 ES 函数的一个重要特点：命名的参数只提供便利，但不是必需的。另外，在命名参数方面，其他语言可能需要事先创建一个函数签名，而将来的调用必需与该签名一致。但在 ES 中，没有这些条条框框，解析器不会验证命名参数。</p>
+<p>通过访问 <code>arguments</code> 对象的 <code>length</code> 属性可以获知有多少个参数传递给了函数。下面这个函数会在每次被调用时，输出传入其中的参数个数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">howManyArgs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="built_in">arguments</span>.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">howManyArgs(<span class="string">"string"</span>, <span class="number">45</span>); <span class="comment">// 2</span></span><br><span class="line">howManyArgs(); <span class="comment">// 0</span></span><br><span class="line">howManyArgs(<span class="number">12</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码会依次出现 3 个警告框，分别显示 <code>2</code>、<code>0</code> 和 <code>1</code>。利用这一点可以让函数能够接收仁义和参数并分别实现适当的功能。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doAdd</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">        alert(<span class="built_in">arguments</span>[<span class="number">0</span>] + <span class="number">10</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">2</span>) &#123;</span><br><span class="line">        alert(<span class="built_in">arguments</span>[<span class="number">0</span>] + <span class="built_in">arguments</span>[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doAdd(<span class="number">10</span>); <span class="comment">// 20</span></span><br><span class="line">doAdd(<span class="number">30</span>, <span class="number">20</span>); <span class="comment">// 50</span></span><br></pre></td></tr></table></figure>
+
+<p>函数 <code>doAdd()</code> 会在只有一个参数的情况下给该参数加上 <code>10</code>；如果是两个参数，则将那个参数简单相加并返回结果。因此，<code>doAdd(10)</code> 会返回 <code>20</code>，而 <code>doAdd(30, 20)</code> 则返回 <code>50</code>。</p>
+<p>另一个与参数相关的重要方面，就是 <code>arguments</code> 对象可以与命名参数一起使用，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doAdd</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">1</span>) &#123;</span><br><span class="line">        alert(num1 + <span class="number">10</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">2</span>) &#123;</span><br><span class="line">        alert(<span class="built_in">arguments</span>[<span class="number">0</span>] + num2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于 <code>arguments</code> 的行为，还有一点比较有意思，那就是它的值永远与对应命名参数的值保持同步。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doAdd</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">arguments</span>[<span class="number">1</span>] = <span class="number">10</span>;</span><br><span class="line">    alert(<span class="built_in">arguments</span>[<span class="number">0</span>] + num2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每次执行这个 <code>doAdd()</code> 函数都会重写第二个参数，将第二个参数的值修改为 <code>10</code>。因为 <code>arguments</code> 对象中的值会自动反映到对应的命名参数，所以修改 <code>arguments[1]</code>，也就修改了 <code>num2</code>，结果它们的值都会变成 <code>10</code>。不过，这并不是说读取这两个值会访问相同的内存空间；它们的内存空间是独立的，但它们的值会同步。另外，如果只传入了一个参数，那么为 <code>arguments[1]</code> 设置的值不会反应到命名参数中。这是因为 <code>arguments</code> 对象的长度是由传入的参数个数决定的，不是由定义函数时的命名参数的个数决定的。</p>
+<p>关于参数还要记住最后一点：没有传递值的命名参数将自动被赋予 <code>undefined</code> 值。这就跟定义了变量但又没有初始化一样。</p>
+<p>严格模式对如何使用 <code>arguments</code> 对象做出了一些限制。首先，像前面例子中那样的赋值会变得无效。也就是说，即使把 <code>arguments[1]</code> 设置为 <code>10</code>，<code>num2</code> 的值仍然还是 <code>undefined</code>。其次，重写 <code>arguments</code> 的值会导致语法错误（代码将不会执行）。</p>
+<p><em>ES 中的所有参数传递的都是值，不可能通过引用传递参数。</em></p>
+<h1 id="2-没有重载"><a href="#2-没有重载" class="headerlink" title="2.没有重载"></a>2.没有重载</h1><p>ES 函数不能像传统意义上那样实现重载。而在其他语言中，可以为一个函数编写两个定义，只要这两个定义的签名（接受的参数的类型和数量）不同即可。如前所述，ES 函数没有签名，因为其参数是由包含零或多个值的数组来表示。而没有函数签名，真正的重载是不可能做到的。</p>
+<p>如果在 ES 中定义了两个名字相同的函数，则该名字只属于后定义的函数。请看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">200</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = addSomeNumber(<span class="number">100</span>); <span class="comment">// 300</span></span><br></pre></td></tr></table></figure>
+
+<p>在此，函数 <code>addSomeNumber()</code> 被定义了两次。第一个版本给参数加 <code>10</code>，而第二个版本给参数加 <code>200</code>。由于后定义的函数覆盖了先定义的函数，因此当在最后一行代码中调用这个函数时，返回的结果就是 <code>300</code>。</p>
+<p>如前所述，通过检查传入函数中参数的类型和属性并作出不同的反应，可以模仿方法的重载。</p>
 
       
 
@@ -381,7 +424,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-理解参数"><span class="toc-number">1.</span> <span class="toc-text">1.理解参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-没有重载"><span class="toc-number">2.</span> <span class="toc-text">2.没有重载</span></a></li></ol>
                     </div>
                 </span>
                         </div>
