@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMA-262 规定了一组语句（也成为流控制语句）。从本质上看，语句定义了 ES 中的主要语法，语句通常使用一个或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。 1.if 语句大多数编程语言中最为常用的一个语句就是 if 语句。以下是 if 语句的语法： 1if (condition) statement1 else statemen">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-09T05:45:11.820Z">
+<meta property="og:updated_time" content="2020-03-09T05:47:24.577Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -269,7 +269,14 @@
 <p>ES 对象的属性没有顺序。因此，通过 for-in 循环输出的属性名的顺序是不可预测的。具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。</p>
 <p>但是，如果表示要迭代的对象的变量值为 <code>null</code> 或 <code>undefined</code>，for-in 语句会抛出错误。ES5 更正了这一行为：对这种情况不再抛出错误，而只是不执行循环体。为了保证最大限度的兼容性，<strong>建议在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined</strong>。</p>
 <p><em>Safari3 以前版本的 for-in 语句中存在一个 bug，该 bug 会导致某些属性被返回两次。</em></p>
-<h1 id="6-label-语句"><a href="#6-label-语句" class="headerlink" title="6.label 语句"></a>6.label 语句</h1>
+<h1 id="6-label-语句"><a href="#6-label-语句" class="headerlink" title="6.label 语句"></a>6.label 语句</h1><p>使用 label 语句可以在代码中添加标签，以便将来使用。以下是 label 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label: statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start: <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中定义的 <code>start</code> 标签可以在将来由 <code>break</code> 或 <code>continue</code> 语句引用。加标签的语句一般都要与 for 语句等循环语句配合使用。</p>
+
       
 
       
