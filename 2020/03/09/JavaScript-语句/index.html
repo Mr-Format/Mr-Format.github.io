@@ -6,14 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>分类 | 灯芯的前端博客</title>
+  <title>JavaScript 语句 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;categories&#x2F;index.html">
+  <meta name="description" content="ECMA-262 规定了一组语句（也成为流控制语句）。从本质上看，语句定义了 ES 中的主要语法，语句通常使用一个或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。 1.if 语句大多数编程语言中最为常用的一个语句就是 if 语句。以下是 if 语句的语法： 1if (condition) statement1 else statemen">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 语句">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;09&#x2F;JavaScript-%E8%AF%AD%E5%8F%A5&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="ECMA-262 规定了一组语句（也成为流控制语句）。从本质上看，语句定义了 ES 中的主要语法，语句通常使用一个或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。 1.if 语句大多数编程语言中最为常用的一个语句就是 if 语句。以下是 if 语句的语法： 1if (condition) statement1 else statemen">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-16T12:21:12.041Z">
+<meta property="og:updated_time" content="2020-03-09T02:51:45.084Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -183,21 +186,241 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article class="article article-type-post show">
-    <header class="article-header" style="border-bottom: 1px solid #ccc">
-        <h1 class="article-title" itemprop="name">
-            分类
-        </h1>
-    </header>
-
+            <article id="post-JavaScript-语句" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-        <div class="category-all-page">
-            <h2>共计&nbsp;
-                5&nbsp;个分类</h2>
-            <ul class="category-list-item-list"><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/CSS/">CSS</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/ES6/">ES6</a><span class="category-list-item-list-count">9</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-item-list-count">6</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/markdown/">markdown</a><span class="category-list-item-list-count">1</span></li><li class="category-list-item-list-item"><a class="category-list-item-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">前端开发规范</a><span class="category-list-item-list-count">5</span></li></ul>
-        </div>
+      <header class="article-header">
         
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript 语句
+    </h1>
+  
+
+        
+        <a href="/2020/03/09/JavaScript-%E8%AF%AD%E5%8F%A5/" class="archive-article-date">
+  	<time datetime="2020-03-09T02:28:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ECMA-262 规定了一组语句（也成为流控制语句）。从本质上看，语句定义了 ES 中的主要语法，语句通常使用一个或多个关键字来完成给定任务。语句可以很简单，例如通知函数退出；也可以比较复杂，例如指定重复执行某个命令的次数。</p>
+<h1 id="1-if-语句"><a href="#1-if-语句" class="headerlink" title="1.if 语句"></a>1.if 语句</h1><p>大多数编程语言中最为常用的一个语句就是 if 语句。以下是 if 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition) statement1 <span class="keyword">else</span> statement2</span><br></pre></td></tr></table></figure>
+
+<p>其中的 condition （条件）可以是任意表达式；而且对这个表达式求值的结果不一定是布尔值。ES 会自动调用 <code>Boolean()</code> 转换函数将这个表达式的结果转换为一个布尔值。如果对 condition 求值的结果是 <code>true</code>，则执行 <code>statement1</code>；反之，则执行 <code>statement2</code>。而且这两个语句既可以是一行代码，也可以是一个代码块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">25</span>)</span><br><span class="line">    alert(<span class="string">"Greater than 25."</span>); <span class="comment">// 单行语句</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Less than or equal to 25."</span>); <span class="comment">// 代码块中的语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建议始终使用代码块，即时要执行的只有一行代码。因为这样可以消除误解，否则可能让人分不清在不同的条件下要执行哪些语句。</p>
+<p>另外，也可以像下面这样把整个 if 语句写在一行代码中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition1) statement1 <span class="keyword">else</span> <span class="keyword">if</span> (condition2) statement2 <span class="keyword">else</span> statement3</span><br></pre></td></tr></table></figure>
+
+<p>但推荐的做法是像下面这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">25</span>) &#123;</span><br><span class="line">    alert(<span class="string">"Greater than 25."</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    alert(<span class="string">"Less than 0."</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Between 0 and 25, inclusive."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-do-while-语句"><a href="#2-do-while-语句" class="headerlink" title="2.do-while 语句"></a>2.do-while 语句</h1><p>do-while 语句是一种后测试循环语句，即只有在循环体中的代码执行之后，才会测试出口条件。换句话说，在对条件表达式求值之前，循环体内的代码至少会被执行一次。以下是 do-while 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    statement</span><br><span class="line">&#125; <span class="keyword">while</span> (expression)</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    i += <span class="number">2</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">alert(i);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，只要变量 <code>i</code> 的值小于 <code>10</code>，循环就会一直继续下去。而且变量 <code>i</code> 的值最初为 <code>0</code>，每次循环都会递增 <code>2</code>。</p>
+<p>像 do-while 这种后测试循环语句最常用于循环体中的代码至少要被执行一次的情形。</p>
+<h1 id="3-while-语句"><a href="#3-while-语句" class="headerlink" title="3.while 语句"></a>3.while 语句</h1><p>while 语句属于前测试循环语句，也就是说，在循环体内的代码被执行之前，就会对出口条件求值。因此，循环体内的代码有可能永远不会被执行。以下是 while 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(expression) statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    i += <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，变量 <code>i</code> 开始时的值为 <code>0</code>，每次循环都会递增 <code>2</code>。而只要 <code>i</code> 的值小于 <code>10</code>，循环就会继续下去。</p>
+<h1 id="4-for-语句"><a href="#4-for-语句" class="headerlink" title="4.for 语句"></a>4.for 语句</h1><p>for 语句也是一种前测试循环语句，但它具有在执行循环之前初始化变量和定义循环后要执行的代码的能力。以下是 for 语句的语法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (initialization; expression; post-loop-expression) statement</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码定义了变量 <code>i</code> 的初始值为 <code>0</code>。只有当条件表达式 <code>i &lt; count</code> 返回 <code>true</code> 的情况下才会进入 <code>for</code> 循环，因此也有可能不会执行循环体中的代码。如果执行了循环体中的代码，则一定会对循环后的表达式 <code>i++</code> 求值，即递增 <code>i</code> 的值。这个 for 循环语句与下面的 while 语句的功能相同：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; count) &#123;</span><br><span class="line">    alert(i);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 while 循环做不到的，使用 for 循环同样也做不到。也就是说，for 循环只是把与循环有关的代码集中在了一个位置。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/03/09/JavaScript-%E8%AF%AD%E5%8F%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/08/JavaScript%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%88%E4%B8%8B%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 操作符（下）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
+            
+                
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-if-语句"><span class="toc-number">1.</span> <span class="toc-text">1.if 语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-do-while-语句"><span class="toc-number">2.</span> <span class="toc-text">2.do-while 语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-while-语句"><span class="toc-number">3.</span> <span class="toc-text">3.while 语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-for-语句"><span class="toc-number">4.</span> <span class="toc-text">4.for 语句</span></a></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
           </div>
         </div>
       </div>
@@ -227,7 +450,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
