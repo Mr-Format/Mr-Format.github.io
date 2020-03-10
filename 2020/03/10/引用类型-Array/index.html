@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的数组与其他多数语言中的数组有相当大的区别。虽然 ES 数组与其他语言中的数组都是数据的有序列表，但与其他语言不同的是，ES 数组的每一项都可以保存任何类型的数据。也就是说，可以用数组的第一个位置来保存字符串，用第二位置来保存数值，用第三位置来保存对象…… 而且，ES 数组的大小是可以动态调整的，即可以随着数据的添加自动增长以容纳新增数据。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-10T08:46:55.016Z">
+<meta property="og:updated_time" content="2020-03-10T10:49:52.540Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -268,7 +268,12 @@
 
 <p>这里定义了两个对象： <code>person1</code> 和 <code>person2</code>。而且还分别为每个对象定义了一个 <code>toString()</code> 方法和一个 <code>toLocaleString()</code> 方法，这两个方法返回不同的值。然后，创建一个包含前面定义的两个对象的数组。在将数组传递给 <code>alert()</code> 时，输出结果是 <code>&quot;Nicholas,Greg&quot;</code>，因为调用了数组每一项的 <code>toString()</code> 方法（这与下一行显示调用 <code>toString()</code> 方法得到的结果相同）。而当调用数组的 <code>toLocaleString()</code> 方法时，输出结果是 <code>&quot;Nikolaos,Grigorios&quot;</code>，原因是调用了数组每一项的 <code>toLocaleString()</code> 方法。</p>
 <p>数组继承的 <code>toLocaleString()</code>、<code>toString()</code> 和 <code>valueOf()</code> 方法，在默认情况下都会以逗号分隔的字符串的形式返回数组项。而如果使用 <code>join()</code> 方法，则可以使用不同的分隔符来构建这个字符串。 <code>join()</code> 方法只接收一个参数，即用作分隔符的字符串，然后返回包含所有数组项的字符串。请看下面的例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>];</span><br><span class="line">alert(colors.join(<span class="string">","</span>)); <span class="comment">// red,green,blue</span></span><br><span class="line">alert(colors.join(<span class="string">"||"</span>)); <span class="comment">// red||green||blue</span></span><br></pre></td></tr></table></figure>
+
+<p>这里使用 <code>join()</code> 方法重现了 <code>toString()</code> 方法的输出。在传递逗号的情况下，得到了以逗号分隔的数组值；传递双竖线符号的情况下，得到了字符串 <code>&quot;red||green||blue&quot;</code>。如果不给 <code>join()</code> 方法传入任何值，或者给它传入 <code>undefined</code>，则使用逗号作为分隔符。IE7 及更早版本会错误的使用字符串 <code>&quot;undefined&quot;</code> 作为分隔符。</p>
+<p><em>如果数组中的某一项的值是 null 或者 undefined，那么该值在 join()、toLocaleString()、toString() 和 valueOf() 方法返回的结果中以空字符串表示。</em></p>
+<h1 id="3-栈方法"><a href="#3-栈方法" class="headerlink" title="3.栈方法"></a>3.栈方法</h1><p>ES 数组也提供了一种让数组的行为类似于其他数据结构的方法。</p>
+
       
 
       
@@ -422,7 +427,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-检测数组"><span class="toc-number">1.</span> <span class="toc-text">1.检测数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-转换方法"><span class="toc-number">2.</span> <span class="toc-text">2.转换方法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-检测数组"><span class="toc-number">1.</span> <span class="toc-text">1.检测数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-转换方法"><span class="toc-number">2.</span> <span class="toc-text">2.转换方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-栈方法"><span class="toc-number">3.</span> <span class="toc-text">3.栈方法</span></a></li></ol>
                     </div>
                 </span>
                         </div>
