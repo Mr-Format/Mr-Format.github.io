@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的 Date 类型使用 UTC（Coordinated Universal Time，国际协调时间）1970 年 1 月 1 日午夜（零点）开始经过的毫秒数来保存日期。在使用这种数据存储格式的条件下，Date 类型保存的日期能够精确到 1970 年 1 月 1 日之前或之后的 285 616 年。 要创建一个日期对象，使用 new 操作符和 Date 构造函数即可，如下所示">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-11T12:51:07.132Z">
+<meta property="og:updated_time" content="2020-03-11T12:57:28.820Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -225,6 +225,15 @@
 <p>这个例子创建了两个日期对象。第一个对象表示 GMT 时间 2000 年 1 月 1 日午夜零时，传入的值一个是表示年份的 2000，一个是表示月份的 0（1月份）。第二个对象表示 GMT 时间 2005 年 5 月 5 日下午 5：55：55，传入的月份为 4，小时为 17。</p>
 <p>如同模仿 <code>Date.parse()</code> 一样，<code>Date</code> 构造函数也会模仿 <code>Date.UTC()</code>，但有一点明显不同：日期和时间都基于本地时区而非 GMT 来创建。不过，<code>Date</code> 构造函数接收的参数仍然与 <code>Date.UTC()</code> 相同。因此，如果第一个参数是数值，<code>Date</code> 构造函数就会假设该值是日期中的年份，而第二个参数是月份，以此类推。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地时间 2000 年 1 月 1 日午夜零时 </span></span><br><span class="line"><span class="keyword">var</span> y2k = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2000</span>, <span class="number">0</span>); </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 本地时间 2005 年 5 月 5 日下午 5:55:55 </span></span><br><span class="line"><span class="keyword">var</span> allFives = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2005</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">17</span>, <span class="number">55</span>, <span class="number">55</span>);</span><br></pre></td></tr></table></figure>
+
+<p>ES5 添加了 <code>Date.now()</code> 方法，返回表示调用这个方法时的日期和时间的毫秒数。这个方法简化了使用 Date 对象分析代码的工作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得开始时间</span></span><br><span class="line"><span class="keyword">var</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">doSomething();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得停止时间</span></span><br><span class="line"><span class="keyword">var</span> stop = <span class="built_in">Date</span>.now(),</span><br><span class="line">    result = stop - start;</span><br></pre></td></tr></table></figure>
+
+<p>支持 <code>Date.now()</code> 方法的浏览器包括 IE9+、Firefox 3+、Safari 3+、Opera 10.5 和 Chrome。在不支持它的浏览器中，使用 + 操作符把 Date 对象转换成字符串，也可以达到同样的目的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得开始时间</span></span><br><span class="line"><span class="keyword">var</span> start = +<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">doSomething();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得停止时间</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stop = +<span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">    result = stop - start;</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-继承的方法"><a href="#1-继承的方法" class="headerlink" title="1.继承的方法"></a>1.继承的方法</h1><p>与其他引用类型一样，Date 类型也重写了 <code>toLocaleString()</code>、<code>toString()</code> 和 <code>valueOf()</code> 方法；</p>
+
       
 
       
@@ -378,7 +387,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-继承的方法"><span class="toc-number">1.</span> <span class="toc-text">1.继承的方法</span></a></li></ol>
                     </div>
                 </span>
                         </div>
