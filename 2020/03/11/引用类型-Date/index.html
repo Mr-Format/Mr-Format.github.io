@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的 Date 类型使用 UTC（Coordinated Universal Time，国际协调时间）1970 年 1 月 1 日午夜（零点）开始经过的毫秒数来保存日期。在使用这种数据存储格式的条件下，Date 类型保存的日期能够精确到 1970 年 1 月 1 日之前或之后的 285 616 年。 要创建一个日期对象，使用 new 操作符和 Date 构造函数即可，如下所示">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-11T12:43:37.386Z">
+<meta property="og:updated_time" content="2020-03-11T12:51:07.132Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -214,11 +214,17 @@
 
 <p>在调用 <code>Date</code> 构造函数而不传递参数的情况下，新创建的对象自动获得当前日期和时间。如果想根据特定的日期和时间创建日期对象，必须传入表示该日期的毫秒数（即从 UTC 时间 1970 年 1 月 1 日零点起至该日期止经过的毫秒数）。为了简化这一计算过程，ECMAScript 提供了两个方法：<code>Date.parse()</code> 和 <code>Date.UTC()</code>。</p>
 <p><code>Date.parse()</code> 方法接收一个表示日期的字符串参数，然后尝试根据这个字符串返回相应日期的毫秒数。ECMA-262 没有定义 <code>Date.parse()</code> 应该支持哪种日期格式，因此这个方法的行为因实现而异，而且通常是因地区而异。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someDate = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(<span class="string">"May 25, 2004"</span>));</span><br></pre></td></tr></table></figure>
+
 <p>如果传入 <code>Date.parse()</code> 方法的字符串不能表示日期，那么它会返回 <code>NaN</code>。实际上，如果直接表示日期的字符串传递给 <code>Date</code> 构造函数，也会在后台调用 <code>Date.parse()</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someDate = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"May 25, 2004"</span>);</span><br></pre></td></tr></table></figure>
+
 <p><code>Date.UTC()</code> 方法同样也返回表示日期的毫秒数，但它与 <code>Date.parse()</code> 在构建值时使用不同的信息。<code>Date.UTC()</code> 的参数分别是年份、基于 0 的月份（一月是 0，二月是 1，以此类推）、月中的哪一天（1 到 31）、小时数（0 到 23）、分钟、秒以及毫秒数。在这些参数中，只有前两个参数（年和月）是必需的。如果没有提供月中的天数，则假设天数为 1；如果省略其他参数，则统统假设为 0。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GMT 时间 2000 年 1 月 1 日午夜零时</span></span><br><span class="line"><span class="keyword">var</span> y2k = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.UTC(<span class="number">2000</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// GMT 时间 2005 年 5 月 5 日下午 5：55：55</span></span><br><span class="line"><span class="keyword">var</span> allFives = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.UTC(<span class="number">2005</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">17</span>, <span class="number">55</span>, <span class="number">55</span>));</span><br></pre></td></tr></table></figure>
 
-
+<p>这个例子创建了两个日期对象。第一个对象表示 GMT 时间 2000 年 1 月 1 日午夜零时，传入的值一个是表示年份的 2000，一个是表示月份的 0（1月份）。第二个对象表示 GMT 时间 2005 年 5 月 5 日下午 5：55：55，传入的月份为 4，小时为 17。</p>
+<p>如同模仿 <code>Date.parse()</code> 一样，<code>Date</code> 构造函数也会模仿 <code>Date.UTC()</code>，但有一点明显不同：日期和时间都基于本地时区而非 GMT 来创建。不过，<code>Date</code> 构造函数接收的参数仍然与 <code>Date.UTC()</code> 相同。因此，如果第一个参数是数值，<code>Date</code> 构造函数就会假设该值是日期中的年份，而第二个参数是月份，以此类推。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地时间 2000 年 1 月 1 日午夜零时 </span></span><br><span class="line"><span class="keyword">var</span> y2k = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2000</span>, <span class="number">0</span>); </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 本地时间 2005 年 5 月 5 日下午 5:55:55 </span></span><br><span class="line"><span class="keyword">var</span> allFives = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2005</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">17</span>, <span class="number">55</span>, <span class="number">55</span>);</span><br></pre></td></tr></table></figure>
       
 
       
