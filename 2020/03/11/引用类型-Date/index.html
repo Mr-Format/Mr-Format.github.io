@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 中的 Date 类型使用 UTC（Coordinated Universal Time，国际协调时间）1970 年 1 月 1 日午夜（零点）开始经过的毫秒数来保存日期。在使用这种数据存储格式的条件下，Date 类型保存的日期能够精确到 1970 年 1 月 1 日之前或之后的 285 616 年。 要创建一个日期对象，使用 new 操作符和 Date 构造函数即可，如下所示">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-11T13:04:04.434Z">
+<meta property="og:updated_time" content="2020-03-12T13:00:51.793Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -233,6 +233,155 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得开始时间</span></span><br><span class="line"><span class="keyword">var</span> start = +<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用函数</span></span><br><span class="line">doSomething();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得停止时间</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stop = +<span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">    result = stop - start;</span><br></pre></td></tr></table></figure>
 
 <h1 id="1-继承的方法"><a href="#1-继承的方法" class="headerlink" title="1.继承的方法"></a>1.继承的方法</h1><p>与其他引用类型一样，Date 类型也重写了 <code>toLocaleString()</code>、<code>toString()</code> 和 <code>valueOf()</code> 方法；但这些方法返回的值与其他类型中的方法不同。Date 类型的 <code>toLocaleString()</code> 方法会按照与浏览器设置的地区相适应的格式返回日期和事件。而 <code>toString()</code> 方法则通常返回带有时区信息的日期和时间。</p>
+<p>这两种方法在不同浏览器中返回的日期和时间格式有很大差别，这些差别仅在调试代码时比较有用，而在显示日期和时间时没有什么价值。</p>
+<p><code>valueOf()</code> 方法不会返回字符串，而是返回日期的毫秒表示。因此，可以方便使用比较操作符（小于或大于）来比较日期值。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2007</span>, <span class="number">0</span>, <span class="number">1</span>); <span class="comment">// Mon Jan 01 2007 00:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"><span class="keyword">var</span> date2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2007</span>, <span class="number">1</span>, <span class="number">1</span>); <span class="comment">// Thu Feb 01 2007 00:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line"></span><br><span class="line">alert(date1 &lt; date2); <span class="comment">// true</span></span><br><span class="line">alert(date1 &gt; date2); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>由于表示 2007 年 1 月 1 日的毫秒值小于表示 2007 年 2 月 1 日的毫秒值，因此在首先使用小于操作符比较日期时，返回的结果是 <code>true</code>。这样，为日期的比较提供了极大的方便。</p>
+<h1 id="2-日期的格式化方法"><a href="#2-日期的格式化方法" class="headerlink" title="2.日期的格式化方法"></a>2.日期的格式化方法</h1><p>Date 类型还有一些专门用于将日期格式化为字符串的方法，这些方法如下：</p>
+<ul>
+<li>toDateString() —— 以特定于实现的格式显示星期几、月、日和年；</li>
+<li>toTimeString() —— 以特定于实现的格式显示时、分、秒和时区；</li>
+<li>toLocaleDateString() —— 以特定于地区的格式显示星期几、月、日和年；</li>
+<li>toLocaleTimeString() —— 以特定于实现的格式显示时、分、秒；</li>
+<li>toUTCString() —— 以特定于实现的格式显示完整的 UTC 日期。</li>
+</ul>
+<p>与 <code>toLocaleString()</code> 和 <code>toString()</code> 方法一样，以上这些字符串格式方法的输出也因浏览器而异，没有哪一个方法能够用来在用户界面中显示一致的日期信息。</p>
+<p><em>除了前面的方法，还有一个 toGMTString() 方法，该方法与 toUTCString() 等价，其存在目的在于确保向后兼容。不过，ES 已不推荐使用该方法。</em></p>
+<h1 id="3-日期-时间组件方法"><a href="#3-日期-时间组件方法" class="headerlink" title="3.日期/时间组件方法"></a>3.日期/时间组件方法</h1><p>剩下的 Date 类型的方法如下所示：</p>
+<p><em>UTC 日期指的是在没有时区偏差的情况下（将日期转换为 GMT 时间）的日期值。</em></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getTime()</td>
+<td>返回表示日期的毫秒数；与 valueOf() 方法返回的值相同</td>
+</tr>
+<tr>
+<td>setTime(毫秒)</td>
+<td>以毫秒数设置日期，会改变整个日期</td>
+</tr>
+<tr>
+<td>getFullYear()</td>
+<td>取得4位数表示的年份</td>
+</tr>
+<tr>
+<td>getUTCFullYear()</td>
+<td>返回 UTC 日期的4位数年份</td>
+</tr>
+<tr>
+<td>setFullYear(年)</td>
+<td>设置日期的年份。传入的年份值必须是4位数字</td>
+</tr>
+<tr>
+<td>setUTCFullYear(年)</td>
+<td>设置 UTC 日期的年份。传入的年份值必须是4位数字</td>
+</tr>
+<tr>
+<td>getMonth()</td>
+<td>返回日期中的月份，其中0表示一月，11表示十二月</td>
+</tr>
+<tr>
+<td>getUTCMonth()</td>
+<td>返回 UTC 日期中的月份，其中0表示一月，11表示十二月</td>
+</tr>
+<tr>
+<td>setMonth(月)</td>
+<td>设置日期的月份。传入的值必须大于0，超过11则增加年份</td>
+</tr>
+<tr>
+<td>setUTCMonth(月)</td>
+<td>设置 UTC 日期的月份。传入的月份值必须大于0，超过11则增加年份</td>
+</tr>
+<tr>
+<td>getDate()</td>
+<td>返回日期月份中的天数（1到31）</td>
+</tr>
+<tr>
+<td>getUTCDate()</td>
+<td>返回 UTC 日期月份中的天数（1到31）</td>
+</tr>
+<tr>
+<td>setDate(日)</td>
+<td>设置日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份</td>
+</tr>
+<tr>
+<td>setUTCDate(日)</td>
+<td>设置UTC日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份</td>
+</tr>
+<tr>
+<td>getDay()</td>
+<td>返回日期中星期的星期几（其中0表示星期日，6表示星期六）</td>
+</tr>
+<tr>
+<td>getUTCDay()</td>
+<td>返回UTC日期中星期的星期几（其中0表示星期日，6表示星期六） getHours()</td>
+</tr>
+<tr>
+<td>getUTCHours()</td>
+<td>返回UTC日期中的小时数（0到23）</td>
+</tr>
+<tr>
+<td>setHours(时)</td>
+<td>设置日期中的小时数。传入的值超过了23则增加月份中的天数 setUTCHours(时)</td>
+</tr>
+<tr>
+<td>getMinutes()</td>
+<td>返回日期中的分钟数（0到59）</td>
+</tr>
+<tr>
+<td>getUTCMinutes()</td>
+<td>返回UTC日期中的分钟数（0到59）</td>
+</tr>
+<tr>
+<td>setMinutes(分)</td>
+<td>设置日期中的分钟数。传入的值超过59则增加小时数</td>
+</tr>
+<tr>
+<td>setUTCMinutes(分)</td>
+<td>设置UTC日期中的分钟数。传入的值超过59则增加小时数</td>
+</tr>
+<tr>
+<td>getSeconds()</td>
+<td>返回日期中的秒数（0到59）</td>
+</tr>
+<tr>
+<td>getUTCSeconds()</td>
+<td>返回UTC日期中的秒数（0到59）</td>
+</tr>
+<tr>
+<td>setSeconds(秒)</td>
+<td>设置日期中的秒数。传入的值超过了59会增加分钟数</td>
+</tr>
+<tr>
+<td>setUTCSeconds(秒)</td>
+<td>设置UTC日期中的秒数。传入的值超过了59会增加分钟数</td>
+</tr>
+<tr>
+<td>getMilliseconds()</td>
+<td>返回日期中的毫秒数</td>
+</tr>
+<tr>
+<td>getUTCMilliseconds()</td>
+<td>返回 UTC 日期中的毫秒数</td>
+</tr>
+<tr>
+<td>setMilliseconds(毫秒)</td>
+<td>设置日期中的毫秒数</td>
+</tr>
+<tr>
+<td>setUTCMilliseconds(毫秒)</td>
+<td>设置UTC日期中的毫秒数</td>
+</tr>
+<tr>
+<td>getTimezoneOffset()</td>
+<td>返回本地时间与 UTC 时间相差的分钟数。</td>
+</tr>
+</tbody></table>
 
       
 
@@ -387,7 +536,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-继承的方法"><span class="toc-number">1.</span> <span class="toc-text">1.继承的方法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-继承的方法"><span class="toc-number">1.</span> <span class="toc-text">1.继承的方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-日期的格式化方法"><span class="toc-number">2.</span> <span class="toc-text">2.日期的格式化方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-日期-时间组件方法"><span class="toc-number">3.</span> <span class="toc-text">3.日期/时间组件方法</span></a></li></ol>
                     </div>
                 </span>
                         </div>
