@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 通过 RegExp 类型来支持正则表达式。使用下面类似 Perl 的语法，就可以创建一个正则表达式。 1var expression = &#x2F; pattern &#x2F; flags ;  其中的模式（pattern）部分可以是任何简单或复杂的正则表达式，可以包含字符类、限定符、分组、向前查找以及反向引用。每个正则表达式都可带有以或多个标志（flags），用以标明正则表达式的行为。正则">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-13T12:32:54.563Z">
+<meta property="og:updated_time" content="2020-03-13T13:00:26.000Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -345,7 +345,25 @@
 <li>lastParen 属性返回最近一次匹配的捕获组，即例子中的 s。</li>
 </ul>
 <p>如前所述，例子使用的长属性名都可以使用相应的短属性名来代替。不过，由于这些短属性名大都不是有效的 ES 标识符，因此必须通过方括号语法来访问它们，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"this has been a short summer"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/(.)hort/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (pattern.test(text)) &#123;</span><br><span class="line">    alert(<span class="built_in">RegExp</span>.$_); <span class="comment">// this has been a short summer</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$`"</span>]); <span class="comment">// this has been a</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"this has been a short summer"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/(.)hort/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (pattern.test(text)) &#123;</span><br><span class="line">    alert(<span class="built_in">RegExp</span>.$_); <span class="comment">// this has been a short summer</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$`"</span>]); <span class="comment">// this has been a</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$'"</span>]); <span class="comment">// summer</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$&amp;"</span>]); <span class="comment">// short</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$+"</span>]); <span class="comment">// s</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>[<span class="string">"$*"</span>]); <span class="comment">// false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了上面介绍的几个属性之外，还有 9 个用于存储捕获组的构造函数属性。访问这些属性的语法是 <code>RegExp.$1、RegExp.$2 …… RegExp.$9</code>，分别用于存储第一、第二 …… 第九个匹配的捕获组。在调用 <code>exec()</code> 或 <code>test()</code> 方法时，这些属性会被自动填充。然后，就可以像下面这样来使用它们：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"this has been a short summer"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/(..)or(.)/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (pattern.test(text)) &#123;</span><br><span class="line">    alert(<span class="built_in">RegExp</span>.$<span class="number">1</span>); <span class="comment">// sh</span></span><br><span class="line">    alert(<span class="built_in">RegExp</span>.$<span class="number">2</span>); <span class="comment">// t</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建了一个包含两个捕获组的模式，并用该模式测试了一个字符串。即使 <code>test()</code> 方法只返回一个布尔值，但 RegExp 构造函数的属性 <code>$1</code> 和 <code>$2</code> 也会被匹配相应捕获组的字符串自动填充。</p>
+<h1 id="4-模式的局限性"><a href="#4-模式的局限性" class="headerlink" title="4.模式的局限性"></a>4.模式的局限性</h1><p>尽管 ES 中的正则表达式功能还是比较完备的，但仍然缺少（特别是 Perl）所支持的高级正则表达式特性。下面列出了 ECMAScript 正则表达式不支持的特性。</p>
+<ul>
+<li>匹配字符串开始和结尾的 \A 和 \Z 锚（但支持以插入符号 ^ 和美元符号 $ 来匹配字符串的开始和结尾）。</li>
+<li>向后查找（但支持向前查找）。</li>
+<li>并集和交集类。</li>
+<li>原子组。</li>
+<li>Unicode 支持（单个字符除外）。</li>
+<li>命名的捕获组（但支持编号的捕获组）。</li>
+<li>s （single，单行）和 x（free-spacing，无间隔）匹配模式。</li>
+<li>条件匹配。</li>
+<li>正则表达式注释。</li>
+</ul>
+
       
 
       
@@ -499,7 +517,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-RegExp-实例属性"><span class="toc-number">1.</span> <span class="toc-text">1.RegExp 实例属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-RegExp-实例方法"><span class="toc-number">2.</span> <span class="toc-text">2.RegExp 实例方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-RegExp-构造函数属性"><span class="toc-number">3.</span> <span class="toc-text">3.RegExp 构造函数属性</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-RegExp-实例属性"><span class="toc-number">1.</span> <span class="toc-text">1.RegExp 实例属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-RegExp-实例方法"><span class="toc-number">2.</span> <span class="toc-text">2.RegExp 实例方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-RegExp-构造函数属性"><span class="toc-number">3.</span> <span class="toc-text">3.RegExp 构造函数属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-模式的局限性"><span class="toc-number">4.</span> <span class="toc-text">4.模式的局限性</span></a></li></ol>
                     </div>
                 </span>
                         </div>
