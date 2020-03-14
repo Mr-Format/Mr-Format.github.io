@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://mr-format.github.io">
   <title>引用类型-Function | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ECMAScript 中的函数实际上是对象。每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数实际上是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。函数通常是使用函数声明语法定义的，如下面的例子所示：">
+  <meta name="description" content="ECMAScript 中的函数实际上是对象。每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数实际上是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。函数通常是使用函数声明语法定义的，如下面的例子所示： 123function sum(sum1, sum2) &amp;#123;    return sum1 + sum2;&amp;#125;">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="引用类型-Function">
 <meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;03&#x2F;13&#x2F;%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-Function&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="ECMAScript 中的函数实际上是对象。每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数实际上是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。函数通常是使用函数声明语法定义的，如下面的例子所示：">
+<meta property="og:description" content="ECMAScript 中的函数实际上是对象。每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数实际上是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。函数通常是使用函数声明语法定义的，如下面的例子所示： 123function sum(sum1, sum2) &amp;#123;    return sum1 + sum2;&amp;#125;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-13T13:18:00.991Z">
+<meta property="og:updated_time" content="2020-03-14T11:50:11.151Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -207,8 +207,38 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>ECMAScript 中的函数实际上是对象。每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数实际上是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。函数通常是使用函数声明语法定义的，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">sum1, sum2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sum1 + sum2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
+<p>这与下面使用函数表达式定义函数的方式几乎相差无几：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sum1 + sum2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码定义了变量 <code>sum</code> 并将其初始化为一个函数。使用函数表达式定义函数时，没有必要使用函数名 —— 通过变量 <code>sum</code> 既可以引用函数。</p>
+<p>最后一种定义函数的方式是使用 Function 构造函数。Function 构造函数可以接收任意数量的参数，但最后一个参数始终都被看成是函数体，而前面的参数则枚举出了新函数的参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"num1"</span>, <span class="string">"num2"</span>, <span class="string">"return num1 + num2"</span>); <span class="comment">// 不推荐</span></span><br></pre></td></tr></table></figure>
+
+<p>从技术角度看，这是一个函数表达式。但是，不推荐使用这种方法定义函数，因为这种语法会导致解析两次代码：第一次是解析常规 ECMAScript 代码，第二次是解析传入构造函数中的字符串。</p>
+<p>由于函数名仅仅是指向函数的指针，因此函数名与包含对象指针的其他变量没有什么不同。换句话说，一个函数可能会有多个名字，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line">alert(sum(<span class="number">10</span>, <span class="number">10</span>)); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherSum = sum;</span><br><span class="line">alert(anotherSum(<span class="number">10</span>, <span class="number">10</span>)); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line">sum = <span class="literal">null</span>;</span><br><span class="line">alert(anotherSum(<span class="number">10</span>, <span class="number">10</span>)); <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码先定义了一个名为 <code>sum()</code> 的函数，然后又声明了变量 <code>anotherSum</code>，并将其设置为与 <code>sum</code> 相等（使用不带圆括号的函数名是访问函数指针，而非调用函数）。此时，<code>anotherSum</code> 和 <code>sum</code> 就都指向了同一个函数，因此 <code>anotherSum()</code> 也可以被调用并返回结果。即使将 <code>sum</code> 设置为 <code>null</code>，让它与函数“断绝关系”，但仍然可以正常调用 <code>anotherSum()</code>。</p>
+<h1 id="1-没有重载"><a href="#1-没有重载" class="headerlink" title="1.没有重载"></a>1.没有重载</h1><p>将函数名想象为指针，有助于理解为什么 ECMAScript 中没有函数重载的概念。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addSomeNumber</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">200</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = addSomeNumber(<span class="number">100</span>); <span class="comment">// 300</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中声明了两个同名函数，而结果则是后面的函数覆盖了前面的函数。以上代码实际上与下面的代码没什么区别：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addSomeNumber = <span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">100</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addSomeNumber = <span class="function"><span class="keyword">function</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">200</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = addSomeNumber(<span class="number">100</span>); <span class="comment">// 300</span></span><br></pre></td></tr></table></figure>
+
+<p>通过观察重写之后的代码，可以清楚看到，在创建第二个函数时，实际上覆盖了引用第一个函数的变量 <code>addSomeNumber</code>。</p>
+<h1 id="2-函数声明与函数表达式"><a href="#2-函数声明与函数表达式" class="headerlink" title="2.函数声明与函数表达式"></a>2.函数声明与函数表达式</h1><p>解析器在向执行环境中加载数据时，对函数声明与函数表达式并非一视同仁。解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(sum(<span class="number">10</span>, <span class="number">10</span>));</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码可以正常运行。因为在代码开始执行之前，解析器就通过一个名为函数声明提升（function declaration hoisting）的过程，读取并将函数声明添加到执行环境中。对代码求值时，JavaScript 引擎在第一遍会声明函数并将它们放到源代码树的顶部。所以，即使声明函数的代码在调用它的代码后面，JavaScript 引擎也能把函数声明提升到顶部。如果像下面例子所示的，把函数声明改为等价的函数表达式，就会在执行期间导致错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(sum(<span class="number">10</span>, <span class="number">10</span>));</span><br><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码之所以会在运行期间产生错误，原因在于函数位于一个初始化语句中，而不是一个函数声明。换句话说，在执行到函数所在的语句之前，变量 <code>sum</code> 中不会保存有对函数的引用；而且，由于第一行代码就会代指 “unexpected identifier”（意外标识符）错误，实际上也不会执行到下一行。</p>
+<p>除了什么时候可以通过变量访问函数这点区别外，函数声明与函数表达式的语法其实是等价的。</p>
+<p><em>也可以同时使用函数声明和函数表达式，例如 var sum = function sum() {}。不过，这种语法在 Safari 中导致错误。</em></p>
+<h1 id="3-作为值的函数"><a href="#3-作为值的函数" class="headerlink" title="3.作为值的函数"></a>3.作为值的函数</h1>
       
 
       
@@ -362,7 +392,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-没有重载"><span class="toc-number">1.</span> <span class="toc-text">1.没有重载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-函数声明与函数表达式"><span class="toc-number">2.</span> <span class="toc-text">2.函数声明与函数表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-作为值的函数"><span class="toc-number">3.</span> <span class="toc-text">3.作为值的函数</span></a></li></ol>
                     </div>
                 </span>
                         </div>
