@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 提供了 3 个特殊的引用类型：Boolean、Number 和 String。这些类型具有与各自的基本类型相应的特殊行为。实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作这些数据。看下面的例子： 12var s1 = &quot;some text&quot;;var s2 = s1.substring(2);">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-19T11:42:30.022Z">
+<meta property="og:updated_time" content="2020-03-20T03:51:49.544Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -227,7 +227,27 @@
 <p>在此，第二行代码试图为字符串 <code>s1</code> 添加一个属性。但是，当第三行代码再次访问 <code>s1</code> 时，其属性不见了。问题的原因就是第二行创建的 String 对象在执行第三行代码时已经被销毁了。第三行代码又创建了一个新的 String 对象，而该对象没有 <code>color</code> 属性。</p>
 <p>当然，可以显式地调用 Boolean、Number 和 String 来创建基本包装类型的对象。不过，应该在绝对必要的情况下再这样做，因为这种做法容易混淆基本类型和引用类型的值。</p>
 <p>对基本包装类型的实例调用 <code>typeof</code> 会返回 <code>&quot;object&quot;</code>，而且所有基本包装类型的对象都会被转换为布尔值 <code>true</code>。</p>
+<p>Object 构造函数也会像工厂方法一样，根据传入值的类型返回相应基本包装类型的实例。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(<span class="string">"some text"</span>);</span><br><span class="line">alert(obj <span class="keyword">instanceof</span> <span class="built_in">String</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
+<p>把字符串传给 Object 构造函数，就会创建 String 的实例；而传入数值参数会得到 Number 的实例，传入布尔值参数就会得到 Boolean 的实例。</p>
+<p>要注意的是，使用 <code>new</code> 调用基本包装类型的构造函数，与直接调用同名的转型函数是不一样的。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="string">"25"</span>;</span><br><span class="line"><span class="keyword">var</span> number = <span class="built_in">Number</span>(value); <span class="comment">// 转型函数</span></span><br><span class="line">alert(<span class="keyword">typeof</span> number); <span class="comment">// "number"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Number</span>(value); <span class="comment">// 构造函数</span></span><br><span class="line">alert(<span class="keyword">typeof</span> obj); <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，变量 <code>number</code> 中保存的是基本类型的值 25，而变量 <code>obj</code> 中保存的是 Number 的实例。</p>
+<p>每个基本包装类型都提供了操作相应基本类型值的便捷方法。</p>
+<h1 id="1-Boolean-类型"><a href="#1-Boolean-类型" class="headerlink" title="1.Boolean 类型"></a>1.Boolean 类型</h1><p>Boolean 类型是与布尔值对应的引用类型。要创建 Boolean 对象，可以像下面这样调用 Boolean 构造函数并传入 <code>true</code> 或 <code>false</code> 值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> booleanObject = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Boolean 类型的实例重写了 <code>valueOf()</code> 方法，返回基本类型值 <code>true</code> 或 <code>false</code>；重写了 <code>toString()</code> 方法，返回字符串 <code>&quot;true&quot;</code> 和 <code>&quot;false&quot;</code>。不过 Boolean 对象在 ES 中的用处不大，因为它们经常会造成人们的误解。其中最常见的问题就是在布尔表达式中使用 Boolean 对象，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> falseObject = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">var</span> result = falseObject &amp;&amp; <span class="literal">true</span>;</span><br><span class="line">alert(result); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> falseValue = <span class="literal">false</span>;</span><br><span class="line">result = falseValue &amp;&amp; <span class="literal">true</span>;</span><br><span class="line">alert(result); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们使用 <code>false</code> 值创建了一个 Boolean 对象。然后，将这个对象与基本类型值 <code>true</code> 构成了逻辑与表达式。由于布尔表达式中的所有对象都会被转换为 <code>true</code>，因此 <code>falseObject</code> 对象在布尔表达式中代表的是 <code>true</code>，结果 <code>true &amp;&amp; true</code> 就等于 <code>true</code> 了。</p>
+<p>基本类型与引用类型的布尔值还有两个区别。首先，<code>typeof</code> 操作符对基本类型返回 <code>&quot;boolean&quot;</code>，而对引用类型返回 <code>&quot;object&quot;</code>。其次，由于 Boolean 对象是 Boolean 类型的实例，所以使用 <code>instanceof</code> 操作符测试 Boolean 对象会返回 <code>true</code>，而测试基本类型的布尔值则返回 <code>false</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="keyword">typeof</span> falseObject); <span class="comment">// object</span></span><br><span class="line">alert(<span class="keyword">typeof</span> falseValue); <span class="comment">// boolean</span></span><br><span class="line">alert(falseObject <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>); <span class="comment">// true</span></span><br><span class="line">alert(falseValue <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>理解基本类型的布尔值与 Boolean 对象之间的区别非常重要。同时，建议永远不要使用 Boolean 对象。</p>
+<h1 id="2-Number-类型"><a href="#2-Number-类型" class="headerlink" title="2.Number 类型"></a>2.Number 类型</h1>
       
 
       
@@ -381,7 +401,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li></ol>
                     </div>
                 </span>
                         </div>
