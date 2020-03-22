@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 提供了 3 个特殊的引用类型：Boolean、Number 和 String。这些类型具有与各自的基本类型相应的特殊行为。实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作这些数据。看下面的例子： 12var s1 = &quot;some text&quot;;var s2 = s1.substring(2);">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-21T02:22:26.829Z">
+<meta property="og:updated_time" content="2020-03-22T07:08:38.724Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -274,7 +274,38 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numberObject = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">var</span> numberValue = <span class="number">10</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> numberObject); <span class="comment">// "object"</span></span><br><span class="line">alert(<span class="keyword">typeof</span> numberValue); <span class="comment">// "number"</span></span><br><span class="line">alert(numberObject <span class="keyword">instanceof</span> <span class="built_in">Number</span>); <span class="comment">// true</span></span><br><span class="line">alert(numberValue <span class="keyword">instanceof</span> <span class="built_in">Number</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>在使用 <code>typeof</code> 操作符检测基本类型数值时，始终会返回 <code>&quot;number&quot;</code>，而在测试 Number 对象时，则会返回 <code>&quot;object&quot;</code>。类似地，Number 对象是 Number 类型的实例，而基本类型的数值则不是。</p>
-<h1 id="3-String-类型"><a href="#3-String-类型" class="headerlink" title="3.String 类型"></a>3.String 类型</h1>
+<h1 id="3-String-类型"><a href="#3-String-类型" class="headerlink" title="3.String 类型"></a>3.String 类型</h1><p>String 类型是字符串的对象包装类型，可以像下面这样使用 String 构造函数来创建。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringObject = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>String 对象的方法也可以在所有基本的字符串值中访问到。其中，继承的 <code>valueOf()</code>、<code>toLocaleString()</code> 和 <code>toString()</code> 方法，都返回对象所表示的基本字符串值。</p>
+<p>String 类型的每个实例都有一个 <code>length</code> 属性，表示字符串中包含多个字符。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringlValue.length); <span class="comment">// "11"</span></span><br></pre></td></tr></table></figure>
+
+<p>应该注意的是，即使字符串中包含双字节字符（不是占一个字节的 ASCII 字符），每个字符也仍然算一个字符。</p>
+<p>String 类型提供了很多方法，用于辅助完成对 ES 中字符串的解析和操作。</p>
+<h1 id="1-字符方法"><a href="#1-字符方法" class="headerlink" title="1.字符方法"></a>1.字符方法</h1><p>两个用于访问字符串中特定字符的方法是：<code>charAt()</code> 和 <code>charCodeAt()</code>。这两个方法都接收一个参数，即基于 0 的字符位置。其中，<code>charAt()</code> 方法以单字符字符串的形式返回给定位置的那个字符。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringValue.charAt(<span class="number">1</span>)); <span class="comment">// "e"</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串 <code>&quot;hello world&quot;</code> 位置 1 处的字符是 <code>&quot;e&quot;</code>，因此调用 <code>charAt(1)</code> 就返回了 <code>&quot;e&quot;</code>。如果你想得到的不是字符而是字符编码，那么就要像下面这样使用 <code>charCodeAt()</code> 了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringValue.charCodeAt(<span class="number">1</span>)); <span class="comment">// 输出"101"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子输出的是 <code>&quot;101&quot;</code>，也就是小写字母 <code>&quot;e&quot;</code> 的字符编码。</p>
+<p>ES5 还定义了另一个访问个别字符的方法。在支持此方法的浏览器中，可以使用方括号加数字索引来访问字符串中的特定字符，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringValue[<span class="number">1</span>]); <span class="comment">// "e"</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，在 IE7 及更早版本的浏览器中使用这种语法，会返回 <code>undefined</code> 值。</p>
+<h1 id="2-字符串操作方法"><a href="#2-字符串操作方法" class="headerlink" title="2.字符串操作方法"></a>2.字符串操作方法</h1><p>字符串的 <code>concat()</code> 方法用于将一或多个字符串拼接起来，返回拼接得到的新字符串。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello "</span>;</span><br><span class="line"><span class="keyword">var</span> result = stringValue.concat(<span class="string">"world"</span>);</span><br><span class="line">alert(result); <span class="comment">// "hello world"</span></span><br><span class="line">alert(stringValue); <span class="comment">// "hello"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，通过 <code>stringValue</code> 调用 <code>concat()</code> 方法返回的结果是 <code>&quot;hello world</code> —— 但 <code>stringValue</code> 的值则保持不变。实际上，<code>concat()</code> 方法可以接受任意多个参数，也就是说可以通过它拼接任意多个字符串。再看一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello "</span>;</span><br><span class="line"><span class="keyword">var</span> result = stringValue.concat(<span class="string">"world"</span>, <span class="string">"!"</span>);</span><br><span class="line"></span><br><span class="line">alert(result); <span class="comment">// "hello world!"</span></span><br><span class="line">alert(stringValue); <span class="comment">// "hello"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子将 <code>&quot;world&quot;</code> 和 <code>&quot;!&quot;</code> 拼接到了 <code>&quot;hello&quot;</code> 的末尾。虽然 <code>concat()</code> 是专门用来拼接字符串的方法，但实践中使用更多的还是加号操作符（<code>+</code>）。而且，使用加号操作符在大多数情况下都比使用 <code>concat()</code> 方法要简便易行（特别是在拼接多个字符串的情况下）。</p>
+<p>ES 还提供了三个基于子字符串创建新字符串的方法：<code>slice()</code>、<code>substr()</code> 和 <code>substring()</code>。这三个方法都会返回被操作字符串的一个子字符串，而且也都接受一或两个参数。第一个参数指定子字符串的开始位置，第二个参数（在指定的情况下）表示子字符串到哪里结束。具体来说，<code>slice()</code> 和 <code>substring()</code> 的第二个参数指定的是子字符串最后一个字符后面的位置。而 <code>substr()</code> 的第二个参数指定的则是返回的字符个数。如果没有给这些方法传递第二个参数，则将字符串的长度作为结束位置。与 <code>concat()</code> 方法一样，<code>slice()</code>、<code>substr()</code> 和 <code>substring()</code> 也不会修改字符串本身的值 —— 它们只是返回一个基本类型的字符串值，对原始字符串没有任何影响。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringValue.slice(<span class="number">3</span>)); <span class="comment">// "lo world"</span></span><br><span class="line">alert(stringValue.substring(<span class="number">3</span>)); <span class="comment">// "lo world"</span></span><br><span class="line">alert(stringValue.substr(<span class="number">3</span>)); <span class="comment">// "lo world"</span></span><br><span class="line">alert(stringValue.slice(<span class="number">3</span>, <span class="number">7</span>)); <span class="comment">// "lo w"</span></span><br><span class="line">alert(stringValue.substring(<span class="number">3</span>, <span class="number">7</span>)); <span class="comment">// "lo w"</span></span><br><span class="line">alert(stringValue.substr(<span class="number">3</span>, <span class="number">7</span>)); <span class="comment">// "lo worl"</span></span><br></pre></td></tr></table></figure>
+
+<p>当传递给这些方法的参数是负值时，<code>slice()</code> 方法会将传入的负值与字符串的长度相加，<code>substr()</code> 方法将负的第一个参数加上字符串的长度，而降负的第二个参数转换为 0。最后，<code>substring()</code> 方法会把所有负值参数都转换为 0。</p>
+
       
 
       
@@ -428,7 +459,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-字符方法"><span class="toc-number">4.</span> <span class="toc-text">1.字符方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-字符串操作方法"><span class="toc-number">5.</span> <span class="toc-text">2.字符串操作方法</span></a></li></ol>
                     </div>
                 </span>
                         </div>
