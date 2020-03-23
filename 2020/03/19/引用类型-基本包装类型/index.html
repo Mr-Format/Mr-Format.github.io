@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 提供了 3 个特殊的引用类型：Boolean、Number 和 String。这些类型具有与各自的基本类型相应的特殊行为。实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作这些数据。看下面的例子： 12var s1 = &quot;some text&quot;;var s2 = s1.substring(2);">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-23T03:09:39.526Z">
+<meta property="og:updated_time" content="2020-03-23T12:09:54.686Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -320,7 +320,68 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"Lorem ipsum dolor sit amet, consectetur adipisicing elit"</span>;</span><br><span class="line"><span class="keyword">var</span> positions = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> pos = stringValue.indexOf(<span class="string">"e"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(pos &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    position.push(pos);</span><br><span class="line">    pos = stringValue.indexOf(<span class="string">"e"</span>, pos + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(position); <span class="comment">// "3, 24, 32, 35, 52"</span></span><br></pre></td></tr></table></figure>
 
 <p>这个例子通过不断增加 <code>indexOf()</code> 方法开始查找的位置，遍历了一个长字符串。在循环之外，首先找到了 <code>&quot;e&quot;</code> 在字符串中的初始位置；而进入循环后，则每次都给 <code>indexOf()</code> 传递上一次的位置加 <code>1</code>。这样就确保了每次新搜索都从上一次找到的字符串的后面开始。每次搜索返回的位置一次被保存在数组 <code>position</code> 中，以便将来使用。</p>
-<h2 id="3-4-trim-方法"><a href="#3-4-trim-方法" class="headerlink" title="3.4 trim() 方法"></a>3.4 trim() 方法</h2>
+<h2 id="3-4-trim-方法"><a href="#3-4-trim-方法" class="headerlink" title="3.4 trim() 方法"></a>3.4 trim() 方法</h2><p>ES5 为所有字符串定义了 <code>trim()</code> 方法。这个方法会创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"    hello world    "</span>;</span><br><span class="line"><span class="keyword">var</span> trimmedStringValue = stringValue.trim();</span><br><span class="line">alert(stringValue); <span class="comment">// "    hello world    "</span></span><br><span class="line">alert(trimmedStringValue); <span class="comment">// "hello world"</span></span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>trim()</code> 返回的是字符串的副本，所以原始字符串中的前置及后缀空格会保持不变。支持这个方法的浏览器有 IE9+、Firefox 3.5+、Safari 5+、Opera 10.5+ 和 Chrome。此外，Firefox 3.5+、Safati 5+ 和 Chrome 8+ 还支持非标准的 <code>trimLeft()</code> 和 <code>trimRight()</code> 方法，分别用于删除字符串开头和末尾的空格。</p>
+<h2 id="3-5-字符串大小写转换方法"><a href="#3-5-字符串大小写转换方法" class="headerlink" title="3.5 字符串大小写转换方法"></a>3.5 字符串大小写转换方法</h2><p>ES 中设计字符串大小写转换的方法有 4 个：<code>toLowerCase()</code>、<code>toLocaleLowerCase()</code>、<code>toUpperCase()</code> 和 <code>toLocaleUpperCase()</code>。其中，<code>toLowerCase()</code> 和 <code>toUpperCase()</code> 是两个经典的方法，而 <code>toLocaleLowerCase()</code> 和 <code>toLocaleUpperCase()</code> 方法则是针对特定地区的实现。对有些地区来说，针对地区的方法与其通用方法得到的结果相同，但少数语言会为 Unicode 大小写转换应用特殊的规则，这时候就必须使用针对地区的方法来保证实现正确的转换。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"hello world"</span>;</span><br><span class="line">alert(stringValue.toLocaleUpperCase()); <span class="comment">// "HELLO WORLD"</span></span><br><span class="line">alert(stringValue.toUpperCase()); <span class="comment">// "HELLO WORLD"</span></span><br><span class="line">alert(stringValue.toLocaleLowerCase()); <span class="comment">// "hello world"</span></span><br><span class="line">alert(stringValue.toLowerCase()); <span class="comment">// "hello world"</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码调用的 <code>toLocaleUpperCase()</code> 和 <code>toUpperCase()</code> 都返回了 <code>&quot;HELLO WORLD&quot;</code>，就像调用 <code>toLocaleLowerCase()</code> 和 <code>toLowerCase()</code> 都返回 <code>&quot;hello world&quot;</code> 一样。一般来说，在不知道自己的代码将在哪种语言环境中运行的情况下，还是使用针对地区的方法更稳妥一些。</p>
+<h2 id="3-6-字符串的模式匹配方法"><a href="#3-6-字符串的模式匹配方法" class="headerlink" title="3.6 字符串的模式匹配方法"></a>3.6 字符串的模式匹配方法</h2><p>String 类型定义了几个用于在字符串中匹配模式的方法。第一个方法就是 <code>match()</code>，在字符串上调用这个方法，本质上与调用 RexExp 的 <code>exec()</code> 方法相同。<code>match()</code> 方法只接受一个参数，要么是一个正则表达式，要么是一个 RegExp 对象。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"cat, bat, sat, fat"</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/.at/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 与 pattern.exec(text) 相同</span></span><br><span class="line"><span class="keyword">var</span> matches = text.match(pattern);</span><br><span class="line">alert(matches.index); <span class="comment">// 0</span></span><br><span class="line">alert(matches[<span class="number">0</span>]); <span class="comment">// "cat"</span></span><br><span class="line">alert(pattern.lastIndex); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<p>本例中的 <code>match()</code> 方法返回了一个数组；如果是调用 RegExp 对象的 <code>exec()</code> 方法并传递本例中的字符串作为参数，那么也会得到与此相同的数组：数组的第一项是与整个模式匹配的字符串，之后的每一项（如果有）保存着与正则表达式中的捕获组匹配的字符串。</p>
+<p>另一个用于查找模式的方法是 <code>search()</code>。这个方法的唯一参数是与 <code>match()</code> 方法的参数相同：由字符串或 RegExp 对象指定的一个正则表达式。<code>search()</code> 方法返回字符串中第一个匹配项的索引；如果没有找到匹配项，则返回 <code>-1</code>。而且，<code>search()</code> 方法始终是从字符串开头向后查找模式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"cat, bat, sat, fat"</span>;</span><br><span class="line"><span class="keyword">var</span> pos = text.search(<span class="regexp">/at/</span>);</span><br><span class="line">alert(pos); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的 <code>search()</code> 方法返回 <code>1</code>，即 <code>&quot;at&quot;</code> 在字符串中第一次出现的位置。</p>
+<p>为了简化替换子字符串的操作，ES 提供了 <code>replace()</code> 方法，这个方法接受两个参数：第一个参数可以是一个 RegExp 对象或者一个字符串（这个字符串不会被转换成正则表达式）；第二个参数可以是一个字符串或者一个函数。如果第一个参数是字符串，那么只会替换第一个子字符串。要想替换所有子字符串，唯一的办法就是提供一个正则表达式，而且要指定全局（<code>g</code>）标志，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"cat, bat, sat, fat"</span>;</span><br><span class="line"><span class="keyword">var</span> result = text.replace(<span class="string">"at"</span>, <span class="string">"ond"</span>);</span><br><span class="line">alert(result); <span class="comment">// "cond, bat, sat, fat"</span></span><br><span class="line"></span><br><span class="line">result = text.replace(<span class="regexp">/at/g</span>, <span class="string">"ond"</span>);</span><br><span class="line">alert(result); <span class="comment">// "cond, bond, sond, fond"</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，首先传入 <code>replace()</code> 方法的是字符串 <code>&quot;at&quot;</code> 和替换用的字符串 <code>&quot;ond&quot;</code>。替换的结果是把 <code>&quot;cat&quot;</code> 变成了 <code>&quot;cond&quot;</code>，但字符串中的其他字符并没有受到影响。然后，通过将第一个参数修改为带有全局标志的正则表达式，就将全部 <code>&quot;at&quot;</code> 都替换成了 <code>&quot;ond&quot;</code>。</p>
+<p>如果第二个参数是字符串，那么还可以使用一些特殊的字符序列，将正则表达式操作得到的值插入到结果字符串中。下表列出了 ES 提供的这些特殊的字符序列。</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符序列</th>
+<th>替换文本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$$</td>
+<td>$</td>
+</tr>
+<tr>
+<td align="center">$&amp;</td>
+<td>匹配整个模式的子字符串。与 RegExp.lastMatch 的值相同</td>
+</tr>
+<tr>
+<td align="center">$’</td>
+<td>匹配的子字符串之前的子字符串。与 RegExp.leftContext 的值相同</td>
+</tr>
+<tr>
+<td align="center">$`</td>
+<td>匹配的子字符串之后的子字符串。与 RegExp.rightContext 的值相同</td>
+</tr>
+<tr>
+<td align="center">$n</td>
+<td>匹配的第 n 个捕获组的子字符串，其中 n 等于 0~9。例如，$1 是匹配第一个捕获组的子字符串，$2 是匹配第二个捕获组的子字符串，以此类推。如果正则表达式中没有定义捕获组，则使用空字符串</td>
+</tr>
+<tr>
+<td align="center">$nn</td>
+<td>匹配第 nn 个捕获组的子字符串，其中 nn 等于 01~99。例如，$01 是匹配第一个捕获组的子字符串，$02 是匹配第二个捕获组的子字符串，以此类推。如果正则表达式中没有定义捕获组，则使用空字符串</td>
+</tr>
+</tbody></table>
+<p>通过这些特殊的字符序列，可以使用最近一次匹配结果中的内容，如下面的例子所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">"cat, bat, sat, fat"</span>;</span><br><span class="line">result = text.replace(<span class="regexp">/(.at)/g</span>, <span class="string">"word ($1)"</span>);</span><br><span class="line">alert(result); <span class="comment">// word (cat), word (bat), word (sat), word (fat)</span></span><br></pre></td></tr></table></figure>
+
+<p>在此，每个以 <code>&quot;at&quot;</code> 结尾的单词都被替换了，替换结果是 <code>&quot;word&quot;</code> 后跟一对圆括号，而圆括号中是被字符序列 <code>$1</code> 所替换的单词。</p>
+<p><code>replace()</code> 方法的第二个参数也可以是一个函数。在只有一个匹配项（即与模式匹配的字符串）的情况下，会向这个函数传递 3 个参数：模式的匹配项、模式匹配项在字符串中的位置和原始字符串。在正则表达式中定义了多个捕获组的情况下，传递给函数的参数依次是模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项 ……，但最后两个参数仍然分别是模式的匹配项在字符串中的位置和原始字符串。这个函数应该返回一个字符串，表示应该被替换的匹配项使用函数作为 <code>replace()</code> 方法的第二个参数可以实现更加精细的替换操作，看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">htmlEscape</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text.replace(<span class="regexp">/[&lt;&gt;"&amp;]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match, pos, originalText</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(match) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&lt;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;lt;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&gt;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;gt;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&amp;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;amp;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"\""</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;quot;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(htmlEscape(<span class="string">"&lt;p class=\"greeting\"&gt;Hello world!&lt;/p&gt;"</span>));</span><br><span class="line"><span class="comment">// &amp;lt;p class=&amp;quot;greeting&amp;quot;&amp;gt;Hello world!&amp;lt;/p&amp;gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里，我们为插入 HTML 代码定义了函数 <code>htmlEscape()</code>，这个函数能够转义 4 个字符：小于号、大于号、和号以及双引号。实现这种转义的最简单方式，就是使用正则表达式查找这几个字符，然后定义一个能够针对每个匹配的字符返回特定 HTML 实体的函数。</p>
+
       
 
       
@@ -474,7 +535,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-字符方法"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 字符方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-字符串操作方法"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 字符串操作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-字符串位置方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 字符串位置方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-trim-方法"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 trim() 方法</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-字符方法"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 字符方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-字符串操作方法"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 字符串操作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-字符串位置方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 字符串位置方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-trim-方法"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 trim() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-字符串大小写转换方法"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 字符串大小写转换方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-字符串的模式匹配方法"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 字符串的模式匹配方法</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
