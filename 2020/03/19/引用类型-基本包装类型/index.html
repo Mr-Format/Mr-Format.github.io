@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMAScript 提供了 3 个特殊的引用类型：Boolean、Number 和 String。这些类型具有与各自的基本类型相应的特殊行为。实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作这些数据。看下面的例子： 12var s1 = &quot;some text&quot;;var s2 = s1.substring(2);">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-23T12:09:54.686Z">
+<meta property="og:updated_time" content="2020-03-24T07:45:14.948Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -381,6 +381,89 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">htmlEscape</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text.replace(<span class="regexp">/[&lt;&gt;"&amp;]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match, pos, originalText</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(match) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&lt;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;lt;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&gt;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;gt;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"&amp;"</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;amp;"</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"\""</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"&amp;quot;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(htmlEscape(<span class="string">"&lt;p class=\"greeting\"&gt;Hello world!&lt;/p&gt;"</span>));</span><br><span class="line"><span class="comment">// &amp;lt;p class=&amp;quot;greeting&amp;quot;&amp;gt;Hello world!&amp;lt;/p&amp;gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>这里，我们为插入 HTML 代码定义了函数 <code>htmlEscape()</code>，这个函数能够转义 4 个字符：小于号、大于号、和号以及双引号。实现这种转义的最简单方式，就是使用正则表达式查找这几个字符，然后定义一个能够针对每个匹配的字符返回特定 HTML 实体的函数。</p>
+<p>最后一个与模式匹配有关的方法是 <code>split()</code>，这个方法可以基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中。分隔符可以是字符串，也可以是一个 RegExp 对象（这个方法不会将字符串看成正则表达式）。<code>split()</code> 方法可以接受可选的第二个参数，用于指定数组的大小，以便确保返回的数组不会超过既定大小。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colorText = <span class="string">"red,blue,green,yellow"</span>;</span><br><span class="line"><span class="keyword">var</span> colors1 = colorText.split(<span class="string">","</span>); <span class="comment">// ["red", "blue", "green", "yellow"]</span></span><br><span class="line"><span class="keyword">var</span> colors2 = colorText.split(<span class="string">","</span>, <span class="number">2</span>); <span class="comment">// ["red", "blue"]</span></span><br><span class="line"><span class="keyword">var</span> colors3 = colorText.split(<span class="regexp">/[^\,]+/</span>); <span class="comment">// ["", ",", ",", ",", ""]</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>colorText</code> 是逗号分隔的颜色名字符串。基于该字符串调用 <code>spit(&quot;,&quot;)</code> 会得到一个包含其中颜色名的数组，用于分割字符串的分隔符是逗号。为了将数组截短，让它只包含两项，可以为 <code>split()</code> 方法传递第二个参数 <code>2</code>。最后，通过使用正则表达式，还可以取得包含逗号字符的数组。需要注意的是，在最后一次调用 <code>spit()</code> 返回的数组中，第一项和最后一项是两个空字符串。之所以会这样，是因为通过正则表达式指定的分隔符出现在了字符串的开头（即子字符串 <code>&quot;red&quot;</code>）和末尾（即子字符串 <code>&quot;yellow&quot;</code>）。</p>
+<p>对 <code>split()</code> 中正则表达式的支持因浏览器而异。尽管对于简单的模式没有什么差别，但对于未发现匹配项以及带有捕获组的模式，匹配的行为就大不相同了。以下是几种常见的差别。</p>
+<ul>
+<li>IE8 及之前版本会忽略捕获组。ECMA-262 规定应该把捕获组拼接到结果数组中。IE9 能正确地在结果中包含捕获组。</li>
+<li>Firefox 3.6 及之前版本在捕获组未找到匹配项时，会在结果数组中包含空字符串；ECMA-262 规定没有匹配项的捕获组在结果数组中应该用 <code>undefined</code> 表示。</li>
+</ul>
+<p>在正则表达式中使用捕获组时还有其他微妙的差别。在使用这种正则表达式时，一定要在各种浏览器下多做一些测试。</p>
+<h2 id="3-7-localeCompare-方法"><a href="#3-7-localeCompare-方法" class="headerlink" title="3.7 localeCompare() 方法"></a>3.7 localeCompare() 方法</h2><p>与操作字符串有关的最后一个方法是 <code>localeCompare()</code>，这个方法比较两个字符串，并返回下列值中的一个：</p>
+<ul>
+<li>如果字符串在字母表中应该排在字符串参数之前，则返回一个负数（大多数情况下是 -1）；</li>
+<li>如果字符串等于字符串参数，则返回 0；</li>
+<li>如果字符串在字母表中应该排在字符串参数之后，则返回一个整数（大多数情况下是 1）。</li>
+</ul>
+<p>下面是几个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = <span class="string">"yellow"</span>;</span><br><span class="line">alert(stringValue.localeCompare(<span class="string">"brick"</span>)); <span class="comment">// 1</span></span><br><span class="line">alert(stringValue.localeCompare(<span class="string">"yellow"</span>)); <span class="comment">// 0</span></span><br><span class="line">alert(stringValue.localeCompare(<span class="string">"zoo"</span>)); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>localeCompare()</code> 返回的数值取决于实现，所以最好是像下面例子所示的这样使用这个方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">determineOrder</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = stringValue.localeCompare(value);</span><br><span class="line">    <span class="keyword">if</span> (result &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        alert(<span class="string">"The string 'yellow' comes before the string '"</span> + value + <span class="string">"'."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (result &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        alert(<span class="string">"The string 'yellow' comes after the string '"</span> + value + <span class="string">"'."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"The string 'yellow' is equal to the string '"</span> + value + <span class="string">"'."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">determineOrder(<span class="string">"brick"</span>);</span><br><span class="line">determineOrder(<span class="string">"yellow"</span>);</span><br><span class="line">determineOrder(<span class="string">"zoo"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>使用这种结构，就可以确保自己发代码在任何实现中都可以正确地运行了。</p>
+<h2 id="3-8-fromCharCode-方法"><a href="#3-8-fromCharCode-方法" class="headerlink" title="3.8 fromCharCode() 方法"></a>3.8 fromCharCode() 方法</h2><p>另外，String 构造函数本身还有一个静态方法：<code>fromCharCode()</code>。这个方法的任务是接收一或多个字符编码，然后将它们转换成一个字符串。从本质上来看，这个方法与实例方法 <code>charCodeAt()</code> 执行的是相反的操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">String</span>.fromCharCode(<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>)); <span class="comment">// "hello"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-9-HTML-方法"><a href="#3-9-HTML-方法" class="headerlink" title="3.9 HTML 方法"></a>3.9 HTML 方法</h2><p>早期的 Web 浏览器提供商觉察到了使用 JavaScript 动态格式化 HTML 的需求。于是，这些提供商就扩展了标准，实现了一些专门用于简化常见 HTML 格式化任务的方法。下表列出了这些 HTML 方法。不过，应该尽量不使用这些方法，因为它们创建的标记通常无法表达语义。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">输出结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">anchor(name)</td>
+<td align="center">&lt;a name=”name”&gt;string&lt;/a&gt;</td>
+</tr>
+<tr>
+<td align="center">big()</td>
+<td align="center">&lt;big&gt;string&lt;/big&gt;</td>
+</tr>
+<tr>
+<td align="center">bold()</td>
+<td align="center">&lt;b&gt;string&lt;/b&gt;</td>
+</tr>
+<tr>
+<td align="center">fixed()</td>
+<td align="center">&lt;tt&gt;string&lt;/tt&gt;</td>
+</tr>
+<tr>
+<td align="center">fontcolor(color)</td>
+<td align="center">&lt;font color=”color”&gt;string&lt;/font&gt;</td>
+</tr>
+<tr>
+<td align="center">fontsize(size)</td>
+<td align="center">&lt;font size=”size”&gt;string&lt;/font&gt;</td>
+</tr>
+<tr>
+<td align="center">italics()</td>
+<td align="center">&lt;i&gt;string&lt;/i&gt;</td>
+</tr>
+<tr>
+<td align="center">link(url)</td>
+<td align="center">&lt;a href=”url”&gt;string&lt;/a&gt;</td>
+</tr>
+<tr>
+<td align="center">small()</td>
+<td align="center">&lt;small&gt;string&lt;/small&gt;</td>
+</tr>
+<tr>
+<td align="center">strike()</td>
+<td align="center">&lt;strike&gt;string&lt;/strike&gt;</td>
+</tr>
+<tr>
+<td align="center">sub()</td>
+<td align="center">&lt;sub&gt;string&lt;/sub&gt;</td>
+</tr>
+<tr>
+<td align="center">sup()</td>
+<td align="center">&lt;sup&gt;string&lt;/sup&gt;</td>
+</tr>
+</tbody></table>
 
       
 
@@ -535,7 +618,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-字符方法"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 字符方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-字符串操作方法"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 字符串操作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-字符串位置方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 字符串位置方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-trim-方法"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 trim() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-字符串大小写转换方法"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 字符串大小写转换方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-字符串的模式匹配方法"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 字符串的模式匹配方法</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Boolean-类型"><span class="toc-number">1.</span> <span class="toc-text">1.Boolean 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Number-类型"><span class="toc-number">2.</span> <span class="toc-text">2.Number 类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-String-类型"><span class="toc-number">3.</span> <span class="toc-text">3.String 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-字符方法"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 字符方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-字符串操作方法"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 字符串操作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-字符串位置方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 字符串位置方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-trim-方法"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 trim() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-字符串大小写转换方法"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 字符串大小写转换方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-字符串的模式匹配方法"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 字符串的模式匹配方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-localeCompare-方法"><span class="toc-number">3.7.</span> <span class="toc-text">3.7 localeCompare() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-fromCharCode-方法"><span class="toc-number">3.8.</span> <span class="toc-text">3.8 fromCharCode() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9-HTML-方法"><span class="toc-number">3.9.</span> <span class="toc-text">3.9 HTML 方法</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
