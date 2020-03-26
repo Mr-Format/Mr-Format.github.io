@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="ECMA-262 对内置对象的定义是：“由 ECMAScript 实现提供的、不依赖于宿主环境的对象，这些对象在 ECMAScript 程序执行之前就已经存在了。”意思就是说，不必显式地实例化内置对象，因为它们已经实例化了。常见的内置对象有 Object、Array 和 String 等。另外，ECMA-262 还定义了两个单体内置对象：Global 和 Math。 1.Global 对象Glob">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-26T10:33:09.446Z">
+<meta property="og:updated_time" content="2020-03-26T10:45:30.605Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -395,6 +395,73 @@
 
 <p>总共有 10 个可能的值，而第一个可能的值是 1。而如果想要选择一个介于 2 和 10 之间的值，就应该将上面的代码改成这样：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">9</span> + <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>多数情况下，其实都可以通过一个函数来计算可能值的总数和第一个可能的值，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectFrom</span>(<span class="params">lowerValue, upperValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> choices = upperValue - lowerValue + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * choices + lowerValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num = selectFrom(<span class="number">2</span>, <span class="number">10</span>);</span><br><span class="line">alert(num); <span class="comment">// 介于 2 和 10 之间（包括 2 和 10）的一个数值</span></span><br></pre></td></tr></table></figure>
+
+<p>函数 <code>selectFrom()</code> 接受两个参数：应该返回的最小值和最大值。利用这个函数，可以方便地从数组中随机取出一项，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> colors = [<span class="string">"red"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>, <span class="string">"yellow"</span>, <span class="string">"black"</span>, <span class="string">"purple"</span>, <span class="string">"brown"</span>];</span><br><span class="line"><span class="keyword">var</span> color = colors[selectFrom(<span class="number">0</span>, colors.length - <span class="number">1</span>)];</span><br><span class="line">alert(color); <span class="comment">// 可能是数组中包含的任何一个字符串</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，传递给 <code>selectFrom()</code> 的第二个参数是数组的长度减 1，也就是数组中最后一项的位置。</p>
+<h2 id="2-5-其他方法"><a href="#2-5-其他方法" class="headerlink" title="2.5 其他方法"></a>2.5 其他方法</h2><p>Math 对象中还包含其他一些与完成各种简单或复杂计算有关的方法，下表列出了上面没有介绍到的 Math 对象的方法。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Math.abs(num)</td>
+<td>返回 num 的绝对值</td>
+</tr>
+<tr>
+<td>Math.exp(num)</td>
+<td>返回 Math.E 的 num 次幂</td>
+</tr>
+<tr>
+<td>Math.log(num)</td>
+<td>返回 num 的自然对数</td>
+</tr>
+<tr>
+<td>Math.pow(num, power)</td>
+<td>返回 num 的 power 次幂</td>
+</tr>
+<tr>
+<td>Math.sqrt(num)</td>
+<td>返回 num 的平方根</td>
+</tr>
+<tr>
+<td>Math.acos(x)</td>
+<td>返回 x 的反余弦值</td>
+</tr>
+<tr>
+<td>Math.asin(x)</td>
+<td>返回 x 的反正弦值</td>
+</tr>
+<tr>
+<td>Math.atan(x)</td>
+<td>返回 x 的反正切值</td>
+</tr>
+<tr>
+<td>Math.atan2(y, x)</td>
+<td>返回 y/x 的反正切值</td>
+</tr>
+<tr>
+<td>Math.cos(x)</td>
+<td>返回 x 的余弦值</td>
+</tr>
+<tr>
+<td>Math.sin(x)</td>
+<td>返回 x 的正弦值</td>
+</tr>
+<tr>
+<td>Math.tan(x)</td>
+<td>返回 x 的正切值</td>
+</tr>
+</tbody></table>
+<p>ECMA-262 规定了这些方法，但不同实现可能会对这些方法采用不同的算法。因此，这些方法在不同的实现中可能会有不同的精度。</p>
+
       
 
       
@@ -548,7 +615,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Global-对象"><span class="toc-number">1.</span> <span class="toc-text">1.Global 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-URI-编码方法"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 URI 编码方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-eval-方法"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 eval() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Global-对象的属性"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 Global 对象的属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4-window-对象"><span class="toc-number">2.</span> <span class="toc-text">1.4 window 对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Math-对象"><span class="toc-number">3.</span> <span class="toc-text">2.Math 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Math-对象的属性"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Math 对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-min-和-max-方法"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 min() 和 max() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-舍入方法"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 舍入方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-random-方法"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 random() 方法</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Global-对象"><span class="toc-number">1.</span> <span class="toc-text">1.Global 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-URI-编码方法"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 URI 编码方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-eval-方法"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 eval() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Global-对象的属性"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 Global 对象的属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4-window-对象"><span class="toc-number">2.</span> <span class="toc-text">1.4 window 对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Math-对象"><span class="toc-number">3.</span> <span class="toc-text">2.Math 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Math-对象的属性"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 Math 对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-min-和-max-方法"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 min() 和 max() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-舍入方法"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 舍入方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-random-方法"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 random() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-其他方法"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 其他方法</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
