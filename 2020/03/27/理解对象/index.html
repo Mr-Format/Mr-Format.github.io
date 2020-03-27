@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="创建自定义对象的最简单方式就是创建一个 object 的实例，然后再为它添加属性和方法，如下所示: 12345678var person = new Object();person.name = &quot;Nicholas&quot;;person.age = 29;person.job = &quot;Software Engineer&quot;;person.sayName = function () &amp;#123;    ale">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-27T04:09:33.450Z">
+<meta property="og:updated_time" content="2020-03-27T08:56:52.336Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -224,6 +224,10 @@
 <li>[[Writable]]：表示能否修改属性的值。像前面例子中那样直接在对象上定义的属性，它们的这个特性默认值为 true。</li>
 <li>[[Value]]：包含这个属性的数据值。读取属性值的时候，从这个位置读；写入属性值的时候，把新值保存在这个位置。这个特性的默认值是 undefined。</li>
 </ul>
+<p>对于像前面例子中那样直接在对象上定义的属性，它们的 <code>[[Configurable]]</code>、<code>[[Enumerable]]</code> 和 <code>[[Wirtable]]</code> 特性都被设置为 <code>true</code>，而 <code>[[Value]]</code> 特性被设置为指定的值。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name = <span class="string">"Nicholas"</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建了一个名为 <code>name</code> 的属性，为它指定的值是 <code>&quot;Nicholas&quot;</code>。也就是说，<code>{[[Value]]</code> 特性将被设置为 <code>&quot;Nicholas&quot;</code>，而对这个值的任何修改都将反映在这个位置。</p>
 
       
 
