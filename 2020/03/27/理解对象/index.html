@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="创建自定义对象的最简单方式就是创建一个 object 的实例，然后再为它添加属性和方法，如下所示: 12345678var person = new Object();person.name = &quot;Nicholas&quot;;person.age = 29;person.job = &quot;Software Engineer&quot;;person.sayName = function () &amp;#123;    ale">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-28T13:44:47.640Z">
+<meta property="og:updated_time" content="2020-03-29T13:14:51.702Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -229,7 +229,18 @@
 
 <p>这里创建了一个名为 <code>name</code> 的属性，为它指定的值是 <code>&quot;Nicholas&quot;</code>。也就是说，<code>{[[Value]]</code> 特性将被设置为 <code>&quot;Nicholas&quot;</code>，而对这个值的任何修改都将反映在这个位置。</p>
 <p>要修改属性默认的特性，必须使用 ES5 的 <code>Object.defineProperty()</code> 方法。这个方法接收三个参数：属性所在的对象、属性的名字和一个描述符对象。其中，描述符（descriptor）对象的属性必须是：<code>configurable</code>、<code>enumerable</code>、<code>writable</code> 和 <code>value</code>。设置其中的一或多个值，可以修改对应的特性值。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">    writable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">alert(person.name); <span class="comment">// "Nicholas"</span></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line">alert(person.name); <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子创建了一个名为 <code>name</code> 的属性，它的值 <code>&quot;Nicholas&quot;</code> 是只读的。这个属性的值是不可修改的。如果尝试为它指定新值，则在非严格模式下，赋值操作将被忽略；在严格模式下，赋值操作将会导致抛出错误。</p>
+<p>类似的规则也适用于不可配置的属性。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">    configurable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">alert(perosn.name); <span class="comment">// "Nicholas"</span></span><br><span class="line"><span class="keyword">delete</span>(person.name);</span><br><span class="line">alert(person.name); <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></table></figure>
+
+<p>把 <code>configurable</code> 设置为 false，表示不能从对象中删除属性。如果对这个属性调用 <code>delete</code>，则在非严格模式下什么也不会发生，而在严格模式下会导致错误。而且，一旦把属性定义为不可配置的，就不能再把它变回可配置了。此时，再调用 <code>Object.defineProperty()</code> 方法修改除 <code>writable</code> 之外的特性，都会导致错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">    configurable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出错误</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    value: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，可以多次调用 <code>Object.defineProperty()</code> 方法修改同一个属性，但在把 <code>configurable</code> 特性设置为 false 之后就会有限制了。</p>
+<p>在调用 <code>Object.defineProperty()</code> 方法时，如果不指定，<code>configurable</code>、<code>enumerable</code> 和 <code>writable</code> 特性的默认值都是 false。</p>
+<h2 id="1-2-访问器属性"><a href="#1-2-访问器属性" class="headerlink" title="1.2 访问器属性"></a>1.2 访问器属性</h2>
       
 
       
@@ -383,7 +394,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-属性类型"><span class="toc-number">1.</span> <span class="toc-text">1.属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-数据属性"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 数据属性</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-属性类型"><span class="toc-number">1.</span> <span class="toc-text">1.属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-数据属性"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 数据属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-访问器属性"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 访问器属性</span></a></li></ol></li></ol>
                     </div>
                 </span>
                         </div>
