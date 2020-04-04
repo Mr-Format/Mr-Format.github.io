@@ -17,7 +17,7 @@
 <meta property="og:description" content="虽然 Object 构造函数或对象字面量都可以用来创建单个对象，但这些方式有个明显的缺点：使用同一接口创建很多对象，会产生大量的重复代码。为解决这个问题，人们开始使用工厂模式的一种变体。 1.工厂模式工厂模式是软件工程领域常见的设计模式，这种模式抽象了创建具体对象的过程。在 ECMAScript 中，是用函数来封装以特定接口创建对象的细节，如下面的例子所示：">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;Mr-Format&#x2F;repo&#x2F;blob&#x2F;master&#x2F;blog&#x2F;%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F3-1.png?raw=true">
-<meta property="og:updated_time" content="2020-04-03T14:19:58.205Z">
+<meta property="og:updated_time" content="2020-04-04T10:36:23.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;Mr-Format&#x2F;repo&#x2F;blob&#x2F;master&#x2F;blog&#x2F;%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F3-1.png?raw=true">
   
@@ -260,6 +260,16 @@
 <p>创建了自定义的构造函数之后，其原型对象默认只会取得 <code>constructor</code> 属性；至于其他方法，则都是从 Object 继承而来。当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向构造函数的原型对象。ECMA-262 第 5 版中管这个指针叫 <code>[[Prototype]]</code>。虽然在脚本中没有标准的方式访问 <code>[[Prototype]]</code>，但 Firefox、Safari 和 Chrome 在每个对象上都支持一个属性 <code>__proto__</code>；而在其他实现中，这个属性对脚本则是完全不可见的。不过，要明确一点：<strong>这个连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间</strong>。</p>
 <p>以 Person 构造函数和 Person.prototype 创建实例的代码为例，下图展示了各个对象之间的关系。</p>
 <p><img src="https://github.com/Mr-Format/repo/blob/master/blog/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F3-1.png?raw=true" alt="原型模式"></p>
+<p>在此，<code>Person.prototype</code> 指向了原型对象，而 <code>Person.prototype.constructor</code> 又指回了 Person。原型对象中除了包含 <code>constructor</code> 属性之外，还包括后来添加的其他属性。Person 的每个实例 —— <code>person1</code> 和 <code>person2</code> 都包含一个内部属性，该属性仅仅指向了 <code>Person.prototype</code>；换句话说，它们与构造函数没有直接的关系。此外，要注意的是，虽然这两个实例都不包含属性和方法，但我们却可以调用 <code>person1.sayName()</code>。这是通过查找对象属性的过程来实现的。</p>
+<p>虽然在所有实现中都无法访问到 <code>[[Prototype]]</code>，但可以通过 <code>isPrototypeOf()</code> 方法来确定对象之间是否存在这种关系。从本质上讲，如果 <code>[[Prototype]]</code> 指向调用 <code>isPrototypeOf()</code> 方法的对象（<code>Person.prototype</code>），那么这个方法就返回 true，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">Object</span>.getPrototypeOf(person1) == Person.prototype); <span class="comment">// true </span></span><br><span class="line">alert(<span class="built_in">Object</span>.getPrototypeOf(person1).name); <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>Object.getPrototypeOf()</code> 可以方便地取得一个对象的原型，而这在利用原型实现继承的情况下是非常重要的。支持这个方法的浏览器有 IE9+、Firefox 3.5+、Safari 5+、Opera 12+ 和 Chrome。</p>
+<p>每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返回该属性的值；如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。如果在原型对象中找到了这个属性，则返回该属性的值。</p>
+<p><em>原型最初只包含 constructor 属性，而该属性也是共享的，因此可以通过对象实例访问。</em></p>
+<p>虽然可以通过对象实例访问保存在原型中的值，但却不能通过对象实例重写原型中的值。如果我们在实例中添加了一个属性，而该属性与实例原型中的一个属性同名，那我们就在该实例中创建该属性，该属性将会屏蔽原型中的那个属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// empty</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">Person.prototype.age = <span class="number">29</span>;</span><br><span class="line">Person.prototype.job = <span class="string">"Software Engineer"</span>;</span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">person1.name = <span class="string">"Greg"</span>;</span><br><span class="line">alert(person1.name); <span class="comment">// "Greg" —— 来自实例</span></span><br><span class="line">alert(person2.name); <span class="comment">// "Nicholas" —— 来自原型</span></span><br></pre></td></tr></table></figure>
+
 
       
 
