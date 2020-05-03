@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>Archives | 灯芯的前端博客</title>
+  <title>理解闭包 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;archives&#x2F;page&#x2F;3&#x2F;index.html">
+  <meta name="description" content="前端领域对于闭包有很多种解释。我认为的闭包应该是这样的：在一个局部作用域中定义了一个函数，这个函数访问了属于它外部作用域中的属性，并且当这个函数不在它被定义的地方调用时，就产生了闭包。看下面的例子： 123456789function outer () &amp;#123;  let name = &amp;apos;张三&amp;apos;  function inner () &amp;#123;    alert(name) &#x2F;&#x2F; &quot;张三&quot;">
+<meta name="keywords" content="原创">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解闭包">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;05&#x2F;03&#x2F;%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="前端领域对于闭包有很多种解释。我认为的闭包应该是这样的：在一个局部作用域中定义了一个函数，这个函数访问了属于它外部作用域中的属性，并且当这个函数不在它被定义的地方调用时，就产生了闭包。看下面的例子： 123456789function outer () &amp;#123;  let name = &amp;apos;张三&amp;apos;  function inner () &amp;#123;    alert(name) &#x2F;&#x2F; &quot;张三&quot;">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-03T08:09:25.714Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,515 +186,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-理解闭包" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      理解闭包
+    </h1>
+  
+
+        
+        <a href="/2020/05/03/%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85/" class="archive-article-date">
+  	<time datetime="2020-05-03T05:32:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端领域对于闭包有很多种解释。我认为的闭包应该是这样的：在一个局部作用域中定义了一个函数，这个函数访问了属于它外部作用域中的属性，并且当这个函数不在它被定义的地方调用时，就产生了闭包。看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name) <span class="comment">// "张三"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  inner()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>这个例子会输出<code>张三</code>。当 <code>inner()</code> 函数被调用时，需要输出变量 <code>name</code> 的值。编译器首先会在 <code>inner()</code> 自身的作用域中查找 <code>name</code> 属性，没有找到；然后在 <code>inner()</code> 的父级作用域，也就是 <code>outer()</code> 函数的作用域中查找，找到了，于是停止继续查找，并且将这个 <code>name</code> 属性的值输出。</p>
+<p>那么上面这个例子产生闭包了吗？对于闭包有这样一种解释：</p>
+<blockquote>
+<blockquote>
+<p>声明在一个函数中的函数，叫做闭包函数</p>
+</blockquote>
+</blockquote>
+<p>以上面这种解释来看，本例中 <code>inner()</code> 函数就产生了一个闭包。但是我认为这并不是一个准确的说法。</p>
+<p>尽管 <code>inner()</code> 函数是在 <code>outer()</code> 的作用域中被声明，并且引用了属于 <code>outer()</code> 作用域的属性 <code>name</code>。但是，<code>inner()</code> 的是在它被定义的地方调用的，而并没有在它被定义之外的地方调用。也就是说，<code>inner()</code> 对于 <code>name</code> 的引用，是按照正常的作用域链规则进行的。在这个过程中，并没有闭包的参与，也就不可能产生闭包。</p>
+<p>来看第二个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name) <span class="comment">// "张三"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> inner</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fn = outer()</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，浏览器同样会输出 <code>张三</code>。与第一个例子不同的是，<code>inner()</code> 函数并没有在它被定义的地方调用，而是将 <code>inner()</code> 函数作为一个值，从 <code>outer()</code> 函数中返回了；然后在全局作用域中，定义了一个变量 <code>fn</code> 用来接收 <code>outer()</code> 函数的返回值，也就是 <code>inner()</code> 函数，此时，闭包产生了；随后，在全局作用域中调用了 <code>inner()</code> 函数，此时，闭包被使用了。</p>
+<p>对 <code>inner()</code> 函数的调用过程做一些解释：<code>inner()</code> 函数被调用时，引用了 <code>name</code> 属性。编译器首先会在 <code>inner()</code> 函数自身作用域中查找 <code>name</code> 属性，没有找到；接下来，编译器并不会直接到 <code>inner()</code> 函数的外部作用域中查找 <code>name</code> 属性，而是在 <code>inner()</code> 函数的闭包中查找。而 <code>inner()</code> 函数的闭包中，正好就保存了 <code>name</code> 属性。</p>
+<p>可以把闭包看作一个特殊的作用域，当 <code>inner()</code> 函数在作为值被返回时，由于它离开了定义时所在的作用域（被赋值给外部作用域的 <code>fn</code> 变量），于是它会将它所引用的外部属性保存在自身的闭包中。这样，当 <code>inner()</code> 函数被调用时，就能在它的闭包中找到原本应该在 <code>outer()</code> 作用域中的属性。</p>
+<p><em>我认为 <code>inner()</code> 函数闭包中所保存的仅仅是它所引用的外部作用域中的属性，而不是将外部作用域整个保存。也就是说，出现在 <code>inner()</code> 函数的闭包空间中的仅仅是 <code>inner()</code> 所引用的 <code>name</code> 属性，而非整个 <code>outer()</code> 函数的作用域。</em></p>
+<p>下面这个例子证明了， <code>inner()</code> 函数在查找不属于自身作用域的属性时，会首先查找闭包而不是外部作用域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'李四'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name) <span class="comment">// "张三"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> inner</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fn = outer()</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>这里，在全局作用域中同样定义了 <code>name</code> 属性。不过，<code>inner()</code> 函数在创建自身的闭包作用域时（我认为闭包就是一个特殊的作用域），会将 <code>outer()</code> 函数的 <code>name</code> 属性保存进去（同样遵循了词法作用域的规则），并且在 <code>inner()</code> 被调用时同样先查找闭包作用域。</p>
+<p>闭包有一个奇怪的现象：如果 <code>inner()</code> 函数并没有引用 <code>outer()</code> 函数的属性，而是引用的全局作用域中的属性，闭包就不会产生了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'李四'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> age = <span class="number">12</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name) <span class="comment">// "李四"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> inner</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fn = outer()</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中 <code>inner()</code> 函数并没有引用 <code>outer()</code> 函数的属性，而是引用了全局的 <code>name</code> 属性。这种情况下并没有产生闭包。然而下面的例子却产生了闭包：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">mid</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(name) <span class="comment">// "张三"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> fn = mid()</span><br><span class="line">  fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outer()</span><br></pre></td></tr></table></figure>
+
+<p>与上一个例子不同，这个例子中产生了闭包。</p>
+<p>我并不清楚具体是什么原因导致了这种区别，或许是因为浏览器对于函数的特殊处理，又或许是因为函数作用域与全局作用域之间存在着某种区别，总之这种区别确确实实存在。</p>
+<p>闭包在实际开发过程中有着广泛的应用，在定时器、事件绑定、ajax请求以及模块中都能看到闭包的出现。下面有几个使用闭包的简单例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindTimer</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bindTimer()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindClick</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line">  <span class="keyword">let</span> btn = <span class="built_in">document</span>.querySelect(<span class="string">'.btn'</span>)</span><br><span class="line">  btn.addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line">    alert(name)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bindClick()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line">  <span class="keyword">let</span> age = <span class="number">12</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">introduce</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`姓名：<span class="subst">$&#123;name&#125;</span>，年龄：<span class="subst">$&#123;age&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">changeName</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    name = <span class="string">'李四'</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123; introduce, changeName &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = createPerson()</span><br><span class="line">person.introduce() <span class="comment">// 姓名：张三，年龄：12</span></span><br><span class="line">person.changeName()</span><br><span class="line">person.introduce() <span class="comment">// 姓名：李四，年龄：12</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">'张三'</span></span><br><span class="line">  <span class="keyword">let</span> age = <span class="number">12</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">introduce</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`姓名：<span class="subst">$&#123;name&#125;</span>，年龄：<span class="subst">$&#123;age&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">changeName</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    name = <span class="string">'李四'</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123; introduce, changeName &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">person.introduce() <span class="comment">// 姓名：张三，年龄：12</span></span><br><span class="line">person.changeName()</span><br><span class="line">person.introduce() <span class="comment">// 姓名：李四，年龄：12</span></span><br></pre></td></tr></table></figure>
+
+<p>总结：当一个函数定义在另一个函数内部，同时这个内部的函数引用了它的外部函数作用域中的属性，并且该函数被从它定义的地方传递到其他地方时，闭包就会被创建；随后当这个函数被调用时，闭包就会被使用。闭包可以看作这个函数的特殊作用域，包含了该函数引用的所有非全局的外部属性。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/05/03/%E7%90%86%E8%A7%A3%E9%97%AD%E5%8C%85/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/09/%E7%BB%A7%E6%89%BF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">继承</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+            <div class="jump-container" id="js-jump-container" style="display:none;">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                    <i class="icon-font icon-back"></i>
+                </a>
+                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                    <i class="icon-font icon-plane jump-plane"></i>
+                </div>
+            </div>
             
+                
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
+    </div>
+</aside>
+
+
+
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2019-12-23T14:28:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/23/%E8%A7%A3%E6%9E%84%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84/">解构：对象解构</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/15/Set%E4%B8%8EMap-2/" class="archive-article-date">
-  	<time datetime="2019-12-15T10:16:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/15/Set%E4%B8%8EMap-2/">Set与Map(2)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/11/Set%E4%B8%8EMap/" class="archive-article-date">
-  	<time datetime="2019-12-11T12:39:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/11/Set%E4%B8%8EMap/">Set与Map(1)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2019-12-07T15:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/07/Promise-2-%E9%AB%98%E7%BA%A7/">Promise与异步编程(2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2019-12-02T14:23:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/02/Promise-1-%E5%9F%BA%E7%A1%80/">Promise与异步编程(1)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ES6//" class="article-tag-list-link color4">ES6</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-5-vue/" class="archive-article-date">
-  	<time datetime="2019-12-01T03:39:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-5-vue/">前端开发规范(5)-vue</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/" class="archive-article-date">
-  	<time datetime="2019-11-30T14:33:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-4-JavaScript/">前端开发规范(4)-JavaScript</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/" class="archive-article-date">
-  	<time datetime="2019-11-28T15:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/28/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-3-CSS/">前端开发规范(3)-CSS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/" class="archive-article-date">
-  	<time datetime="2019-11-23T14:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">前端开发规范(2)-HTML</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2019-11-21T06:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">前端开发规范(1)-基本原则</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&lt; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">Next &gt;</a>
-    </nav>
   
 
 
@@ -723,8 +454,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
