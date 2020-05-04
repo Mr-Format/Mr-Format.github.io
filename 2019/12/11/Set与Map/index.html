@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="JS 的大部分时期都只存在一种集合类型，即数组类型。数组在 JS 中的使用正如其他语言的数组一样，但缺少更多类型的集合导致数组也经常被当做队列与栈来使用。 数组只使用了数值型的索引，而如果非数值型的索引是必要的，开发者便会使用非数组的对象。这种技巧引出了非数组对象的定制实现，即 Set 与 Map。 Set 是不包含重复值的列表。你一般不会像对待数组那样来访问 Set 中的某个项；相反更常见的是，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-15T10:15:21.104Z">
+<meta property="og:updated_time" content="2020-05-04T13:50:08.923Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -57,7 +57,7 @@
             </hgroup>
             
                 <p class="header-subtitle">
-                    前端路茫茫~~
+                    前端进阶@@
                 </p>
                 
 
@@ -137,7 +137,7 @@
 			  <h1 class="header-author js-header-author">灯芯</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端路茫茫~~<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端进阶@@<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -332,6 +332,9 @@
 <li>Weak Set 没有 <code>size</code> 属性。</li>
 </ol>
 <p>Weak Set 看起来功能有限，而这对于正确管理内存而言是必要的。一般来说，若只想追踪对象的引用，应当使用 Weak Set 而不是正规的 Set。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.amazon.cn/dp/B071GW3JDP" target="_blank" rel="noopener">深入理解ES6</a></li>
+</ul>
 
       
 
@@ -495,7 +498,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-ES5-中的-Set-与-Map"><span class="toc-number">1.</span> <span class="toc-text">1.ES5 中的 Set 与 Map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-变通方法的问题"><span class="toc-number">2.</span> <span class="toc-text">2.变通方法的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-ES6-的-Set"><span class="toc-number">3.</span> <span class="toc-text">3.ES6 的 Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-创建-Set-并添加项目"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 创建 Set 并添加项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-移除值"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 移除值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Set-上的-forEach-方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 Set 上的 forEach() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-将-Set-转换为数组"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 将 Set 转换为数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-Weak-Set"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 Weak Set</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-ES5-中的-Set-与-Map"><span class="toc-number">1.</span> <span class="toc-text">1.ES5 中的 Set 与 Map</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-变通方法的问题"><span class="toc-number">2.</span> <span class="toc-text">2.变通方法的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-ES6-的-Set"><span class="toc-number">3.</span> <span class="toc-text">3.ES6 的 Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-创建-Set-并添加项目"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 创建 Set 并添加项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-移除值"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 移除值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Set-上的-forEach-方法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 Set 上的 forEach() 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-将-Set-转换为数组"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 将 Set 转换为数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-Weak-Set"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 Weak Set</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
                     </div>
                 </span>
                         </div>

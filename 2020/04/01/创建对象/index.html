@@ -17,7 +17,7 @@
 <meta property="og:description" content="虽然 Object 构造函数或对象字面量都可以用来创建单个对象，但这些方式有个明显的缺点：使用同一接口创建很多对象，会产生大量的重复代码。为解决这个问题，人们开始使用工厂模式的一种变体。 1.工厂模式工厂模式是软件工程领域常见的设计模式，这种模式抽象了创建具体对象的过程。在 ECMAScript 中，是用函数来封装以特定接口创建对象的细节，如下面的例子所示：">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;Mr-Format&#x2F;repo&#x2F;blob&#x2F;master&#x2F;blog&#x2F;%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F3-1.png?raw=true">
-<meta property="og:updated_time" content="2020-04-09T04:46:17.094Z">
+<meta property="og:updated_time" content="2020-05-04T13:41:37.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;Mr-Format&#x2F;repo&#x2F;blob&#x2F;master&#x2F;blog&#x2F;%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F3-1.png?raw=true">
   
@@ -59,7 +59,7 @@
             </hgroup>
             
                 <p class="header-subtitle">
-                    前端路茫茫~~
+                    前端进阶@@
                 </p>
                 
 
@@ -139,7 +139,7 @@
 			  <h1 class="header-author js-header-author">灯芯</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端路茫茫~~<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端进阶@@<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -357,6 +357,9 @@
 
 <p>这样，变量 <code>friend</code> 中保存的是一个稳妥对象，而除了调用 <code>sayName()</code> 方法外，没有别的方式可以访问其数据成员。稳妥构造函数提供的这种安全性，使它非常适合在某些安全执行环境。</p>
 <p>与寄生构造函数模式类似，使用稳妥构造函数模式创建的对象与构造函数之间也 没有什么关系，因此 <code>instanceof</code> 操作符对这种对象也没有意义。 </p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.ituring.com.cn/book/946/" target="_blank" rel="noopener">JavaScript高级程序设计（第三版）</a></li>
+</ul>
 
       
 
@@ -520,7 +523,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-工厂模式"><span class="toc-number">1.</span> <span class="toc-text">1.工厂模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-构造函数模式"><span class="toc-number">2.</span> <span class="toc-text">2.构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-将构造函数当作函数"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 将构造函数当作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-构造函数的问题"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 构造函数的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-原型模式"><span class="toc-number">3.</span> <span class="toc-text">3.原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-理解原型对象"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 理解原型对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-原型与-in-操作符"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 原型与 in 操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-更简单的原型语法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 更简单的原型语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-原型的动态性"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 原型的动态性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-原生对象的原型"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 原生对象的原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-原型对象的问题"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 原型对象的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-组合使用构造函数模式和原型模式"><span class="toc-number">4.</span> <span class="toc-text">4.组合使用构造函数模式和原型模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-动态原型模式"><span class="toc-number">5.</span> <span class="toc-text">5.动态原型模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-寄生构造函数模式"><span class="toc-number">6.</span> <span class="toc-text">6.寄生构造函数模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-稳妥构造函数模式"><span class="toc-number">7.</span> <span class="toc-text">7.稳妥构造函数模式</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-工厂模式"><span class="toc-number">1.</span> <span class="toc-text">1.工厂模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-构造函数模式"><span class="toc-number">2.</span> <span class="toc-text">2.构造函数模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-将构造函数当作函数"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 将构造函数当作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-构造函数的问题"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 构造函数的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-原型模式"><span class="toc-number">3.</span> <span class="toc-text">3.原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-理解原型对象"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 理解原型对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-原型与-in-操作符"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 原型与 in 操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-更简单的原型语法"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 更简单的原型语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-原型的动态性"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 原型的动态性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-原生对象的原型"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 原生对象的原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-原型对象的问题"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 原型对象的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-组合使用构造函数模式和原型模式"><span class="toc-number">4.</span> <span class="toc-text">4.组合使用构造函数模式和原型模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-动态原型模式"><span class="toc-number">5.</span> <span class="toc-text">5.动态原型模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-寄生构造函数模式"><span class="toc-number">6.</span> <span class="toc-text">6.寄生构造函数模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-稳妥构造函数模式"><span class="toc-number">7.</span> <span class="toc-text">7.稳妥构造函数模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">8.</span> <span class="toc-text">参考文献</span></a></li></ol>
                     </div>
                 </span>
                         </div>

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="灯芯的前端博客">
 <meta property="og:description" content="JS 最强大的一面就是它能及其轻易地处理异步编程。作为因互联网而生的语言，JS 从一开始就必须能够响应点击或按键之类的用户交互行为。 Node.js 通过使用回调函数来代替事件，进一步推动了 JS 中的异步编程。 随着越来越多的程序开始使用异步编程，事件与回调函数已不足以支持开发者的所有需求。Promise正是为了解决这方面的问题。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-07T15:56:50.259Z">
+<meta property="og:updated_time" content="2020-05-04T13:49:55.749Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -57,7 +57,7 @@
             </hgroup>
             
                 <p class="header-subtitle">
-                    前端路茫茫~~
+                    前端进阶@@
                 </p>
                 
 
@@ -137,7 +137,7 @@
 			  <h1 class="header-author js-header-author">灯芯</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端路茫茫~~<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>前端进阶@@<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -363,6 +363,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> possiblyUnhandledRejections = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当一个拒绝未被处理，将其添加到 Map</span></span><br><span class="line"><span class="built_in">window</span>.onunhandledrejection = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    possiblyUnhandledRejections.set(event.promise, event.reason)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onrejectionhandled = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    possiblyUnhandledRejections.delete(event.promise)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    possiblyUnhandledRejections.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">reason, promise</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(reason.message ? reason.message : reason)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 做点事来处理这些拒绝</span></span><br><span class="line">        handledRejection(promise, reason)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    possiblyUnhandledRejections.clear()</span><br><span class="line">&#125;, <span class="number">60000</span>)</span><br></pre></td></tr></table></figure>
 
 <p>这个实现与 Node.js 的实现几乎一模一样。使用了相同方法在 Map 中存储 Promise 及其拒绝值，并在此后进行检查。唯一的区别就是在事件处理函数中信息提取的方式。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.amazon.cn/dp/B071GW3JDP" target="_blank" rel="noopener">深入理解ES6</a></li>
+</ul>
 
       
 
@@ -526,7 +529,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-异步编程的背景"><span class="toc-number">1.</span> <span class="toc-text">1.异步编程的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件模型"><span class="toc-number">1.1.</span> <span class="toc-text">事件模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调模式"><span class="toc-number">1.2.</span> <span class="toc-text">回调模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Promise-基础"><span class="toc-number">2.</span> <span class="toc-text">2.Promise 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-的生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">Promise 的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建未决的-Promise"><span class="toc-number">2.2.</span> <span class="toc-text">创建未决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建已决的-Promise"><span class="toc-number">2.3.</span> <span class="toc-text">创建已决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行器错误"><span class="toc-number">2.4.</span> <span class="toc-text">执行器错误</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-全局的-Promise-拒绝处理"><span class="toc-number">3.</span> <span class="toc-text">3.全局的 Promise 拒绝处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Node-js-的拒绝处理"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Node.js 的拒绝处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-浏览器的拒绝处理"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 浏览器的拒绝处理</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-异步编程的背景"><span class="toc-number">1.</span> <span class="toc-text">1.异步编程的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件模型"><span class="toc-number">1.1.</span> <span class="toc-text">事件模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调模式"><span class="toc-number">1.2.</span> <span class="toc-text">回调模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Promise-基础"><span class="toc-number">2.</span> <span class="toc-text">2.Promise 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-的生命周期"><span class="toc-number">2.1.</span> <span class="toc-text">Promise 的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建未决的-Promise"><span class="toc-number">2.2.</span> <span class="toc-text">创建未决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建已决的-Promise"><span class="toc-number">2.3.</span> <span class="toc-text">创建已决的 Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行器错误"><span class="toc-number">2.4.</span> <span class="toc-text">执行器错误</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-全局的-Promise-拒绝处理"><span class="toc-number">3.</span> <span class="toc-text">3.全局的 Promise 拒绝处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Node-js-的拒绝处理"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Node.js 的拒绝处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-浏览器的拒绝处理"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 浏览器的拒绝处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
                     </div>
                 </span>
                         </div>
