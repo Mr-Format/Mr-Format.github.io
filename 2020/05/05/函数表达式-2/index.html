@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>灯芯的前端博客</title>
+  <title>函数表达式-2 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="灯芯的前端博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;page&#x2F;4&#x2F;index.html">
+  <meta name="description" content="3.模仿块级作用域JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含函数中而非语句中创建的，来看下面的例子。 123456function outputNumbers(count)&amp;#123;  for (var i=0; i &amp;lt; count; i++)&amp;#123;    alert(i);  &amp;#125;  alert(i); &#x2F;&#x2F; 计数&amp;#125;">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数表达式-2">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;05&#x2F;05&#x2F;%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-2&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
+<meta property="og:description" content="3.模仿块级作用域JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含函数中而非语句中创建的，来看下面的例子。 123456function outputNumbers(count)&amp;#123;  for (var i=0; i &amp;lt; count; i++)&amp;#123;    alert(i);  &amp;#125;  alert(i); &#x2F;&#x2F; 计数&amp;#125;">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-05T13:07:47.351Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -182,295 +186,139 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-前端开发规范-2-HTML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-函数表达式-2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">前端开发规范(2)-HTML</a>
+    <h1 class="article-title" itemprop="name">
+      函数表达式-2
     </h1>
   
 
         
-        <a href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/" class="archive-article-date">
-  	<time datetime="2019-11-23T14:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
+        <a href="/2020/05/05/%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-2/" class="archive-article-date">
+  	<time datetime="2020-05-05T12:11:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>尽量遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度。</p>
-<h1 id="1-通用约定"><a href="#1-通用约定" class="headerlink" title="1.通用约定"></a>1.通用约定</h1><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
-<li>自闭和 (self-closing) 标签， 无需闭合 (例如：<code>img</code> <code>input</code> <code>br</code> <code>hr</code> 等)；</li>
-<li>可选的闭合标签 (closing tag)，需闭合 (例如：<code>&lt;/li&gt;</code> 或 <code>&lt;/body&gt;</code>)；</li>
-<li>尽量减少标签数量</li>
+        <h1 id="3-模仿块级作用域"><a href="#3-模仿块级作用域" class="headerlink" title="3.模仿块级作用域"></a>3.模仿块级作用域</h1><p>JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含函数中而非语句中创建的，来看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputNumbers</span>(<span class="params">count</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">    alert(i);</span><br><span class="line">  &#125;</span><br><span class="line">  alert(i); <span class="comment">// 计数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>这个函数中定义了一个 for 循环，而变量 <code>i</code> 的初始值被设置为 <code>0</code>。在 Java、C++等语言中，变量 <code>i</code> 只会在 for 循环的语句块中有定义，循环一旦结束，变量 <code>i</code> 就会被销毁。可是在 JavaScrip 中，变量 <code>i</code> 是定义在 <code>ouputNumbers()</code> 的活动对象中的，因此从它有定义开始，就可以在函数内部随处访问它。即使像下面这样错误地重新声明同一个变量，也不会改变它的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputNumbers</span>(<span class="params">count</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">    alert(i);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> i; <span class="comment">// 重新声明变量</span></span><br><span class="line">  alert(i); <span class="comment">// 计数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 从来不会告诉你是否多次声明了同一个变量；遇到这种情况，它只会对后续的声明视而不见（不过，它会执行后续声明中的变量初始化）。匿名函数可以用来模仿块级作用域并避免这个问题。</p>
+<p>用作块级作用域（通常称为私有作用域）的匿名函数的语法如下所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 这里是块级作用域</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>以上代码定义并立即调用了一个匿名函数。将函数声明包含在一对圆括号中，表示它实际上是一个函数表达式。而紧随其后的另一对圆括号会立即调用这个函数。如果有读者感觉这种语法不太好理解，可以再看看下面这个例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">5</span>;</span><br><span class="line">outputNumbers(count);</span><br></pre></td></tr></table></figure>
+
+<p>这里初始化了变量 <code>count</code>，将其值设置为 <code>5</code>。当然，这里的变量是没有必要的，因为可以把值直接传给函数。为了让代码更简洁，我们在调用函数时用 <code>5</code> 来代替变量 <code>count</code>，如下所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputNumbers(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这样做之所以可行，是因为变量只不过是值的另一种表现形式，因此用实际的值替换变量没有问题。再看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someFunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="comment">// 这里是块级作用域</span></span><br><span class="line">&#125;;</span><br><span class="line">someFunction();</span><br></pre></td></tr></table></figure>
+
+<p>这个例子先定义了一个函数，然后立即调用了它。定义函数的方式是创建一个匿名函数，并把匿名函数赋值给变量 <code>someFunction</code>。而调用函数的方式是在函数名称后面添加一对圆括号，即 <code>someFunction()</code>。通过前面的例子我们知道，可以使用实际的值来取代变量 <code>count</code>，那在这里是不是也可以用函数的值直接取代函数名呢？ 然而，下面的代码却会导致错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 这里是块级作用域</span></span><br><span class="line">&#125;(); <span class="comment">// 出错！</span></span><br></pre></td></tr></table></figure>
+
+<p>这段代码会导致语法错误，是因为 JavaScript 将 function 关键字当作一个函数声明的开始，而函数声明后面不能跟圆括号。然而，函数表达式的后面可以跟圆括号。要将函数声明转换成函数表达式，只要像下面这样给它加上一对圆括号即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 这里是块级作用域</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>无论在什么地方，只要临时需要一些变量，就可以使用私有作用域，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputNumbers</span>(<span class="params">count</span>)</span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">      alert(i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)();</span><br><span class="line"></span><br><span class="line">  alert(i); <span class="comment">// 导致一个错误！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个重写后的 <code>outputNumbers()</code> 函数中，我们在 for 循环外部插入了一个私有作用域。在匿名函数中定义的任何变量，都会在执行结束时被销毁。因此，变量 <code>i</code> 只能在循环中使用，使用后即被销毁。<br>而在私有作用域中能够访问变量 <code>count</code>，是因为这个匿名函数是一个闭包，它能够访问包含作用域中的所有变量。</p>
+<p>这种技术经常在全局作用域中被用在函数外部，从而限制向全局作用域中添加过多的变量和函数。一般来说，我们都应该尽量少向全局作用域中添加变量和函数。在一个由很多开发人员共同参与的大型应用程序中，过多的全局变量和函数很容易导致命名冲突。而通过创建私有作用域，每个开发人员既可以使用自己的变量，又不必担心搞乱全局作用域。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">if</span> (now.getMonth() == <span class="number">0</span> &amp;&amp; now.getDate() == <span class="number">1</span>)&#123;</span><br><span class="line">    alert(<span class="string">"Happy new year!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>把上面这段代码放在全局作用域中，可以用来确定哪一天是 1 月 1 日；如果到了这一天，就会向用户显示一条祝贺新年的消息。其中的变量 <code>now</code> 现在是匿名函数中的局部变量，而我们不必在全局作用域中创建它。</p>
+<p><em>这种做法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用。只要函数执行完毕，就可以立即销毁其作用域链了。</em></p>
+<h1 id="4-私有变量"><a href="#4-私有变量" class="headerlink" title="4.私有变量"></a>4.私有变量</h1><p>严格来讲，JavaScript 中没有私有成员的概念；所有对象属性都是公有的。不过，倒是有一个私有变量的概念。任何在函数中定义的变量，都可以认为是私有变量，因为不能在函数的外部访问这些变量。私有变量包括函数的参数、局部变量和在函数内部定义的其他函数。来看下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1, num2</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> sum = num1 + num2;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个函数内部，有 3 个私有变量：<code>num1</code>、<code>num2</code> 和 <code>sum</code>。在函数内部可以访问这几个变量，但在函数外部则不能访问它们。如果在这个函数内部创建一个闭包，那么闭包通过自己的作用域链也可以访问这些变量。而利用这一点，就可以创建用于访问私有变量的公有方法。</p>
+<p>我们把有权访问私有变量和私有函数的公有方法称为特权方法（privileged method）。有两种在对象上创建特权方法的方式。第一种是在构造函数中定义特权方法，基本模式如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyObject</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 私有变量和私有函数</span></span><br><span class="line">  <span class="keyword">var</span> privateVariable = <span class="number">10</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">privateFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 特权方法</span></span><br><span class="line">  <span class="keyword">this</span>.publicMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    privateVariable++;</span><br><span class="line">    <span class="keyword">return</span> privateFunction();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个模式在构造函数内部定义了所有私有变量和函数。然后，又继续创建了能够访问这些私有成员的特权方法。能够在构造函数中定义特权方法，是因为特权方法作为闭包有权访问在构造函数中定义的所有变量和函数。对这个例子而言，变量 <code>privateVariable</code> 和函数 <code>privateFunction()</code> 只能通过特权方法 <code>publicMethod()</code> 来访问。在创建 <code>MyObject</code> 的实例后，除了使用 <code>publicMethod()</code> 这一个途径外，没有任何办法可以直接访问 <code>privateVariable</code> 和 <code>privateFunction()</code>。</p>
+<p>利用私有和特权成员，可以隐藏那些不应该被直接修改的数据，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    name = value;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</span><br><span class="line">alert(person.getName()); <span class="comment">//"Nicholas"</span></span><br><span class="line">person.setName(<span class="string">"Greg"</span>);</span><br><span class="line">alert(person.getName()); <span class="comment">//"Greg"</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码的构造函数中定义了两个特权方法：<code>getName()</code> 和 <code>setName()</code>。这两个方法都可以在构造函数外部使用，而且都有权访问私有变量 <code>name</code>。但在 <code>Person</code> 构造函数外部，没有任何办法访问 <code>name</code>。由于这两个方法是在构造函数内部定义的，它们作为闭包能够通过作用域链访问 <code>name</code>。私有变量 <code>name</code> 在 <code>Person</code> 的每一个实例中都不相同，因为每次调用构造函数都会重新创建这两个方法。不过，在构造函数中定义特权方法也有一个缺点，那就是你必须使用构造函数模式来达到这个目的。构造函数模式的缺点是针对每个实例都会创建同样一组新方法，而使用静态私有变量来实现特权方法就可以避免这个问题。</p>
+<h2 id="4-1-静态私有变量"><a href="#4-1-静态私有变量" class="headerlink" title="4.1 静态私有变量"></a>4.1 静态私有变量</h2><p>通过在私有作用域中定义私有变量或函数，同样也可以创建特权方法，其基本模式如下所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有变量和私有函数</span></span><br><span class="line">  <span class="keyword">var</span> privateVariable = <span class="number">10</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">privateFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造函数</span></span><br><span class="line">  MyObject = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 公有/特权方法</span></span><br><span class="line">  MyObject.prototype.publicMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    privateVariable++;</span><br><span class="line">    <span class="keyword">return</span> privateFunction();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>这个模式创建了一个私有作用域，并在其中封装了一个构造函数及相应的方法。在私有作用域中，首先定义了私有变量和私有函数，然后又定义了构造函数及其公有方法。公有方法是在原型上定义的，这一点体现了典型的原型模式。需要注意的是，这个模式在定义构造函数时并没有使用函数声明，而是使用了函数表达式。函数声明只能创建局部函数，但那并不是我们想要的。出于同样的原因，我们也没有在声明 <code>MyObject</code> 时使用 <code>var</code> 关键字。记住：初始化未经声明的变量，总是会创建一个全局变量。因此，<code>MyObject</code> 就成了一个全局变量，能够在私有作用域之外被访问到。但也要知道，在严格模式下给未经声明的变量赋值会导致错误。</p>
+<p>这个模式与在构造函数中定义特权方法的主要区别，就在于私有变量和函数是由实例共享的。由于特权方法是在原型上定义的，因此所有实例都使用同一个函数。而这个特权方法，作为一个闭包，总是保存着对包含作用域的引用。来看一看下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  Person = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    name = value;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Person.prototype.setName = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>)</span>&#123; </span><br><span class="line">    name = value;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>);</span><br><span class="line">alert(person1.getName()); <span class="comment">// "Nicholas"</span></span><br><span class="line">person1.setName(<span class="string">"Greg"</span>);</span><br><span class="line">alert(person1.getName()); <span class="comment">//"Greg"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Michael"</span>);</span><br><span class="line">alert(person1.getName()); <span class="comment">//"Michael"</span></span><br><span class="line">alert(person2.getName()); <span class="comment">//"Michael"</span></span><br></pre></td></tr></table></figure>
+
+<p>这个例子中的 <code>Person</code> 构造函数与 <code>getName()</code> 和 <code>setName()</code> 方法一样，都有权访问私有变量 <code>name</code>。在这种模式下，变量 <code>name</code> 就变成了一个静态的、由所有实例共享的属性。也就是说，在一个实例上调用 <code>setName()</code> 会影响所有实例。而调用 <code>setName()</code> 或新建一个 <code>Person</code> 实例都会赋予 <code>name</code> 属性一个新值。结果就是所有实例都会返回相同的值。</p>
+<p>以这种方式创建静态私有变量会因为使用原型而增进代码复用，但每个实例都没有自己的私有变量。到底是使用实例变量，还是静态私有变量，最终还是要视你的具体需求而定。</p>
+<p><em>多查找作用域链中的一个层次，就会在一定程度上影响查找速度。而这正是使用闭包和私有变量的一个显明的不足之处。</em></p>
+<h2 id="4-2-模块模式"><a href="#4-2-模块模式" class="headerlink" title="4.2 模块模式"></a>4.2 模块模式</h2><p>前面的模式是用于为自定义类型创建私有变量和特权方法的。而道格拉斯所说的模块模式（module pattern）则是为单例创建私有变量和特权方法。所谓单例（singleton），指的就是只有一个实例的对象。按照惯例，JavaScript 是以对象字面量的方式来创建单例对象的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> singleton = &#123;</span><br><span class="line">  name : value,</span><br><span class="line">  method : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//这里是方法的代码</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>模块模式通过为单例添加私有变量和特权方法能够使其得到增强，其语法形式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> singleton = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有变量和私有函数</span></span><br><span class="line">  <span class="keyword">var</span> privateVariable = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">privateFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="comment">// 特权/公有方法和属性</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    publicProperty: <span class="literal">true</span>,</span><br><span class="line">    publicMethod : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      privateVariable++;</span><br><span class="line">      <span class="keyword">return</span> privateFunction();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>这个模块模式使用了一个返回对象的匿名函数。在这个匿名函数内部，首先定义了私有变量和函数。然后，将一个对象字面量作为函数的值返回。返回的对象字面量中只包含可以公开的属性和方法。由于这个对象是在匿名函数内部定义的，因此它的公有方法有权访问私有变量和函数。从本质上来讲，这个对象字面量定义的是单例的公共接口。这种模式在需要对单例进行某些初始化，同时又需要维护其私有变量时是非常有用的，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> application = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有变量和函数</span></span><br><span class="line">  <span class="keyword">var</span> components = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//初始化</span></span><br><span class="line">  components.push(<span class="keyword">new</span> BaseComponent());</span><br><span class="line"></span><br><span class="line">  <span class="comment">//公共</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    getComponentCount : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> components.length;</span><br><span class="line">    &#125;,</span><br><span class="line">    registerComponent : <span class="function"><span class="keyword">function</span>(<span class="params">component</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> component == <span class="string">"object"</span>)&#123;</span><br><span class="line">        components.push(component);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>Web 应用程序中，经常需要使用一个单例来管理应用程序级的信息。这个简单的例子创建了一个用于管理组件的 <code>application</code> 对象。在创建这个对象的过程中，首先声明了一个私有的 <code>components</code> 数组，并向数组中添加了一个 <code>BaseComponent</code> 的新实例（在这里不需要关心 <code>BaseComponent</code> 的代码，我们只是用它来展示初始化操作）。而返回对象的 <code>getComponentCount()</code> 和 <code>registerComponent()</code> 方法，都是有权访问数组 <code>components</code> 的特权方法。前者只是返回已注册的组件数目，后者用于注册新组件。</p>
+<p>简言之，如果必须创建一个对象并以某些数据对其进行初始化，同时还要公开一些能够访问这些私有数据的方法，那么就可以使用模块模式。以这种模式创建的每个单例都是 Object 的实例，因为最终要通过一个对象字面量来表示它。事实上，这也没有什么；毕竟，单例通常都是作为全局对象存在的，我们不会将它传递给一个函数。因此，也就没有什么必要使用 <code>instanceof</code> 操作符来检查其对象类型了。</p>
+<h2 id="4-3-增强的模块模式"><a href="#4-3-增强的模块模式" class="headerlink" title="4.3 增强的模块模式"></a>4.3 增强的模块模式</h2><p>有人进一步改进了模块模式，即在返回对象之前加入对其增强的代码。这种增强的模块模式适合那些单例必须是某种类型的实例，同时还必须添加某些属性和（或）方法对其加以增强的情况。来看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> singleton = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有变量和私有函数</span></span><br><span class="line">  <span class="keyword">var</span> privateVariable = <span class="number">10</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">privateFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建对象</span></span><br><span class="line">  <span class="keyword">var</span> object = <span class="keyword">new</span> CustomType();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加特权/公有属性和方法</span></span><br><span class="line">  object.publicProperty = <span class="literal">true</span>;</span><br><span class="line">  object.publicMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    privateVariable++;</span><br><span class="line">    <span class="keyword">return</span> privateFunction();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回这个对象</span></span><br><span class="line">  <span class="keyword">return</span> object;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>如果前面演示模块模式的例子中的 <code>application</code> 对象必须是 <code>BaseComponent</code> 的实例，那么就可以使用以下代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> application = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有变量和函数</span></span><br><span class="line">  <span class="keyword">var</span> components = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//初始化</span></span><br><span class="line">  components.push(<span class="keyword">new</span> BaseComponent());</span><br><span class="line"></span><br><span class="line">  <span class="comment">//创建 application 的一个局部副本</span></span><br><span class="line">  <span class="keyword">var</span> app = <span class="keyword">new</span> BaseComponent();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//公共接口</span></span><br><span class="line">  app.getComponentCount = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> components.length;</span><br><span class="line">  &#125;;</span><br><span class="line">  app.registerComponent = <span class="function"><span class="keyword">function</span>(<span class="params">component</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> component == <span class="string">"object"</span>)&#123;</span><br><span class="line">      components.push(component);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//返回这个副本</span></span><br><span class="line">  <span class="keyword">return</span> app;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>在这个重写后的应用程序（application）单例中，首先也是像前面例子中一样定义了私有变量。主要的不同之处在于命名变量 <code>app</code> 的创建过程，因为它必须是 <code>BaseComponent</code> 的实例。这个实例实际上是 <code>application</code> 对象的局部变量版。此后，我们又为 <code>app</code> 对象添加了能够访问私有变量的公有方法。最后一步是返回 <code>app</code> 对象，结果仍然是将它赋值给全局变量 <code>application</code>。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.ituring.com.cn/book/946/" target="_blank" rel="noopener">JavaScript高级程序设计（第三版）</a></li>
 </ul>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-2-HTML/">展开全文 >></a>
-        </p>
       
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端开发规范-1-基本原则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">前端开发规范(1)-基本原则</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/" class="archive-article-date">
-  	<time datetime="2019-11-21T06:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-基本原则"><a href="#1-基本原则" class="headerlink" title="1.基本原则"></a>1.基本原则</h1><h2 id="结构、样式和行为分离"><a href="#结构、样式和行为分离" class="headerlink" title="结构、样式和行为分离"></a>结构、样式和行为分离</h2><p>尽量确保文档和模板只包含 <code>HTML</code> 结构，样式都放到样式表里，行为都放到脚本里。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端开发规范//" class="article-tag-list-link color2">前端开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-过渡、动画和变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">过渡、动画和变换</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/" class="archive-article-date">
-  	<time datetime="2019-11-20T15:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-过渡"><a href="#1-过渡" class="headerlink" title="1.过渡"></a>1.过渡</h1><h2 id="1-1-使用过渡"><a href="#1-1-使用过渡" class="headerlink" title="1.1 使用过渡"></a>1.1 使用过渡</h2><p>过渡效果一般是由浏览器之间改变元素的CSS属性实现的.例如,如果使用:hover选择器,一旦用户将鼠标悬停在元素之上,浏览器就会应用跟选择器关联的属性.</p>
-<p>CSS过渡属性允许我们控制应用新属性值的速度.比如可以选择逐渐改变元素的外观.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS//" class="article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/20/%E8%BF%87%E6%B8%A1%E3%80%81%E5%8A%A8%E7%94%BB%E5%92%8C%E5%8F%98%E6%8D%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-变量、作用域和内存问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">变量、作用域和内存问题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:39:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>按照ECMA-262的定义, JavaScript的变量与其他语言的变量有很大区别.</p>
-<p>JavaScript变量松散类型的本质, 决定了它只是在特定时间用于保存特定值的一个名字而已.</p>
-<p>由于不存在定义某个变量必须要保存何种数据类型值的规则, 变量的值及其数据类型可以在脚本的声明周期内改变.</p>
-        
-      
-
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -501,16 +349,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/05/05/%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/04/%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">函数表达式(1)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -525,342 +432,32 @@
             </div>
             
                 
+                    <div class="toc-container tooltip-left">
+                        <i class="icon-font icon-category"></i>
+                        <div class="tooltip tooltip-east">
+                            <span class="tooltip-item">
+                </span>
+                            <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-模仿块级作用域"><span class="toc-number">1.</span> <span class="toc-text">3.模仿块级作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-私有变量"><span class="toc-number">2.</span> <span class="toc-text">4.私有变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-静态私有变量"><span class="toc-number">2.1.</span> <span class="toc-text">4.1 静态私有变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-模块模式"><span class="toc-number">2.2.</span> <span class="toc-text">4.2 模块模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-增强的模块模式"><span class="toc-number">2.3.</span> <span class="toc-text">4.3 增强的模块模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+                    </div>
+                </span>
+                        </div>
+                    </div>
+                    
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-AJAX-XMLHttpRequest对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">AJAX-XMLHttpRequest对象</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2019-11-16T10:35:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ajax, 全称Asynchronous JavaScript + XML, 是一种能够像服务器请求额外的数据而无需卸载页面的技术.</p>
-<p>Ajax技术的核心是XMLHttpRequest对象(简称XHR). XHR为向服务器发送请求和解析服务器响应提供了流畅的接口. 能够以异步方式从服务器取得更多信息, 意味着用户单击后, 可以不必刷新页面也能取得新数据. 也就是说, 可以使用 XHR对象取得新数据, 然后再通过DOM将新数据插入到页面中.</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/AJAX-XMLHttpRequest%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">Markdown基本语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:54:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，语法简洁，易于学习，适合用来写博客。</p>
-<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="切换预览模式"><a href="#切换预览模式" class="headerlink" title="切换预览模式"></a>切换预览模式</h2><p>在VScode中通过快捷键 <code>ctrl+shift+p</code> 打开命令框，搜索 <code>markdown</code> ，然后选择 <code>Markdown:打开侧边预览</code>  。</p>
-<p><img src="data:image/png;base64,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%0AZn4U1HhVlLXMKpPez9tssLov0HA6V3SWkZIPg+FMj2543SfZfYMD3ltKmod4%0AcPR/S79rLOZKX9eQPEo6Jz3pYDmMZmED6buG03uEGDrQjNBB89mKgqht3GBb%0AbNrcbKR9s0hpsKltUfhqEQjtpS+yyq5ynmTyFwHPBfLZwASPYTyoGBLzpUed%0A0rXtktLbPG7SR66mb9hgWmQ1vbXcsUtWL9onq+b1qlnTRy/9aKZnnEdM8ITS%0AFwPpXTCwq5wn0f7qxB4PqcUqDkzLFFfSslfMl36zmKX0boLvTPrapGeEuvfS%0A+5sAN8tbPiDqdrUcSj+u6U16r+rv0lvYruJ9LvOwSC3qHxz5t3xR5m9OVN2I%0A+dK7Qr5z0q8bGF5flL5dt4gjjR3D8oY3S7PukicNUofSe5FZpljc3E13S98n%0AcbH6Ji8t2qdi6j9Kg0V+pOpG/IX0UJgim/QJ8dK7id8tdEcLWfZuhnReei5k%0AR/v0XLbikIcIUuKjrdL3SUz49Cl0UbwK5H08vxYuLsR86a1Op/SUe9UNpUdH%0A0rGj6VwQXQnyQcezPQRG0veVOrRm/GO+aZZWrW+R3ifxfWFR2+vkmX+AB21Y%0Air3+wlmYa14WU5D0Qkh6ISS9EPsqvRCTkPRCSHohJL0Qkl4ISS8OG0kvDg5J%0ALw4OSf+LvTP6TdwIwrilCIRXYiVSYnNgaR0eAlhIJ/Lep0a5t6hSXvtYVf3/%0A/4J+346ni+Pj7khDQ4751Ni7M7NrKv12PGtobbo4GfSmi5NBb7o4nQn0fmHv%0AAjcd1MeGvhrtq8p8+07kyh8Y4KpsvvD4cy+sHU2mtmhMJ4Wer8lPPXl3/lGa%0A35ZZUrko54tRlHfx9MwuNZ200Dvty5Bi0aW+2tGQ3t/ezuczbep89t+Nmw5A%0Af73NybU0ttdvCb0bJbl/oXdsVm7vLeLaE+ixStL4/gzVYv7vrWD+gOGIZ/r3%0AssBwBfzdzjNv0Ju+BX0e0Bg2bw49uFMm/4XeLyrtO0fmJSRBX1V+V6bxIo5I%0AtQ2pVyspZ8MyvekY6P/MazRqnP8H6B9II6sYWkG35vPFXKD/9Xb+6FGt6Phy%0A5xVvUk0Te4o0/FWm0EdZjjf9EPTNEDw3S0Ifcghn8L3Z5oHQIwQBvBMMCD2H%0AMAQWMYcsIIpJHEWIlCz98kbz8O65rT8gsi8bVbVQ4qGVqtjQ9shr06FZYdpy%0A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" alt="markdown预览"></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/markdown//" class="article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开始写博客啦" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">开始写博客啦~~</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/" class="archive-article-date">
-  	<time datetime="2019-11-16T06:13:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>19年初接触前端到现在有大半年了，这一路上看到了很多也学到了很多。回想一下，自己的技术的确是在不断的进步，但是前端的知识究竟掌握了多少，在工作又用到了哪些，实在是很难清楚的表述出来。</p>
-<p>于是决定开始写博客，将自己学过的、用到的知识总结记录下来，同时用自己的过去为未来确定方向。</p>
-<p>我的博客用git+hexo搭建，使用起来真的很方便。</p>
-<p>最后，庆祝自己的博客诞生啦~~</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E5%95%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-16T04:35:57.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-            <div class="jump-container" id="js-jump-container" style="display:none;">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                    <i class="icon-font icon-back"></i>
-                </a>
-                <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                    <i class="icon-font icon-plane jump-plane"></i>
-                </div>
-            </div>
-            
-                
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&lt; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -892,8 +489,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
