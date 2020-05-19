@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mr-format.github.io">
-  <title>事件处理程序 | 灯芯的前端博客</title>
+  <title>事件类型 | 灯芯的前端博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事件就是用户或浏览器自身执行的某种动作。诸如 click、load 和 mouseover，都是事件的名字。而响应某个事件的函数就叫做事件处理程序（或事件侦听器）。事件处理程序的名字以&amp;quot;on&amp;quot;开头，因此 click 事件的事件处理程序就是 onclick，load 事件的事件处理程序就是 onload。为事件指定处理程序的方式有好几种。 1.HTML 事件处理程序">
+  <meta name="description" content="Web 浏览器中可能发生的事件有很多类型。如前所述，不同的事件类型具有不同的信息，而“DOM3 级事件”规定了以下几类事件。  UI（User Interface，用户界面）事件，当用户与页面上的元素交互时触发； 焦点事件，当元素获得或失去焦点时触发； 鼠标事件，当用户通过鼠标在页面上执行操作时触发； 滚轮事件，当使用鼠标滚轮（或类似设备）时触发； 文本事件，当在文档中输入文本时触发； 键盘事件，">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="事件处理程序">
-<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;05&#x2F;15&#x2F;%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="事件类型">
+<meta property="og:url" content="https:&#x2F;&#x2F;mr-format.github.io&#x2F;2020&#x2F;05&#x2F;19&#x2F;%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="灯芯的前端博客">
-<meta property="og:description" content="事件就是用户或浏览器自身执行的某种动作。诸如 click、load 和 mouseover，都是事件的名字。而响应某个事件的函数就叫做事件处理程序（或事件侦听器）。事件处理程序的名字以&amp;quot;on&amp;quot;开头，因此 click 事件的事件处理程序就是 onclick，load 事件的事件处理程序就是 onload。为事件指定处理程序的方式有好几种。 1.HTML 事件处理程序">
+<meta property="og:description" content="Web 浏览器中可能发生的事件有很多类型。如前所述，不同的事件类型具有不同的信息，而“DOM3 级事件”规定了以下几类事件。  UI（User Interface，用户界面）事件，当用户与页面上的元素交互时触发； 焦点事件，当元素获得或失去焦点时触发； 鼠标事件，当用户通过鼠标在页面上执行操作时触发； 滚轮事件，当使用鼠标滚轮（或类似设备）时触发； 文本事件，当在文档中输入文本时触发； 键盘事件，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-15T15:33:51.189Z">
+<meta property="og:updated_time" content="2020-05-19T13:40:56.552Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灯芯的前端博客" type="application/atom+xml">
@@ -186,111 +186,85 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-事件处理程序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-事件类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      事件处理程序
+      事件类型
     </h1>
   
 
         
-        <a href="/2020/05/15/%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-05-15T14:50:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-15</time>
+        <a href="/2020/05/19/%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2020-05-19T13:39:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>事件就是用户或浏览器自身执行的某种动作。诸如 <code>click</code>、<code>load</code> 和 <code>mouseover</code>，都是事件的名字。而响应某个事件的函数就叫做事件处理程序（或事件侦听器）。事件处理程序的名字以<code>&quot;on&quot;</code>开头，因此 <code>click</code> 事件的事件处理程序就是 <code>onclick</code>，<code>load</code> 事件的事件处理程序就是 <code>onload</code>。为事件指定处理程序的方式有好几种。</p>
-<h1 id="1-HTML-事件处理程序"><a href="#1-HTML-事件处理程序" class="headerlink" title="1.HTML 事件处理程序"></a>1.HTML 事件处理程序</h1><a id="more"></a>
+        <p>Web 浏览器中可能发生的事件有很多类型。如前所述，不同的事件类型具有不同的信息，而“DOM3 级事件”规定了以下几类事件。</p>
+<ul>
+<li>UI（User Interface，用户界面）事件，当用户与页面上的元素交互时触发；</li>
+<li>焦点事件，当元素获得或失去焦点时触发；</li>
+<li>鼠标事件，当用户通过鼠标在页面上执行操作时触发；</li>
+<li>滚轮事件，当使用鼠标滚轮（或类似设备）时触发；</li>
+<li>文本事件，当在文档中输入文本时触发；</li>
+<li>键盘事件，当用户通过键盘在页面上执行操作时触发；</li>
+<li>合成事件，当为 IME（Input Method Editor，输入法编辑器）输入字符时触发；</li>
+<li>变动（mutation）事件，当底层 DOM 结构发生变化时触发。</li>
+<li>变动名称事件，当元素或属性名变动时触发(已废弃)。</li>
+</ul>
+<a id="more"></a>
 
-<p>某个元素支持的每种事件，都可以使用一个与相应事件处理程序同名的 HTML 特性来指定。这个特性的值应该是能够执行的 JavaScript 代码。例如，要在按钮被单击时执行一些 JavaScript，可以像下面这样编写代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"button"</span> value=<span class="string">"Click Me"</span> onclick=<span class="string">"alert('Clicked')"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>除了这几类事件之外，HTML5 也定义了一组事件，而有些浏览器还会在 DOM 和 BOM 中实现其他专有事件。这些专有的事件一般都是根据开发人员需求定制的，没有什么规范，因此不同浏览器的实现有可能不一致。</p>
+<p>DOM3 级事件模块在 DOM2 级事件模块基础上重新定义了这些事件，也添加了一些新事件。包括 IE9 在内的所有浏览器都支持 DOM2 级事件。IE9 也支持 DOM3 级事件。</p>
+<h1 id="1-UI事件"><a href="#1-UI事件" class="headerlink" title="1 UI事件"></a>1 UI事件</h1><p>UI 事件指的是那些不一定与用户操作有关的事件。这些事件在 DOM 规范出现之前，都是以这种或那种形式存在的，而在 DOM 规范中保留是为了向后兼容。现有的 UI 事件如下。</p>
+<ul>
+<li>DOMActivate：表示元素已经被用户操作（通过鼠标或键盘）激活。这个事件在 DOM3 级事件中被废弃，但 Firefox 2+和 Chrome 支持它。考虑到不同浏览器实现的差异，不建议使用这个事件。</li>
+<li>load：当页面完全加载后在 window 上面触发，当所有框架都加载完毕时在框架集上面触发，当图像加载完毕时在 <code>&lt;img&gt;</code> 元素上面触发，或者当嵌入的内容加载完毕时在 <code>&lt;object&gt;</code> 元素上面触发。</li>
+<li>unload：当页面完全卸载后在 window 上面触发，当所有框架都卸载后在框架集上面触发，或者当嵌入的内容卸载完毕后在 <code>&lt;object&gt;</code> 元素上面触发。</li>
+<li>abort：在用户停止下载过程时，如果嵌入的内容没有加载完，则在<code>&lt;object&gt;</code> 元素上面触发。</li>
+<li>error：当发生 JavaScript 错误时在 window 上面触发，当无法加载图像时在 <code>&lt;img&gt;</code>元素上面触发，当无法加载嵌入内容时在 <code>&lt;object&gt;</code> 元素上面触发，或者当有一或多个框架无法加载时在框架集上面触发。</li>
+<li>select：当用户选择文本框（<code>&lt;input&gt;</code> 或 <code>&lt;texterea&gt;</code>）中的一或多个字符时触发。</li>
+<li>resize：当窗口或框架的大小变化时在 window 或框架上面触发。</li>
+<li>scroll：当用户滚动带滚动条的元素中的内容时，在该元素上面触发。<code>&lt;body&gt;</code> 元素中包含所加载页面的滚动条。</li>
+</ul>
+<p>多数这些事件都与 window 对象或表单控件相关。</p>
+<p>除了 <code>DOMActivate</code> 之外，其他事件在 DOM2 级事件中都归为 HTML 事件（<code>DOMActivate</code> 在 DOM2 级中仍然属于 UI 事件）。要确定浏览器是否支持 DOM2 级事件规定的 HTML 事件，可以使用如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSupported = <span class="built_in">document</span>.implementation.hasFeature(<span class="string">"HTMLEvents"</span>, <span class="string">"2.0"</span>);</span><br></pre></td></tr></table></figure>
 
-<p>当单击这个按钮时，就会显示一个警告框。这个操作是通过指定 <code>onclick</code> 特性并将一些 JavaScript代码作为它的值来定义的。由于这个值是 JavaScript，因此不能在其中使用未经转义的 HTML 语法字符，例如和号（<code>&amp;</code>）、双引号（<code>&quot;&quot;</code>）、小于号（<code>&lt;</code>）或大于号（<code>&gt;</code>）。为了避免使用 HTML 实体，这里使用了单引号。如果想要使用双引号，那么就要将代码改写成如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"button"</span> value=<span class="string">"Click Me"</span> onclick=<span class="string">"alert(&amp;quot;Clicked&amp;quot;)"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>注意，只有根据“DOM2 级事件”实现这些事件的浏览器才会返回 <code>true</code>。而以非标准方式支持这些事件的浏览器则会返回 <code>false</code>。要确定浏览器是否支持“DOM3 级事件”定义的事件，可以使用如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isSupported = <span class="built_in">document</span>.implementation.hasFeature(<span class="string">"UIEvent"</span>, <span class="string">"3.0"</span>);</span><br></pre></td></tr></table></figure>
 
-<p>在 HTML 中定义的事件处理程序可以包含要执行的具体动作，也可以调用在页面其他地方定义的脚本，如下面的例子所示：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">showMessage</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">    alert(<span class="string">"Hello world!"</span>);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Click Me"</span> <span class="attr">onclick</span>=<span class="string">"showMessage()"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-1-load-事件"><a href="#1-1-load-事件" class="headerlink" title="1.1 load 事件"></a>1.1 load 事件</h2><p>JavaScript 中最常用的一个事件就是 load。当页面完全加载后（包括所有图像、JavaScript 文件、CSS 文件等外部资源），就会触发 <code>window</code> 上面的 <code>load</code> 事件。有两种定义 <code>onload</code> 事件处理程序的方式。第一种方式是使用如下所示的 JavaScript 代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Loaded!"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>在这个例子中，单击按钮就会调用 <code>showMessage()</code> 函数。这个函数是在一个独立的 <code>&lt;script&gt;</code> 元素中定义的，当然也可以被包含在一个外部文件中。事件处理程序中的代码在执行时，有权访问全局作用域中的任何代码。</p>
-<p>这样指定事件处理程序具有一些独到之处。首先，这样会创建一个封装着元素属性值的函数。这个函数中有一个局部变量 event，也就是事件对象。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出 "click" --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Click Me"</span> <span class="attr">onclick</span>=<span class="string">"alert(event.type)"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这是通过 JavaScript 来指定事件处理程序的方式。与添加其他事件一样，这里也给事件处理程序传入了一个 <code>event</code> 对象。这个 <code>event</code> 对象中不包含有关这个事件的任何附加信息，但在兼容 DOM 的浏览器中，<code>event.target</code> 属性的值会被设置为 <code>document</code>，而 IE 并不会为这个事件设置 <code>srcElement</code> 属性。</p>
+<p>第二种指定 <code>onload</code> 事件处理程序的方式是为 <code>&lt;body&gt;</code> 元素添加一个 <code>onload</code> 特性，如下面的例子所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Load Event Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"alert('Loaded!')"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>通过 <code>event</code> 变量，可以直接访问事件对象，你不用自己定义它，也不用从函数的参数列表中读取。在这个函数内部，<code>this</code> 值等于事件的目标元素，例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出 "Click Me" --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Click Me"</span> <span class="attr">onclick</span>=<span class="string">"alert(this.value)"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一般来说，在 <code>window</code> 上面发生的任何事件都可以在 <code>&lt;body&gt;</code> 元素中通过相应的特性来指定，因为在 HTML 中无法访问 <code>window</code> 元素。实际上，这只是为了保证向后兼容的一种权宜之计，但所有浏览器都能很好地支持这种方式。建议尽可能使用 JavaScript 方式。</p>
+<p>图像上面也可以触发 <code>load</code> 事件，无论是在 DOM 中的图像元素还是 HTML 中的图像元素。因此，可以在 HTML 中为任何图像指定 <code>onload</code> 事件处理程序，例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"smile.gif"</span> <span class="attr">onload</span>=<span class="string">"alert('Image loaded.')"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>关于这个动态创建的函数，另一个有意思的地方是它扩展作用域的方式。在这个函数内部，可以像访问局部变量一样访问 <code>document</code> 及该元素本身的成员。这个函数使用 <code>with</code> 像下面这样扩展作用域：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">with</span>(<span class="built_in">document</span>)&#123;</span><br><span class="line">    <span class="keyword">with</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">    <span class="comment">// 元素属性值</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，当例子中的图像加载完毕后就会显示一个警告框。同样的功能也可以使用 JavaScript 来实现，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> image = <span class="built_in">document</span>.getElementById(<span class="string">"myImage"</span>);</span><br><span class="line"></span><br><span class="line">image.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  alert(event.target.src);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>如此一来，事件处理程序要访问自己的属性就简单多了。下面这行代码与前面的例子效果相同：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 输出 "Click Me" --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Click Me"</span> <span class="attr">onclick</span>=<span class="string">"alert(value)"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里，使用 JavaScript 指定了 <code>onload</code> 事件处理程序。同时也传入了 <code>event</code> 对象，尽管它也不包含什么有用的信息。不过，事件的目标是 <code>&lt;img&gt;</code> 元素，因此可以通过 <code>src</code> 属性访问并显示该信息。</p>
+<p>在创建新的 <code>&lt;img&gt;</code> 元素时，可以为其指定一个事件处理程序，以便图像加载完毕后给出提示。此时，最重要的是要在<strong>指定 <code>src</code> 属性之前先指定事件</strong>，如下面的例子所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> image = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">  image.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    alert(event.target.src);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(image);</span><br><span class="line">  image.src = <span class="string">"smile.gif"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>如果当前元素是一个表单输入元素，则作用域中还会包含访问表单元素（父元素）的入口，这个函数就变成了如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">with</span>(<span class="built_in">document</span>)&#123;</span><br><span class="line">    <span class="keyword">with</span>(<span class="keyword">this</span>.form)&#123;</span><br><span class="line">      <span class="keyword">with</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">      <span class="comment">// 元素属性值</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，首先为 <code>window</code> 指定了 <code>onload</code> 事件处理程序。原因在于，我们是想向 DOM 中添加一个新元素，所以必须确定页面已经加载完毕 —— 如果在页面加载前操作 <code>document.body</code> 会导致错误。然后，创建了一个新的图像元素，并设置了其 <code>onload</code> 事件处理程序。最后又将这个图像添加到页面中，还设置了它的 <code>src</code> 属性。这里有一点需要格外注意：<strong>新图像元素不一定要从添加到文档后才开始下载，只要设置了 <code>src</code> 属性就会开始下载。</strong></p>
+<p><em>在不属于 DOM 文档的图像（包括未添加到文档的 <code>&lt;img&gt;</code> 元素和 Image 对象）上触发 load 事件时，IE8 及之前版本不会生成 event 对象。IE9 修复了这个问题。</em></p>
+<p>还有一些元素也以非标准的方式支持 <code>load</code> 事件。在 IE9+、Firefox、Opera、Chrome 和 Safari 3+ 及更高版本中，<code>&lt;script&gt;</code> 元素也会触发 <code>load</code> 事件，以便开发人员确定动态加载的 JavaScript 文件是否加载完毕。<strong>与图像不同，只有在设置了 <code>&lt;script&gt;</code> 元素的 <code>src</code> 属性并将该元素添加到文档后，才会开始下载 JavaScript 文件</strong>。换句话说，对于<code>&lt;script&gt;</code> 元素而言，指定 <code>src</code> 属性和指定事件处理程序的先后顺序就不重要了。以下代码展示了怎样为 <code>&lt;script&gt;</code> 元素指定事件处理程序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  script.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">"Loaded"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  script.src = <span class="string">"example.js"</span>;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>实际上，这样扩展作用域的方式，无非就是想让事件处理程序无需引用表单元素就能访问其他表单字段。例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Echo Username"</span> <span class="attr">onclick</span>=<span class="string">"alert(username.value)"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，单击按钮会显示文本框中的文本。值得注意的是，这里直接引用了 <code>username</code> 元素。</p>
-<p>不过，在 HTML 中指定事件处理程序有两个缺点。首先，存在一个时差问题。因为用户可能会在 HTML 元素一出现在页面上就触发相应的事件，但当时的事件处理程序有可能尚不具备执行条件。以前面的例子来说明，假设 <code>showMessage()</code> 函数是在按钮下方、页面的最底部定义的。如果用户在页面解析 <code>showMessage()</code> 函数之前就单击了按钮，就会引发错误。为此，很多 HTML 事件处理程序都会被封装在一个 <code>try-catch</code> 块中，以便错误不会浮出水面，如下面的例子所示：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Click Me"</span> <span class="attr">onclick</span>=<span class="string">"try&#123;showMessage();&#125;catch(ex)&#123;&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，如果在 <code>showMessage()</code> 函数有定义之前单击了按钮，用户将不会看到 JavaScript 错误，因为在浏览器有机会处理错误之前，错误就被捕获了。</p>
-<p>另一个缺点是，这样扩展事件处理程序的作用域链在不同浏览器中会导致不同结果。不同 JavaScript 引擎遵循的标识符解析规则略有差异，很可能会在访问非限定对象成员时出错。</p>
-<p>通过 HTML 指定事件处理程序的最后一个缺点是 HTML 与 JavaScript 代码紧密耦合。如果要更换事件处理程序，就要改动两个地方：HTML 代码和 JavaScript 代码。而这正是许多开发人员摒弃 HTML 事件处理程序，转而使用 JavaScript 指定事件处理程序的原因所在。</p>
-<h1 id="2-DOM0-级事件处理程序"><a href="#2-DOM0-级事件处理程序" class="headerlink" title="2.DOM0 级事件处理程序"></a>2.DOM0 级事件处理程序</h1><p>通过 JavaScript 指定事件处理程序的传统方式，就是将一个函数赋值给一个事件处理程序属性。这种为事件处理程序赋值的方法是在第四代 Web 浏览器中出现的，而且至今仍然为所有现代浏览器所支持。原因一是简单，二是具有跨浏览器的优势。要使用 JavaScript 指定事件处理程序，首先必须取得一个要操作的对象的引用。</p>
-<p>每个元素（包括 window 和 document）都有自己的事件处理程序属性，这些属性通常全部小写，例如 <code>onclick</code>。将这种属性的值设置为一个函数，就可以指定事件处理程序，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Clicked"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在此，我们通过文档对象取得了一个按钮的引用，然后为它指定了 <code>onclick</code> 事件处理程序。但要注意，在这些代码运行以前不会指定事件处理程序，因此如果这些代码在页面中位于按钮后面，就有可能在一段时间内怎么单击都没有反应。</p>
-<p>使用 DOM0 级方法指定的事件处理程序被认为是元素的方法。因此，这时候的事件处理程序是在元素的作用域中运行；换句话说，程序中的 <code>this</code> 引用当前元素。来看一个例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">// "myBtn"</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>单击按钮显示的是元素的 ID，这个 ID 是通过 <code>this.id</code> 取得的。不仅仅是 ID，实际上可以在事件处理程序中通过 <code>this</code> 访问元素的任何属性和方法。以这种方式添加的事件处理程序会在事件流的冒泡阶段被处理。</p>
-<p>也可以删除通过 DOM0 级方法指定的事件处理程序，只要像下面这样将事件处理程序属性的值设置为 null 即可：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.onclick = <span class="literal">null</span>; <span class="comment">// 删除事件处理程序</span></span><br></pre></td></tr></table></figure>
-
-<p>将事件处理程序设置为 <code>null</code> 之后，再单击按钮将不会有任何动作发生。</p>
-<h1 id="3-DOM2-级事件处理程序"><a href="#3-DOM2-级事件处理程序" class="headerlink" title="3.DOM2 级事件处理程序"></a>3.DOM2 级事件处理程序</h1><p>“DOM2级事件”定义了两个方法，用于处理指定和删除事件处理程序的操作：<code>addEventListener()</code> 和 <code>removeEventListener()</code>。所有 DOM 节点中都包含这两个方法，并且它们都接受 3 个参数：要处理的事件名、作为事件处理程序的函数和一个布尔值。最后这个布尔值参数如果是 <code>true</code>，表示在捕获阶段调用事件处理程序；如果是 <code>false</code>，表示在冒泡阶段调用事件处理程序。</p>
-<p>要在按钮上为 <code>click</code> 事件添加事件处理程序，可以使用下列代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码为一个按钮添加了 <code>onclick</code> 事件处理程序，而且该事件会在冒泡阶段被触发（因为最后一个参数是 <code>false</code>）。与 DOM0 级方法一样，这里添加的事件处理程序也是在其依附的元素的作用域中运行。使用 DOM2 级方法添加事件处理程序的主要好处是可以添加多个事件处理程序。来看下面的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Hello world!"</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这里为按钮添加了两个事件处理程序。这两个事件处理程序会按照添加它们的顺序触发，因此首先会显示元素的 ID，其次会显示 <code>&quot;Hello world!&quot;</code> 消息。</p>
-<p>通过 <code>addEventListener()</code> 添加的事件处理程序只能使用 <code>removeEventListener()</code> 来移除；移除时传入的参数与添加处理程序时使用的参数相同。这也意味着通过 <code>addEventListener()</code> 添加的匿<br>名函数将无法移除，如下面的例子所示。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); </span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里省略了其他代码</span></span><br><span class="line">btn.removeEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 没有用！</span></span><br><span class="line">  alert(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，我们使用 <code>addEventListener()</code> 添加了一个事件处理程序。虽然调用 <code>removeEventListener()</code> 时看似使用了相同的参数，但实际上，第二个参数与传入 <code>addEventListener()</code> 中的那一个是完全不同的函数。而传入 <code>removeEventListener()</code> 中的事件处理程序函数必须与传入 <code>addEventListener()</code> 中的相同，如下面的例子所示。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line"><span class="keyword">var</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, handler, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">// 这里省略了其他代码</span></span><br><span class="line"></span><br><span class="line">btn.removeEventListener(<span class="string">"click"</span>, handler, <span class="literal">false</span>); <span class="comment">// 有效！</span></span><br></pre></td></tr></table></figure>
-
-<p>重写后的这个例子没有问题，是因为在 <code>addEventListener()</code> 和 <code>removeEventListener()</code> 中使用了相同的函数。</p>
-<p>大多数情况下，都是将事件处理程序添加到事件流的冒泡阶段，这样可以最大限度地兼容各种浏览器。最好只在需要在事件到达目标之前截获它的时候将事件处理程序添加到捕获阶段。如果不是特别需要，我们不建议在事件捕获阶段注册事件处理程序。</p>
-<p><em>IE9、Firefox、Safari、Chrome 和 Opera 支持 DOM2 级事件处理程序</em></p>
-<h1 id="4-IE事件处理程序"><a href="#4-IE事件处理程序" class="headerlink" title="4.IE事件处理程序"></a>4.IE事件处理程序</h1><p>IE 实现了与 DOM 中类似的两个方法：<code>attachEvent()</code> 和 <code>detachEvent()</code>。这两个方法接受相同的两个参数：事件处理程序名称与事件处理程序函数。由于 IE8 及更早版本只支持事件冒泡，所以通过 <code>attachEvent()</code> 添加的事件处理程序都会被添加到冒泡阶段。</p>
-<p>要使用 <code>attachEvent()</code> 为按钮添加一个事件处理程序，可以使用以下代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Clicked"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>注意，<code>attachEvent()</code> 的第一个参数是 <code>&quot;onclick&quot;</code>，而非 DOM 的 <code>addEventListener()</code> 方法中的 <code>&quot;click&quot;</code>。</p>
-<p>在 IE 中使用 <code>attachEvent()</code> 与使用 DOM0 级方法的主要区别在于事件处理程序的作用域。在使用 DOM0 级方法的情况下，事件处理程序会在其所属元素的作用域内运行；在使用 <code>attachEvent()</code> 方法的情况下，事件处理程序会在全局作用域中运行，因此 <code>this</code> 等于 <code>window</code>。来看下面的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span> === <span class="built_in">window</span>); <span class="comment">// true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>在编写跨浏览器的代码时，牢记这一区别非常重要。</p>
-<p>与 <code>addEventListener()</code> 类似，<code>attachEvent()</code> 方法也可以用来为一个元素添加多个事件处理程序。来看下面的例子。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">btn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Clicked"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">btn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Hello world!"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>这里调用了两次 <code>attachEvent()</code>，为同一个按钮添加了两个不同的事件处理程序。不过，与 DOM 方法不同的是，这些事件处理程序不是以添加它们的顺序执行，而是以相反的顺序被触发。单击这个例子中的按钮，首先看到的是 <code>&quot;Hello world!&quot;</code>，然后才是 <code>&quot;Clicked&quot;</code>。</p>
-<p>使用  <code>attachEvent()</code> 添加的事件可以通过 <code>detachEvent()</code> 来移除，条件是必须提供相同的参数。与 DOM 方法一样，这也意味着添加的匿名函数将不能被移除。不过，只要能够将对相同函数的引用传给 <code>detachEvent()</code>，就可以移除相应的事件处理程序。例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line"><span class="keyword">var</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Clicked"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btn.attachEvent(<span class="string">"onclick"</span>, handler);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里省略了其他代码</span></span><br><span class="line"></span><br><span class="line">btn.detachEvent(<span class="string">"onclick"</span>, handler);</span><br></pre></td></tr></table></figure>
-
-<p>这个例子将保存在变量 <code>handler</code> 中的函数作为事件处理程序。因此，后面的 <code>detachEvent()</code> 可以使用相同的函数来移除事件处理程序。</p>
+<p>这个例子为新创建的 <code>&lt;script&gt;</code> 元素指定了 <code>onload</code> 事件处理程序。此时，大多数浏览器中 <code>event</code> 对象的 <code>target</code> 属性引用的都是 <code>&lt;script&gt;</code> 节点，而在 Firefox 3 之前的版本中，引用的则是 <code>document</code>。IE8 及更早版本不支持 <code>&lt;script&gt;</code> 元素上的 <code>load</code> 事件。</p>
+<h2 id="1-2-unload-事件"><a href="#1-2-unload-事件" class="headerlink" title="1.2 unload 事件"></a>1.2 unload 事件</h2><p>与 <code>load</code> 事件对应的是 <code>unload</code> 事件，这个事件在文档被完全卸载后触发。只要用户从一个页面切换到另一个页面，就会发生 <code>unload</code> 事件。而利用这个事件最多的情况是清除引用，以避免内存泄漏。与 <code>load</code> 事件类似，也有两种指定 <code>onunload</code> 事件处理程序的方式。第一种方式是使用 JavaScript，如下所示：</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
 <li><a href="https://www.ituring.com.cn/book/946/" target="_blank" rel="noopener">JavaScript高级程序设计（第三版）</a></li>
 </ul>
@@ -405,7 +379,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/05/15/%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mr-format.github.io/2020/05/19/%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -419,18 +393,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/19/%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          事件对象
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/13/%E4%BA%8B%E4%BB%B6%E6%B5%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">事件流</div>
+    <a href="/2020/05/19/%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">事件对象</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -457,7 +422,7 @@
                 </span>
                             <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-HTML-事件处理程序"><span class="toc-number">1.</span> <span class="toc-text">1.HTML 事件处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-DOM0-级事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">2.DOM0 级事件处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-DOM2-级事件处理程序"><span class="toc-number">3.</span> <span class="toc-text">3.DOM2 级事件处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-IE事件处理程序"><span class="toc-number">4.</span> <span class="toc-text">4.IE事件处理程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-UI事件"><span class="toc-number">1.</span> <span class="toc-text">1 UI事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-load-事件"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 load 事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-unload-事件"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 unload 事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
                     </div>
                 </span>
                         </div>
